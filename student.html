@@ -2002,5 +2002,23 @@
 
   <script src="js/common.js"></script>
   <script src="js/student.js"></script>
+  <script>
+    (function(){
+      const base = 'https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/';
+      function rewriteDocsSrcs(){
+        document.querySelectorAll('img').forEach(img => {
+          const s = img.getAttribute('src');
+          if (s && s.startsWith('docs/')) {
+            img.setAttribute('src', base + s.slice('docs/'.length));
+          }
+        });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', rewriteDocsSrcs);
+      } else {
+        rewriteDocsSrcs();
+      }
+    })();
+  </script>
 </body>
 </html>
