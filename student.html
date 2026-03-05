@@ -360,18 +360,53 @@
       display: none;
     }
 
+    .pro-tip-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      padding: 0 32px;
+      margin: 260px 0 0;
+    }
+
     .pro-tip {
       display: inline-block;
-      padding: 8px 20px;
-      font-size: 12px;
-      color: var(--text-secondary);
+      padding: 10px 18px;
+      font-size: 13px;
+      color: #fff;
       font-weight: 500;
-      text-align: center;
-      background: var(--bg-light);
-      border-radius: 100px;
-      margin: 140px auto 0;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      width: fit-content;
+      background: #007AFF;
+      border-radius: 18px 18px 4px 18px;
+      max-width: 260px;
+      box-shadow: 0 2px 12px rgba(0, 122, 255, 0.25);
+      opacity: 0;
+      transform: translateX(40px) scale(0.92);
+      animation: proTipSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+    }
+
+    .pro-tip-tail {
+      width: 8px;
+      height: 8px;
+      background: #007AFF;
+      border-radius: 0 0 2px 0;
+      margin-top: -2px;
+      margin-right: 4px;
+      align-self: flex-end;
+      opacity: 0;
+      animation: proTipSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+    }
+
+    @keyframes proTipSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateX(40px) scale(0.92);
+      }
+      60% {
+        opacity: 1;
+        transform: translateX(-4px) scale(1.02);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
     }
 
     /* Main Title */
@@ -409,6 +444,7 @@
       border-top: 1px solid #e1e1e6;
       opacity: 0;
       transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
     .category-section:first-child {
@@ -499,9 +535,9 @@
     }
 
     .category-label {
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 600;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: #8e8e93;
       position: relative;
@@ -516,87 +552,28 @@
       letter-spacing: 0.01em;
     }
 
-    /* Tooltip Styles */
-    .category-label[data-tooltip] {
-      position: relative;
-    }
-
-    .category-label[data-tooltip]:hover::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      left: 0;
-      bottom: 100%;
-      margin-bottom: 10px;
-      padding: 12px 16px;
+    /* Tooltip */
+    .tooltip {
+      position: fixed;
+      z-index: 10000;
+      max-width: 280px;
+      padding: 10px 14px;
       background: var(--text-primary);
       color: var(--bg-white);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 400;
       line-height: 1.5;
       border-radius: 8px;
-      white-space: normal;
-      width: 280px;
-      z-index: 1000;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
       pointer-events: none;
       opacity: 0;
-      animation: tooltipFadeIn 0.2s ease forwards;
+      transform: translateY(4px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
     }
 
-    .category-label[data-tooltip]:hover::before {
-      content: '';
-      position: absolute;
-      left: 20px;
-      bottom: 100%;
-      margin-bottom: 2px;
-      border: 6px solid transparent;
-      border-top-color: var(--text-primary);
-      z-index: 1001;
-      opacity: 0;
-      animation: tooltipFadeIn 0.2s ease forwards;
-    }
-
-    @keyframes tooltipFadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-5px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Mobile tooltip - show on tap */
-    @media (max-width: 768px) {
-      .category-label[data-tooltip]:active::after,
-      .category-label[data-tooltip].tooltip-active::after {
-        content: attr(data-tooltip);
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        margin: 0;
-        padding: 16px 20px;
-        background: var(--text-primary);
-        color: var(--bg-white);
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 1.5;
-        border-radius: 12px;
-        white-space: normal;
-        width: 85%;
-        max-width: 320px;
-        z-index: 10000;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-        pointer-events: none;
-        opacity: 1;
-      }
-
-      .category-label[data-tooltip]:active::before,
-      .category-label[data-tooltip].tooltip-active::before {
-        display: none;
-      }
+    .tooltip.is-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .tools-row {
@@ -611,7 +588,7 @@
       align-items: center;
       text-decoration: none;
       color: var(--text-primary);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.2s ease;
+      transition: opacity 0.35s ease, transform 0.35s ease, box-shadow 0.25s ease;
       padding: 12px 8px;
       border-radius: 14px;
       position: relative;
@@ -916,35 +893,38 @@
         margin-top: 8px;
       }
 
+      .pro-tip-wrapper {
+        margin-top: 210px;
+        padding: 0 20px;
+      }
+
       .pro-tip {
-        margin-top: 130px;
-        font-size: 11px;
+        font-size: 12px;
+        padding: 9px 16px;
       }
 
       .main-title {
-        font-size: 34px;
-        margin: 20px 0 28px;
+        font-size: 38px;
+        margin: 20px 0 10px;
         padding: 0 16px;
+        letter-spacing: -1.5px;
+      }
+
+      .main-subtitle {
+        font-size: 16px;
+        margin-bottom: 36px;
       }
 
       .content-container {
-        padding: 0 12px 40px;
-      }
-
-      .top-ai-assistants-container {
-        padding: 6px;
-        margin-bottom: 24px;
-        border-radius: 16px;
+        padding: 0 16px 40px;
       }
 
       .category-section {
-        padding: 20px 16px 16px;
-        margin-bottom: 12px;
-        border-radius: 16px;
+        padding-top: 36px;
       }
 
-      .category-label {
-        font-size: 17px;
+      .category-header {
+        gap: 16px;
       }
 
       .tools-row {
@@ -972,23 +952,7 @@
       }
 
       .section-divider {
-        margin: 24px 0 16px;
-      }
-
-      .divider-title {
-        font-size: 12px;
-      }
-
-      .divider-subtitle {
-        font-size: 11px;
-      }
-
-      .must-try-section {
-        padding: 20px 16px 16px;
-      }
-
-      .must-try-section .category-label {
-        font-size: 17px;
+        margin: 32px 0 8px;
       }
     }
 
@@ -1011,33 +975,36 @@
       }
 
       .main-title {
-        font-size: 28px;
-        margin: 16px 0 24px;
+        font-size: 30px;
+        margin: 16px 0 8px;
+        letter-spacing: -1px;
+      }
+
+      .main-subtitle {
+        font-size: 15px;
+        margin-bottom: 28px;
+      }
+
+      .pro-tip-wrapper {
+        margin-top: 180px;
+        padding: 0 16px;
       }
 
       .pro-tip {
-        margin-top: 120px;
-        font-size: 10px;
-        padding: 6px 16px;
+        font-size: 11px;
+        padding: 8px 14px;
       }
 
       .content-container {
-        padding: 0 8px 40px;
-      }
-
-      .top-ai-assistants-container {
-        padding: 4px;
-        border-radius: 14px;
+        padding: 0 10px 40px;
       }
 
       .category-section {
-        padding: 16px 12px 12px;
-        margin-bottom: 10px;
-        border-radius: 14px;
+        padding-top: 28px;
       }
 
-      .category-label {
-        font-size: 15px;
+      .category-header {
+        gap: 14px;
       }
 
       .tools-row {
@@ -1066,15 +1033,11 @@
       }
 
       .section-divider {
-        margin: 20px 0 12px;
+        margin: 24px 0 8px;
       }
 
-      .must-try-section {
-        padding: 16px 12px 12px;
-      }
-
-      .must-try-section .category-label {
-        font-size: 15px;
+      .tools-row .tool-item:nth-child(n+4) {
+        display: none;
       }
     }
   </style>
@@ -1117,7 +1080,7 @@
   </nav>
 
   <!-- Pro Tip -->
-  <div style="text-align:center">
+  <div class="pro-tip-wrapper">
     <div class="pro-tip">Pro Tip: Click on any icon!</div>
   </div>
 
@@ -1464,9 +1427,7 @@
     <!-- SECTION DIVIDER -->
     <div class="section-divider">
       <div class="divider-content">
-        <div class="divider-icon">✨</div>
-        <h2 class="divider-title">More Free Tools</h2>
-        <p class="divider-subtitle">Additional resources to help you succeed</p>
+        <h2 class="divider-title">More Tools</h2>
       </div>
     </div>
 
@@ -1498,11 +1459,6 @@
           <a href="https://www.coursera.org" target="_blank" class="tool-item">
             <div class="tool-icon"><img src="docs/Coursera.png" alt="Coursera" onerror="this.parentElement.innerHTML='📖'"></div>
             <div class="tool-name">Coursera</div>
-            <span class="tool-tag free-tier">Free Tier</span>
-          </a>
-          <a href="https://www.edx.org" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/EdX.png" alt="edX" onerror="this.parentElement.innerHTML='🎓'"></div>
-            <div class="tool-name">edX</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
         </div>
@@ -1539,11 +1495,6 @@
             <div class="tool-name">Studocu</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
-          <a href="https://www.cram.com" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-study">C</div>
-            <div class="tool-name">Cram</div>
-            <span class="tool-tag free-tier">Free Tier</span>
-            </a>
           </div>
         </div>
     </section>
@@ -1578,11 +1529,6 @@
             <div class="tool-name">EasyBib</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
-          <a href="https://www.bibme.org" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-citation">B</div>
-            <div class="tool-name">BibMe</div>
-            <span class="tool-tag free">Free</span>
-            </a>
           </div>
         </div>
     </section>
@@ -1617,11 +1563,6 @@
             <div class="tool-name">SmallPDF</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
-          <a href="https://www.pdf24.org" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-pdf">24</div>
-            <div class="tool-name">PDF24</div>
-            <span class="tool-tag free">Free</span>
-          </a>
         </div>
       </div>
     </section>
@@ -1654,11 +1595,6 @@
           <a href="https://www.iloveimg.com/resize-image" target="_blank" class="tool-item">
             <div class="tool-icon"><img src="docs/iLoveIMG.jpg" alt="iLoveIMG Resize" onerror="this.parentElement.innerHTML='📐'"></div>
             <div class="tool-name">iLoveIMG Resize</div>
-            <span class="tool-tag free-tier">Free Tier</span>
-          </a>
-          <a href="https://www.tinypng.com" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-image">T</div>
-            <div class="tool-name">TinyPNG</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
         </div>
@@ -1695,11 +1631,6 @@
             <div class="tool-name">Shotcut</div>
             <span class="tool-tag free">Free</span>
           </a>
-          <a href="https://www.veed.io" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-video">V</div>
-            <div class="tool-name">VEED</div>
-            <span class="tool-tag free-tier">Free Tier</span>
-          </a>
         </div>
       </div>
     </section>
@@ -1734,11 +1665,6 @@
             <div class="tool-name">123Apps Audio</div>
             <span class="tool-tag free">Free</span>
           </a>
-          <a href="https://www.mp3cut.net" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-audio">M</div>
-            <div class="tool-name">MP3Cut</div>
-            <span class="tool-tag free">Free</span>
-          </a>
         </div>
       </div>
     </section>
@@ -1768,6 +1694,11 @@
             <div class="tool-name">Dropbox</div>
             <span class="tool-tag limited">Limited</span>
           </a>
+          <a href="https://wetransfer.com" target="_blank" class="tool-item">
+            <div class="tool-icon icon-custom icon-cloud">WT</div>
+            <div class="tool-name">WeTransfer</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
         </div>
       </div>
     </section>
@@ -1796,9 +1727,14 @@
             <div class="tool-icon"><img src="docs/Evernote.png" alt="Evernote" onerror="this.parentElement.innerHTML='📝'"></div>
             <div class="tool-name">Evernote</div>
             <span class="tool-tag limited">Limited</span>
-            </a>
-          </div>
+          </a>
+          <a href="https://todoist.com" target="_blank" class="tool-item">
+            <div class="tool-icon icon-custom icon-productivity">T</div>
+            <div class="tool-name">Todoist</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
         </div>
+      </div>
     </section>
 
     <!-- CODE LEARNING -->
@@ -1857,8 +1793,13 @@
           </a>
           <a href="https://www.canva.com" target="_blank" class="tool-item">
             <div class="tool-icon"><img src="docs/canva.jpg" alt="Canva" onerror="this.parentElement.innerHTML='🎨'"></div>
-              <div class="tool-name">Canva</div>
+            <div class="tool-name">Canva</div>
             <span class="tool-tag limited">Limited</span>
+          </a>
+          <a href="https://www.photopea.com" target="_blank" class="tool-item">
+            <div class="tool-icon icon-custom icon-design">P</div>
+            <div class="tool-name">Photopea</div>
+            <span class="tool-tag free">Free</span>
           </a>
         </div>
       </div>
@@ -1888,6 +1829,11 @@
             <div class="tool-icon"><img src="docs/Busuu.png" alt="Busuu" onerror="this.parentElement.innerHTML='🌍'"></div>
             <div class="tool-name">Busuu</div>
             <span class="tool-tag limited">Limited</span>
+          </a>
+          <a href="https://www.tandem.net" target="_blank" class="tool-item">
+            <div class="tool-icon icon-custom icon-language">T</div>
+            <div class="tool-name">Tandem</div>
+            <span class="tool-tag free">Free</span>
           </a>
         </div>
       </div>
@@ -1949,6 +1895,16 @@
             <div class="tool-name">Library Genesis</div>
             <span class="tool-tag free">Free</span>
           </a>
+          <a href="https://www.gutenberg.org" target="_blank" class="tool-item">
+            <div class="tool-icon">📜</div>
+            <div class="tool-name">Project Gutenberg</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://openlibrary.org" target="_blank" class="tool-item">
+            <div class="tool-icon">📕</div>
+            <div class="tool-name">Open Library</div>
+            <span class="tool-tag free">Free</span>
+          </a>
         </div>
       </div>
     </section>
@@ -1968,6 +1924,21 @@
             <div class="tool-name">VIP Stream</div>
             <span class="tool-tag free">Free</span>
           </a>
+          <a href="https://tubitv.com" target="_blank" class="tool-item">
+            <div class="tool-icon">📺</div>
+            <div class="tool-name">Tubi</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://pluto.tv" target="_blank" class="tool-item">
+            <div class="tool-icon">🛸</div>
+            <div class="tool-name">Pluto TV</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://www.crackle.com" target="_blank" class="tool-item">
+            <div class="tool-icon">🎞️</div>
+            <div class="tool-name">Crackle</div>
+            <span class="tool-tag free">Free</span>
+          </a>
         </div>
       </div>
     </section>
@@ -1985,6 +1956,21 @@
           <a href="https://deepwebnest.com/" target="_blank" class="tool-item">
             <div class="tool-icon">☁️</div>
             <div class="tool-name">Deep Web Nest</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://alternativeto.net" target="_blank" class="tool-item">
+            <div class="tool-icon">🔀</div>
+            <div class="tool-name">AlternativeTo</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://www.producthunt.com" target="_blank" class="tool-item">
+            <div class="tool-icon">🚀</div>
+            <div class="tool-name">Product Hunt</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://github.com/topics/awesome" target="_blank" class="tool-item">
+            <div class="tool-icon">⭐</div>
+            <div class="tool-name">Awesome Lists</div>
             <span class="tool-tag free">Free</span>
           </a>
         </div>
@@ -2014,276 +2000,7 @@
     <p class="footer-copyright">© 2026 Free University Tools. All rights reserved.</p>
   </footer>
 
-  <script>
-    // Mobile menu toggle
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const mainNav = document.getElementById('mainNav');
-    
-    if (mobileMenuToggle && mainNav) {
-      mobileMenuToggle.addEventListener('click', function() {
-        mainNav.classList.toggle('mobile-open');
-        this.textContent = mainNav.classList.contains('mobile-open') ? '✕' : '☰';
-      });
-
-      // Close menu when clicking on a link
-      mainNav.querySelectorAll('.nav-link, .btn-donate').forEach(link => {
-        link.addEventListener('click', function() {
-          mainNav.classList.remove('mobile-open');
-          mobileMenuToggle.textContent = '☰';
-        });
-      });
-    }
-
-    // Header scroll effect
-    window.addEventListener('scroll', function() {
-      const header = document.getElementById('header');
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
-
-    // Staggered scroll-reveal animations
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const section = entry.target;
-          section.classList.add('is-visible');
-          section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-
-          const items = section.querySelectorAll('.tool-item');
-          items.forEach((item, i) => {
-            setTimeout(() => {
-              item.classList.add('is-visible');
-              item.style.transition = 'opacity 0.4s ease, transform 0.4s ease, box-shadow 0.25s ease, background 0.2s ease';
-            }, 80 + i * 50);
-          });
-
-          sectionObserver.unobserve(section);
-        }
-      });
-    }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('.category-section').forEach(el => {
-      sectionObserver.observe(el);
-    });
-
-    // --- 3-way toggle + search + filtering ---
-    const toolsSearch = document.getElementById('toolsSearch');
-    const toolsModeToggle = document.getElementById('toolsModeToggle');
-    const toggleOptions = Array.from(document.querySelectorAll('.tools-toggle-option'));
-    const mainTitle = document.getElementById('mainTitle');
-    const tocTimeline = document.getElementById('tocTimeline');
-    const allToolItems = Array.from(document.querySelectorAll('.tool-item'));
-    const allCategorySections = Array.from(document.querySelectorAll('.category-section'));
-    let currentMode = 'all';
-
-    function getItemPricing(item) {
-      const tag = item.querySelector('.tool-tag');
-      if (!tag) return 'free';
-      if (tag.classList.contains('paid')) return 'paid';
-      return 'free';
-    }
-
-    function applyFilters() {
-      const query = (toolsSearch?.value || '').trim().toLowerCase();
-      const isSearching = query.length > 0;
-
-      if (tocTimeline) {
-        tocTimeline.classList.toggle('is-searching', isSearching);
-      }
-
-      allToolItems.forEach((item) => {
-        const name = (item.querySelector('.tool-name')?.textContent || '').toLowerCase();
-        const matchesQuery = !isSearching || name.includes(query);
-        const pricing = getItemPricing(item);
-        const matchesMode = currentMode === 'all' || pricing === currentMode;
-        const show = matchesQuery && matchesMode;
-        item.style.display = show ? '' : 'none';
-        if (show) item.classList.add('is-visible');
-      });
-
-      allCategorySections.forEach((section) => {
-        const items = section.querySelectorAll('.tool-item');
-        const anyVisible = Array.from(items).some((i) => i.style.display !== 'none');
-        section.style.display = anyVisible ? '' : 'none';
-        if (anyVisible) section.classList.add('is-visible');
-      });
-
-      const dividers = document.querySelectorAll('.section-divider');
-      dividers.forEach((d) => d.style.display = isSearching ? 'none' : '');
-
-      const aiContainer = document.querySelector('.top-ai-assistants-container');
-      if (aiContainer) {
-        if (isSearching || currentMode === 'paid') {
-          const hasVisible = Array.from(aiContainer.querySelectorAll('.tool-item')).some(i => i.style.display !== 'none');
-          aiContainer.style.display = hasVisible ? '' : 'none';
-        } else {
-          aiContainer.style.display = '';
-        }
-      }
-
-      buildTocItems();
-      scheduleTocUpdate();
-    }
-
-    function setMode(nextMode) {
-      currentMode = nextMode;
-      if (toolsModeToggle) toolsModeToggle.dataset.mode = nextMode;
-      toggleOptions.forEach((opt) => {
-        opt.classList.toggle('active', opt.dataset.mode === nextMode);
-      });
-      applyFilters();
-    }
-
-    if (toolsSearch) {
-      toolsSearch.addEventListener('input', () => applyFilters());
-    }
-
-    toggleOptions.forEach((opt) => {
-      opt.addEventListener('click', () => setMode(opt.dataset.mode));
-    });
-
-    applyFilters();
-
-    // --- Timeline TOC ---
-    const tocTrack = document.getElementById('tocTrack');
-    const tocProgress = document.getElementById('tocProgress');
-    let tocItems = [];
-
-    function buildTocItems() {
-      tocItems = [];
-      while (tocTrack.children.length > 1) {
-        tocTrack.removeChild(tocTrack.lastChild);
-      }
-
-      const visibleSections = allCategorySections.filter((s) => {
-        return s.style.display !== 'none';
-      });
-
-      const headerItem = document.createElement('div');
-      headerItem.className = 'toc-item';
-      const headerDot = document.createElement('div');
-      headerDot.className = 'toc-dot';
-      const headerLabel = document.createElement('span');
-      headerLabel.className = 'toc-label';
-      headerLabel.textContent = 'Student Tools';
-      headerItem.appendChild(headerDot);
-      headerItem.appendChild(headerLabel);
-      tocTrack.appendChild(headerItem);
-      headerItem.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-      tocItems.push({ item: headerItem, section: mainTitle || document.body, alwaysVisible: true });
-
-      visibleSections.forEach((section) => {
-        const label = section.querySelector('.category-label');
-        if (!label) return;
-        const item = document.createElement('div');
-        item.className = 'toc-item';
-        const dot = document.createElement('div');
-        dot.className = 'toc-dot';
-        const lbl = document.createElement('span');
-        lbl.className = 'toc-label';
-        lbl.textContent = label.textContent;
-        item.appendChild(dot);
-        item.appendChild(lbl);
-        tocTrack.appendChild(item);
-        item.addEventListener('click', () => {
-          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-        tocItems.push({ item, section });
-      });
-    }
-
-    let tocRaf = 0;
-    function updateTocScroll() {
-      const viewMid = window.innerHeight * 0.35;
-      let activeIdx = -1;
-
-      for (let i = tocItems.length - 1; i >= 0; i--) {
-        const { section, item } = tocItems[i];
-        if (item.classList.contains('is-hidden')) continue;
-        if (section.offsetParent === null && !tocItems[i].alwaysVisible) continue;
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= viewMid) {
-          activeIdx = i;
-          break;
-        }
-      }
-
-      if (activeIdx === -1) {
-        const first = tocItems.find(t => !t.item.classList.contains('is-hidden'));
-        if (first) activeIdx = tocItems.indexOf(first);
-      }
-
-      tocItems.forEach(({ item }, i) => {
-        item.classList.toggle('is-active', i === activeIdx);
-      });
-
-      if (tocProgress && tocTrack) {
-        if (activeIdx >= 0) {
-          const activeEl = tocItems[activeIdx].item;
-          if (activeEl.offsetParent !== null) {
-            const trackRect = tocTrack.getBoundingClientRect();
-            const dotRect = activeEl.getBoundingClientRect();
-            const h = (dotRect.top + dotRect.height / 2) - trackRect.top;
-            tocProgress.style.height = Math.max(0, h) + 'px';
-          } else {
-            tocProgress.style.height = '0px';
-          }
-        } else {
-          tocProgress.style.height = '0px';
-        }
-      }
-    }
-
-    function scheduleTocUpdate() {
-      cancelAnimationFrame(tocRaf);
-      tocRaf = requestAnimationFrame(updateTocScroll);
-    }
-
-    window.addEventListener('scroll', scheduleTocUpdate, { passive: true });
-    updateTocScroll();
-
-    // --- Draggable TOC ---
-    let isDragging = false;
-
-    function getVisibleTocItems() {
-      return tocItems.filter(t => !t.item.classList.contains('is-hidden'));
-    }
-
-    function scrollToNearestFromY(clientY) {
-      const visible = getVisibleTocItems();
-      if (visible.length === 0) return;
-      let closest = visible[0];
-      let closestDist = Infinity;
-      visible.forEach((entry) => {
-        const rect = entry.item.getBoundingClientRect();
-        const mid = rect.top + rect.height / 2;
-        const dist = Math.abs(clientY - mid);
-        if (dist < closestDist) { closestDist = dist; closest = entry; }
-      });
-      if (closest.alwaysVisible) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        closest.section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
-
-    tocTrack.addEventListener('mousedown', (e) => {
-      if (e.target.closest('.toc-item')) return;
-      isDragging = true;
-      tocTrack.classList.add('is-dragging');
-      document.body.style.userSelect = 'none';
-      scrollToNearestFromY(e.clientY);
-    });
-    window.addEventListener('mousemove', (e) => { if (isDragging) scrollToNearestFromY(e.clientY); });
-    window.addEventListener('mouseup', () => { if (isDragging) { isDragging = false; tocTrack.classList.remove('is-dragging'); document.body.style.userSelect = ''; } });
-    tocTrack.addEventListener('touchstart', (e) => { if (e.target.closest('.toc-item')) return; isDragging = true; tocTrack.classList.add('is-dragging'); scrollToNearestFromY(e.touches[0].clientY); }, { passive: true });
-    window.addEventListener('touchmove', (e) => { if (isDragging) scrollToNearestFromY(e.touches[0].clientY); }, { passive: true });
-    window.addEventListener('touchend', () => { if (isDragging) { isDragging = false; tocTrack.classList.remove('is-dragging'); } });
-  </script>
+  <script src="js/common.js"></script>
+  <script src="js/student.js"></script>
 </body>
 </html>
