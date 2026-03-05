@@ -1690,5 +1690,101 @@
 
   <script src="js/common.js"></script>
   <script src="js/index.js"></script>
+  <script>
+    (function(){
+      const baseRaw = 'https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/';
+      // Prevent horizontal swiping/overflow on mobile
+      try{
+        document.documentElement.style.overflowX = 'hidden';
+        document.body.style.overflowX = 'hidden';
+        document.documentElement.style.overscrollBehaviorX = 'none';
+        document.documentElement.style.touchAction = 'pan-y';
+      }catch(e){}
+
+      // Inject CSS overrides: background images -> GitHub raw, tool-card wrapping and widget transitions
+      var css = '' +
+        '.floating-start-browsing{box-sizing:border-box!important;transition:top 0.28s ease,right 0.28s ease,bottom 0.28s ease;}\n' +
+        '.hero::after{background-image:url("' + baseRaw + 'cat.gif") !important;}\n' +
+        '.features::after{background-image:url("' + baseRaw + 'duck.gif") !important;}\n' +
+        '.cta-content::after{background-image:url("' + baseRaw + 'hello.gif") !important;}\n' +
+        '@media (max-width:768px){\n' +
+        '  .hero::after,.features::after{right:8px;max-width:40vw;}\n' +
+        '  .tools-track{width:100%!important;}\n' +
+        '  .tool-card{min-width:0!important;}\n' +
+        '  .floating-start-browsing{max-width:calc(100% - 32px)!important;right:16px;left:16px;}\n' +
+        '  .mobile-nav-open .floating-start-browsing{ /* allow JS to reposition */ position:fixed; }\n' +
+        '}';
+      var s = document.createElement('style'); s.appendChild(document.createTextNode(css)); document.head.appendChild(s);
+
+      // Rewrite any <img src="docs/..."> to GitHub raw path
+      function rewriteImgSrcs(){
+        document.querySelectorAll('img').forEach(img => {
+          const src = img.getAttribute('src');
+          if (src && src.startsWith('docs/')) {
+            img.setAttribute('src', baseRaw + src.slice('docs/'.length));
+          }
+        });
+      }
+
+      // Position the floating widget so it doesn't overlap the mobile nav dropdown
+      var mainNav = document.getElementById('mainNav');
+      var floating = document.getElementById('floatingStartBrowsing');
+      var header = document.getElementById('header');
+      var origZ = null;
+
+      function positionWidgetRespectingNav(){
+        if (!floating) return;
+        // only adjust on small screens
+        if (window.innerWidth <= 768 && mainNav && mainNav.classList.contains('mobile-open')){
+          const navRect = mainNav.getBoundingClientRect();
+          const headerBottom = header ? header.getBoundingClientRect().bottom : 0;
+          // navRect.bottom may be <= headerBottom if nav overlays; pick the larger
+          const topPos = Math.max(navRect.bottom, headerBottom) + 12; // 12px gap
+          // store original z-index
+          if (origZ === null) origZ = window.getComputedStyle(floating).zIndex || '';
+          floating.style.top = topPos + 'px';
+          floating.style.right = '16px';
+          floating.style.left = 'auto';
+          floating.style.bottom = 'auto';
+          // lower z so nav and header sit above widget
+          floating.style.zIndex = '900';
+        } else {
+          // restore bottom-anchored state
+          if (!floating) return;
+          floating.style.top = '';
+          floating.style.right = '';
+          floating.style.left = '';
+          floating.style.bottom = '';
+          if (origZ !== null) {
+            floating.style.zIndex = origZ;
+            origZ = null;
+          } else {
+            floating.style.zIndex = '';
+          }
+        }
+      }
+
+      function syncBodyClass(){
+        if(!mainNav) return;
+        document.body.classList.toggle('mobile-nav-open', mainNav.classList.contains('mobile-open'));
+        positionWidgetRespectingNav();
+      }
+
+      // Init on load
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function(){ rewriteImgSrcs(); syncBodyClass(); positionWidgetRespectingNav(); });
+      } else {
+        rewriteImgSrcs(); syncBodyClass(); positionWidgetRespectingNav();
+      }
+
+      if(mainNav){
+        var mo = new MutationObserver(syncBodyClass);
+        mo.observe(mainNav, { attributes: true, attributeFilter: ['class'] });
+      }
+      window.addEventListener('resize', positionWidgetRespectingNav);
+      window.addEventListener('orientationchange', positionWidgetRespectingNav);
+      window.addEventListener('scroll', function(){ if (mainNav && mainNav.classList.contains('mobile-open')) positionWidgetRespectingNav(); });
+    })();
+  </script>
 </body>
 </html>
