@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Free University Tools</title>
+  <style>
+    :root {
+      --bg-white: #FFFFFF;
+      --bg-light: #F5F5F7;
+      --text-primary: #1D1D1F;
+      --text-secondary: #86868B;
+      --accent-blue: #007AFF;
+      --border-gray: #D2D2D7;
+      --hover-gray: #FAFAFA;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-white);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .header.scrolled {
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    
+    .logo {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-free {
+      color: #1d1d1f;
+    }
+
+    .logo-university {
+      color: #4f4f54;
+    }
+
+    .logo-tools {
+      color: #8e8e93;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    
+    .nav-link {
+      position: relative;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      padding-bottom: 2px;
+      transition: color 0.2s ease;
+    }
+    
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 2px;
+      border-radius: 999px;
+      background-color: var(--text-primary);
+      transform: scaleX(0);
+      transform-origin: center;
+      opacity: 0;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--text-secondary);
+    }
+    
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+    
+    .btn-donate {
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      background: var(--text-primary);
+      color: var(--bg-white);
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    
+    .btn-donate:hover {
+      background: #000;
+      transform: translateY(-1px);
+    }
+
+    main {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 100px 24px 80px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .page-header h1 {
+      font-size: 48px;
+      font-weight: 600;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+
+    .page-header p {
+      font-size: 21px;
+      color: var(--text-secondary);
+    }
+
+    .contact-form {
+      background: var(--bg-light);
+      padding: 40px;
+      border-radius: 18px;
+      margin-bottom: 40px;
+    }
+
+    .instagram-card {
+      background: var(--bg-light);
+      padding: 28px;
+      border-radius: 18px;
+      margin-bottom: 24px;
+      text-align: center;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .instagram-card h2 {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+
+    .instagram-card p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .btn-instagram {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--text-primary);
+      color: var(--bg-white);
+      padding: 12px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .btn-instagram:hover {
+      background: #000;
+      transform: translateY(-1px);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--border-gray);
+      border-radius: 12px;
+      font-size: 17px;
+      font-family: inherit;
+      background: var(--bg-white);
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--text-primary);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .btn-submit {
+      background: var(--text-primary);
+      color: var(--bg-white);
+      padding: 14px 32px;
+      border: none;
+      border-radius: 30px;
+      font-size: 17px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .btn-submit:hover {
+      background: #000;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .contact-info {
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .contact-info p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .footer {
+      background: var(--bg-white);
+      border-top: 1px solid var(--border-gray);
+      padding: 40px 24px;
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 15px;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--text-primary);
+    }
+
+    .footer-copyright {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .header-inner {
+        padding: 0 16px;
+        height: 60px;
+      }
+
+      .nav {
+        gap: 20px;
+      }
+
+      .nav-link {
+        font-size: 15px;
+      }
+
+      main {
+        padding: 80px 16px 60px;
+      }
+
+      .page-header h1 {
+        font-size: 36px;
+      }
+
+      .contact-form {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><span class="logo-free">free</span><span class="logo-university">university</span><span class="logo-tools">tools</span></a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="student.html" class="nav-link">Students</a>
+        <a href="powerful.html" class="nav-link">Powerful Tools</a>
+        <a href="https://buy.stripe.com/4gMaEW87U7IO8C8azDcjS01" target="_blank" class="btn-donate">Donate</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <h1>Contact Us</h1>
+      <p>We'd love to hear from you — reach out on Instagram.</p>
+    </div>
+
+    <div class="instagram-card">
+      <h2>Message us on Instagram</h2>
+      <p>DM us on Instagram and we’ll get back to you as soon as we can.</p>
+      <p><strong>Handle:</strong> @freeuniversitytools</p>
+      <a class="btn-instagram" href="https://www.instagram.com/freeuniversitytools/" target="_blank" rel="noopener noreferrer">
+        <span aria-hidden="true">✉</span>
+        <span>Open Instagram DMs</span>
+      </a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="index.html" class="footer-link">Home</a>
+      <a href="student.html" class="footer-link">Students</a>
+      <a href="powerful.html" class="footer-link">Powerful Tools</a>
+      <a href="about.html" class="footer-link">About</a>
+      <a href="contact.html" class="footer-link">Contact</a>
+      <a href="https://buy.stripe.com/4gMaEW87U7IO8C8azDcjS01" target="_blank" class="footer-link">Donate</a>
+    </div>
+    <p class="footer-copyright">© 2026 Free University Tools. All rights reserved.</p>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+</html>
