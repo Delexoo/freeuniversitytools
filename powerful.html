@@ -522,6 +522,58 @@
       margin-top: 20px;
     }
 
+    /* Bug Report Button */
+    .bug-report-button {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 1099;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #007AFF 0%, #5856d6 100%);
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 999px;
+      box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: messageSlideIn 0.5s ease-out;
+    }
+
+    @keyframes messageSlideIn {
+      0% {
+        transform: translateY(100px) scale(0.8);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .bug-report-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 122, 255, 0.4);
+      background: linear-gradient(135deg, #5856d6 0%, #007AFF 100%);
+    }
+
+    .bug-report-button::before {
+      display: none;
+    }
+
+    @keyframes messagePulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
     /* Animations */
     @keyframes fadeInUp {
       from {
@@ -581,6 +633,21 @@
         display: flex;
       }
 
+      /* Move widget down when mobile menu is open */
+      body:has(.nav.mobile-open) .tools-widget {
+        top: 200px !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transform: translateX(-50%) translateY(-20px) !important;
+      }
+
+      /* Show widget when menu is closed */
+      body:not(:has(.nav.mobile-open)) .tools-widget {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: translateX(-50%) translateY(0) !important;
+      }
+
       .nav-link {
         font-size: 16px;
         padding: 12px 0;
@@ -606,8 +673,10 @@
       }
 
       .tools-widget {
-        top: 70px;
-        width: calc(100% - 16px);
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 32px);
         padding: 8px;
         gap: 8px;
       }
@@ -682,6 +751,9 @@
         <a href="index.html" class="nav-link">Home</a>
         <a href="student.html" class="nav-link">Students</a>
         <a href="powerful.html" class="nav-link active">Powerful Tools</a>
+        <a href="report.html" class="nav-link">Report a Bug</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
         <a href="https://buy.stripe.com/4gMaEW87U7IO8C8azDcjS01" target="_blank" class="btn-donate">Donate</a>
       </nav>
     </div>
@@ -1180,12 +1252,16 @@
       <a href="index.html" class="footer-link">Home</a>
       <a href="student.html" class="footer-link">Students</a>
       <a href="powerful.html" class="footer-link">Powerful Tools</a>
+      <a href="report.html" class="footer-link">Report a Bug</a>
       <a href="about.html" class="footer-link">About</a>
       <a href="contact.html" class="footer-link">Contact</a>
       <a href="https://buy.stripe.com/4gMaEW87U7IO8C8azDcjS01" target="_blank" class="footer-link">Donate</a>
     </div>
     <p class="footer-copyright">© 2026 Free University Tools. All rights reserved.</p>
   </footer>
+
+  <!-- Bug Report Button -->
+  <a href="report.html" class="bug-report-button">Report a bug</a>
 
   <script src="js/common.js"></script>
   <script src="js/powerful.js"></script>

@@ -291,16 +291,6 @@
       box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14);
       backdrop-filter: saturate(180%) blur(16px);
       -webkit-backdrop-filter: saturate(180%) blur(16px);
-      transform: translate3d(0, 22px, 0) scale(0.94);
-      opacity: 0;
-      pointer-events: none;
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease,
-        box-shadow 0.25s ease, border-color 0.25s ease;
-    }
-
-    .floating-start-browsing.is-visible {
-      opacity: 1;
-      pointer-events: auto;
       transform: translate3d(0, 0, 0) scale(1);
     }
 
@@ -322,13 +312,12 @@
       text-transform: uppercase;
       color: #6e6e73;
       line-height: 1.1;
-      opacity: 0;
-      max-height: 0;
+      max-height: 16px;
       overflow: hidden;
       transition: opacity 0.25s ease, max-height 0.25s ease, margin-bottom 0.25s ease;
     }
 
-    .floating-start-browsing.is-expanded .floating-start-eyebrow {
+    .floating-start-browsing .floating-start-eyebrow {
       opacity: 1;
       max-height: 16px;
       margin-bottom: 3px;
@@ -348,13 +337,14 @@
       font-size: 13px;
       color: #515154;
       line-height: 1.35;
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
+      max-height: 44px;
+      opacity: 1;
+      overflow: visible;
+      margin-top: 2px;
       transition: opacity 0.25s ease, max-height 0.3s ease, margin-top 0.25s ease;
     }
 
-    .floating-start-browsing.is-expanded .floating-start-note {
+    .floating-start-browsing .floating-start-note {
       max-height: 44px;
       opacity: 1;
       margin-top: 2px;
@@ -724,7 +714,6 @@
       display: flex;
       gap: 18px;
       width: max-content;
-      animation: marquee-left 30s linear infinite;
     }
 
     .tool-card {
@@ -746,7 +735,7 @@
     }
 
     .tool-card:hover {
-      transform: translateY(-5px);
+      transform: none;
       border-color: #d2d2d7;
       background: #ffffff;
       box-shadow: 0 16px 35px rgba(0, 0, 0, 0.08);
@@ -817,7 +806,7 @@
       display: flex;
       flex-direction: column;
       gap: 3px;
-      min-width: 0;
+      min-width: 120px;
     }
 
     .tool-name {
@@ -1167,9 +1156,7 @@
       }
 
       .hero::after {
-        width: 104px;
-        height: 104px;
-        right: 12px;
+        display: none;
       }
 
       .hero h1 {
@@ -1189,11 +1176,7 @@
       }
 
       .features::after {
-        width: 520px;
-        height: 520px;
-        left: -36px;
-        right: auto;
-        bottom: -12px;
+        display: none;
       }
 
       .features-grid {
@@ -1241,10 +1224,24 @@
 
       .tools-track {
         display: grid;
-        grid-template-columns: 1fr;
-        gap: 14px;
-        width: 100%;
-        animation: none;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        padding: 0 16px;
+      }
+
+      .tool-card {
+        min-width: 280px;
+        transition: none;
+      }
+
+      /* Hide duplicate tools on mobile - show only first 3 */
+      .tool-card:nth-child(n+4) {
+        display: none;
+      }
+
+      /* Hide icons on mobile */
+      .tool-icon {
+        display: none;
       }
 
       .contact-strip {
@@ -1281,10 +1278,7 @@
       }
 
       .cta-content::after {
-        width: 130px;
-        height: 130px;
-        right: -18px;
-        top: -54px;
+        display: none;
       }
 
       .cta-panel {
@@ -1328,14 +1322,33 @@
       }
 
       .floating-start-browsing {
-        right: 16px;
-        left: 16px;
-        bottom: 16px;
-        width: auto;
+        width: auto !important;
+        min-width: auto !important;
+        max-width: calc(100vw - 32px) !important;
+        padding: 6px 10px !important;
+        gap: 6px !important;
+        right: 16px !important;
+        bottom: 16px !important;
+      }
+
+      .floating-start-arrow {
+        width: 24px !important;
+        height: 24px !important;
       }
 
       .floating-start-browsing .btn-label {
-        white-space: normal;
+        font-size: 14px !important;
+      }
+
+      .floating-start-eyebrow,
+      .floating-start-note {
+        display: none !important;
+      }
+
+      /* Prevent floating button from being affected by mobile menu */
+      .floating-start-browsing {
+        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease,
+          box-shadow 0.25s ease, border-color 0.25s ease, bottom 0.3s ease !important;
       }
     }
 
@@ -1368,6 +1381,9 @@
         <a href="index.html" class="nav-link active">Home</a>
         <a href="student.html" class="nav-link">Students</a>
         <a href="powerful.html" class="nav-link">Powerful Tools</a>
+        <a href="report.html" class="nav-link">Report a Bug</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
         <a href="https://buy.stripe.com/4gMaEW87U7IO8C8azDcjS01" target="_blank" class="btn-donate">Donate</a>
       </nav>
     </div>
@@ -1662,30 +1678,18 @@
     </div>
   </section>
 
-  <a href="student.html" class="floating-start-browsing" id="floatingStartBrowsing" aria-label="Start Browsing">
-    <span class="floating-start-copy">
-      <span class="floating-start-eyebrow">Start now</span>
-      <span class="btn-label">Start Browsing</span>
-      <span class="floating-start-note">Explore student tools, courses, and AI picks.</span>
-    </span>
-    <span class="floating-start-arrow" aria-hidden="true">
-      <svg viewBox="0 0 24 24">
-        <path d="M8 6l6 6-6 6"></path>
-      </svg>
-    </span>
-  </a>
-
   <!-- Footer -->
   <footer class="footer">
-      <div class="footer-links">
+    <div class="footer-links">
       <a href="index.html" class="footer-link">Home</a>
       <a href="student.html" class="footer-link">Students</a>
       <a href="powerful.html" class="footer-link">Powerful Tools</a>
+      <a href="report.html" class="footer-link">Report a Bug</a>
       <a href="about.html" class="footer-link">About</a>
       <a href="contact.html" class="footer-link">Contact</a>
       <a href="https://buy.stripe.com/4gMaEW87U7IO8C8azDcjS01" target="_blank" class="footer-link">Donate</a>
     </div>
-    <p class="footer-copyright">© 2026 Free University Tools. All rights reserved.</p>
+    <p class="footer-copyright"> 2026 Free University Tools. All rights reserved.</p>
   </footer>
 
   <script src="js/common.js"></script>
