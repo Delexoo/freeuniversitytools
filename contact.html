@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us - Free University Tools</title>
+  <title>Contact - Free University Tools</title>
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png">
   <style>
+    /* CSS Variables - Apple-inspired colors */
     :root {
       --bg-white: #FFFFFF;
       --bg-light: #F5F5F7;
@@ -12,9 +14,9 @@
       --text-secondary: #86868B;
       --accent-blue: #007AFF;
       --border-gray: #D2D2D7;
-      --hover-gray: #FAFAFA;
     }
 
+    /* Reset & Base Styles */
     * {
       margin: 0;
       padding: 0;
@@ -27,12 +29,14 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background-color: var(--bg-white);
+      background: linear-gradient(145deg, #ffffff 0%, #f8f9fb 100%);
       color: var(--text-primary);
       line-height: 1.6;
       overflow-x: hidden;
+      min-height: 100vh;
     }
 
+    /* Header */
     .header {
       position: fixed;
       top: 0;
@@ -59,7 +63,17 @@
       justify-content: space-between;
       height: 64px;
     }
-    
+
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--text-primary);
+      padding: 8px;
+    }
+
     .logo {
       font-size: 20px;
       font-weight: 600;
@@ -85,7 +99,7 @@
       align-items: center;
       gap: 24px;
     }
-    
+
     .nav-link {
       position: relative;
       color: var(--text-primary);
@@ -97,7 +111,7 @@
       padding-bottom: 2px;
       transition: color 0.2s ease;
     }
-    
+
     .nav-link::after {
       content: "";
       position: absolute;
@@ -112,17 +126,17 @@
       opacity: 0;
       transition: transform 0.2s ease, opacity 0.2s ease;
     }
-    
+
     .nav-link:hover {
       color: var(--text-secondary);
     }
-    
+
     .nav-link:hover::after,
     .nav-link.active::after {
       opacity: 1;
       transform: scaleX(1);
     }
-    
+
     .btn-donate {
       border-radius: 999px;
       padding: 8px 18px;
@@ -135,158 +149,166 @@
       text-decoration: none;
       transition: background 0.2s ease, transform 0.2s ease;
     }
-    
+
     .btn-donate:hover {
       background: #000;
       transform: translateY(-1px);
     }
 
-    main {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 100px 24px 80px;
+    /* Dropdown Menu */
+    .nav-dropdown {
+      position: relative;
+      display: inline-block;
     }
 
-    .page-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .page-header h1 {
-      font-size: 48px;
-      font-weight: 600;
-      letter-spacing: -1px;
-      margin-bottom: 16px;
+    .nav-dropdown-btn {
+      background: none;
+      border: none;
       color: var(--text-primary);
-    }
-
-    .page-header p {
-      font-size: 21px;
-      color: var(--text-secondary);
-    }
-
-    .contact-form {
-      background: var(--bg-light);
-      padding: 40px;
-      border-radius: 18px;
-      margin-bottom: 40px;
-    }
-
-    .instagram-card {
-      background: var(--bg-light);
-      padding: 28px;
-      border-radius: 18px;
-      margin-bottom: 24px;
-      text-align: center;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-    }
-
-    .instagram-card h2 {
-      font-size: 24px;
-      font-weight: 600;
-      letter-spacing: -0.3px;
-      margin-bottom: 10px;
-      color: var(--text-primary);
-    }
-
-    .instagram-card p {
-      font-size: 17px;
-      color: var(--text-secondary);
-      margin-bottom: 16px;
-    }
-
-    .btn-instagram {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: var(--text-primary);
-      color: var(--bg-white);
-      padding: 12px 22px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: 600;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    .btn-instagram:hover {
-      background: #000;
-      transform: translateY(-1px);
+    .nav-dropdown-btn:hover {
+      background: var(--bg-light);
     }
 
-    .form-group {
-      margin-bottom: 24px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 15px;
-      font-weight: 500;
-      margin-bottom: 8px;
-      color: var(--text-primary);
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 14px 16px;
+    .nav-dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: var(--bg-white);
       border: 1px solid var(--border-gray);
       border-radius: 12px;
-      font-size: 17px;
-      font-family: inherit;
-      background: var(--bg-white);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      padding: 0;
+      min-width: 150px;
+      z-index: 1000;
+    }
+
+    .nav-dropdown:hover .nav-dropdown-content {
+      display: block;
+    }
+
+    .nav-dropdown-content .nav-link {
+      display: block;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-gray);
+      margin: 0;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      padding-bottom: 2px;
+      transition: color 0.2s ease;
+      position: relative;
       color: var(--text-primary);
-      transition: all 0.2s ease;
+      text-decoration: none;
     }
 
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--text-primary);
+    .nav-dropdown-content .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 2px;
+      border-radius: 999px;
+      background-color: var(--text-primary);
+      transform: scaleX(0);
+      transform-origin: center;
+      opacity: 0;
+      transition: transform 0.2s ease, opacity 0.2s ease;
     }
 
-    .form-group textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    .btn-submit {
-      background: var(--text-primary);
-      color: var(--bg-white);
-      padding: 14px 32px;
-      border: none;
-      border-radius: 30px;
-      font-size: 17px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      width: 100%;
-    }
-
-    .btn-submit:hover {
-      background: #000;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    .contact-info {
-      text-align: center;
-      padding: 40px 0;
-    }
-
-    .contact-info p {
-      font-size: 17px;
+    .nav-dropdown-content .nav-link:hover {
       color: var(--text-secondary);
-      margin-bottom: 8px;
     }
 
+    .nav-dropdown-content .nav-link:hover::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .nav-dropdown-content .nav-link:last-child {
+      border-bottom: none;
+    }
+
+    /* Main Content */
+    .main-content {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 120px 24px 80px;
+      position: relative;
+      min-height: calc(100vh - 200px);
+    }
+
+    .center-message {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-primary);
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .center-message h1 {
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+
+    .center-message p {
+      font-size: 18px;
+      margin-bottom: 24px;
+      color: var(--text-secondary);
+    }
+
+    .instagram-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #E4405F, #C13584, #833AB4, #5851DB, #405DE6);
+      color: white;
+      text-decoration: none;
+      padding: 16px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 12px rgba(228, 64, 95, 0.3);
+    }
+
+    .instagram-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(228, 64, 95, 0.4);
+    }
+
+    .instagram-logo {
+      font-size: 20px;
+    }
+
+    .instagram-handle {
+      font-weight: 600;
+    }
+
+    /* Footer */
     .footer {
       background: var(--bg-white);
       border-top: 1px solid var(--border-gray);
       padding: 40px 24px;
       text-align: center;
-      margin-top: 80px;
     }
 
     .footer-links {
@@ -314,76 +336,258 @@
       margin-top: 20px;
     }
 
+    /* Responsive Design */
     @media (max-width: 768px) {
       .header-inner {
         padding: 0 16px;
-        height: 60px;
+        height: auto;
+        min-height: 60px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .logo {
+        font-size: 18px;
+        flex: 1;
+        min-width: 0;
+      }
+
+      .mobile-menu-toggle {
+        display: block;
+        order: 2;
       }
 
       .nav {
-        gap: 20px;
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 0;
+        padding: 12px 0;
+        order: 3;
+        border-top: 1px solid var(--border-gray);
+        margin-top: 8px;
       }
 
-      .nav-link {
-        font-size: 15px;
+      .nav.mobile-open {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 12px 0;
+        order: 3;
+        border-top: 1px solid var(--border-gray);
+        margin-top: 8px;
       }
 
-      main {
-        padding: 80px 16px 60px;
+      .nav.mobile-open .nav-link,
+      .nav.mobile-open .btn-donate {
+        font-size: 16px;
+        padding: 12px 0;
+        width: 100%;
+        text-align: left;
+        border-bottom: 1px solid var(--border-gray);
+        margin: 0;
       }
 
-      .page-header h1 {
+      .nav.mobile-open .nav-link:last-child,
+      .nav.mobile-open .btn-donate {
+        border-bottom: none;
+      }
+
+      .nav.mobile-open .nav-dropdown {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+        position: static;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        min-width: auto;
+        z-index: auto;
+        margin-bottom: 12px;
+      }
+
+      .nav.mobile-open .nav-dropdown-btn {
+        display: none;
+      }
+
+      .nav.mobile-open .nav-dropdown-content {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        gap: 0;
+        position: static;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        min-width: auto;
+        z-index: auto;
+      }
+
+      .nav.mobile-open .nav-dropdown-content .nav-link {
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border-gray);
+        margin: 0;
+        font-size: 16px;
+        text-align: left;
+        width: 100%;
+        background: transparent;
+        position: static;
+        color: var(--text-primary);
+        text-decoration: none;
+      }
+
+      .nav.mobile-open .nav-dropdown-content .nav-link:last-child {
+        border-bottom: none;
+      }
+
+      .nav.mobile-open .btn-donate {
+        order: 4;
+        margin-top: 12px;
+        text-align: center;
+        background: var(--text-primary);
+        color: var(--bg-white);
+        border-radius: 999px;
+        padding: 10px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: background 0.2s ease, transform 0.2s ease;
+        border-bottom: none;
+      }
+
+      .nav.mobile-open .btn-donate:hover {
+        background: #000;
+        transform: translateY(-1px);
+      }
+
+      .btn-donate {
+        padding: 10px 16px;
+        font-size: 14px;
+        width: 100%;
+        text-align: center;
+        margin-top: 8px;
+      }
+
+      .main-content {
+        padding: 180px 16px 60px;
+      }
+
+      .contact-section {
+        padding: 60px 24px;
+        margin-bottom: 60px;
+      }
+
+      .contact-title {
         font-size: 36px;
+        margin-bottom: 20px;
       }
 
-      .contact-form {
-        padding: 24px;
+      .contact-subtitle {
+        font-size: 18px;
+        margin-bottom: 32px;
+      }
+
+      .contact-methods {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 40px;
+      }
+
+      .contact-method {
+        padding: 24px 20px;
+      }
+
+      .contact-icon {
+        width: 56px;
+        height: 56px;
+        font-size: 24px;
+        margin-bottom: 12px;
+      }
+
+      .contact-method-title {
+        font-size: 18px;
+      }
+
+      .contact-method-description {
+        font-size: 15px;
       }
     }
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header class="header" id="header">
     <div class="header-inner">
       <a href="index.html" class="logo"><span class="logo-free">free</span><span class="logo-university">university</span><span class="logo-tools">tools</span></a>
-      <nav class="nav">
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">☰</button>
+      <nav class="nav" id="mainNav">
         <a href="index.html" class="nav-link">Home</a>
         <a href="student.html" class="nav-link">Students</a>
         <a href="powerful.html" class="nav-link">Powerful Tools</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn">More ▼</button>
+          <div class="nav-dropdown-content">
+            <a href="about.html" class="nav-link">About Us</a>
+            <a href="contact.html" class="nav-link active">Contact</a>
+            <a href="report.html" class="nav-link">Report a Bug</a>
+          </div>
+        </div>
         <a href="https://buy.stripe.com/4gMaEW87U7IO8C8azDcjS01" target="_blank" class="btn-donate">Donate</a>
       </nav>
     </div>
   </header>
 
-  <main>
-    <div class="page-header">
-      <h1>Contact Us</h1>
-      <p>We'd love to hear from you — reach out on Instagram.</p>
-    </div>
-
-    <div class="instagram-card">
-      <h2>Message us on Instagram</h2>
-      <p>DM us on Instagram and we’ll get back to you as soon as we can.</p>
-      <p><strong>Handle:</strong> @freeuniversitytools</p>
-      <a class="btn-instagram" href="https://www.instagram.com/freeuniversitytools/" target="_blank" rel="noopener noreferrer">
-        <span aria-hidden="true">✉</span>
-        <span>Open Instagram DMs</span>
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="center-message">
+      <h1>Get in Touch</h1>
+      <p>Follow us on Instagram for updates and direct messages.</p>
+      <br>
+      <a href="https://instagram.com/freeuniversitytools" target="_blank" class="instagram-button">
+        <span class="instagram-logo">📷</span>
+        <span class="instagram-handle">@freeuniversitytools</span>
       </a>
     </div>
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="footer-links">
       <a href="index.html" class="footer-link">Home</a>
       <a href="student.html" class="footer-link">Students</a>
       <a href="powerful.html" class="footer-link">Powerful Tools</a>
+      <a href="report.html" class="footer-link">Report a Bug</a>
       <a href="about.html" class="footer-link">About</a>
       <a href="contact.html" class="footer-link">Contact</a>
       <a href="https://buy.stripe.com/4gMaEW87U7IO8C8azDcjS01" target="_blank" class="footer-link">Donate</a>
     </div>
-    <p class="footer-copyright">© 2026 Free University Tools. All rights reserved.</p>
+    <div class="footer-copyright">
+      © 2026 Free University Tools. Helping students succeed with free tools.
+    </div>
   </footer>
 
-  <script src="js/common.js"></script>
+  <script>
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mainNav = document.getElementById('mainNav');
+    
+    mobileMenuToggle.addEventListener('click', () => {
+      mainNav.classList.toggle('mobile-open');
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 10) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
 </body>
 </html>

@@ -61,6 +61,8 @@
       align-items: center;
       justify-content: space-between;
       height: 64px;
+      flex-wrap: wrap;
+      gap: 24px;
     }
 
     .mobile-menu-toggle {
@@ -154,11 +156,99 @@
       transform: translateY(-1px);
     }
 
+    /* Dropdown Menu */
+    .nav-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .nav-dropdown-btn {
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-dropdown-btn:hover {
+      background: var(--bg-light);
+    }
+
+    .nav-dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: var(--bg-white);
+      border: 1px solid var(--border-gray);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      padding: 0;
+      min-width: 150px;
+      z-index: 1000;
+    }
+
+    .nav-dropdown:hover .nav-dropdown-content {
+      display: block;
+    }
+
+    .nav-dropdown-content .nav-link {
+      display: block;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-gray);
+      margin: 0;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      padding-bottom: 2px;
+      transition: color 0.2s ease;
+      position: relative;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-dropdown-content .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 2px;
+      border-radius: 999px;
+      background-color: var(--text-primary);
+      transform: scaleX(0);
+      transform-origin: center;
+      opacity: 0;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-dropdown-content .nav-link:hover {
+      color: var(--text-secondary);
+    }
+
+    .nav-dropdown-content .nav-link:hover::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .nav-dropdown-content .nav-link:last-child {
+      border-bottom: none;
+    }
+
     /* Main Content */
     .main-content {
       max-width: 980px;
       margin: 0 auto;
       padding: 120px 24px 80px;
+      position: relative;
+      min-height: calc(100vh - 200px);
     }
 
     /* About Section */
@@ -210,6 +300,18 @@
     .profile-handle {
       font-size: 14px;
       color: var(--text-secondary);
+    }
+
+    .center-message {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-primary);
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
     /* Footer */
@@ -279,18 +381,98 @@
 
       .nav.mobile-open {
         display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 12px 0;
+        order: 3;
+        border-top: 1px solid var(--border-gray);
+        margin-top: 8px;
       }
 
-      .nav-link {
+      .nav.mobile-open .nav-link,
+      .nav.mobile-open .btn-donate {
         font-size: 16px;
         padding: 12px 0;
         width: 100%;
         text-align: left;
         border-bottom: 1px solid var(--border-gray);
+        margin: 0;
       }
 
-      .nav-link:last-child {
+      .nav.mobile-open .nav-link:last-child,
+      .nav.mobile-open .btn-donate {
         border-bottom: none;
+      }
+
+      .nav.mobile-open .nav-dropdown {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+        position: static;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        min-width: auto;
+        z-index: auto;
+        margin-bottom: 12px;
+      }
+
+      .nav.mobile-open .nav-dropdown-btn {
+        display: none;
+      }
+
+      .nav.mobile-open .nav-dropdown-content {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        gap: 0;
+        position: static;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        min-width: auto;
+        z-index: auto;
+      }
+
+      .nav.mobile-open .nav-dropdown-content .nav-link {
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border-gray);
+        margin: 0;
+        font-size: 16px;
+        text-align: left;
+        width: 100%;
+        background: transparent;
+        position: static;
+        color: var(--text-primary);
+        text-decoration: none;
+      }
+
+      .nav.mobile-open .nav-dropdown-content .nav-link:last-child {
+        border-bottom: none;
+      }
+
+      .nav.mobile-open .btn-donate {
+        order: 4;
+        margin-top: 12px;
+        text-align: center;
+        background: var(--text-primary);
+        color: var(--bg-white);
+        border-radius: 999px;
+        padding: 10px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: background 0.2s ease, transform 0.2s ease;
+        border-bottom: none;
+      }
+
+      .nav.mobile-open .btn-donate:hover {
+        background: #000;
+        transform: translateY(-1px);
       }
 
       .btn-donate {
@@ -302,7 +484,7 @@
       }
 
       .main-content {
-        padding: 100px 16px 60px;
+        padding: 180px 16px 60px;
       }
 
       .about-section {
@@ -336,9 +518,14 @@
         <a href="index.html" class="nav-link">Home</a>
         <a href="student.html" class="nav-link">Students</a>
         <a href="powerful.html" class="nav-link">Powerful Tools</a>
-        <a href="report.html" class="nav-link">Report a Bug</a>
-        <a href="about.html" class="nav-link active">About</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn">More ▼</button>
+          <div class="nav-dropdown-content">
+            <a href="about.html" class="nav-link active">About Us</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="report.html" class="nav-link">Report a Bug</a>
+          </div>
+        </div>
         <a href="https://buy.stripe.com/4gMaEW87U7IO8C8azDcjS01" target="_blank" class="btn-donate">Donate</a>
       </nav>
     </div>
@@ -346,17 +533,12 @@
 
   <!-- Main Content -->
   <main class="main-content">
-    <section class="about-section">
-      <!-- Profile Section -->
-      <div class="profile-section">
-        <img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png" alt="Free University Tools" class="profile-image">
-        <div class="profile-comment">
-          "lowkey im just trying to help people that all"
-        </div>
-        <div class="profile-name">Free University Tools</div>
-        <div class="profile-handle">@freeuniversitytools</div>
-      </div>
-    </section>
+    <div class="center-message">
+      a broke CSUSM student <i>(me)</i> got tired of searching for utilities for hours…
+      <br>so I made this instead. now it's all here for you! 🥀
+      <br>
+      <br>thats literally the whole reason why this entire website exist! LOL
+    </div>
   </main>
 
   <!-- Footer -->

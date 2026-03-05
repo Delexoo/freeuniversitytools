@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Powerful Tools - Free University Tools</title>
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png">
   <style>
     /* CSS Variables - Apple-inspired colors */
     :root {
@@ -153,6 +154,92 @@
     .btn-donate:hover {
       background: #000;
       transform: translateY(-1px);
+    }
+
+    /* Dropdown Menu */
+    .nav-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .nav-dropdown-btn {
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-dropdown-btn:hover {
+      background: var(--bg-light);
+    }
+
+    .nav-dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: var(--bg-white);
+      border: 1px solid var(--border-gray);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      padding: 0;
+      min-width: 150px;
+      z-index: 1000;
+    }
+
+    .nav-dropdown:hover .nav-dropdown-content {
+      display: block;
+    }
+
+    .nav-dropdown-content .nav-link {
+      display: block;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-gray);
+      margin: 0;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      padding-bottom: 2px;
+      transition: color 0.2s ease;
+      position: relative;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-dropdown-content .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 2px;
+      border-radius: 999px;
+      background-color: var(--text-primary);
+      transform: scaleX(0);
+      transform-origin: center;
+      opacity: 0;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-dropdown-content .nav-link:hover {
+      color: var(--text-secondary);
+    }
+
+    .nav-dropdown-content .nav-link:hover::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .nav-dropdown-content .nav-link:last-child {
+      border-bottom: none;
     }
 
     /* Main Content */
@@ -656,6 +743,77 @@
         border-bottom: 1px solid var(--border-gray);
       }
 
+      .nav.mobile-open .nav-dropdown {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+        position: static;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        min-width: auto;
+        z-index: auto;
+        margin-bottom: 12px;
+      }
+
+      .nav.mobile-open .nav-dropdown-btn {
+        display: none;
+      }
+
+      .nav.mobile-open .nav-dropdown-content {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        gap: 0;
+        position: static;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        min-width: auto;
+        z-index: auto;
+      }
+
+      .nav.mobile-open .nav-dropdown-content .nav-link {
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border-gray);
+        margin: 0;
+        font-size: 16px;
+        text-align: left;
+        width: 100%;
+        background: transparent;
+        position: static;
+        color: var(--text-primary);
+        text-decoration: none;
+      }
+
+      .nav.mobile-open .nav-dropdown-content .nav-link:last-child {
+        border-bottom: none;
+      }
+
+      .nav.mobile-open .btn-donate {
+        order: 4;
+        margin-top: 12px;
+        text-align: center;
+        background: var(--text-primary);
+        color: var(--bg-white);
+        border-radius: 999px;
+        padding: 10px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: background 0.2s ease, transform 0.2s ease;
+        border-bottom: none;
+      }
+
+      .nav.mobile-open .btn-donate:hover {
+        background: #000;
+        transform: translateY(-1px);
+      }
+
       .nav-link:last-child {
         border-bottom: none;
       }
@@ -669,7 +827,7 @@
       }
 
       main {
-        padding: 148px 16px 60px;
+        padding: 220px 16px 60px;
       }
 
       .tools-widget {
@@ -751,9 +909,14 @@
         <a href="index.html" class="nav-link">Home</a>
         <a href="student.html" class="nav-link">Students</a>
         <a href="powerful.html" class="nav-link active">Powerful Tools</a>
-        <a href="report.html" class="nav-link">Report a Bug</a>
-        <a href="about.html" class="nav-link">About</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn">More ▼</button>
+          <div class="nav-dropdown-content">
+            <a href="about.html" class="nav-link">About Us</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="report.html" class="nav-link">Report a Bug</a>
+          </div>
+        </div>
         <a href="https://buy.stripe.com/4gMaEW87U7IO8C8azDcjS01" target="_blank" class="btn-donate">Donate</a>
       </nav>
     </div>
