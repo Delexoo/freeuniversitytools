@@ -547,6 +547,12 @@
       background: rgba(197, 48, 48, 0.12);
     }
 
+    /* In Paid Tools mode, make every pricing label red-ish for strong visual cue */
+    body[data-mode="paid"] .tool-pricing-label {
+      color: #c53030;
+      background: rgba(197, 48, 48, 0.16);
+    }
+
     /* Tool icons – compatible for PNG/JPG, any aspect ratio */
     .tool-link-icon {
       display: block;
@@ -565,7 +571,6 @@
       image-rendering: auto;
       image-rendering: -webkit-optimize-contrast;
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
-      vertical-align: middle;
     }
 
     .tool-link:hover .tool-link-icon {
@@ -1237,23 +1242,23 @@
         <section class="tool-category" data-category="free-movies">
           <h3 class="category-title">Free Movies</h3>
           <div class="category-tools">
-            <a href="https://soap2day.pe" target="_blank" rel="noopener noreferrer" class="tool-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/Soap2Day.png" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">Soap2Day</span></a>
-            <a href="https://vipstream.tv" target="_blank" rel="noopener noreferrer" class="tool-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/vipstream.png" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">VIP Stream</span></a>
+            <a href="https://soap2day.pe" target="_blank" rel="noopener noreferrer" class="tool-link piracy-warning-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/Soap2Day.png" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">Soap2Day</span></a>
+            <a href="https://vipstream.tv" target="_blank" rel="noopener noreferrer" class="tool-link piracy-warning-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/vipstream.png" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">VIP Stream</span></a>
             <a href="https://flixer.su" target="_blank" rel="noopener noreferrer" class="tool-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/Flixer.png" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">Flixer</span></a>
             <a href="https://www.cineby.app" target="_blank" rel="noopener noreferrer" class="tool-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">Cineby</span></a>
-            <a href="https://tubitv.com" target="_blank" rel="noopener noreferrer" class="tool-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/Tubi.png" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">Tubi</span></a>
-            <a href="https://pluto.tv" target="_blank" rel="noopener noreferrer" class="tool-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/PlutoTV.png" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">Pluto TV</span></a>
-            <a href="https://www.crackle.com" target="_blank" rel="noopener noreferrer" class="tool-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">Crackle</span></a>
+            <a href="https://tubitv.com" target="_blank" rel="noopener noreferrer" class="tool-link piracy-warning-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/Tubi.png" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">Tubi</span></a>
+            <a href="https://pluto.tv" target="_blank" rel="noopener noreferrer" class="tool-link piracy-warning-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/PlutoTV.png" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">Pluto TV</span></a>
+            <a href="https://www.crackle.com" target="_blank" rel="noopener noreferrer" class="tool-link piracy-warning-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">Crackle</span></a>
           </div>
         </section>
         <section class="tool-category" data-category="free-stuff">
           <h3 class="category-title">Free Stuff</h3>
           <div class="category-tools">
-            <a href="https://fmhy.net" target="_blank" rel="noopener noreferrer" class="tool-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FMHY.jpg" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">FMHY</span></a>
-            <a href="https://deepwebnest.com" target="_blank" rel="noopener noreferrer" class="tool-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/DeepWebNest.jpg" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">DeepWebNest</span></a>
-            <a href="https://alternativeto.net" target="_blank" rel="noopener noreferrer" class="tool-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/AlternativeTo.png" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">AlternativeTo</span></a>
-            <a href="https://www.producthunt.com" target="_blank" rel="noopener noreferrer" class="tool-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">Product Hunt</span></a>
-            <a href="https://github.com/sindresorhus/awesome" target="_blank" rel="noopener noreferrer" class="tool-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">Awesome Lists</span></a>
+            <a href="https://fmhy.net" target="_blank" rel="noopener noreferrer" class="tool-link piracy-warning-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FMHY.jpg" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">FMHY</span></a>
+            <a href="https://deepwebnest.com" target="_blank" rel="noopener noreferrer" class="tool-link piracy-warning-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/DeepWebNest.jpg" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">DeepWebNest</span></a>
+            <a href="https://alternativeto.net" target="_blank" rel="noopener noreferrer" class="tool-link piracy-warning-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/AlternativeTo.png" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">AlternativeTo</span></a>
+            <a href="https://www.producthunt.com" target="_blank" rel="noopener noreferrer" class="tool-link piracy-warning-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">Product Hunt</span></a>
+            <a href="https://github.com/sindresorhus/awesome" target="_blank" rel="noopener noreferrer" class="tool-link piracy-warning-link" data-pricing="free"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png" alt="" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png'"><span class="tool-link-name">Awesome Lists</span></a>
           </div>
       </section>
 
@@ -1520,7 +1525,10 @@
       <section class="tool-category" data-category="math-science">
         <h3 class="category-title">Math and Science</h3>
         <div class="category-tools">
-          <p class="category-empty">Coming soon</p>
+          <a href="https://youlearn.ai" target="_blank" rel="noopener noreferrer" class="tool-link" data-pricing="paid">
+            <img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/youlearn.png" alt="YouLearn AI" class="tool-link-icon" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'">
+            <span class="tool-link-name">YouLearn AI</span>
+          </a>
         </div>
       </section>
 
@@ -1677,6 +1685,20 @@
     <div class="footer-copyright">© 2026 Free University Tools. Helping students succeed with free tools.</div>
   </footer>
 
+  <!-- Piracy / third-party disclaimer modal -->
+  <div id="piracyDisclaimerModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:2000; align-items:center; justify-content:center;">
+    <div style="background:#fff; max-width:420px; width:calc(100% - 40px); padding:24px 20px; border-radius:20px; box-shadow:0 12px 40px rgba(0,0,0,0.35); text-align:left; color:#202124; margin:0 auto;">
+      <h2 style="margin:0 0 12px; font-size:18px; font-weight:600;">Important Disclaimer</h2>
+      <p style="font-size:14px; margin:0 0 10px;">Disclaimer: For educational purposes only. No support for piracy.</p>
+      <p style="font-size:14px; margin:0 0 10px;">I have no control over any third‑party sites or their content. Use them at your own risk.</p>
+      <p style="font-size:14px; margin:0 0 14px;"><strong>For your safety, it's best to use a VPN and the Redirect Blocker extension included on this website.</strong></p>
+      <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:4px;">
+        <button id="piracyCancelBtn" style="border-radius:999px; padding:6px 14px; font-size:13px; border:1px solid #DADCE0; background:#fff; cursor:pointer;">Cancel</button>
+        <button id="piracyContinueBtn" style="border-radius:999px; padding:6px 16px; font-size:13px; border:none; background:#1A73E8; color:#fff; cursor:pointer;">I Understand, Continue</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Bug Report Button -->
   <a href="report.html" class="bug-report-button" aria-label="Report a bug or suggest new tools">
     <span class="bug-report-msg bug-report-msg-a">Report a bug</span>
@@ -1694,6 +1716,54 @@
         if (src && src.indexOf(prefix) === 0) {
           img.setAttribute('src', baseRaw + src.slice(prefix.length));
           img.setAttribute('loading', 'lazy');
+        }
+      });
+    })();
+
+    // Piracy / third-party warning modal logic
+    (function () {
+      const modal = document.getElementById('piracyDisclaimerModal');
+      if (!modal) return;
+      const continueBtn = document.getElementById('piracyContinueBtn');
+      const cancelBtn = document.getElementById('piracyCancelBtn');
+      const warningLinks = document.querySelectorAll('.piracy-warning-link');
+      let pendingHref = null;
+
+      function openModal(href) {
+        pendingHref = href;
+        modal.style.display = 'flex';
+      }
+
+      function closeModal() {
+        modal.style.display = 'none';
+        pendingHref = null;
+      }
+
+      warningLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const href = this.getAttribute('href');
+          openModal(href);
+        });
+      });
+
+      if (continueBtn) {
+        continueBtn.addEventListener('click', function () {
+          if (pendingHref) {
+            window.open(pendingHref, '_blank', 'noopener,noreferrer');
+          }
+          closeModal();
+        });
+      }
+
+      if (cancelBtn) {
+        cancelBtn.addEventListener('click', closeModal);
+      }
+
+      // Close modal when clicking outside
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) {
+          closeModal();
         }
       });
     })();

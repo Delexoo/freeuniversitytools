@@ -506,7 +506,8 @@
 
     .pro-tip-wrapper {
       display: flex;
-      justify-content: flex-end;
+      flex-direction: column;
+      align-items: flex-end;
       padding: 0 32px;
       margin: 260px 0 0;
     }
@@ -524,6 +525,15 @@
       opacity: 0;
       transform: translateX(40px) scale(0.92);
       animation: proTipSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+    }
+
+    .pro-tip + .pro-tip {
+      margin-top: 8px;
+    }
+
+    /* Second tip appears 2s after the first */
+    .pro-tip.secondary {
+      animation-delay: 2.5s;
     }
 
     .pro-tip-tail {
@@ -637,10 +647,7 @@
       padding: 24px 0;
     }
 
-    /* Paid Section - Hidden by default */
-    .paid-section {
-      display: none;
-    }
+    /* Paid items are hidden/shown by JS filter; no separate Paid category section */
 
     /* Section Divider */
     .section-divider {
@@ -852,6 +859,12 @@
       color: #C5221F;
     }
 
+    /* In Paid Tools mode, make every tag red-ish for strong visual cue */
+    body[data-mode="paid"] .tool-tag {
+      background: #FDECEC;
+      color: #C5221F;
+    }
+
     /* Footer */
     .footer {
       background: var(--bg-white);
@@ -860,6 +873,8 @@
       text-align: center;
       margin-top: 80px;
     }
+
+    /* (removed) duck overlay */
 
     .footer-links {
       display: flex;
@@ -874,11 +889,13 @@
       text-decoration: none;
       font-size: 15px;
       transition: color 0.2s ease;
+      position: relative;
     }
 
     .footer-link:hover {
       color: var(--text-primary);
     }
+
 
     .footer-copyright {
       color: var(--text-secondary);
@@ -1384,6 +1401,7 @@
   <!-- Pro Tip -->
   <div class="pro-tip-wrapper">
     <div class="pro-tip">Pro Tip: Click on any icon!</div>
+    <div class="pro-tip secondary">Tools are ranked from best to solid.</div>
   </div>
 
   <!-- Main Title -->
@@ -1439,7 +1457,7 @@
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://oceanofpdf.com/" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/OceanOfPDF.png" alt="Ocean of PDF" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/oceanOfpdf.png" alt="Ocean of PDF" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Ocean of PDF</div>
             <span class="tool-tag free">Free</span>
           </a>
@@ -1671,6 +1689,11 @@
       <div class="category-header">
         <div class="category-label">Programming (AI Tools)</div>
         <div class="tools-row">
+          <a href="https://cursor.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Cursor.jpg" alt="Cursor AI" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Cursor AI</div>
+            <span class="tool-tag paid">Paid</span>
+          </a>
           <a href="https://claude.ai" target="_blank" class="tool-item">
             <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/claude.jpg" alt="Claude" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Claude</div>
@@ -1689,12 +1712,7 @@
           <a href="https://dyad.ai" target="_blank" class="tool-item">
             <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Dyad.png" alt="Dyad" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Dyad</div>
-            <span class="tool-tag limited">Paid</span>
-          </a>
-          <a href="https://chipp.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Chipp.jpg" alt="Chipp" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
-            <div class="tool-name">Chipp</div>
-            <span class="tool-tag limited">Paid</span>
+            <span class="tool-tag free">Free</span>
           </a>
         </div>
       </div>
@@ -1837,39 +1855,6 @@
       </div>
     </section>
 
-    <!-- PAID (shown when "Paid Tools" toggle is selected – paid tag only) -->
-    <section class="category-section paid-section" data-category="paid">
-      <div class="category-header">
-        <div class="category-label">Paid</div>
-        <div class="tools-row">
-          <a href="https://www.grammarly.com/premium" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Grammarly.png" alt="Grammarly Premium" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
-            <div class="tool-name">Grammarly Premium</div>
-            <span class="tool-tag limited">Paid</span>
-          </a>
-          <a href="https://quillbot.com/premium" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Quillbot.png" alt="QuillBot Premium" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
-            <div class="tool-name">QuillBot Premium</div>
-            <span class="tool-tag limited">Paid</span>
-          </a>
-          <a href="https://chat.openai.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/ChatGPT.png" alt="ChatGPT Plus" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
-            <div class="tool-name">ChatGPT Plus</div>
-            <span class="tool-tag limited">Paid</span>
-          </a>
-          <a href="https://claude.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/claude.jpg" alt="Claude Pro" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
-            <div class="tool-name">Claude Pro</div>
-            <span class="tool-tag limited">Paid</span>
-          </a>
-          <a href="https://www.notion.so/product" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Notion.png" alt="Notion Plus" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
-            <div class="tool-name">Notion Plus</div>
-            <span class="tool-tag limited">Paid</span>
-          </a>
-        </div>
-      </div>
-    </section>
     </div>
     <!-- END TOP AI ASSISTANTS CONTAINER -->
 
@@ -1878,19 +1863,24 @@
       <div class="category-header">
         <div class="category-label">Study</div>
         <div class="tools-row">
+          <a href="https://youlearn.ai" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/youlearn.png" alt="YouLearn AI" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">YouLearn AI</div>
+            <span class="tool-tag paid">Paid</span>
+          </a>
           <a href="https://knowt.io" target="_blank" class="tool-item">
             <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Knowt.png" alt="Knowt" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Knowt</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
-          <a href="https://www.quizlet.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Quizlet" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
-            <div class="tool-name">Quizlet</div>
-            <span class="tool-tag free-tier">Free Tier</span>
-          </a>
           <a href="https://cluely.com" target="_blank" class="tool-item">
             <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/cluely.jpg" alt="Cluely" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Cluely</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://www.quizlet.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Quizlet" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Quizlet</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://www.ankiweb.net" target="_blank" class="tool-item">
@@ -1937,8 +1927,8 @@
             <div class="tool-name">Dropbox</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
+          </div>
         </div>
-      </div>
     </section>
 
     <!-- ONLINE POLL (moved under Study) -->
@@ -1971,8 +1961,8 @@
             <div class="tool-name">SurveyMonkey</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
+          </div>
         </div>
-      </div>
     </section>
 
     <!-- PDF TOOLS -->

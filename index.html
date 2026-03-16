@@ -326,6 +326,21 @@
       z-index: 0;
     }
 
+    /* Clickable overlay for cat.gif to trigger meow audio */
+    .hero-cat-trigger {
+      position: absolute;
+      right: clamp(58px, 15vw, 275px);
+      top: 50%;
+      width: 170px;
+      height: 170px;
+      transform: translateY(-50%);
+      z-index: 2;
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
     .hero-content {
       max-width: 800px;
       animation: fadeInUp 0.8s ease;
@@ -334,7 +349,7 @@
     }
 
     .hero h1 {
-      font-size: 56px;
+      font-size: 60px;
       font-weight: 600;
       line-height: 1.1;
       margin-bottom: 20px;
@@ -343,7 +358,7 @@
     }
 
     .hero .subheadline {
-      font-size: 21px;
+      font-size: 23px;
       color: var(--text-secondary);
       margin-bottom: 40px;
       line-height: 1.5;
@@ -547,23 +562,40 @@
 
     /* DM Conversation Section */
     .dm-section {
-      padding: 40px 24px 100px;
+      padding: 40px 24px 0; /* no bottom padding so next section sits directly beneath */
       background: var(--bg-white);
       position: relative;
     }
 
     .dm-container {
-      max-width: 420px;
+      position: relative;
+      max-width: 520px;
       margin: 0 auto;
+      padding: 190px 32px 170px; /* base (mobile/tablet fallback) */
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 10px;
+    }
+
+    .dm-phone-frame {
+      position: absolute;
+      inset: 0;
+      border-radius: 32px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .dm-phone-image {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     .dm-bubble {
-      max-width: 300px;
+      max-width: 320px;
       padding: 10px 18px;
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 500;
       line-height: 1.45;
       opacity: 0;
@@ -575,16 +607,16 @@
       background: #007AFF;
       color: #fff;
       align-self: flex-end;
-      border-radius: 18px 18px 4px 18px;
+      border-radius: 30px 30px 18px 30px; /* slightly more rounded, still with a soft tail */
       box-shadow: 0 2px 12px rgba(0, 122, 255, 0.25);
       transform: translateX(40px) scale(0.92);
     }
 
     .dm-bubble.received {
-      background: #E9E9EB;
-      color: #1D1D1F;
+      background: #2C2C2E; /* dark gray bubble for Daniel */
+      color: #FFFFFF;      /* white text */
       align-self: flex-start;
-      border-radius: 18px 18px 18px 4px;
+      border-radius: 30px 30px 30px 18px; /* slightly more rounded, still with a soft tail */
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
       transform: translateX(-40px) scale(0.92);
     }
@@ -604,6 +636,98 @@
       margin-top: 14px;
     }
 
+    /* Inline "Why choose us" block under the DM phone */
+    .features-inline {
+      max-width: 900px;
+      margin: -350px auto 0;        /* move initial position much further up toward the phone */
+      padding: 4px 24px 32px;
+      transform-origin: top center;
+      will-change: transform, opacity;
+    }
+
+    .features-inline-header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .features-inline-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr)); /* four fixed boxes on desktop */
+      gap: 14px 18px;
+      align-items: stretch;
+    }
+
+    .features-inline-item {
+      padding: 16px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: #ffffff;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06);
+    }
+
+    .features-inline-item h3 {
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      margin: 0;
+    }
+
+    .features-inline-item--stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .features-inline {
+        max-width: 100%;
+        padding: 8px 16px 28px;
+        margin: -130px auto 0; /* lower than desktop's -350px so it sits further down on mobile */
+      }
+
+      .features-inline-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* two-by-two on small screens */
+      }
+
+      .features-inline-item {
+        padding: 12px 14px;
+      }
+
+      .features-inline-item h3 {
+        font-size: 14px;
+      }
+
+      .features-inline-item p {
+        font-size: 12px;
+      }
+    }
+
+    /* Mobile typography for inline "Why choose us?" block (match desktop style, scaled down) */
+    @media (max-width: 480px) {
+      .features-inline-header .features-intro-eyebrow {
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #6e6e73;
+        margin-bottom: 6px;
+      }
+
+      .features-inline-header .section-title {
+        font-size: 20px;  /* smaller so the full line fits on one row on mobile */
+        font-weight: 600;
+        margin-bottom: 6px;
+        letter-spacing: -0.4px;
+        color: #1d1d1f;
+      }
+
+      .features-inline-header .features-tagline {
+        font-size: 14px;
+        line-height: 1.5;
+        color: #515154;
+        margin: 0;
+      }
+    }
+
     .dm-link {
       color: #fff;
       text-decoration: underline;
@@ -617,122 +741,49 @@
 
       .dm-container {
         max-width: 100%;
+        padding: 150px 12px 150px; /* shift DMs slightly up on mobile */
       }
 
       .dm-bubble {
-        max-width: 260px;
-        font-size: 14px;
-        padding: 9px 14px;
+        max-width: 200px;
+        font-size: 13px;   /* slightly smaller text on mobile */
+        padding: 6px 10px; /* smaller, tighter bubbles on mobile */
+      }
+
+      /* Mobile: slightly less rounded bubbles so they don't look too pill-like on small screens */
+      .dm-bubble.sent {
+        border-radius: 20px 20px 10px 20px;
+        margin-right: 16px; /* pull away from the extreme right edge */
+      }
+
+      .dm-bubble.received {
+        border-radius: 20px 20px 20px 10px;
+        margin-left: 16px;  /* pull away from the extreme left edge */
       }
     }
 
-    /* Features Section */
-    .features {
-      padding: 100px 24px;
-      background: #000000;
-      color: #f5f5f7;
-      position: relative;
-      overflow: hidden;
-      --duck-x: 0px;
-      --duck-opacity: 1;
-      --duck-scale-x: 1;
+    /* Desktop: make phone + DMs much bigger */
+    @media (min-width: 1024px) {
+      .dm-section {
+        padding: 60px 24px 10px; /* almost no bottom padding on desktop */
+      }
+
+      .dm-container {
+        max-width: 700px;
+        padding: 360px 64px 440px; /* shift DMs slightly up on desktop */
+      }
+
+      .dm-phone-frame {
+        border-radius: 40px;
+      }
+
+      .dm-bubble {
+        max-width: 420px; /* narrower so long messages wrap to more lines and don't cross over */
+        padding: 18px 28px;
+        font-size: 21px;
+      }
     }
 
-    .features::after {
-      content: "";
-      position: absolute;
-      left: -48px;
-      right: auto;
-      bottom: -25px;
-      width: 940px;
-      height: 940px;
-      background: url("duck.gif") center / contain no-repeat;
-      transform: translate3d(var(--duck-x), 0, 0) scaleX(var(--duck-scale-x));
-      transform-origin: center;
-      opacity: var(--duck-opacity);
-      transition: transform 0.18s ease-out, opacity 0.25s ease;
-      pointer-events: none;
-      z-index: 20;
-    }
-
-    .features-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
-    }
-
-    .features-header {
-      text-align: center;
-      max-width: 760px;
-      margin: 0 auto 44px;
-    }
-
-    .features-intro-eyebrow {
-      font-size: 13px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #a1a1a6;
-      margin-bottom: 10px;
-    }
-
-    .section-title {
-      font-size: 40px;
-      font-weight: 600;
-      margin-bottom: 12px;
-      letter-spacing: -0.5px;
-      color: var(--text-primary);
-    }
-
-    .features-tagline {
-      font-size: 18px;
-      color: #d2d2d7;
-      line-height: 1.6;
-    }
-
-    .features .section-title {
-      color: #f5f5f7;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .feature-card {
-      background: linear-gradient(160deg, #171717 0%, #0f0f0f 100%);
-      padding: 24px 22px;
-      border-radius: 22px;
-      text-align: left;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-      min-width: 0;
-      min-height: 184px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      overflow: hidden;
-      position: relative;
-      grid-column: span 5;
-    }
-
-    .feature-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 22px;
-      right: 22px;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.05));
-    }
-
-    .feature-card-lead {
-      grid-column: span 7;
-      grid-row: span 2;
-      min-height: 384px;
-      padding: 30px 28px;
-    }
 
     .feature-card-wide {
       grid-column: 1 / -1;
@@ -816,15 +867,13 @@
     }
 
     .tools-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 24px;
-      margin-bottom: 38px;
+      text-align: center;
+      margin: 125px 0 28px; /* push Featured Tools text down by 300px statically */
     }
 
     .tools-header-copy {
       max-width: 620px;
+      margin: 0 auto;
     }
 
     .tools-eyebrow {
@@ -836,8 +885,8 @@
     }
 
     .tools-preview .section-title {
-      margin-bottom: 8px;
-      text-align: left;
+      margin-bottom: 6px;
+      text-align: center;
       color: #1d1d1f;
     }
 
@@ -850,39 +899,41 @@
     .tools-carousel {
       overflow: hidden;
       position: relative;
-      mask-image: linear-gradient(to right, transparent 0, black 8%, black 92%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0, black 8%, black 92%, transparent 100%);
+      /* Removed mask-image fade so featured tools (like Cluely) are fully visible */
     }
 
     .tools-track {
       display: flex;
-      gap: 18px;
-      width: max-content;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      align-items: center; /* center stacked cards horizontally */
     }
 
     .tool-card {
       text-align: left;
       text-decoration: none;
       color: #1d1d1f;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease,
-        background 0.3s ease;
-      padding: 18px;
-      border-radius: 20px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease,
+        background 0.2s ease;
+      padding: 16px 18px;
+      border-radius: 18px;
       border: 1px solid #e5e5ea;
       background: #ffffff;
       display: flex;
       align-items: center;
-      gap: 14px;
-      min-height: 108px;
+      gap: 12px;
+      min-height: 96px;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-      min-width: 320px;
+      width: 100%;
+      max-width: 420px; /* fixed width so they stack like a vertical list */
     }
 
     .tool-card:hover {
-      transform: none;
+      transform: translateY(-2px);
       border-color: #d2d2d7;
       background: #ffffff;
-      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
     }
 
     .tool-icon {
@@ -985,6 +1036,9 @@
       color: #f5f5f7;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      min-height: 200px;
+      overflow: hidden;
     }
 
     .contact-strip-inner {
@@ -995,6 +1049,216 @@
       grid-template-columns: minmax(0, 1fr) auto;
       align-items: center;
       gap: 28px;
+      position: relative;
+    }
+
+    .contact-duck-overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 72px;
+      height: 72px;
+      z-index: 1;
+      pointer-events: auto;
+      cursor: pointer;
+      transform-origin: center bottom;
+      background: transparent;
+      border: none;
+      padding: 0;
+      opacity: 0;
+    }
+
+    .contact-duck-overlay.is-ready {
+      opacity: 1;
+      transition: opacity 140ms ease;
+    }
+
+    .contact-duck-overlay img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Easter egg: Plus button to spawn player 2 */
+    .contact-spawn-button {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #f5f5f7;
+      font-size: 14px;
+      font-weight: 300;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: all 0.2s ease;
+    }
+
+    .contact-spawn-button:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.1);
+    }
+
+    /* Hidden game controls hint (bottom left) */
+    .contact-controls-hint {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      z-index: 10;
+      opacity: 0.4;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    /* no hover interaction; pulse only happens on click/keypress */
+
+    /* Arrow keys hint (hidden until player 2 spawns) */
+    .contact-controls-hint-arrows {
+      position: absolute;
+      bottom: 52px;
+      left: 16px;
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      align-items: center;
+      z-index: 10;
+      opacity: 0.4;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .contact-controls-hint-arrows.show {
+      display: flex;
+    }
+
+    /* no hover interaction; pulse only happens on click/keypress */
+
+    .arrow-keys-row {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+    }
+
+    .control-key {
+      width: 22px;
+      height: 22px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f5f5f7;
+      font-size: 9px;
+      font-weight: 600;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      text-transform: uppercase;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .control-key,
+    .control-key-arrow {
+      user-select: none;
+      -webkit-user-select: none;
+      cursor: default;
+      pointer-events: none;
+      transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .control-key-arrow {
+      width: 22px;
+      height: 22px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f5f5f7;
+      font-size: 9px;
+      font-weight: 700;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .control-key.pulse,
+    .control-key-arrow.pulse {
+      background: rgba(255, 255, 255, 0.22);
+      border-color: rgba(255, 255, 255, 0.38);
+      transform: scale(1.08);
+      box-shadow: 0 3px 10px rgba(255, 255, 255, 0.12);
+    }
+
+    /* Player 2 duck styling (same as player 1) */
+    .contact-duck-overlay.player2 {
+      z-index: 2;
+    }
+
+    /* Hide duck game UI on mobile */
+    @media (max-width: 768px) {
+      .contact-duck-overlay,
+      .contact-spawn-button,
+      .contact-controls-hint,
+      .contact-controls-hint-arrows {
+        display: none !important;
+      }
+    }
+
+    /* Duck collision spark (simple white burst) */
+    .duck-explosion {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      pointer-events: none;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow:
+        0 0 0 0 rgba(255,255,255,0.9),
+        0 0 18px 6px rgba(255,255,255,0.55);
+      transform: translate(-50%, -50%) scale(0.6);
+      opacity: 0.95;
+      animation: duckSpark 260ms ease-out forwards;
+    }
+
+    @keyframes duckSpark {
+      0% { transform: translate(-50%, -50%) scale(0.55); opacity: 0.95; }
+      70% { transform: translate(-50%, -50%) scale(2.8); opacity: 0.7; }
+      100% { transform: translate(-50%, -50%) scale(3.6); opacity: 0; }
+    }
+
+    /* Honk text */
+    .duck-honk-text {
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 20;
+      color: rgba(245, 245, 247, 0.95);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      text-shadow: 0 6px 18px rgba(0,0,0,0.45);
+      opacity: 0;
+      animation: honkPop 650ms ease-out forwards;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    @keyframes honkPop {
+      0% { transform: translate(-50%, -50%) translateY(6px) scale(0.92); opacity: 0; }
+      18% { opacity: 1; }
+      100% { transform: translate(-50%, -50%) translateY(-22px) scale(1); opacity: 0; }
     }
 
     .contact-strip-copy {
@@ -1110,13 +1374,27 @@
     .cta-content::after {
       content: "";
       position: absolute;
-      right: clamp(-28px, -1vw, 8px);
-      top: 170px;
+      right: -350px;
+      top: 180px;
       width: 190px;
       height: 190px;
-      background: url("hello.gif") center / contain no-repeat;
+      background: url("huh.gif") center / contain no-repeat;
       pointer-events: none;
       z-index: 0;
+    }
+
+    /* Clickable overlay that sits on top of huh.gif to trigger audio */
+    .cta-huh-trigger {
+      position: absolute;
+      right: -350px;
+      top: 180px;
+      width: 190px;
+      height: 190px;
+      z-index: 2;
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
     }
 
     .cta-panel {
@@ -1435,11 +1713,11 @@
       }
 
       .hero h1 {
-        font-size: 36px;
+        font-size: 38px;
       }
 
       .hero .subheadline {
-        font-size: 18px;
+        font-size: 19px;
       }
 
       .section-title {
@@ -1477,31 +1755,14 @@
         font-size: 16px;
       }
 
-      .tools-preview {
-        padding: 60px 16px;
-      }
-
-      .tools-header {
-        flex-direction: column;
-        align-items: flex-start;
-        margin-bottom: 28px;
-      }
-
-      .tools-preview .section-title {
-        text-align: left;
-        margin-bottom: 8px;
-      }
-
       .tools-carousel {
         mask-image: none;
         -webkit-mask-image: none;
       }
 
       .tools-track {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-        padding: 0 16px;
+        align-items: stretch;
+        padding: 0 8px;
       }
 
       /* Featured tools: on mobile show only logo icon + name */
@@ -1645,7 +1906,7 @@
 
     @media (max-width: 480px) {
       .hero h1 {
-        font-size: 32px;
+        font-size: 34px;
       }
 
       .tool-card {
@@ -1691,6 +1952,7 @@
 
   <!-- Hero Section -->
   <section class="hero">
+    <button class="hero-cat-trigger" type="button" aria-label="Play meow sound"></button>
     <div class="hero-content">
       <h1>Study smarter.</h1>
       <p class="subheadline">Find the best AI tools, study resources, books, and courses.<br>All hand-picked for students. <strong>100% free, forever.</strong></p>
@@ -1709,6 +1971,14 @@
   <!-- DM Conversation -->
   <section class="dm-section">
     <div class="dm-container" id="dmContainer">
+      <div class="dm-phone-frame" aria-hidden="true">
+        <img
+          src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/iPhoneDMs.png"
+          alt=""
+          class="dm-phone-image"
+          onerror="this.style.display='none';"
+        >
+      </div>
       <div class="dm-bubble sent">yo daniel</div>
       <div class="dm-bubble sent">I found this website it's lowkey kinda tuff</div>
       <div class="dm-bubble received">wdym</div>
@@ -1719,47 +1989,17 @@
       <div class="dm-bubble sent"><a href="index.html" class="dm-link">freeuniversitytools.com</a></div>
       <div class="dm-bubble sent">its genuinely stacked 😭</div>
     </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="features">
-    <div class="features-container">
-      <div class="features-header">
-        <div class="features-intro-eyebrow">Why choose us</div>
+    <!-- Inline "Why choose us" copy placed directly under the phone -->
+    <div class="features-inline">
+      <div class="features-inline-header">
+        <div class="features-intro-eyebrow">Why choose us?</div>
         <h2 class="section-title">Simple, useful, and made for students.</h2>
         <p class="features-tagline">Everything you need in one clean place, without distractions.</p>
-      </div>
-
-      <div class="features-grid">
-          <div class="feature-card feature-card-lead">
-            <div class="feature-card-body">
-              <h3>Curated tools</h3>
-              <p>Only practical tools worth using, chosen for real student workflows and everyday study speed.</p>
-            </div>
-          </div>
-          <div class="feature-card">
-            <div class="feature-card-body">
-              <h3>Always free</h3>
-              <p>No hidden paywalls or subscriptions.</p>
-            </div>
-          </div>
-          <div class="feature-card">
-            <div class="feature-card-body">
-              <h3>Fast access</h3>
-              <p>Find what you need in seconds.</p>
-            </div>
-          </div>
-          <div class="feature-card feature-card-wide">
-            <div class="feature-card-body">
-              <h3>Updated often</h3>
-              <p>Fresh tools added regularly so your study stack stays current without the noise.</p>
-            </div>
-          </div>
       </div>
     </div>
   </section>
 
-  <!-- Tools Preview Section -->
+  <!-- Tools Preview Section (now visually paired with "Why choose us?" and animated separately) -->
   <section class="tools-preview">
     <div class="tools-container">
       <div class="tools-header">
@@ -1805,6 +2045,24 @@
 
   <!-- Contact Strip -->
   <section class="contact-strip">
+    <button class="contact-spawn-button" type="button" aria-label="Spawn player 2" id="spawnPlayer2Btn">+</button>
+    <div class="contact-controls-hint-arrows" aria-label="Arrow key controls" id="arrowKeysHint">
+      <div class="control-key-arrow" data-key="ArrowUp">↑</div>
+      <div class="arrow-keys-row">
+        <div class="control-key-arrow" data-key="ArrowLeft">←</div>
+        <div class="control-key-arrow" data-key="ArrowDown">↓</div>
+        <div class="control-key-arrow" data-key="ArrowRight">→</div>
+      </div>
+    </div>
+    <div class="contact-controls-hint" aria-label="Game controls">
+      <div class="control-key" data-key="w">W</div>
+      <div class="control-key" data-key="s">S</div>
+      <div class="control-key" data-key="a">A</div>
+      <div class="control-key" data-key="d">D</div>
+    </div>
+    <button class="contact-duck-overlay" type="button" aria-label="Honking duck" id="player1Duck">
+      <img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/duck.gif" alt="">
+    </button>
     <div class="contact-strip-inner">
       <div class="contact-strip-copy">
         <div class="contact-strip-badge">
@@ -1827,6 +2085,7 @@
   <!-- CTA Section -->
   <section class="cta-section">
     <div class="cta-content">
+      <button class="cta-huh-trigger" type="button" aria-label="Play huh sound"></button>
       <div class="cta-panel">
         <div class="cta-copy">
           <div class="cta-eyebrow">Start now</div>
@@ -1868,6 +2127,41 @@
     })();
   </script>
   <script>
+    // Play huh.mp3 from GitHub when the huh.gif area is clicked
+    (function () {
+      var trigger = document.querySelector('.cta-huh-trigger');
+      if (!trigger) return;
+
+      var audio = new Audio('https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/huh.mp3');
+
+      trigger.addEventListener('click', function () {
+        try {
+          audio.currentTime = 0;
+          audio.play().catch(function () {});
+        } catch (e) {}
+      });
+    })();
+  </script>
+  <script>
+    // Play meow.mp3 (80%) or deep-meow.mp3 (20%) when the cat.gif area is clicked
+    (function () {
+      var trigger = document.querySelector('.hero-cat-trigger');
+      if (!trigger) return;
+
+      var meow = new Audio('https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/meow.mp3');
+      var deepMeow = new Audio('https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/deep-meow.mp3');
+
+      trigger.addEventListener('click', function () {
+        try {
+          var roll = Math.random(); // 0–1
+          var chosen = roll < 0.98 ? meow : deepMeow; // 98% normal, 2% deep
+          chosen.currentTime = 0;
+          chosen.play().catch(function () {});
+        } catch (e) {}
+      });
+    })();
+  </script>
+  <script>
     (function(){
       const baseRaw = 'https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/';
       // Prevent horizontal swiping/overflow on mobile
@@ -1882,10 +2176,9 @@
       var css = '' +
         '.floating-start-browsing{box-sizing:border-box!important;transition:top 0.28s ease,right 0.28s ease,bottom 0.28s ease;}\n' +
         '.hero::after{background-image:url("' + baseRaw + 'cat.gif") !important;}\n' +
-        '.features::after{background-image:url("' + baseRaw + 'duck.gif") !important;}\n' +
-        '.cta-content::after{background-image:url("' + baseRaw + 'hello.gif") !important;}\n' +
+        '.cta-content::after{background-image:url("' + baseRaw + 'huh.gif") !important;}\n' +
         '@media (max-width:768px){\n' +
-        '  .hero::after,.features::after{right:8px;max-width:40vw;}\n' +
+        '  .hero::after{right:8px;max-width:40vw;}\n' +
         '  .tools-track{width:100%!important;}\n' +
         '  .tool-card{min-width:0!important;}\n' +
         '  .floating-start-browsing{max-width:calc(100% - 32px)!important;right:16px;left:16px;}\n' +
@@ -1961,6 +2254,658 @@
       window.addEventListener('resize', positionWidgetRespectingNav);
       window.addEventListener('orientationchange', positionWidgetRespectingNav);
       window.addEventListener('scroll', function(){ if (mainNav && mainNav.classList.contains('mobile-open')) positionWidgetRespectingNav(); });
+    })();
+  </script>
+  <script>
+    // Gravity physics for duck.gif in contact section + drag & throw + honk on click
+    (function () {
+      // Disable duck game on mobile
+      if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) return;
+
+      const duck = document.querySelector('.contact-duck-overlay');
+      const container = document.querySelector('.contact-strip');
+      if (!duck || !container) return;
+
+      const duckWidth = 72;
+      const duckHeight = 72;
+      
+      // Calculate initial position closer to ground
+      function getInitialY() {
+        const containerRect = container.getBoundingClientRect();
+        const containerHeight = containerRect.height;
+        const bottomBoundary = containerHeight - duckHeight;
+        // Start about 20px above the ground (bottom of the black section)
+        return Math.max(0, bottomBoundary - 20);
+      }
+      
+      // Player coordinates are container-relative:
+      // x: 0..containerWidth, y: 0..containerHeight
+      // Spawn player 1 centered on the x-axis
+      let x = Math.max(0, (container.getBoundingClientRect().width - duckWidth) / 2); // horizontal position (relative to black section)
+      let y = getInitialY();  // vertical position (relative to black section)
+      let vx = 0;             // horizontal velocity px/s
+      let vy = 0;             // vertical velocity px/s
+      const gravity = 900;    // px/s^2
+      const bounce = 0.48;    // energy loss on bounce
+      const friction = 0.95;  // horizontal friction (damping)
+      const moveSpeed = 2400;  // px/s for keyboard movement (very very fast)
+      const jumpForce = 450;  // px/s upward impulse for jump
+      let lastTime = null;
+      const keys = {};  // Track pressed keys
+      let isDragging = false;
+      let dragOffsetX = 0;  // Offset between mouse and duck center
+      let dragOffsetY = 0;
+      let dragStartTime = 0;
+      let dragPrevX = 0;
+      let dragPrevY = 0;
+      let dragPrevTime = 0;
+      let animationId = null;
+      // Share player2 state for collisions
+      let player2State = null;
+      let lastPunchAt = 0;
+      const punchCooldownMs = 650;
+
+      // Set initial position before first paint to avoid a flash at (0,0)
+      duck.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+      duck.classList.add('is-ready');
+
+      function spawnExplosion(cx, cy) {
+        try {
+          const boom = document.createElement('div');
+          boom.className = 'duck-explosion';
+          boom.style.left = cx + 'px';
+          boom.style.top = cy + 'px';
+          container.appendChild(boom);
+          window.setTimeout(function () {
+            if (boom && boom.parentNode) boom.parentNode.removeChild(boom);
+          }, 520);
+        } catch (e) {}
+      }
+
+      function playPunch() {
+        try {
+          const audio = new Audio('https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/punch.mp3');
+          audio.currentTime = 0;
+          audio.play().catch(function () {});
+        } catch (e) {}
+      }
+
+      function spawnHonkText(cx, cy) {
+        try {
+          const t = document.createElement('div');
+          t.className = 'duck-honk-text';
+          t.textContent = '*honk';
+          t.style.left = cx + 'px';
+          t.style.top = cy + 'px';
+          container.appendChild(t);
+          window.setTimeout(function () {
+            if (t && t.parentNode) t.parentNode.removeChild(t);
+          }, 750);
+        } catch (e) {}
+      }
+
+      // Shared boundary function - both players use this
+      function getBoundaries(duckW = duckWidth, duckH = duckHeight) {
+        const containerRect = container.getBoundingClientRect();
+        const containerWidth = containerRect.width;
+        const containerHeight = containerRect.height;
+        // Full playable box = entire black section (contact-strip)
+        return {
+          left: 0,
+          right: Math.max(0, containerWidth - duckW),
+          top: 0,
+          bottom: Math.max(0, containerHeight - duckH)
+        };
+      }
+
+      function step(ts) {
+        if (isDragging) {
+          // Don't apply physics while dragging
+          animationId = requestAnimationFrame(step);
+          return;
+        }
+
+        if (lastTime == null) {
+          lastTime = ts;
+          animationId = requestAnimationFrame(step);
+          return;
+        }
+        const dt = Math.min((ts - lastTime) / 1000, 0.032); // seconds, clamp for stability
+        lastTime = ts;
+
+        const bounds = getBoundaries();
+
+        // Keyboard controls
+        if (keys['a'] || keys['A']) {
+          vx -= moveSpeed * dt;
+        }
+        if (keys['d'] || keys['D']) {
+          vx += moveSpeed * dt;
+        }
+
+        // Apply horizontal friction
+        vx *= friction;
+        x += vx * dt;
+
+        // Integrate gravity
+        vy += gravity * dt;
+        y += vy * dt;
+
+        // Check if keyboard controls are active
+        const isKeyboardControlled = keys['a'] || keys['A'] || keys['d'] || keys['D'] || keys['w'] || keys['W'];
+
+        // Constrain to left boundary
+        if (x < bounds.left) {
+          x = bounds.left;
+          if (isKeyboardControlled) {
+            vx = 0; // Stop instead of bounce when using keyboard
+          } else if (Math.abs(vx) > 40) {
+            vx = -vx * bounce;
+          } else {
+            vx = 0;
+          }
+        }
+
+        // Constrain to right boundary
+        if (x > bounds.right) {
+          x = bounds.right;
+          if (isKeyboardControlled) {
+            vx = 0; // Stop instead of bounce when using keyboard
+          } else if (Math.abs(vx) > 40) {
+            vx = -vx * bounce;
+          } else {
+            vx = 0;
+          }
+        }
+
+        // Constrain to top boundary
+        if (y < bounds.top) {
+          y = bounds.top;
+          if (isKeyboardControlled) {
+            vy = 0; // Stop instead of bounce when using keyboard
+          } else if (Math.abs(vy) > 40) {
+            vy = -vy * bounce;
+          } else {
+            vy = 0;
+          }
+        }
+
+        // Constrain to bottom boundary
+        if (y > bounds.bottom) {
+          y = bounds.bottom;
+          if (isKeyboardControlled) {
+            vy = 0; // Stop instead of bounce when using keyboard
+          } else if (Math.abs(vy) > 40) {
+            vy = -vy * bounce;
+          } else {
+            vy = 0;
+          }
+        }
+
+        // Flip duck horizontally based on movement direction
+        const flipX = vx < 0 ? 'scaleX(-1)' : (vx > 0 ? 'scaleX(1)' : '');
+        
+        duck.style.transform = 'translate(' + x + 'px, ' + y + 'px)' + (flipX ? ' ' + flipX : '');
+
+        // Collision: player1 vs player2 (punch + explosion + extreme launch)
+        if (player2State && player2State.spawned) {
+          const now = performance.now();
+          if (now - lastPunchAt > punchCooldownMs) {
+            const dx = (x + duckWidth / 2) - (player2State.x + duckWidth / 2);
+            const dy = (y + duckHeight / 2) - (player2State.y + duckHeight / 2);
+            const dist2 = dx * dx + dy * dy;
+            const hitDist = 54; // slightly smaller than sprite size for nicer feel
+            if (dist2 <= hitDist * hitDist) {
+              lastPunchAt = now;
+              playPunch();
+              // Explosion at midpoint
+              spawnExplosion((x + player2State.x) / 2 + duckWidth / 2, (y + player2State.y) / 2 + duckHeight / 2);
+
+              // Launch both away from each other
+              const len = Math.max(0.0001, Math.sqrt(dist2));
+              const nx = dx / len;
+              const ny = dy / len;
+              const power = 4200; // EXTREME
+              vx += nx * power;
+              vy += ny * power * 0.95;
+              player2State.vx -= nx * power;
+              player2State.vy -= ny * power * 0.95;
+
+              // also push player 2’s live velocities immediately
+              vx2 = player2State.vx;
+              vy2 = player2State.vy;
+            }
+          }
+        }
+        animationId = requestAnimationFrame(step);
+      }
+
+      animationId = requestAnimationFrame(step);
+
+      // Drag and throw functionality
+      function getMousePos(e) {
+        const containerRect = container.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return {
+          x: clientX - containerRect.left,
+          y: clientY - containerRect.top
+        };
+      }
+
+      function startDrag(e) {
+        e.preventDefault();
+        isDragging = true;
+        const mousePos = getMousePos(e);
+        
+        // Calculate offset between mouse and duck center
+        dragOffsetX = mousePos.x - x - duckWidth / 2;
+        dragOffsetY = mousePos.y - y - duckHeight / 2;
+        
+        dragPrevX = x;
+        dragPrevY = y;
+        dragStartTime = dragPrevTime = performance.now();
+        vx = 0; // Reset velocities when starting drag
+        vy = 0;
+        duck.style.cursor = 'grabbing';
+      }
+
+      function drag(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        const bounds = getBoundaries();
+        const mousePos = getMousePos(e);
+        
+        // Calculate new position accounting for offset
+        let newX = mousePos.x - dragOffsetX - duckWidth / 2;
+        let newY = mousePos.y - dragOffsetY - duckHeight / 2;
+        
+        // Constrain to boundaries while dragging
+        if (newX < bounds.left) newX = bounds.left;
+        if (newX > bounds.right) newX = bounds.right;
+        if (newY < bounds.top) newY = bounds.top;
+        if (newY > bounds.bottom) newY = bounds.bottom;
+        
+        x = newX;
+        y = newY;
+        // Flip duck horizontally based on movement direction during drag
+        const dragVx = (x - dragPrevX) / Math.max((performance.now() - dragPrevTime) / 1000, 0.001);
+        const flipX = dragVx < 0 ? 'scaleX(-1)' : (dragVx > 0 ? 'scaleX(1)' : '');
+        // X is viewport coordinates, convert to container-relative for transform
+        const containerRect = container.getBoundingClientRect();
+        duck.style.transform = 'translate(' + x + 'px, ' + y + 'px)' + (flipX ? ' ' + flipX : '');
+
+        // Track velocity for throw
+        const now = performance.now();
+        const dt = (now - dragPrevTime) / 1000;
+        if (dt > 0) {
+          vx = (x - dragPrevX) / dt;
+          vy = (y - dragPrevY) / dt;
+        }
+        dragPrevX = x;
+        dragPrevY = y;
+        dragPrevTime = now;
+      }
+
+      function endDrag(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        isDragging = false;
+        duck.style.cursor = 'pointer';
+        lastTime = null; // Reset animation timing
+        // Velocities are already set from drag movement
+        // Continue physics simulation
+      }
+
+      // Mouse events
+      duck.addEventListener('mousedown', startDrag);
+      document.addEventListener('mousemove', drag);
+      document.addEventListener('mouseup', endDrag);
+
+      // Touch events
+      duck.addEventListener('touchstart', startDrag, { passive: false });
+      document.addEventListener('touchmove', drag, { passive: false });
+      document.addEventListener('touchend', endDrag);
+
+      // Keyboard controls
+      const honkUrl = 'https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/honk.mp3';
+
+      function pulseKeyIcon(key) {
+        const k = (key || '').toString();
+        const selector = '[data-key="' + k + '"],[data-key="' + k.toLowerCase() + '"],[data-key="' + k.toUpperCase() + '"]';
+        const el = document.querySelector(selector);
+        if (!el) return;
+        el.classList.remove('pulse');
+        void el.offsetWidth;
+        el.classList.add('pulse');
+        window.setTimeout(function () { el.classList.remove('pulse'); }, 180);
+      }
+      
+      document.addEventListener('keydown', function(e) {
+        // Disable Space key on this page (prevents scrolling while playing)
+        if (e.code === 'Space' || e.key === ' ') {
+          e.preventDefault();
+          return;
+        }
+
+        keys[e.key] = true;
+        pulseKeyIcon(e.key);
+        
+        // W key for jump
+        if (e.key === 'w' || e.key === 'W') {
+          e.preventDefault();
+          // Only jump if on ground or close to ground
+          const bounds = getBoundaries();
+          if (y >= bounds.bottom - 5) {
+            vy -= jumpForce;
+          }
+        }
+        
+        // S key for honk
+        if (e.key === 's' || e.key === 'S') {
+          e.preventDefault();
+          try {
+            const audio = new Audio(honkUrl);
+            audio.currentTime = 0;
+            audio.play().catch(function () {});
+          } catch (err) {}
+          // show *honk next to player 1
+          spawnHonkText(x + duckWidth + 10, y + duckHeight * 0.45);
+        }
+      });
+
+      document.addEventListener('keyup', function(e) {
+        keys[e.key] = false;
+      });
+
+      // Player 2 duck (easter egg) - controlled by arrow keys
+      let player2Duck = null;
+      let player2Spawned = false;
+      const arrowKeys = {}; // Track arrow key presses for player 2
+
+      function spawnPlayer2() {
+        if (player2Spawned) return; // Only spawn once
+        
+        const container = document.querySelector('.contact-strip');
+        const duck1 = document.getElementById('player1Duck');
+        if (!container || !duck1) return;
+
+        // Create player 2 duck element
+        player2Duck = document.createElement('button');
+        player2Duck.className = 'contact-duck-overlay player2';
+        player2Duck.type = 'button';
+        player2Duck.setAttribute('aria-label', 'Player 2 duck');
+        player2Duck.id = 'player2Duck';
+        const img = document.createElement('img');
+        img.src = 'https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/duck.gif';
+        img.alt = '';
+        player2Duck.appendChild(img);
+        container.appendChild(player2Duck);
+
+        // Initialize player 2 physics (start on right side) - use same environment as player 1
+        const duckWidth2 = 72;
+        const duckHeight2 = 72;
+        
+        // Use the shared boundary function with player 2's dimensions
+        function getBoundaries2() {
+          return getBoundaries(duckWidth2, duckHeight2);
+        }
+        
+        function getInitialY2() {
+          const bounds = getBoundaries2();
+          // Start at same height as player 1 (20px above ground)
+          return Math.max(bounds.top, bounds.bottom - 20);
+        }
+
+        function getInitialX2() {
+          const bounds = getBoundaries2();
+          return bounds.right; // Start on right side
+        }
+
+        let x2 = getInitialX2();
+        let y2 = getInitialY2();
+        let vx2 = 0;
+        let vy2 = 0;
+        const gravity2 = 900;  // Same gravity as player 1
+        const bounce2 = 0.48;   // Same bounce as player 1
+        const friction2 = 0.95; // Same friction as player 1
+        const moveSpeed2 = 2400;
+        const jumpForce2 = 450;
+        let lastTime2 = null;
+        let animationId2 = null;
+        let isDragging2 = false;
+        let dragOffsetX2 = 0;
+        let dragOffsetY2 = 0;
+        let dragPrevX2 = 0;
+        let dragPrevY2 = 0;
+        let dragPrevTime2 = 0;
+
+        function getMousePos2(e) {
+          const containerRect = container.getBoundingClientRect();
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+          return {
+            x: clientX - containerRect.left,
+            y: clientY - containerRect.top
+          };
+        }
+
+        // Set initial position before first frame to avoid a flash
+        player2Duck.style.transform = 'translate(' + x2 + 'px, ' + y2 + 'px)';
+        player2Duck.classList.add('is-ready');
+
+        function step2(ts) {
+          if (isDragging2) {
+            animationId2 = requestAnimationFrame(step2);
+            return;
+          }
+          if (lastTime2 == null) {
+            lastTime2 = ts;
+            animationId2 = requestAnimationFrame(step2);
+            return;
+          }
+          const dt = Math.min((ts - lastTime2) / 1000, 0.032);
+          lastTime2 = ts;
+
+          const bounds = getBoundaries2();
+
+          // Arrow key controls for player 2
+          if (arrowKeys['ArrowLeft']) {
+            vx2 -= moveSpeed2 * dt;
+          }
+          if (arrowKeys['ArrowRight']) {
+            vx2 += moveSpeed2 * dt;
+          }
+
+          // Apply horizontal friction
+          vx2 *= friction2;
+          x2 += vx2 * dt;
+
+          // Integrate gravity
+          vy2 += gravity2 * dt;
+          y2 += vy2 * dt;
+
+          // Check if keyboard controls are active
+          const isKeyboardControlled2 = arrowKeys['ArrowLeft'] || arrowKeys['ArrowRight'] || arrowKeys['ArrowUp'];
+
+          // Constrain to boundaries
+          if (x2 < bounds.left) {
+            x2 = bounds.left;
+            vx2 = isKeyboardControlled2 ? 0 : (Math.abs(vx2) > 40 ? -vx2 * bounce2 : 0);
+          }
+          if (x2 > bounds.right) {
+            x2 = bounds.right;
+            vx2 = isKeyboardControlled2 ? 0 : (Math.abs(vx2) > 40 ? -vx2 * bounce2 : 0);
+          }
+          if (y2 < bounds.top) {
+            y2 = bounds.top;
+            vy2 = isKeyboardControlled2 ? 0 : (Math.abs(vy2) > 40 ? -vy2 * bounce2 : 0);
+          }
+          if (y2 > bounds.bottom) {
+            y2 = bounds.bottom;
+            vy2 = isKeyboardControlled2 ? 0 : (Math.abs(vy2) > 40 ? -vy2 * bounce2 : 0);
+          }
+
+          // Flip duck horizontally based on movement direction
+          const flipX2 = vx2 < 0 ? 'scaleX(-1)' : (vx2 > 0 ? 'scaleX(1)' : '');
+          player2Duck.style.transform = 'translate(' + x2 + 'px, ' + y2 + 'px)' + (flipX2 ? ' ' + flipX2 : '');
+          
+          // keep shared state in sync for collisions/launch
+          if (player2State) {
+            player2State.x = x2;
+            player2State.y = y2;
+            player2State.vx = vx2;
+            player2State.vy = vy2;
+          }
+          animationId2 = requestAnimationFrame(step2);
+        }
+
+        animationId2 = requestAnimationFrame(step2);
+
+        // Drag & throw for player 2 (matches player 1)
+        function startDrag2(e) {
+          e.preventDefault();
+          isDragging2 = true;
+          const mousePos = getMousePos2(e);
+          dragOffsetX2 = mousePos.x - x2 - duckWidth2 / 2;
+          dragOffsetY2 = mousePos.y - y2 - duckHeight2 / 2;
+          dragPrevX2 = x2;
+          dragPrevY2 = y2;
+          dragPrevTime2 = performance.now();
+          vx2 = 0;
+          vy2 = 0;
+          player2Duck.style.cursor = 'grabbing';
+        }
+
+        function drag2(e) {
+          if (!isDragging2) return;
+          e.preventDefault();
+          const bounds = getBoundaries2();
+          const mousePos = getMousePos2(e);
+          let newX = mousePos.x - dragOffsetX2 - duckWidth2 / 2;
+          let newY = mousePos.y - dragOffsetY2 - duckHeight2 / 2;
+
+          if (newX < bounds.left) newX = bounds.left;
+          if (newX > bounds.right) newX = bounds.right;
+          if (newY < bounds.top) newY = bounds.top;
+          if (newY > bounds.bottom) newY = bounds.bottom;
+
+          x2 = newX;
+          y2 = newY;
+
+          // Track velocity for throw
+          const now = performance.now();
+          const dt = (now - dragPrevTime2) / 1000;
+          if (dt > 0) {
+            vx2 = (x2 - dragPrevX2) / dt;
+            vy2 = (y2 - dragPrevY2) / dt;
+          }
+          dragPrevX2 = x2;
+          dragPrevY2 = y2;
+          dragPrevTime2 = now;
+        }
+
+        function endDrag2(e) {
+          if (!isDragging2) return;
+          e.preventDefault();
+          isDragging2 = false;
+          player2Duck.style.cursor = 'pointer';
+          lastTime2 = null; // reset timing so throw feels consistent
+        }
+
+        player2Duck.addEventListener('mousedown', startDrag2);
+        document.addEventListener('mousemove', drag2);
+        document.addEventListener('mouseup', endDrag2);
+        player2Duck.addEventListener('touchstart', startDrag2, { passive: false });
+        document.addEventListener('touchmove', drag2, { passive: false });
+        document.addEventListener('touchend', endDrag2);
+
+        // Initialize shared state handle for collisions/knockback
+        player2State = {
+          spawned: true,
+          x: x2,
+          y: y2,
+          vx: vx2,
+          vy: vy2
+        };
+
+        // Arrow key controls for player 2
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+            arrowKeys[e.key] = true;
+            
+            // ArrowUp for jump
+            if (e.key === 'ArrowUp') {
+              e.preventDefault();
+              const bounds = getBoundaries2();
+              if (y2 >= bounds.bottom - 5) {
+                vy2 -= jumpForce2;
+              }
+            }
+          }
+          
+          // Down arrow for honk (player 2)
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            try {
+              const audio = new Audio(honkUrl);
+              audio.currentTime = 0;
+              audio.play().catch(function () {});
+            } catch (err) {}
+            // show *honk next to player 2
+            spawnHonkText(x2 + duckWidth2 + 10, y2 + duckHeight2 * 0.45);
+          }
+        });
+
+        document.addEventListener('keyup', function(e) {
+          if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+            arrowKeys[e.key] = false;
+          }
+        });
+
+        player2Spawned = true;
+      }
+
+      // Spawn player 2 when plus button is clicked
+      const spawnBtn = document.getElementById('spawnPlayer2Btn');
+      if (spawnBtn) {
+        spawnBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          spawnPlayer2();
+          const arrowHint = document.getElementById('arrowKeysHint');
+          if (arrowHint) arrowHint.classList.add('show');
+          spawnBtn.style.display = 'none'; // Hide button after spawning
+        });
+      }
+
+      // Note: key UI is non-interactive (pulses only on real keypress)
+
+      // Honk on click (but not on drag)
+      let clickStartY = 0;
+      let clickStartTime = 0;
+      
+      duck.addEventListener('mousedown', function(e) {
+        clickStartY = e.clientY;
+        clickStartTime = performance.now();
+      });
+
+      duck.addEventListener('click', function (e) {
+        // Only honk if it was a quick click (not a drag)
+        const clickDuration = performance.now() - clickStartTime;
+        const clickDistance = Math.abs(e.clientY - clickStartY);
+        
+        if (clickDuration < 200 && clickDistance < 10) {
+          e.stopPropagation();
+          try {
+            const audio = new Audio(honkUrl);
+            audio.currentTime = 0;
+            audio.play().catch(function () {});
+          } catch (err) {}
+          // show *honk next to player 1
+          spawnHonkText(x + duckWidth + 10, y + duckHeight * 0.45);
+        }
+      });
     })();
   </script>
 </body>
