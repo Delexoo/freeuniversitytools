@@ -1085,21 +1085,24 @@
       position: absolute;
       bottom: 16px;
       right: 16px;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.35);
       color: #f5f5f7;
-      font-size: 14px;
-      font-weight: 300;
+      font-size: 18px;
+      font-weight: 500;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 10;
-      transition: all 0.2s ease;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(10px);
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
     }
+
 
     .contact-spawn-button:hover {
       background: rgba(255, 255, 255, 0.25);
@@ -1263,6 +1266,22 @@
 
     .contact-strip-copy {
       max-width: 680px;
+    }
+
+    /* Individual word spans for hammer interaction */
+    .contact-strip-copy span,
+    .contact-strip-title span,
+    .contact-strip-text span {
+      display: inline;
+      position: relative;
+      transition: none;
+      pointer-events: none; /* Don't interfere with text selection, but allow transform */
+    }
+    
+    /* Ensure text elements can have transformed children */
+    .contact-strip-title,
+    .contact-strip-text {
+      display: block;
     }
 
     .contact-strip-badge {
@@ -2075,7 +2094,16 @@
 
   <!-- Contact Strip -->
   <section class="contact-strip">
-    <button class="contact-spawn-button" type="button" aria-label="Spawn player 2" id="spawnPlayer2Btn">+</button>
+    <button class="contact-spawn-button" type="button" aria-label="Spawn player 2" id="spawnPlayer2Btn">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="18" height="18">
+        <!-- Head -->
+        <circle cx="8" cy="8" r="3" fill="currentColor"></circle>
+        <!-- Body -->
+        <path d="M3.5 15c0-2.2 1.8-4 4-4h1c2.2 0 4 1.8 4 4v1H3.5v-1z" fill="currentColor"></path>
+        <!-- Plus sign -->
+        <path d="M17 7v-3h2v3h3v2h-3v3h-2v-3h-3v-2h3z" fill="currentColor"></path>
+      </svg>
+    </button>
     <div class="contact-controls-hint-arrows" aria-label="Arrow key controls" id="arrowKeysHint">
       <div class="control-key-arrow" data-key="ArrowUp">↑</div>
       <div class="arrow-keys-row">
@@ -2095,15 +2123,40 @@
     </button>
     <div class="contact-strip-inner">
       <div class="contact-strip-copy">
-        <div class="contact-strip-badge">
+        <div class="contact-strip-badge contact-prop-hit">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M4.5 7.5h15v9h-15z"></path>
             <path d="m5 8 7 5 7-5"></path>
           </svg>
           <span>Contact us</span>
         </div>
-        <h2 class="contact-strip-title">Have feedback or a tool suggestion?</h2>
-        <p class="contact-strip-text">We read every message. Reach out and help us make Free University Tools even better for students.</p>
+        <h2 class="contact-strip-title">
+          <span class="contact-word-hit">Have </span>
+          <span class="contact-word-hit">feedback </span>
+          <span class="contact-word-hit">or </span>
+          <span class="contact-word-hit">a </span>
+          <span class="contact-word-hit">tool </span>
+          <span class="contact-word-hit">suggestion?</span>
+        </h2>
+        <p class="contact-strip-text">
+          <span class="contact-word-hit">We </span>
+          <span class="contact-word-hit">read </span>
+          <span class="contact-word-hit">every </span>
+          <span class="contact-word-hit">message. </span>
+          <span class="contact-word-hit">Reach </span>
+          <span class="contact-word-hit">out </span>
+          <span class="contact-word-hit">and </span>
+          <span class="contact-word-hit">help </span>
+          <span class="contact-word-hit">us </span>
+          <span class="contact-word-hit">make </span>
+          <span class="contact-word-hit">Free </span>
+          <span class="contact-word-hit">University </span>
+          <span class="contact-word-hit">Tools </span>
+          <span class="contact-word-hit">even </span>
+          <span class="contact-word-hit">better </span>
+          <span class="contact-word-hit">for </span>
+          <span class="contact-word-hit">students.</span>
+        </p>
       </div>
       <div class="contact-strip-actions">
         <a href="contact.html" class="btn-contact-dark">Open Contact Page</a>
@@ -2318,7 +2371,7 @@
       const gravity = 900;    // px/s^2
       const bounce = 0.48;    // energy loss on bounce
       const friction = 0.95;  // horizontal friction (damping)
-      const moveSpeed = 2400;  // px/s for keyboard movement (very very fast)
+      const moveSpeed = 3600;  // px/s for keyboard movement (very very fast)
       const jumpForce = 450;  // px/s upward impulse for jump
       let lastTime = null;
       const keys = {};  // Track pressed keys
@@ -2334,6 +2387,346 @@
       let player2State = null;
       let lastPunchAt = 0;
       const punchCooldownMs = 650;
+
+      // Hammer power-up state
+      let hammerElement = null;
+      let hammerX = 0;
+      let hammerY = 0;
+      let hammerVx = 0; // Hammer horizontal velocity
+      let hammerVy = 0; // Hammer vertical velocity
+      let hammerHolder = null; // 'player1' or 'player2' or null
+      let hammerTimer = 0; // seconds remaining
+      let hammerSwingAngle = -Math.PI / 2; // current swing angle (-90 to 90 degrees, left to right)
+      let hammerSwingDirection = 0; // 1 or -1 for swing direction (0 = not set yet)
+      const HAMMER_DURATION = 16; // seconds
+      const HAMMER_SPAWN_INTERVAL = 30000; // spawn every 30 seconds
+      const HAMMER_SPAWN_CHANCE = 1; // always spawn when interval passes
+      let lastHammerSpawn = performance.now();
+      let lastHammerSound = 0; // Track last time hammer sound played
+      const HAMMER_SOUND_COOLDOWN = 200; // milliseconds between hammer sounds
+
+      // Contact strip "props" (individual words and buttons) that can be knocked around by the hammer
+      const contactProps = [];
+      (function initContactProps() {
+        try {
+          // Words are pre-wrapped in spans with class "contact-word-hit" in the HTML
+          // Also include the "Contact us" badge container (icon + text) as one pushable prop
+          const propEls = container.querySelectorAll('.contact-word-hit, .contact-prop-hit');
+          propEls.forEach(function (el) {
+            const originalRect = getRectInContainer(el);
+            if (originalRect.width > 0 && originalRect.height > 0) {
+              contactProps.push({
+                el,
+                x: 0,
+                y: 0,
+                vx: 0,
+                vy: 0,
+                rot: 0,
+                rotVel: 0,
+                lastHitAt: 0,
+                originalX: originalRect.left,
+                originalY: originalRect.top,
+                width: originalRect.width,
+                height: originalRect.height
+              });
+              el.style.willChange = 'transform';
+              el.style.position = 'relative';
+              // spans need inline-block to move as units; the badge can stay flex, so only force for spans
+              if (el.tagName === 'SPAN') el.style.display = 'inline-block';
+            }
+          });
+
+          // Process buttons individually
+          const actions = container.querySelector('.contact-strip-actions');
+          if (actions) {
+            const buttons = actions.querySelectorAll('a');
+            buttons.forEach(function (button) {
+              const originalRect = getRectInContainer(button);
+              if (originalRect.width > 0 && originalRect.height > 0) {
+                contactProps.push({
+                  el: button,
+                  x: 0,
+                  y: 0,
+                  vx: 0,
+                  vy: 0,
+                  rot: 0,
+                  rotVel: 0,
+                  lastHitAt: 0,
+                  originalX: originalRect.left,
+                  originalY: originalRect.top,
+                  width: originalRect.width,
+                  height: originalRect.height
+                });
+                button.style.willChange = 'transform';
+                button.style.position = 'relative';
+              }
+            });
+          }
+        } catch (e) {
+          console.error('Error initializing contact props:', e);
+        }
+      })();
+
+      // Expose some internals for other fun effects (like the pig)
+      window.futContactProps = contactProps;
+      window.futSpawnExplosion = spawnExplosion;
+      window.futPlayPunch = playPunch;
+
+      // Expose player hit hooks for pig collisions (impulses are in px/s)
+      window.futGetPlayerRects = function () {
+        const rects = [];
+        rects.push({
+          id: 'player1',
+          left: x,
+          top: y,
+          right: x + duckWidth,
+          bottom: y + duckHeight,
+          cx: x + duckWidth / 2,
+          cy: y + duckHeight / 2
+        });
+        if (player2State && player2State.spawned) {
+          const w2 = player2State.width || duckWidth;
+          const h2 = player2State.height || duckHeight;
+          rects.push({
+            id: 'player2',
+            left: player2State.x,
+            top: player2State.y,
+            right: player2State.x + w2,
+            bottom: player2State.y + h2,
+            cx: player2State.x + w2 / 2,
+            cy: player2State.y + h2 / 2
+          });
+        }
+        return rects;
+      };
+
+      window.futApplyImpulseToPlayer = function (id, ix, iy) {
+        if (id === 'player1') {
+          vx += ix;
+          vy += iy;
+          return;
+        }
+        if (id === 'player2' && player2State && player2State.spawned) {
+          player2State.vx += ix;
+          player2State.vy += iy;
+          player2State.needsVelocitySync = true;
+        }
+      };
+
+      function getRectInContainer(el) {
+        const cr = container.getBoundingClientRect();
+        const r = el.getBoundingClientRect();
+        return {
+          left: r.left - cr.left,
+          top: r.top - cr.top,
+          right: r.right - cr.left,
+          bottom: r.bottom - cr.top,
+          width: r.width,
+          height: r.height
+        };
+      }
+
+      function updateContactProps(dt) {
+        if (!contactProps.length) {
+          // Debug: log if no props
+          if (!updateContactProps._logged) {
+            console.warn('updateContactProps called but contactProps is empty!');
+            updateContactProps._logged = true;
+          }
+          return;
+        }
+        // Simple damping; keep them bouncing within the section
+        const damp = Math.pow(0.14, dt); // frame-rate independent-ish
+        const containerRect = container.getBoundingClientRect();
+        const bounceFactor = 0.6; // Bounce energy retention
+        
+        for (let i = 0; i < contactProps.length; i++) {
+          const p = contactProps[i];
+          
+          // Integrate
+          p.x += p.vx * dt;
+          p.y += p.vy * dt;
+          
+          // Constrain to container boundaries using original position + offset
+          const containerWidth = containerRect.width;
+          const containerHeight = containerRect.height;
+          const currentX = p.originalX + p.x;
+          const currentY = p.originalY + p.y;
+          
+          // Left boundary
+          if (currentX < 0) {
+            p.x = -p.originalX;
+            if (Math.abs(p.vx) > 10) {
+              p.vx = -p.vx * bounceFactor;
+            } else {
+              p.vx = 0;
+            }
+          }
+          
+          // Right boundary
+          if (currentX + p.width > containerWidth) {
+            p.x = containerWidth - p.originalX - p.width;
+            if (Math.abs(p.vx) > 10) {
+              p.vx = -p.vx * bounceFactor;
+            } else {
+              p.vx = 0;
+            }
+          }
+          
+          // Top boundary
+          if (currentY < 0) {
+            p.y = -p.originalY;
+            if (Math.abs(p.vy) > 10) {
+              p.vy = -p.vy * bounceFactor;
+            } else {
+              p.vy = 0;
+            }
+          }
+          
+          // Bottom boundary
+          if (currentY + p.height > containerHeight) {
+            p.y = containerHeight - p.originalY - p.height;
+            if (Math.abs(p.vy) > 10) {
+              p.vy = -p.vy * bounceFactor;
+            } else {
+              p.vy = 0;
+            }
+          }
+          
+          // Dampen linear velocity
+          p.vx *= damp;
+          p.vy *= damp;
+
+          // Integrate and damp rotation
+          if (typeof p.rot === 'number' && typeof p.rotVel === 'number') {
+            p.rotVel *= damp;
+            // Snap tiny angular velocity
+            if (Math.abs(p.rotVel) < 8) p.rotVel = 0;
+            p.rot += p.rotVel * dt;
+          }
+          
+          // Snap tiny velocities
+          if (Math.abs(p.vx) < 6) p.vx = 0;
+          if (Math.abs(p.vy) < 6) p.vy = 0;
+          
+          // Always apply transform using translate3d + slight rotation
+          const angle = p.rot || 0;
+          const transformValue =
+            'translate3d(' + p.x.toFixed(2) + 'px, ' + p.y.toFixed(2) + 'px, 0) ' +
+            'rotate(' + angle.toFixed(1) + 'deg)';
+          p.el.style.transform = transformValue;
+          p.el.style.willChange = 'transform';
+          p.el.style.position = 'relative';
+          
+          // Debug: log movement (throttled)
+          if ((Math.abs(p.vx) > 1 || Math.abs(p.vy) > 1) && !p._lastLogTime) {
+            p._lastLogTime = performance.now();
+            console.log('Word moving:', p.el.textContent, 'vx:', p.vx.toFixed(2), 'vy:', p.vy.toFixed(2), 'x:', p.x.toFixed(2), 'y:', p.y.toFixed(2));
+          } else if (p._lastLogTime && performance.now() - p._lastLogTime > 500) {
+            p._lastLogTime = null;
+          }
+        }
+      }
+
+      function hammerHitContactProps(hammerRect, hammerAngleRad) {
+        if (!contactProps.length) {
+          console.log('No contact props to check');
+          return;
+        }
+        const now = performance.now();
+        const hitCooldownMs = 60; // Reduced cooldown for better responsiveness
+        const basePower = 3200; // Increased power for better effect
+        const upKick = 900;
+
+        // Direction is along the hammer angle (so the "push" feels like the swing)
+        const dirX = Math.cos(hammerAngleRad);
+        const dirY = Math.sin(hammerAngleRad);
+        
+        let hitsThisFrame = 0;
+        let checkedCount = 0;
+
+        for (let i = 0; i < contactProps.length; i++) {
+          const p = contactProps[i];
+          if (now - p.lastHitAt < hitCooldownMs) continue;
+          
+          checkedCount++;
+          
+          // Calculate current position accounting for transform
+          const currentX = p.originalX + p.x;
+          const currentY = p.originalY + p.y;
+          
+          // Create collision rect using original dimensions and current transformed position
+          const wordRect = {
+            left: currentX,
+            top: currentY,
+            right: currentX + p.width,
+            bottom: currentY + p.height
+          };
+          
+          // For word elements, expand the hitbox slightly if needed for easier hitting
+          const minHitbox = 24; // Minimum hitbox size for words
+          const expandedLeft = Math.min(wordRect.left, wordRect.left - Math.max(0, (minHitbox - p.width) / 2));
+          const expandedRight = Math.max(wordRect.right, wordRect.right + Math.max(0, (minHitbox - p.width) / 2));
+          const expandedTop = Math.min(wordRect.top, wordRect.top - Math.max(0, (minHitbox - p.height) / 2));
+          const expandedBottom = Math.max(wordRect.bottom, wordRect.bottom + Math.max(0, (minHitbox - p.height) / 2));
+          
+          // Check collision with hammer
+          const isColliding = (
+            expandedLeft < hammerRect.right &&
+            expandedRight > hammerRect.left &&
+            expandedTop < hammerRect.bottom &&
+            expandedBottom > hammerRect.top
+          );
+          
+          // Debug: log collision checks for words (first few times)
+          if (p.el.tagName === 'SPAN' && isColliding && !p._collisionLogged) {
+            console.log('Word collision detected:', p.el.textContent, 'rect:', wordRect, 'hammer:', hammerRect, 'originalX:', p.originalX, 'originalY:', p.originalY);
+            p._collisionLogged = true;
+            setTimeout(() => { p._collisionLogged = false; }, 2000);
+          }
+          
+          if (isColliding) {
+            p.lastHitAt = now;
+            
+            // Calculate center of the hit word for explosion effect (using transformed position)
+            const centerX = wordRect.left + p.width / 2;
+            const centerY = wordRect.top + p.height / 2;
+            
+            // Spawn punch explosion effect at the character's center
+            spawnExplosion(centerX, centerY);
+            
+            // Play punch sound
+            playPunch();
+            
+            // Add impulse; a bit of upward kick so it can fly off-screen
+            // Velocity is in px/s, will be multiplied by dt in updateContactProps
+            const randomFactor = 0.8 + Math.random() * 0.4; // 0.8 to 1.2
+            const impulseX = dirX * basePower * randomFactor;
+            const impulseY = dirY * basePower * randomFactor - upKick;
+            p.vx += impulseX;
+            p.vy += impulseY;
+
+            // Give the word/button a bit of spin based on hammer direction
+            if (typeof p.rotVel === 'number') {
+              const spinDir = dirY > 0 ? 1 : -1; // rough vertical-based spin direction
+              const spinAmount = (120 + Math.random() * 80) * spinDir; // degrees per second
+              p.rotVel += spinAmount;
+            }
+            
+            hitsThisFrame++;
+            // Debug log
+            const elementType = p.el.tagName === 'SPAN' ? 'WORD' : 'BUTTON';
+            console.log('Hit ' + elementType + ':', p.el.textContent || p.el.innerText || '?', 
+                       'impulseX:', impulseX.toFixed(2), 'impulseY:', impulseY.toFixed(2),
+                       'new vx:', p.vx.toFixed(2), 'new vy:', p.vy.toFixed(2),
+                       'position:', p.x.toFixed(2), p.y.toFixed(2),
+                       'originalX:', p.originalX.toFixed(2), 'originalY:', p.originalY.toFixed(2));
+          }
+        }
+        if (hitsThisFrame > 0) {
+          console.log('Total hits this frame:', hitsThisFrame);
+        }
+      }
 
       // Set initial position before first paint to avoid a flash at (0,0)
       duck.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
@@ -2372,6 +2765,247 @@
             if (t && t.parentNode) t.parentNode.removeChild(t);
           }, 750);
         } catch (e) {}
+      }
+
+      // Hammer power-up functions
+      function createHammer() {
+        if (hammerElement) return; // Hammer already exists
+        
+        hammerElement = document.createElement('img');
+        hammerElement.src = 'https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/hammer.png';
+        hammerElement.className = 'duck-hammer';
+        hammerElement.style.position = 'absolute';
+        hammerElement.style.width = '150px'; // Hammer width (bigger)
+        hammerElement.style.height = '180px'; // Hammer height (bigger and longer vertically)
+        hammerElement.style.zIndex = '1000';
+        hammerElement.style.pointerEvents = 'none';
+        hammerElement.style.display = 'none';
+        hammerElement.style.transformOrigin = '75px 180px'; // Rotate from bottom center (half width 150px, full height 180px)
+        container.appendChild(hammerElement);
+      }
+
+      function spawnHammer() {
+        if (hammerElement && hammerElement.style.display !== 'none') return; // Already spawned
+        
+        createHammer();
+        const bounds = getBoundaries();
+        const hammerHeight = 180; // Hammer height
+        const containerRect = container.getBoundingClientRect();
+        const containerHeight = containerRect.height;
+        hammerX = bounds.left + Math.random() * (bounds.right - bounds.left - 150);
+        hammerY = containerHeight - hammerHeight; // Spawn on the floor (bottom of container)
+        hammerVx = 0; // No velocity needed
+        hammerVy = 0; // No velocity needed
+        hammerElement.style.left = hammerX + 'px';
+        hammerElement.style.top = hammerY + 'px';
+        hammerElement.style.display = 'block';
+        hammerElement.style.transformOrigin = '75px 180px'; // Ensure transform origin is set (bottom center)
+        hammerElement.style.transform = 'rotate(0deg)';
+        hammerHolder = null;
+        hammerTimer = 0;
+      }
+
+      // Expose spawnHammer globally for dev button
+
+      function checkHammerPickup() {
+        if (!hammerElement || hammerElement.style.display === 'none' || hammerHolder) return;
+        
+        const bounds = getBoundaries();
+        const hammerRect = {
+          left: hammerX,
+          top: hammerY,
+          right: hammerX + 150, // Hammer width
+          bottom: hammerY + 180 // Hammer height
+        };
+        
+        // Check player 1 collision
+        const p1Rect = {
+          left: x,
+          top: y,
+          right: x + duckWidth,
+          bottom: y + duckHeight
+        };
+        
+        if (p1Rect.left < hammerRect.right && p1Rect.right > hammerRect.left &&
+            p1Rect.top < hammerRect.bottom && p1Rect.bottom > hammerRect.top) {
+          hammerHolder = 'player1';
+          hammerTimer = HAMMER_DURATION;
+          hammerSwingAngle = -Math.PI / 2; // Start pointing left
+          hammerSwingDirection = 1;
+          hammerVx = 0; // Reset velocity when picked up
+          hammerVy = 0; // Reset velocity when picked up
+          // Play hammer sound once when picked up
+          try {
+            const audio = new Audio('https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/hammer.mp3');
+            audio.volume = 0.3;
+            audio.play().catch(() => {});
+          } catch (e) {}
+          return;
+        }
+        
+        // Check player 2 collision
+        if (player2State && player2Duck) {
+          const p2Rect = {
+            left: player2State.x,
+            top: player2State.y,
+            right: player2State.x + duckWidth,
+            bottom: player2State.y + duckHeight
+          };
+          
+          if (p2Rect.left < hammerRect.right && p2Rect.right > hammerRect.left &&
+              p2Rect.top < hammerRect.bottom && p2Rect.bottom > hammerRect.top) {
+            hammerHolder = 'player2';
+            hammerTimer = HAMMER_DURATION;
+            hammerSwingAngle = 0;
+            hammerSwingDirection = 1;
+            hammerVx = 0; // Reset velocity when picked up
+            hammerVy = 0; // Reset velocity when picked up
+            // Play hammer sound once when picked up
+            try {
+              const audio = new Audio('https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/hammer.mp3');
+              audio.volume = 0.3;
+              audio.play().catch(() => {});
+            } catch (e) {}
+            return;
+          }
+        }
+      }
+
+      function updateHammerSwing(dt) {
+        if (!hammerHolder || !hammerElement) return;
+
+        // If the hammer holder is currently being dragged, skip swing update to avoid glitching
+        if (hammerHolder === 'player1' && isDragging) return;
+        if (hammerHolder === 'player2' && player2State && player2State.isDragging) return;
+        
+        // Determine facing direction based on holder's current horizontal velocity
+        let facing = 1; // 1 = right, -1 = left
+        if (hammerHolder === 'player1') {
+          if (vx < -10) facing = -1;
+          else if (vx > 10) facing = 1;
+        } else if (hammerHolder === 'player2' && player2State) {
+          if (player2State.vx < -10) facing = -1;
+          else if (player2State.vx > 10) facing = 1;
+        }
+
+        // Make swing direction follow facing:
+        // facing right: swing from left (-90) to right (90)
+        // facing left:  swing from right (90) to left (-90)
+        if (facing === 1 && hammerSwingDirection === 0) {
+          hammerSwingDirection = 1;
+        } else if (facing === -1 && hammerSwingDirection === 0) {
+          hammerSwingDirection = -1;
+        }
+
+        // Swing from left (-90 degrees) to right (90 degrees)
+        const swingSpeed = 25; // radians per second
+        hammerSwingAngle += swingSpeed * dt * hammerSwingDirection;
+        
+        // Clamp swing angle
+        if (hammerSwingAngle >= Math.PI / 2) { // 90 degrees (pointing right)
+          hammerSwingAngle = Math.PI / 2;
+          // If facing right, reverse back toward left; if facing left, keep pushing toward left
+          hammerSwingDirection = (facing === 1 ? -1 : -1);
+        } else if (hammerSwingAngle <= -Math.PI / 2) { // -90 degrees (pointing left)
+          hammerSwingAngle = -Math.PI / 2;
+          // If facing left, reverse back toward right; if facing right, keep pushing toward right
+          hammerSwingDirection = (facing === -1 ? 1 : 1);
+        }
+        
+        // Position hammer relative to holder
+        let holderX, holderY;
+        if (hammerHolder === 'player1') {
+          holderX = x + duckWidth / 2;
+          holderY = y + duckHeight / 2;
+        } else {
+          holderX = player2State.x + duckWidth / 2;
+          holderY = player2State.y + duckHeight / 2;
+        }
+        
+        // Position hammer so its bottom center extends outward from the player's center
+        // Transform origin is at bottom center (75px, 180px), so:
+        // Add offset to extend outward from player
+        const hammerOffset = 25; // Padding to extend hammer outward from player
+        const offsetX = Math.cos(hammerSwingAngle) * hammerOffset;
+        const offsetY = Math.sin(hammerSwingAngle) * hammerOffset;
+        
+        // Position so bottom center is offset outward from holder center
+        hammerX = holderX + offsetX - 75; // Position so bottom center X is offset outward (half width 150px)
+        hammerY = holderY + offsetY - 180; // Position so bottom center Y is offset outward (full height 180px)
+        
+        hammerElement.style.left = hammerX + 'px';
+        hammerElement.style.top = hammerY + 'px';
+        hammerElement.style.transformOrigin = '75px 180px'; // Rotate from bottom center
+        hammerElement.style.transform = 'rotate(' + (hammerSwingAngle * 180 / Math.PI) + 'deg)';
+        
+        // Check collision with opponent
+        checkHammerHit();
+
+        // Knock around contact strip text/buttons when swinging
+        const hammerRect = {
+          left: hammerX,
+          top: hammerY,
+          right: hammerX + 150,
+          bottom: hammerY + 180
+        };
+        hammerHitContactProps(hammerRect, hammerSwingAngle);
+      }
+
+      function checkHammerHit() {
+        if (!hammerHolder || !hammerElement) return;
+        
+        const hammerRect = {
+          left: hammerX,
+          top: hammerY,
+          right: hammerX + 150, // Hammer width
+          bottom: hammerY + 180 // Hammer height
+        };
+        
+        if (hammerHolder === 'player1' && player2State && player2Duck) {
+          // Check if hammer hits player 2
+          const p2Rect = {
+            left: player2State.x,
+            top: player2State.y,
+            right: player2State.x + duckWidth,
+            bottom: player2State.y + duckHeight
+          };
+          
+          if (p2Rect.left < hammerRect.right && p2Rect.right > hammerRect.left &&
+              p2Rect.top < hammerRect.bottom && p2Rect.bottom > hammerRect.top) {
+            // Launch player 2 far away
+            const hitPower = 5000;
+            const angle = Math.atan2(player2State.y - (y + duckHeight / 2), player2State.x - (x + duckWidth / 2));
+            player2State.vx = Math.cos(angle) * hitPower;
+            player2State.vy = Math.sin(angle) * hitPower - 800; // Add upward component
+            // Flag for one-time sync in step2
+            if (player2State) {
+              player2State.needsVelocitySync = true;
+            }
+            
+            playPunch(); // Use punch sound for hit
+            spawnExplosion(player2State.x + duckWidth / 2, player2State.y + duckHeight / 2);
+          }
+        } else if (hammerHolder === 'player2' && player2State) {
+          // Check if hammer hits player 1
+          const p1Rect = {
+            left: x,
+            top: y,
+            right: x + duckWidth,
+            bottom: y + duckHeight
+          };
+          
+          if (p1Rect.left < hammerRect.right && p1Rect.right > hammerRect.left &&
+              p1Rect.top < hammerRect.bottom && p1Rect.bottom > hammerRect.top) {
+            // Launch player 1 far away
+            const hitPower = 5000;
+            const angle = Math.atan2(y - (player2State.y + duckHeight / 2), x - (player2State.x + duckWidth / 2));
+            vx = Math.cos(angle) * hitPower;
+            vy = Math.sin(angle) * hitPower - 800; // Add upward component
+            
+            playPunch(); // Use punch sound for hit
+            spawnExplosion(x + duckWidth / 2, y + duckHeight / 2);
+          }
+        }
       }
 
       // Shared boundary function - both players use this
@@ -2475,6 +3109,66 @@
         // Flip duck horizontally based on movement direction
         const flipX = vx < 0 ? 'scaleX(-1)' : (vx > 0 ? 'scaleX(1)' : '');
         
+        // Hammer logic - only spawn when both players are active
+        const currentTime = performance.now();
+        
+        // Only spawn hammer if player 2 exists and is spawned
+        if (player2State && player2State.spawned) {
+          // Spawn hammer rarely (every 2 minutes with 30% chance)
+          if (!hammerElement || hammerElement.style.display === 'none') {
+            if (currentTime - lastHammerSpawn > HAMMER_SPAWN_INTERVAL) {
+              // Random chance to actually spawn (makes it rarer)
+              if (Math.random() < HAMMER_SPAWN_CHANCE) {
+                spawnHammer();
+                lastHammerSpawn = currentTime;
+              } else {
+                // Reset timer even if we don't spawn, but add some randomness
+                lastHammerSpawn = currentTime - (HAMMER_SPAWN_INTERVAL * 0.5);
+              }
+            }
+          }
+        } else {
+          // If player 2 doesn't exist, hide hammer if it exists
+          if (hammerElement && hammerElement.style.display !== 'none') {
+            hammerElement.style.display = 'none';
+            hammerHolder = null;
+            hammerTimer = 0;
+          }
+        }
+        
+        // Hammer stays stationary on the floor when not being held (no gravity/physics)
+        if (hammerElement && hammerElement.style.display !== 'none' && !hammerHolder) {
+          // Just ensure it stays on the floor - no physics updates needed
+          const containerRect = container.getBoundingClientRect();
+          const containerHeight = containerRect.height;
+          const hammerHeight = 180;
+          hammerY = containerHeight - hammerHeight; // Keep on floor (bottom of container)
+          hammerElement.style.left = hammerX + 'px';
+          hammerElement.style.top = hammerY + 'px';
+        }
+        
+        // Update contact strip props (copy/actions) physics
+        updateContactProps(dt);
+
+        // Check for hammer pickup
+        checkHammerPickup();
+        
+        // Update hammer swing if held
+        if (hammerHolder) {
+          updateHammerSwing(dt);
+          hammerTimer -= dt;
+          
+          // Remove hammer when timer expires
+          if (hammerTimer <= 0) {
+            hammerHolder = null;
+            hammerTimer = 0;
+            if (hammerElement) {
+              hammerElement.style.display = 'none';
+            }
+            lastHammerSpawn = currentTime; // Reset spawn timer
+          }
+        }
+        
         duck.style.transform = 'translate(' + x + 'px, ' + y + 'px)' + (flipX ? ' ' + flipX : '');
 
         // Collision: player1 vs player2 (punch + explosion + extreme launch)
@@ -2496,14 +3190,14 @@
               const nx = dx / len;
               const ny = dy / len;
               const power = 4200; // EXTREME
+              // Apply impulses to player 1 (this duck)
               vx += nx * power;
               vy += ny * power * 0.95;
+
+              // Apply impulses to player 2 through shared state so its physics loop picks it up
               player2State.vx -= nx * power;
               player2State.vy -= ny * power * 0.95;
-
-              // also push player 2’s live velocities immediately
-              vx2 = player2State.vx;
-              vy2 = player2State.vy;
+              player2State.needsVelocitySync = true;
             }
           }
         }
@@ -2626,7 +3320,10 @@
           e.preventDefault();
           // Only jump if on ground or close to ground
           const bounds = getBoundaries();
-          if (y >= bounds.bottom - 5) {
+          const groundThreshold = 15; // pixels from ground
+          const isOnGround = y >= bounds.bottom - groundThreshold;
+          const isNotMovingUp = vy <= 0; // Not already jumping
+          if (isOnGround && isNotMovingUp) {
             vy -= jumpForce;
           }
         }
@@ -2699,7 +3396,7 @@
         const gravity2 = 900;  // Same gravity as player 1
         const bounce2 = 0.48;   // Same bounce as player 1
         const friction2 = 0.95; // Same friction as player 1
-        const moveSpeed2 = 2400;
+        const moveSpeed2 = 3600;
         const jumpForce2 = 450;
         let lastTime2 = null;
         let animationId2 = null;
@@ -2736,6 +3433,13 @@
           }
           const dt = Math.min((ts - lastTime2) / 1000, 0.032);
           lastTime2 = ts;
+
+          // One-time sync velocities from player2State if externally updated (e.g., hammer hit)
+          if (player2State && player2State.needsVelocitySync) {
+            vx2 = player2State.vx;
+            vy2 = player2State.vy;
+            player2State.needsVelocitySync = false;
+          }
 
           const bounds = getBoundaries2();
 
@@ -2796,6 +3500,7 @@
         function startDrag2(e) {
           e.preventDefault();
           isDragging2 = true;
+          if (player2State) player2State.isDragging = true;
           const mousePos = getMousePos2(e);
           dragOffsetX2 = mousePos.x - x2 - duckWidth2 / 2;
           dragOffsetY2 = mousePos.y - y2 - duckHeight2 / 2;
@@ -2833,12 +3538,25 @@
           dragPrevX2 = x2;
           dragPrevY2 = y2;
           dragPrevTime2 = now;
+          
+          // Update player2State during drag
+          if (player2State) {
+            player2State.x = x2;
+            player2State.y = y2;
+            player2State.vx = vx2;
+            player2State.vy = vy2;
+          }
+          
+          // Update visual position
+          const flipX2 = vx2 < 0 ? 'scaleX(-1)' : (vx2 > 0 ? 'scaleX(1)' : '');
+          player2Duck.style.transform = 'translate(' + x2 + 'px, ' + y2 + 'px)' + (flipX2 ? ' ' + flipX2 : '');
         }
 
         function endDrag2(e) {
           if (!isDragging2) return;
           e.preventDefault();
           isDragging2 = false;
+          if (player2State) player2State.isDragging = false;
           player2Duck.style.cursor = 'pointer';
           lastTime2 = null; // reset timing so throw feels consistent
         }
@@ -2856,7 +3574,11 @@
           x: x2,
           y: y2,
           vx: vx2,
-          vy: vy2
+          vy: vy2,
+          width: duckWidth2,
+          height: duckHeight2,
+          needsVelocitySync: false, // Flag for one-time velocity sync
+          isDragging: false // Track if player 2 is being dragged (used for hammer)
         };
 
         // Arrow key controls for player 2
@@ -2868,7 +3590,10 @@
             if (e.key === 'ArrowUp') {
               e.preventDefault();
               const bounds = getBoundaries2();
-              if (y2 >= bounds.bottom - 5) {
+              const groundThreshold2 = 15; // pixels from ground
+              const isOnGround2 = y2 >= bounds.bottom - groundThreshold2;
+              const isNotMovingUp2 = vy2 <= 0; // Not already jumping
+              if (isOnGround2 && isNotMovingUp2) {
                 vy2 -= jumpForce2;
               }
             }
@@ -2896,6 +3621,11 @@
         player2Spawned = true;
       }
 
+      // Expose whether player 2 is enabled (for pig logic)
+      window.futIsPlayer2Enabled = function () {
+        return !!player2Spawned;
+      };
+
       // Spawn player 2 when plus button is clicked
       const spawnBtn = document.getElementById('spawnPlayer2Btn');
       if (spawnBtn) {
@@ -2908,6 +3638,8 @@
           spawnBtn.style.display = 'none'; // Hide button after spawning
         });
       }
+
+      // Dev button to spawn hammer
 
       // Note: key UI is non-interactive (pulses only on real keypress)
 
@@ -2936,6 +3668,190 @@
           spawnHonkText(x + duckWidth + 10, y + duckHeight * 0.45);
         }
       });
+    })();
+  </script>
+  <script>
+    // Rare pig.gif running across contact section
+    (function () {
+      // Disable pig on mobile
+      if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) return;
+
+      const container = document.querySelector('.contact-strip');
+      if (!container) return;
+      const containerRectInitial = container.getBoundingClientRect();
+
+      let pigElement = null;
+      let pigAnimationId = null;
+      let lastPigSpawn = performance.now();
+      const PIG_SPAWN_INTERVAL = 180000; // Check every 3 minutes
+      const PIG_SPAWN_CHANCE = 1; // Always spawn when interval passes (but only if player 2 is enabled)
+      const PIG_SPEED = 900; // pixels per second (fast)
+      let pigX = 0;
+      let pigY = 0;
+      const PIG_WIDTH = 500;  // Slightly smaller pig
+      const PIG_HEIGHT = 360; // Slightly smaller pig
+
+      function createPig() {
+        if (pigElement) return; // Already exists
+
+        pigElement = document.createElement('img');
+        pigElement.src = 'https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/pig.gif';
+        pigElement.style.position = 'absolute';
+        pigElement.style.width = PIG_WIDTH + 'px';
+        pigElement.style.height = PIG_HEIGHT + 'px';
+        pigElement.style.zIndex = '5';
+        pigElement.style.pointerEvents = 'none';
+        pigElement.style.objectFit = 'contain';
+        container.appendChild(pigElement);
+
+        // Play audio
+        try {
+          const audio = new Audio('https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Audio1.MP3');
+          audio.volume = 0.5;
+          audio.play().catch(() => {});
+        } catch (e) {}
+
+        // Start animation on the contact-strip ground
+        const containerRect = container.getBoundingClientRect();
+        pigX = -PIG_WIDTH; // start just left of contact section
+        pigY = containerRect.height - PIG_HEIGHT; // ground inside contact section
+        pigElement.style.left = pigX + 'px';
+        pigElement.style.top = pigY + 'px';
+
+        let lastTime = performance.now();
+        function animatePig(currentTime) {
+          if (!pigElement) return;
+
+          const dt = (currentTime - lastTime) / 1000;
+          lastTime = currentTime;
+
+          pigX += PIG_SPEED * dt;
+
+          pigElement.style.left = pigX + 'px';
+
+          const containerRectNow = container.getBoundingClientRect();
+
+          // Compute pig rect in contact-strip coordinates
+          const pigRect = {
+            left: pigX,
+            top: pigY,
+            right: pigX + PIG_WIDTH,
+            bottom: pigY + PIG_HEIGHT
+          };
+
+          // Hit contact props (words/buttons) with punch effect (NO punch sound for pig)
+          const contactProps = window.futContactProps || [];
+          if (contactProps.length && window.futSpawnExplosion) {
+            const basePower = 5200;
+            const upKick = 800;
+            const dirX = 1; // pig runs left to right
+            const dirY = 0;
+            const now = performance.now();
+            const hitCooldownMs = 80;
+
+            for (let i = 0; i < contactProps.length; i++) {
+              const p = contactProps[i];
+              if (now - p.lastHitAt < hitCooldownMs) continue;
+
+              const currentX = p.originalX + p.x;
+              const currentY = p.originalY + p.y;
+              const wordRect = {
+                left: currentX,
+                top: currentY,
+                right: currentX + p.width,
+                bottom: currentY + p.height
+              };
+
+              const isColliding =
+                pigRect.left < wordRect.right &&
+                pigRect.right > wordRect.left &&
+                pigRect.top < wordRect.bottom &&
+                pigRect.bottom > wordRect.top;
+
+              if (isColliding) {
+                p.lastHitAt = now;
+                const cx = wordRect.left + p.width / 2;
+                const cy = wordRect.top + p.height / 2;
+                window.futSpawnExplosion(cx, cy);
+
+                const randomFactor = 0.9 + Math.random() * 0.4;
+                const impulseX = dirX * basePower * randomFactor;
+                const impulseY = dirY * basePower * randomFactor - upKick;
+                p.vx += impulseX;
+                p.vy += impulseY;
+              }
+            }
+          }
+
+          // Hit players too (NO punch sound for pig)
+          const getPlayerRects = window.futGetPlayerRects;
+          const applyImpulseToPlayer = window.futApplyImpulseToPlayer;
+          if (typeof getPlayerRects === 'function' && typeof applyImpulseToPlayer === 'function' && window.futSpawnExplosion) {
+            const players = getPlayerRects();
+            const now = performance.now();
+            const playerHitCooldownMs = 140;
+            // store cooldown on the function itself (pig IIFE scoped)
+            animatePig._lastPlayerHit = animatePig._lastPlayerHit || { player1: 0, player2: 0 };
+
+            for (let i = 0; i < players.length; i++) {
+              const pr = players[i];
+              if (now - (animatePig._lastPlayerHit[pr.id] || 0) < playerHitCooldownMs) continue;
+
+              const isColliding =
+                pigRect.left < pr.right &&
+                pigRect.right > pr.left &&
+                pigRect.top < pr.bottom &&
+                pigRect.bottom > pr.top;
+
+              if (isColliding) {
+                animatePig._lastPlayerHit[pr.id] = now;
+                window.futSpawnExplosion(pr.cx, pr.cy);
+                // Launch hard to the right + a bit up
+                const ix = 3400 + Math.random() * 900;
+                const iy = -900 - Math.random() * 500;
+                applyImpulseToPlayer(pr.id, ix, iy);
+              }
+            }
+          }
+
+          // Remove when off-screen right relative to contact section
+          if (pigX > containerRectNow.width) {
+            if (pigElement && pigElement.parentNode) {
+              pigElement.parentNode.removeChild(pigElement);
+            }
+            pigElement = null;
+            pigAnimationId = null;
+            return;
+          }
+
+          pigAnimationId = requestAnimationFrame(animatePig);
+        }
+
+        pigAnimationId = requestAnimationFrame(animatePig);
+      }
+
+      function checkPigSpawn() {
+        const currentTime = performance.now();
+        const isP2Enabled = typeof window.futIsPlayer2Enabled === 'function' && window.futIsPlayer2Enabled();
+        if (!isP2Enabled) {
+          lastPigSpawn = currentTime; // reset timer while P2 is disabled
+          return;
+        }
+        if (currentTime - lastPigSpawn > PIG_SPAWN_INTERVAL) {
+          if (Math.random() < PIG_SPAWN_CHANCE) {
+            createPig();
+          }
+          lastPigSpawn = currentTime;
+        }
+      }
+
+      // Expose dev trigger
+      window.spawnPigDev = function () {
+        createPig();
+      };
+
+      // Check for pig spawn periodically
+      setInterval(checkPigSpawn, 5000); // Check every 5 seconds
     })();
   </script>
 </body>
