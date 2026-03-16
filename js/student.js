@@ -40,37 +40,92 @@ const toolsSearch = document.getElementById('toolsSearch');
 const toolsModeToggle = document.getElementById('toolsModeToggle');
 const toggleOptions = Array.from(document.querySelectorAll('.tools-toggle-option'));
 const mainTitle = document.getElementById('mainTitle');
-const tocTimeline = document.getElementById('tocTimeline');
 const allToolItems = Array.from(document.querySelectorAll('.tool-item'));
 const allCategorySections = Array.from(document.querySelectorAll('.category-section'));
-let currentMode = 'all';
+let currentMode = 'free';
+
+// Tag types: free | free-tier | limited → show on "Free Tools"; paid | limited → show on "Paid Tools".
+// On Free view, limited tags display "Limited"; on Paid view they display "Paid".
+function updateLimitedTagLabels() {
+  const label = currentMode === 'free' ? 'Limited' : 'Paid';
+  document.querySelectorAll('.tool-tag.limited').forEach((el) => { el.textContent = label; });
+}
 
 function getItemPricing(item) {
   const tag = item.querySelector('.tool-tag');
   if (!tag) return 'free';
   if (tag.classList.contains('paid')) return 'paid';
+  if (tag.classList.contains('limited')) return 'limited';
   return 'free';
+}
+
+// Extra keywords per category label (lowercase) so search has wide reach
+const CATEGORY_KEYWORDS = {
+  'must try!': ['compare', 'ai', 'redirect', 'vocal', 'blocker', 'essential', 'top'],
+  'student': ['writing', 'grammar', 'quillbot', 'notion', 'student'],
+  'research': ['research', 'search', 'perplexity', 'claude', 'chatgpt', 'papers', 'academic'],
+  'mathematics': ['math', 'algebra', 'calculus', 'equation', 'symbolab', 'mathbot', 'numbers'],
+  'programming': ['code', 'coding', 'developer', 'claude', 'cursor', 'github'],
+  'analytical': ['analysis', 'data', 'claude', 'gemini', 'perplexity'],
+  'ai browsers': ['browser', 'arc', 'opera', 'ai', 'browsing'],
+  'conversation': ['chat', 'ai', 'character', 'talk', 'conversation'],
+  'notetakers': ['notes', 'notion', 'evernote', 'note', 'taking'],
+  'all-in-one': ['ai', 'claude', 'chatgpt', 'all in one'],
+  'study': ['study', 'flashcards', 'quiz', 'learn', 'learning', 'exam', 'memorize', 'school', 'homework', 'knowt', 'quizlet', 'anki', 'studocu', 'khan'],
+  'essay tools': ['essay', 'writing', 'word counter', 'citation', 'paper'],
+  'pdf tools': ['pdf', 'merge', 'split', 'convert', 'tinywow', 'ilovepdf'],
+  'image tools': ['image', 'photo', 'remove bg', 'resize', 'crop', 'convert'],
+  'video converters': ['video', 'convert', 'youtube', 'download', 'clipchamp'],
+  'audio converters': ['audio', 'mp3', 'convert', 'vocal', 'music'],
+  'gif converters': ['gif', 'ezgif', 'animate', 'convert'],
+  'collaborate': ['collaborate', 'share', 'drive', 'dropbox', 'mega', 'miro', 'team'],
+  'online poll': ['poll', 'survey', 'vote', 'feedback'],
+  'online whiteboard': ['whiteboard', 'draw', 'board', 'miro'],
+  'course': ['course', 'learn', 'coursera', 'edx', 'udemy', 'khan', 'mit', 'freecodecamp'],
+  'productivity': ['productivity', 'todo', 'task', 'microsoft', 'ticktick', 'minimalist'],
+  'code learning': ['code', 'learn', 'freecodecamp', 'odin', 'programming'],
+  'design tools': ['design', 'canva', 'gimp', 'figma', 'photopea', 'inkscape'],
+  'language learning': ['language', 'duolingo', 'hello', 'tandem', 'memrise', 'busuu'],
+  'immersive reader': ['reader', 'read', 'text to speech', 'eleven', 'speechify', 'accessibility'],
+  'todo list': ['todo', 'task', 'list', 'productivity', 'ticktick', 'todoist', 'microsoft'],
+  'notepad': ['notepad', 'notes', 'notion', 'simple', 'text'],
+  'utilities': ['utility', 'qr', 'password', 'random', 'url', 'shortener', 'barcode'],
+  'free books': ['books', 'read', 'library', 'anna', 'ocean', 'libgen', 'gutenberg'],
+  'free movies': ['movies', 'stream', 'tubi', 'pluto', 'soap', 'flix', 'watch'],
+  'free stuff': ['free', 'fmhy', 'alternativeto', 'product hunt', 'discovery'],
+  'secret': ['12ft', 'paywall', 'bypass', 'read']
+};
+
+function getSearchableText(item) {
+  const name = (item.querySelector('.tool-name')?.textContent || '').toLowerCase();
+  const section = item.closest('.category-section');
+  const categoryLabel = (section?.querySelector('.category-label')?.textContent || '').toLowerCase();
+  const extra = (CATEGORY_KEYWORDS[categoryLabel] || []).join(' ');
+  return [name, categoryLabel, extra].filter(Boolean).join(' ');
 }
 
 function applyFilters() {
   const query = (toolsSearch?.value || '').trim().toLowerCase();
   const isSearching = query.length > 0;
-
-  if (tocTimeline) {
-    tocTimeline.classList.toggle('is-searching', isSearching);
-  }
+  const queryWords = query.split(/\s+/).filter(Boolean);
 
   allToolItems.forEach((item) => {
-    const name = (item.querySelector('.tool-name')?.textContent || '').toLowerCase();
-    const matchesQuery = !isSearching || name.includes(query);
+    const searchable = getSearchableText(item);
+    const matchesQuery = !isSearching || queryWords.every((word) => searchable.includes(word));
     const pricing = getItemPricing(item);
-    const matchesMode = currentMode === 'all' || pricing === currentMode;
+    const matchesMode = currentMode === 'paid' ? (pricing === 'paid' || pricing === 'limited') : (pricing !== 'paid');
     const show = matchesQuery && matchesMode;
     item.style.display = show ? '' : 'none';
     if (show) item.classList.add('is-visible');
   });
 
   allCategorySections.forEach((section) => {
+    const isPaidSection = section.classList.contains('paid-section');
+    if (isPaidSection) {
+      section.style.display = currentMode === 'paid' ? 'block' : 'none';
+      if (currentMode === 'paid') section.classList.add('is-visible');
+      return;
+    }
     const items = section.querySelectorAll('.tool-item');
     const anyVisible = Array.from(items).some((i) => i.style.display !== 'none');
     section.style.display = anyVisible ? '' : 'none';
@@ -89,9 +144,6 @@ function applyFilters() {
       aiContainer.style.display = '';
     }
   }
-
-  buildTocItems();
-  scheduleTocUpdate();
 }
 
 function setMode(nextMode) {
@@ -101,6 +153,7 @@ function setMode(nextMode) {
     opt.classList.toggle('active', opt.dataset.mode === nextMode);
   });
   applyFilters();
+  updateLimitedTagLabels();
 }
 
 if (toolsSearch) {
@@ -112,141 +165,4 @@ toggleOptions.forEach((opt) => {
 });
 
 applyFilters();
-
-// --- Timeline TOC ---
-const tocTrack = document.getElementById('tocTrack');
-const tocProgress = document.getElementById('tocProgress');
-let tocItems = [];
-
-function buildTocItems() {
-  tocItems = [];
-  while (tocTrack.children.length > 1) {
-    tocTrack.removeChild(tocTrack.lastChild);
-  }
-
-  const visibleSections = allCategorySections.filter((s) => {
-    return s.style.display !== 'none';
-  });
-
-  const headerItem = document.createElement('div');
-  headerItem.className = 'toc-item';
-  const headerDot = document.createElement('div');
-  headerDot.className = 'toc-dot';
-  const headerLabel = document.createElement('span');
-  headerLabel.className = 'toc-label';
-  headerLabel.textContent = 'Student Tools';
-  headerItem.appendChild(headerDot);
-  headerItem.appendChild(headerLabel);
-  tocTrack.appendChild(headerItem);
-  headerItem.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-  tocItems.push({ item: headerItem, section: mainTitle || document.body, alwaysVisible: true });
-
-  visibleSections.forEach((section) => {
-    const label = section.querySelector('.category-label');
-    if (!label) return;
-    const item = document.createElement('div');
-    item.className = 'toc-item';
-    const dot = document.createElement('div');
-    dot.className = 'toc-dot';
-    const lbl = document.createElement('span');
-    lbl.className = 'toc-label';
-    lbl.textContent = label.textContent;
-    item.appendChild(dot);
-    item.appendChild(lbl);
-    tocTrack.appendChild(item);
-    item.addEventListener('click', () => {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-    tocItems.push({ item, section });
-  });
-}
-
-let tocRaf = 0;
-function updateTocScroll() {
-  const viewMid = window.innerHeight * 0.35;
-  let activeIdx = -1;
-
-  for (let i = tocItems.length - 1; i >= 0; i--) {
-    const { section, item } = tocItems[i];
-    if (item.classList.contains('is-hidden')) continue;
-    if (section.offsetParent === null && !tocItems[i].alwaysVisible) continue;
-    const rect = section.getBoundingClientRect();
-    if (rect.top <= viewMid) {
-      activeIdx = i;
-      break;
-    }
-  }
-
-  if (activeIdx === -1) {
-    const first = tocItems.find(t => !t.item.classList.contains('is-hidden'));
-    if (first) activeIdx = tocItems.indexOf(first);
-  }
-
-  tocItems.forEach(({ item }, i) => {
-    item.classList.toggle('is-active', i === activeIdx);
-  });
-
-  if (tocProgress && tocTrack) {
-    if (activeIdx >= 0) {
-      const activeEl = tocItems[activeIdx].item;
-      if (activeEl.offsetParent !== null) {
-        const trackRect = tocTrack.getBoundingClientRect();
-        const dotRect = activeEl.getBoundingClientRect();
-        const h = (dotRect.top + dotRect.height / 2) - trackRect.top;
-        tocProgress.style.height = Math.max(0, h) + 'px';
-      } else {
-        tocProgress.style.height = '0px';
-      }
-    } else {
-      tocProgress.style.height = '0px';
-    }
-  }
-}
-
-function scheduleTocUpdate() {
-  cancelAnimationFrame(tocRaf);
-  tocRaf = requestAnimationFrame(updateTocScroll);
-}
-
-window.addEventListener('scroll', scheduleTocUpdate, { passive: true });
-updateTocScroll();
-
-// --- Draggable TOC ---
-let isDragging = false;
-
-function getVisibleTocItems() {
-  return tocItems.filter(t => !t.item.classList.contains('is-hidden'));
-}
-
-function scrollToNearestFromY(clientY) {
-  const visible = getVisibleTocItems();
-  if (visible.length === 0) return;
-  let closest = visible[0];
-  let closestDist = Infinity;
-  visible.forEach((entry) => {
-    const rect = entry.item.getBoundingClientRect();
-    const mid = rect.top + rect.height / 2;
-    const dist = Math.abs(clientY - mid);
-    if (dist < closestDist) { closestDist = dist; closest = entry; }
-  });
-  if (closest.alwaysVisible) {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  } else {
-    closest.section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-}
-
-tocTrack.addEventListener('mousedown', (e) => {
-  if (e.target.closest('.toc-item')) return;
-  isDragging = true;
-  tocTrack.classList.add('is-dragging');
-  document.body.style.userSelect = 'none';
-  scrollToNearestFromY(e.clientY);
-});
-window.addEventListener('mousemove', (e) => { if (isDragging) scrollToNearestFromY(e.clientY); });
-window.addEventListener('mouseup', () => { if (isDragging) { isDragging = false; tocTrack.classList.remove('is-dragging'); document.body.style.userSelect = ''; } });
-tocTrack.addEventListener('touchstart', (e) => { if (e.target.closest('.toc-item')) return; isDragging = true; tocTrack.classList.add('is-dragging'); scrollToNearestFromY(e.touches[0].clientY); }, { passive: true });
-window.addEventListener('touchmove', (e) => { if (isDragging) scrollToNearestFromY(e.touches[0].clientY); }, { passive: true });
-window.addEventListener('touchend', () => { if (isDragging) { isDragging = false; tocTrack.classList.remove('is-dragging'); } });
+updateLimitedTagLabels();

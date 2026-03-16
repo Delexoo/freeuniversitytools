@@ -28,6 +28,11 @@
       scroll-behavior: smooth;
     }
 
+    /* Mobile-only banner (hidden on desktop) */
+    .mobile-banner {
+      display: none;
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       background-color: var(--bg-white);
@@ -180,11 +185,55 @@
       background: var(--bg-light);
     }
 
+    .desktop-dropdown-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: var(--text-primary);
+      padding: 6px 10px;
+      line-height: 1;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .desktop-dropdown-toggle:hover {
+      background: var(--bg-light);
+    }
+
+    @media (min-width: 769px) {
+      .nav-dropdown-btn {
+        display: none;
+      }
+      .desktop-dropdown-toggle {
+        display: flex;
+      }
+      .nav-dropdown-content {
+        display: none;
+      }
+      .nav-dropdown:hover .nav-dropdown-content {
+        display: none;
+      }
+      .nav-dropdown.is-open .nav-dropdown-content {
+        display: block;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .desktop-dropdown-toggle {
+        display: none !important;
+      }
+    }
+
     .nav-dropdown-content {
       display: none;
       position: absolute;
       top: 100%;
       right: 0;
+      margin-top: 4px;
       background: var(--bg-white);
       border: 1px solid var(--border-gray);
       border-radius: 12px;
@@ -194,8 +243,16 @@
       z-index: 1000;
     }
 
-    .nav-dropdown:hover .nav-dropdown-content {
-      display: block;
+    @media (max-width: 768px) {
+      .nav-dropdown:hover .nav-dropdown-content {
+        display: none;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .nav-dropdown.is-open .nav-dropdown-content {
+        display: block;
+      }
     }
 
     .nav-dropdown-content .nav-link {
@@ -889,6 +946,18 @@
       border-color: #ccdefe;
     }
 
+    .tool-icon.tool-icon-logo {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .tool-icon.tool-icon-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
     .tool-content {
       display: flex;
       flex-direction: column;
@@ -1214,20 +1283,27 @@
         display: flex;
         flex-direction: column;
         gap: 0;
-        padding: 12px 0;
+        padding: 12px 16px 16px;
         order: 3;
         border-top: 1px solid var(--border-gray);
         margin-top: 8px;
+        align-items: stretch;
       }
 
       .nav.mobile-open .nav-link,
       .nav.mobile-open .btn-donate {
         font-size: 16px;
-        padding: 12px 0;
+        padding: 14px 0;
         width: 100%;
         text-align: left;
         border-bottom: 1px solid var(--border-gray);
         margin: 0;
+        display: block;
+        box-sizing: border-box;
+      }
+
+      .nav.mobile-open .nav-link::after {
+        display: none;
       }
 
       .nav.mobile-open .nav-link:last-child {
@@ -1245,8 +1321,10 @@
         border-radius: 0;
         box-shadow: none;
         min-width: auto;
+        width: 100%;
         z-index: auto;
-        margin-bottom: 12px;
+        margin-bottom: 0;
+        align-items: stretch;
       }
 
       .nav.mobile-open .nav-dropdown-btn {
@@ -1263,20 +1341,28 @@
         border: none;
         box-shadow: none;
         min-width: auto;
+        width: 100%;
         z-index: auto;
+        align-items: stretch;
       }
 
       .nav.mobile-open .nav-dropdown-content .nav-link {
-        padding: 12px 0;
+        padding: 14px 0;
         border-bottom: 1px solid var(--border-gray);
         margin: 0;
         font-size: 16px;
         text-align: left;
         width: 100%;
+        display: block;
+        box-sizing: border-box;
         background: transparent;
         position: static;
         color: var(--text-primary);
         text-decoration: none;
+      }
+
+      .nav.mobile-open .nav-dropdown-content .nav-link::after {
+        display: none;
       }
 
       .nav.mobile-open .nav-dropdown-content .nav-link:last-child {
@@ -1290,7 +1376,7 @@
         background: var(--text-primary);
         color: var(--bg-white);
         border-radius: 999px;
-        padding: 10px 16px;
+        padding: 12px 16px;
         font-size: 14px;
         font-weight: 500;
         letter-spacing: 0.02em;
@@ -1298,6 +1384,8 @@
         text-decoration: none;
         transition: background 0.2s ease, transform 0.2s ease;
         border-bottom: none;
+        display: block;
+        box-sizing: border-box;
       }
 
       .nav.mobile-open .btn-donate:hover {
@@ -1317,8 +1405,29 @@
         margin-top: 8px;
       }
 
+      .mobile-banner {
+        display: block;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        padding: 6px 12px;
+        font-size: 11px;
+        text-align: center;
+        background: var(--text-primary);
+        color: var(--bg-white);
+        transition: transform 0.35s ease, opacity 0.35s ease;
+      }
+
+      .mobile-banner.hide {
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+      }
+
       .hero {
-        padding: 180px 16px 60px;
+        padding: 100px 16px 60px;
       }
 
       .hero::after {
@@ -1395,19 +1504,35 @@
         padding: 0 16px;
       }
 
-      .tool-card {
-        min-width: 280px;
+      /* Featured tools: on mobile show only logo icon + name */
+      .tools-preview .tool-card .tool-note {
+        display: none;
+      }
+
+      .tools-preview .tool-card {
+        min-width: 0;
+        flex: 1;
+        min-height: 0;
+        padding: 12px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
         transition: none;
       }
 
-      /* Hide duplicate tools on mobile - show only first 3 */
-      .tool-card:nth-child(n+4) {
-        display: none;
+      .tools-preview .tool-card .tool-icon {
+        display: flex;
+        width: 48px;
+        height: 48px;
       }
 
-      /* Hide icons on mobile */
-      .tool-icon {
-        display: none;
+      .tools-preview .tool-card .tool-content {
+        min-width: 0;
+      }
+
+      .tools-preview .tool-card .tool-name {
+        font-size: 14px;
       }
 
       .contact-strip {
@@ -1538,6 +1663,9 @@
   </style>
 </head>
 <body>
+  <!-- Mobile-only banner: for best experience use desktop -->
+  <div class="mobile-banner" id="mobileBanner" role="status" aria-live="polite">For the best experience use desktop version.</div>
+
   <!-- Header -->
   <header class="header" id="header">
     <div class="header-inner">
@@ -1547,7 +1675,8 @@
         <a href="index.html" class="nav-link active">Home</a>
         <a href="student.html" class="nav-link">Students</a>
         <a href="powerful.html" class="nav-link">Powerful Tools</a>
-        <div class="nav-dropdown">
+        <div class="nav-dropdown" id="navDropdown">
+          <button type="button" class="desktop-dropdown-toggle" id="desktopDropdownToggle" aria-label="More menu" aria-expanded="false">☰</button>
           <button class="nav-dropdown-btn">More ▼</button>
           <div class="nav-dropdown-content">
             <a href="about.html" class="nav-link">About Us</a>
@@ -1642,168 +1771,31 @@
       </div>
       <div class="tools-carousel">
         <div class="tools-track">
-        <a href="student.html" class="tool-card">
-          <div class="tool-icon ai" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <rect x="4" y="6.5" width="16" height="11.5" rx="4"></rect>
-              <line x1="12" y1="3.5" x2="12" y2="6.5"></line>
-              <circle cx="9" cy="12" r="1"></circle>
-              <circle cx="15" cy="12" r="1"></circle>
-              <path d="M9.5 15h5"></path>
-            </svg>
+        <a href="https://cluely.com/" target="_blank" rel="noopener noreferrer" class="tool-card">
+          <div class="tool-icon tool-icon-logo" aria-hidden="true">
+            <img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/cluely.jpg" alt="Cluely" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'">
           </div>
           <div class="tool-content">
-            <div class="tool-name">AI Assistants</div>
-            <div class="tool-note">Writing, ideas, and quick help</div>
+            <div class="tool-name">Cluely</div>
+            <div class="tool-note">AI study assistant and writing help</div>
           </div>
         </a>
         <a href="student.html" class="tool-card">
-          <div class="tool-icon study" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M6 5.5h5a2.5 2.5 0 0 1 2.5 2.5V19"></path>
-              <path d="M18 5.5h-5a2.5 2.5 0 0 0-2.5 2.5V19"></path>
-              <path d="M6 18.5h5"></path>
-              <path d="M18 18.5h-5"></path>
-            </svg>
+          <div class="tool-icon tool-icon-logo" aria-hidden="true">
+            <img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Soap2Day.png" alt="Free Movies" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'">
           </div>
           <div class="tool-content">
-            <div class="tool-name">Study Tools</div>
-            <div class="tool-note">Flashcards, notes, and planning</div>
+            <div class="tool-name">Free Movies</div>
+            <div class="tool-note">Tubi, Pluto TV, and more free streaming</div>
           </div>
         </a>
-        <a href="powerful.html" class="tool-card">
-          <div class="tool-icon web" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="8"></circle>
-              <path d="M4.5 12h15"></path>
-              <path d="M12 4.2a12 12 0 0 1 0 15.6"></path>
-              <path d="M12 4.2a12 12 0 0 0 0 15.6"></path>
-            </svg>
+        <a href="https://elevenreader.io" target="_blank" rel="noopener noreferrer" class="tool-card">
+          <div class="tool-icon tool-icon-logo" aria-hidden="true">
+            <img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/ElevenReader.png" alt="Eleven Reader" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'">
           </div>
           <div class="tool-content">
-            <div class="tool-name">Web Tools</div>
-            <div class="tool-note">Converters, utilities, and more</div>
-          </div>
-        </a>
-        <a href="student.html" class="tool-card">
-          <div class="tool-icon notes" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M7 4.5h10a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-11a2 2 0 0 1 2-2z"></path>
-              <path d="M8.5 9h7"></path>
-              <path d="M8.5 12h7"></path>
-              <path d="M8.5 15h4.5"></path>
-            </svg>
-          </div>
-          <div class="tool-content">
-            <div class="tool-name">Note Taking</div>
-            <div class="tool-note">Capture and organize faster</div>
-          </div>
-        </a>
-        <a href="student.html" class="tool-card">
-          <div class="tool-icon books" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M6 5h7a2 2 0 0 1 2 2v11H8a2 2 0 0 0-2 2z"></path>
-              <path d="M18 5h-5a2 2 0 0 0-2 2v11h7a2 2 0 0 1 2 2V7a2 2 0 0 0-2-2z"></path>
-            </svg>
-          </div>
-          <div class="tool-content">
-            <div class="tool-name">Free Books</div>
-            <div class="tool-note">Open resources for every subject</div>
-          </div>
-        </a>
-        <a href="student.html" class="tool-card">
-          <div class="tool-icon courses" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M3.5 9.5 12 5l8.5 4.5L12 14z"></path>
-              <path d="M7 11.8v3.7c0 .8 2.2 2 5 2s5-1.2 5-2v-3.7"></path>
-              <path d="M20.5 9.5v5"></path>
-            </svg>
-          </div>
-          <div class="tool-content">
-            <div class="tool-name">Courses</div>
-            <div class="tool-note">Top free learning platforms</div>
-          </div>
-        </a>
-        <a href="student.html" class="tool-card" aria-hidden="true" tabindex="-1">
-          <div class="tool-icon ai" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <rect x="4" y="6.5" width="16" height="11.5" rx="4"></rect>
-              <line x1="12" y1="3.5" x2="12" y2="6.5"></line>
-              <circle cx="9" cy="12" r="1"></circle>
-              <circle cx="15" cy="12" r="1"></circle>
-              <path d="M9.5 15h5"></path>
-            </svg>
-          </div>
-          <div class="tool-content">
-            <div class="tool-name">AI Assistants</div>
-            <div class="tool-note">Writing, ideas, and quick help</div>
-          </div>
-        </a>
-        <a href="student.html" class="tool-card" aria-hidden="true" tabindex="-1">
-          <div class="tool-icon study" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M6 5.5h5a2.5 2.5 0 0 1 2.5 2.5V19"></path>
-              <path d="M18 5.5h-5a2.5 2.5 0 0 0-2.5 2.5V19"></path>
-              <path d="M6 18.5h5"></path>
-              <path d="M18 18.5h-5"></path>
-            </svg>
-          </div>
-          <div class="tool-content">
-            <div class="tool-name">Study Tools</div>
-            <div class="tool-note">Flashcards, notes, and planning</div>
-          </div>
-        </a>
-        <a href="powerful.html" class="tool-card" aria-hidden="true" tabindex="-1">
-          <div class="tool-icon web" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="8"></circle>
-              <path d="M4.5 12h15"></path>
-              <path d="M12 4.2a12 12 0 0 1 0 15.6"></path>
-              <path d="M12 4.2a12 12 0 0 0 0 15.6"></path>
-            </svg>
-          </div>
-          <div class="tool-content">
-            <div class="tool-name">Web Tools</div>
-            <div class="tool-note">Converters, utilities, and more</div>
-          </div>
-        </a>
-        <a href="student.html" class="tool-card" aria-hidden="true" tabindex="-1">
-          <div class="tool-icon notes" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M7 4.5h10a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-11a2 2 0 0 1 2-2z"></path>
-              <path d="M8.5 9h7"></path>
-              <path d="M8.5 12h7"></path>
-              <path d="M8.5 15h4.5"></path>
-            </svg>
-          </div>
-          <div class="tool-content">
-            <div class="tool-name">Note Taking</div>
-            <div class="tool-note">Capture and organize faster</div>
-          </div>
-        </a>
-        <a href="student.html" class="tool-card" aria-hidden="true" tabindex="-1">
-          <div class="tool-icon books" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M6 5h7a2 2 0 0 1 2 2v11H8a2 2 0 0 0-2 2z"></path>
-              <path d="M18 5h-5a2 2 0 0 0-2 2v11h7a2 2 0 0 1 2 2V7a2 2 0 0 0-2-2z"></path>
-            </svg>
-          </div>
-          <div class="tool-content">
-            <div class="tool-name">Free Books</div>
-            <div class="tool-note">Open resources for every subject</div>
-          </div>
-        </a>
-        <a href="student.html" class="tool-card" aria-hidden="true" tabindex="-1">
-          <div class="tool-icon courses" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M3.5 9.5 12 5l8.5 4.5L12 14z"></path>
-              <path d="M7 11.8v3.7c0 .8 2.2 2 5 2s5-1.2 5-2v-3.7"></path>
-              <path d="M20.5 9.5v5"></path>
-            </svg>
-          </div>
-          <div class="tool-content">
-            <div class="tool-name">Courses</div>
-            <div class="tool-note">Top free learning platforms</div>
+            <div class="tool-name">Eleven Reader</div>
+            <div class="tool-note">Text-to-speech and immersive reading</div>
           </div>
         </a>
         </div>
@@ -1860,11 +1852,21 @@
       <a href="contact.html" class="footer-link">Contact</a>
       <a href="https://buy.stripe.com/4gMaEW87U7IO8C8azDcjS01" target="_blank" class="footer-link">Donate</a>
     </div>
-    <p class="footer-copyright"> 2026 Free University Tools. All rights reserved.</p>
+    <div class="footer-copyright">© 2026 Free University Tools. Helping students succeed with free tools.</div>
   </footer>
 
   <script src="js/common.js"></script>
   <script src="js/index.js"></script>
+  <script>
+    (function() {
+      var banner = document.getElementById('mobileBanner');
+      if (banner && window.matchMedia('(max-width: 768px)').matches) {
+        setTimeout(function() {
+          banner.classList.add('hide');
+        }, 4000);
+      }
+    })();
+  </script>
   <script>
     (function(){
       const baseRaw = 'https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/';

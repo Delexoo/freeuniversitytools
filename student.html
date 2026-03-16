@@ -4,16 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Tools - Free University Tools</title>
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png">
   <style>
-    /* CSS Variables - Apple-inspired colors */
+    /* CSS Variables - professional palette (aligned with powerful.html) */
     :root {
       --bg-white: #FFFFFF;
-      --bg-light: #F5F5F7;
-      --text-primary: #1D1D1F;
-      --text-secondary: #86868B;
-      --accent-blue: #007AFF;
-      --border-gray: #D2D2D7;
-      --hover-gray: #FAFAFA;
+      --bg-light: #F8F9FA;
+      --bg-subtle: #F1F3F4;
+      --text-primary: #202124;
+      --text-secondary: #5F6368;
+      --text-muted: #80868B;
+      --accent-blue: #1A73E8;
+      --border-gray: #DADCE0;
+      --border-light: #E8EAED;
+      --hover-gray: #F8F9FA;
+      --shadow-sm: 0 1px 2px rgba(60, 64, 67, 0.06);
+      --shadow-md: 0 2px 6px rgba(60, 64, 67, 0.08);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --content-max: 1120px;
     }
 
     /* Reset & Base Styles */
@@ -28,14 +38,15 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       background-color: var(--bg-white);
       color: var(--text-primary);
       line-height: 1.6;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Header */
+    /* Header – same as powerful.html */
     .header {
       position: fixed;
       top: 0;
@@ -45,7 +56,7 @@
       backdrop-filter: saturate(180%) blur(20px);
       -webkit-backdrop-filter: saturate(180%) blur(20px);
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      z-index: 1000;
+      z-index: 1100;
       transition: all 0.3s ease;
     }
 
@@ -178,31 +189,77 @@
       background: var(--bg-light);
     }
 
+    .desktop-dropdown-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: var(--text-primary);
+      padding: 6px 10px;
+      line-height: 1;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .desktop-dropdown-toggle:hover {
+      background: var(--bg-light);
+    }
+
+    @media (min-width: 769px) {
+      .nav-dropdown-btn {
+        display: none;
+      }
+      .desktop-dropdown-toggle {
+        display: flex;
+      }
+      .nav-dropdown-content {
+        display: none;
+      }
+      .nav-dropdown:hover .nav-dropdown-content {
+        display: none;
+      }
+      .nav-dropdown.is-open .nav-dropdown-content {
+        display: block;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .desktop-dropdown-toggle {
+        display: none !important;
+      }
+    }
+
     .nav-dropdown-content {
       display: none;
       position: absolute;
       top: 100%;
       right: 0;
+      margin-top: 6px;
       background: var(--bg-white);
       border: 1px solid var(--border-gray);
       border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-      padding: 0;
-      min-width: 150px;
-      z-index: 1000;
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+      padding: 6px 0;
+      min-width: 160px;
+      z-index: 1101;
     }
 
-    .nav-dropdown:hover .nav-dropdown-content {
-      display: block;
+    @media (min-width: 769px) {
+      .nav-dropdown.is-open .nav-dropdown-content {
+        display: block;
+      }
     }
 
     .nav-dropdown-content .nav-link {
       display: block;
-      padding: 12px 16px;
+      padding: 10px 18px;
       text-align: left;
-      border-bottom: 1px solid var(--border-gray);
+      border-bottom: 1px solid var(--border-light);
       margin: 0;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 400;
       letter-spacing: 0.02em;
       text-transform: none;
@@ -241,22 +298,22 @@
       border-bottom: none;
     }
 
-    /* Search Widget */
+    /* Search Widget – below header so dropdown can overlay */
     .tools-widget {
       position: fixed;
       top: 76px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 1050;
+      z-index: 1000;
       width: min(680px, calc(100% - 28px));
       display: flex;
       align-items: center;
       gap: 10px;
       padding: 10px;
-      border-radius: 16px;
+      border-radius: var(--radius-lg);
       background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(29, 29, 31, 0.14);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-md);
       backdrop-filter: saturate(180%) blur(16px);
       -webkit-backdrop-filter: saturate(180%) blur(16px);
     }
@@ -265,8 +322,8 @@
       flex: 1;
       height: 40px;
       border-radius: 11px;
-      border: 1px solid #d2d2d7;
-      background: #ffffff;
+      border: 1px solid var(--border-gray);
+      background: var(--bg-white);
       color: var(--text-primary);
       font-size: 14px;
       padding: 0 12px;
@@ -274,20 +331,25 @@
     }
 
     .tools-search:focus {
-      border-color: #8e8e93;
-      box-shadow: 0 0 0 3px rgba(142, 142, 147, 0.12);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
     }
 
+    .tools-search::placeholder {
+      color: var(--text-muted);
+    }
+
+    .tools-toggle-2,
     .tools-toggle-3 {
       position: relative;
       height: 40px;
       border-radius: 11px;
-      border: 1px solid #d2d2d7;
-      background: #ffffff;
+      border: 1px solid var(--border-gray);
+      background: var(--bg-white);
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       align-items: stretch;
-      min-width: 265px;
+      min-width: 200px;
       padding: 2px;
       overflow: hidden;
     }
@@ -296,7 +358,7 @@
       position: absolute;
       top: 2px;
       left: 2px;
-      width: calc((100% - 4px) / 3);
+      width: calc((100% - 4px) / 2);
       height: calc(100% - 4px);
       border-radius: 9px;
       background: #1d1d1f;
@@ -304,12 +366,8 @@
       z-index: 0;
     }
 
-    .tools-toggle-3[data-mode="free"] .tools-toggle-thumb {
+    .tools-toggle-2[data-mode="paid"] .tools-toggle-thumb {
       transform: translateX(100%);
-    }
-
-    .tools-toggle-3[data-mode="paid"] .tools-toggle-thumb {
-      transform: translateX(200%);
     }
 
     .tools-toggle-option {
@@ -364,7 +422,7 @@
       bottom: 4px;
       left: 50%;
       width: 1.5px;
-      background: #e1e1e6;
+      background: var(--border-light);
       transform: translateX(-50%);
       border-radius: 1px;
     }
@@ -374,7 +432,7 @@
       top: 4px;
       left: 50%;
       width: 1.5px;
-      background: #1d1d1f;
+      background: var(--text-primary);
       transform: translateX(-50%);
       border-radius: 1px;
       transition: height 0.25s ease;
@@ -394,7 +452,7 @@
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: #d2d2d7;
+      background: var(--border-gray);
       border: 1.5px solid #fff;
       transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
       flex-shrink: 0;
@@ -406,7 +464,7 @@
       white-space: nowrap;
       font-size: 11px;
       font-weight: 500;
-      color: #86868b;
+      color: var(--text-muted);
       opacity: 0;
       transform: translateX(-4px);
       transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
@@ -423,18 +481,18 @@
     }
 
     .toc-item:hover .toc-dot {
-      background: #aeaeb2;
+      background: var(--text-muted);
       transform: scale(1.3);
     }
 
     .toc-item.is-active .toc-dot {
-      background: #1d1d1f;
+      background: var(--text-primary);
       transform: scale(1.5);
       box-shadow: 0 0 0 3px rgba(29, 29, 31, 0.12);
     }
 
     .toc-item.is-active .toc-label {
-      color: #1d1d1f;
+      color: var(--text-primary);
       font-weight: 600;
     }
 
@@ -459,10 +517,10 @@
       font-size: 13px;
       color: #fff;
       font-weight: 500;
-      background: #007AFF;
+      background: var(--accent-blue);
       border-radius: 18px 18px 4px 18px;
       max-width: 260px;
-      box-shadow: 0 2px 12px rgba(0, 122, 255, 0.25);
+      box-shadow: 0 2px 12px rgba(26, 115, 232, 0.25);
       opacity: 0;
       transform: translateX(40px) scale(0.92);
       animation: proTipSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
@@ -471,7 +529,7 @@
     .pro-tip-tail {
       width: 8px;
       height: 8px;
-      background: #007AFF;
+      background: var(--accent-blue);
       border-radius: 0 0 2px 0;
       margin-top: -2px;
       margin-right: 4px;
@@ -495,7 +553,7 @@
       }
     }
 
-    /* Main Title */
+    /* Main title & subtitle – same layout as powerful.html */
     .main-title {
       text-align: center;
       font-size: 56px;
@@ -517,30 +575,44 @@
       line-height: 1.4;
     }
 
-    /* Content Container */
     .content-container {
       max-width: 980px;
       margin: 0 auto;
-      padding: 0 24px 80px;
+      padding: 0 24px 64px;
     }
 
-    /* Category Section */
+    /* Category Section – seamless modern layout */
     .category-section {
-      padding: 48px 0 0;
-      border-top: 1px solid #e1e1e6;
+      padding: 40px 0;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.5s ease, transform 0.5s ease;
+      position: relative;
     }
 
     .category-section:first-child {
-      border-top: none;
       padding-top: 0;
     }
 
     .category-section.is-visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    .category-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.05), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .category-section:not(:first-child)::before {
+      opacity: 1;
     }
 
     /* Must Try Section */
@@ -551,19 +623,21 @@
 
     .must-try-section .category-label {
       color: var(--accent-blue);
+      border-bottom-color: rgba(26, 115, 232, 0.15);
     }
 
     .must-try-section .category-label::before {
       content: '';
       display: inline-block;
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background: var(--accent-blue);
-      margin-right: 8px;
+      margin-right: 10px;
       vertical-align: middle;
       position: relative;
       top: -1px;
+      box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
     }
 
     /* Top AI Assistants Container */
@@ -572,29 +646,42 @@
     }
 
     .top-ai-assistants-container .category-section {
-      border-top: 1px solid #e1e1e6;
-      padding-top: 48px;
+      padding: 32px 0;
     }
 
     .top-ai-assistants-container .category-section:first-child {
-      border-top: none;
       padding-top: 0;
+    }
+
+    /* Paid Section - Hidden by default */
+    .paid-section {
+      display: none;
     }
 
     /* Section Divider */
     .section-divider {
-      margin: 56px 0 8px;
+      margin: 48px 0 18px;
       padding: 0;
       border: none;
+      position: relative;
     }
 
-    .section-divider::before,
-    .section-divider::after {
-      display: none;
+    .section-divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.08), transparent);
     }
 
     .divider-content {
       padding: 0;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .divider-icon {
@@ -602,12 +689,15 @@
     }
 
     .divider-title {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #8e8e93;
+      color: var(--text-muted);
       margin: 0;
+      background: var(--bg-white);
+      padding: 0 16px;
+      position: relative;
     }
 
     .divider-subtitle {
@@ -617,55 +707,31 @@
     .category-header {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 14px;
+      margin-bottom: 18px;
+      align-items: center;
     }
 
     .category-label {
-      font-size: 13px;
+      font-size: 0.8rem;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #8e8e93;
+      color: var(--text-secondary);
       position: relative;
-      cursor: help;
-    }
-
-    .secret-disclaimer {
-      font-size: 11px;
-      color: #86868b;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-light);
       text-align: center;
-      padding: 8px 0 0;
-      letter-spacing: 0.01em;
+      width: 100%;
     }
 
-    /* Tooltip */
-    .tooltip {
-      position: fixed;
-      z-index: 10000;
-      max-width: 280px;
-      padding: 10px 14px;
-      background: var(--text-primary);
-      color: var(--bg-white);
-      font-size: 13px;
-      font-weight: 400;
-      line-height: 1.5;
-      border-radius: 8px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
-      pointer-events: none;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 0.18s ease, transform 0.18s ease;
-    }
-
-    .tooltip.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
 
     .tools-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-      gap: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
     }
 
     .tool-item {
@@ -674,12 +740,15 @@
       align-items: center;
       text-decoration: none;
       color: var(--text-primary);
-      transition: opacity 0.35s ease, transform 0.35s ease, box-shadow 0.25s ease;
-      padding: 12px 8px;
-      border-radius: 14px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 16px 12px;
+      border-radius: 20px;
       position: relative;
       opacity: 0;
-      transform: translateY(12px);
+      transform: translateY(10px);
+      background: transparent;
+      width: fit-content;
+      max-width: 100%;
     }
 
     .tool-item.is-visible {
@@ -688,165 +757,115 @@
     }
 
     .tool-item:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      transform: translateY(-6px);
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    .tool-item:focus-visible {
+      outline: 2px solid var(--accent-blue, #1a73e8);
+      outline-offset: 2px;
     }
 
     .tool-icon {
-      width: 76px;
-      height: 76px;
+      width: 96px;
+      height: 96px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 6px;
-      background: #FF3B30;
-      border-radius: 16px;
+      margin-bottom: 12px;
+      background: var(--bg-white);
+      border: none;
+      border-radius: 22px;
       overflow: hidden;
-      transition: all 0.2s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
-      font-size: 30px;
+      font-size: 32px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.08);
     }
 
-    .tool-icon:has(img),
-    .tool-icon:has(.icon-custom) {
-      background: var(--bg-light);
+    .tool-icon:has(img) {
+      background: var(--bg-white);
     }
-
-    /* Custom Icon Styles */
-    .icon-custom {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, var(--accent-blue), rgba(88, 86, 214, 0.8));
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-      border-radius: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .icon-custom.icon-math {
-      background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
-    }
-
-    .icon-custom.icon-code {
-      background: linear-gradient(135deg, #4ECDC4, #44A08D);
-      font-size: 14px;
-    }
-
-    .icon-custom.icon-browser {
-      background: linear-gradient(135deg, #667EEA, #764BA2);
-    }
-
-    .icon-custom.icon-study {
-      background: linear-gradient(135deg, #F093FB, #F5576C);
-    }
-
-    .icon-custom.icon-citation {
-      background: linear-gradient(135deg, #4FACFE, #00F2FE);
-    }
-
-    .icon-custom.icon-pdf {
-      background: linear-gradient(135deg, #FA709A, #FEE140);
-    }
-
-    .icon-custom.icon-image {
-      background: linear-gradient(135deg, #30CFD0, #330867);
-    }
-
-    .icon-custom.icon-video {
-      background: linear-gradient(135deg, #A8EDEA, #FED6E3);
-      color: #1D1D1F;
-    }
-
-    .icon-custom.icon-audio {
-      background: linear-gradient(135deg, #FF9A9E, #FECFEF);
-    }
-
-    .icon-custom.icon-cloud {
-      background: linear-gradient(135deg, #A1C4FD, #C2E9FB);
-      color: #1D1D1F;
-    }
-
-    .icon-custom.icon-productivity {
-      background: linear-gradient(135deg, #84FAB0, #8FD3F4);
-      color: #1D1D1F;
-    }
-
-    .icon-custom.icon-design {
-      background: linear-gradient(135deg, #FFECD2, #FCB69F);
-      color: #1D1D1F;
-    }
-
-    .icon-custom.icon-language {
-      background: linear-gradient(135deg, #FF9A56, #FF6A88);
-    }
-
-    .icon-custom.icon-utility {
-      background: linear-gradient(135deg, #A8CABA, #5D4E75);
-    }
-
 
     .tool-item:hover .tool-icon {
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08);
+      transform: scale(1.05) translateY(-2px);
     }
 
     .tool-icon img {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      border-radius: 12px;
+      border-radius: 20px;
       display: block;
+      padding: 6px;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      box-sizing: border-box;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .tool-item:hover .tool-icon img {
+      transform: scale(1.08);
     }
 
     .tool-name {
-      font-size: 11px;
+      font-size: 14px;
       font-weight: 500;
       text-align: center;
       color: var(--text-primary);
-      line-height: 1.3;
-      max-width: 80px;
+      line-height: 1.5;
+      max-width: 110px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      letter-spacing: -0.02em;
+      transition: color 0.2s ease;
+    }
+
+    .tool-item:hover .tool-name {
+      color: var(--accent-blue);
     }
 
     .tool-tag {
       position: absolute;
-      top: 6px;
-      right: 2px;
-      font-size: 8px;
+      top: 10px;
+      right: 6px;
+      font-size: 9px;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.4px;
-      padding: 2px 7px;
-      border-radius: 100px;
+      letter-spacing: 0.6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
       z-index: 2;
       pointer-events: none;
-      line-height: 1.5;
+      line-height: 1.3;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease;
+    }
+
+    .tool-item:hover .tool-tag {
+      transform: scale(1.05);
     }
 
     .tool-tag.free {
       background: #E8F5E9;
-      color: #2E7D32;
+      color: #1E8E3E;
     }
 
     .tool-tag.free-tier {
-      background: #FFF3E0;
-      color: #E65100;
+      background: #FEF7E0;
+      color: #B06000;
     }
 
     .tool-tag.limited {
-      background: #FCE4EC;
-      color: #C2185B;
+      background: #FCE8EC;
+      color: #C5221F;
     }
 
     .tool-tag.paid {
-      background: #FFE5E3;
-      color: #B3261E;
+      background: #FCE8E6;
+      color: #C5221F;
     }
 
     /* Footer */
@@ -883,6 +902,102 @@
       margin-top: 20px;
     }
 
+    .secret-disclaimer {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      margin: 24px 0 0;
+      padding: 0 24px;
+    }
+
+    /* Bug Report Button – aligned with powerful.html */
+    .bug-report-button {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 1099;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 160px;
+      background: linear-gradient(135deg, var(--accent-blue) 0%, #5856d6 100%);
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 999px;
+      box-shadow: 0 4px 16px rgba(26, 115, 232, 0.3);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: messageSlideIn 0.5s ease-out;
+    }
+
+    .bug-report-button {
+      overflow: hidden;
+    }
+
+    .bug-report-button .bug-report-msg {
+      white-space: nowrap;
+      will-change: opacity, transform;
+    }
+
+    .bug-report-button .bug-report-msg-a {
+      animation: bugReportShowA 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    .bug-report-button .bug-report-msg-b {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: bugReportShowB 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes bugReportShowA {
+      0% { opacity: 1; transform: translateY(0); }
+      35% { opacity: 1; transform: translateY(0); }
+      50% { opacity: 0; transform: translateY(-8px); }
+      85% { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bugReportShowB {
+      0% { opacity: 0; transform: translateY(8px); }
+      35% { opacity: 0; transform: translateY(8px); }
+      50% { opacity: 1; transform: translateY(0); }
+      85% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-8px); }
+    }
+
+    @keyframes messageSlideIn {
+      0% {
+        transform: translateY(100px) scale(0.8);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .bug-report-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26, 115, 232, 0.4);
+    }
+
+    .bug-report-button:hover .bug-report-msg {
+      animation-play-state: paused;
+    }
+
+    .bug-report-button::before {
+      display: none;
+    }
+
     /* Animations */
     @keyframes fadeInUp {
       from {
@@ -896,35 +1011,7 @@
     }
 
     /* Responsive Design */
-    @media (max-width: 1100px) {
-      .toc-timeline {
-        display: none;
-      }
-    }
-
     @media (max-width: 768px) {
-      .tools-widget {
-        top: 70px;
-        width: calc(100% - 16px);
-        padding: 8px;
-        gap: 8px;
-      }
-
-      .tools-search {
-        height: 38px;
-        font-size: 13px;
-      }
-
-      .tools-toggle-3 {
-        height: 38px;
-        min-width: 215px;
-      }
-
-      .tools-toggle-option {
-        font-size: 11px;
-        padding: 0 6px;
-      }
-
       .header-inner {
         padding: 0 16px;
         height: auto;
@@ -957,6 +1044,13 @@
 
       .nav.mobile-open {
         display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 12px 16px 16px;
+        order: 3;
+        border-top: 1px solid var(--border-gray);
+        margin-top: 8px;
+        align-items: stretch;
       }
 
       /* Move widget down when mobile menu is open */
@@ -976,10 +1070,16 @@
 
       .nav-link {
         font-size: 16px;
-        padding: 12px 0;
+        padding: 14px 0;
         width: 100%;
         text-align: left;
         border-bottom: 1px solid var(--border-gray);
+        display: block;
+        box-sizing: border-box;
+      }
+
+      .nav.mobile-open .nav-link::after {
+        display: none;
       }
 
       .nav.mobile-open .nav-dropdown {
@@ -993,8 +1093,10 @@
         border-radius: 0;
         box-shadow: none;
         min-width: auto;
+        width: 100%;
         z-index: auto;
-        margin-bottom: 12px;
+        margin-bottom: 0;
+        align-items: stretch;
       }
 
       .nav.mobile-open .nav-dropdown-btn {
@@ -1002,7 +1104,7 @@
       }
 
       .nav.mobile-open .nav-dropdown-content {
-        display: flex;
+        display: flex !important;
         flex-direction: column;
         padding: 0;
         gap: 0;
@@ -1011,20 +1113,28 @@
         border: none;
         box-shadow: none;
         min-width: auto;
+        width: 100%;
         z-index: auto;
+        align-items: stretch;
       }
 
       .nav.mobile-open .nav-dropdown-content .nav-link {
-        padding: 12px 0;
+        padding: 14px 0;
         border-bottom: 1px solid var(--border-gray);
         margin: 0;
         font-size: 16px;
         text-align: left;
         width: 100%;
+        display: block;
+        box-sizing: border-box;
         background: transparent;
         position: static;
         color: var(--text-primary);
         text-decoration: none;
+      }
+
+      .nav.mobile-open .nav-dropdown-content .nav-link::after {
+        display: none;
       }
 
       .nav.mobile-open .nav-dropdown-content .nav-link:last-child {
@@ -1038,7 +1148,7 @@
         background: var(--text-primary);
         color: var(--bg-white);
         border-radius: 999px;
-        padding: 10px 16px;
+        padding: 12px 16px;
         font-size: 14px;
         font-weight: 500;
         letter-spacing: 0.02em;
@@ -1046,6 +1156,8 @@
         text-decoration: none;
         transition: background 0.2s ease, transform 0.2s ease;
         border-bottom: none;
+        display: block;
+        box-sizing: border-box;
       }
 
       .nav.mobile-open .btn-donate:hover {
@@ -1065,14 +1177,36 @@
         margin-top: 8px;
       }
 
-      .pro-tip-wrapper {
-        margin-top: 210px;
-        padding: 0 20px;
+      .tools-widget {
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100vw - 24px);
+        max-width: calc(100% - 24px);
+        padding: 8px;
+        gap: 8px;
+        box-sizing: border-box;
       }
 
-      .pro-tip {
-        font-size: 12px;
-        padding: 9px 16px;
+      .tools-search {
+        height: 38px;
+        font-size: 13px;
+        min-width: 0;
+        flex: 1 1 0;
+      }
+
+      .tools-toggle-2,
+      .tools-toggle-3 {
+        height: 38px;
+        min-width: 0;
+        flex: 0 0 auto;
+        width: 50%;
+        max-width: 160px;
+      }
+
+      .tools-toggle-option {
+        font-size: 11px;
+        padding: 0 6px;
       }
 
       .main-title {
@@ -1091,36 +1225,48 @@
         padding: 0 16px 40px;
       }
 
+      .pro-tip-wrapper {
+        margin-top: 220px;
+        padding: 0 16px;
+      }
+
+      .pro-tip {
+        font-size: 12px;
+        padding: 9px 16px;
+      }
+
       .category-section {
-        padding-top: 36px;
+        padding-top: 18px;
       }
 
       .category-header {
-        gap: 16px;
+        gap: 8px;
+        align-items: center;
       }
 
       .tools-row {
-        grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
-        gap: 6px;
+        gap: 16px;
       }
 
       .tool-item {
-        padding: 8px 4px;
+        padding: 10px 8px;
       }
 
       .tool-icon {
-        width: 62px;
-        height: 62px;
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
       }
 
       .tool-name {
-        font-size: 10px;
-        max-width: 64px;
+        font-size: 13px;
+        font-weight: 500;
+        max-width: 90px;
       }
 
       .tool-tag {
-        font-size: 7px;
-        padding: 1px 5px;
+        font-size: 8px;
+        padding: 2px 6px;
       }
 
       .section-divider {
@@ -1129,21 +1275,23 @@
     }
 
     @media (max-width: 480px) {
-      .header-inner {
-        height: 56px;
+      .tools-widget {
+        flex-direction: column;
+        width: calc(100vw - 24px);
+        max-width: calc(100% - 24px);
+        padding: 10px;
+        gap: 8px;
       }
 
-      .logo {
-        font-size: 16px;
+      .tools-search {
+        width: 100%;
+        flex: none;
       }
 
-      .nav-link {
-        font-size: 13px;
-      }
-
-      .btn-donate {
-        padding: 5px 10px;
-        font-size: 12px;
+      .tools-toggle-2,
+      .tools-toggle-3 {
+        width: 100%;
+        max-width: none;
       }
 
       .main-title {
@@ -1158,7 +1306,7 @@
       }
 
       .pro-tip-wrapper {
-        margin-top: 180px;
+        margin-top: 240px;
         padding: 0 16px;
       }
 
@@ -1172,36 +1320,40 @@
       }
 
       .category-section {
-        padding-top: 28px;
+        padding-top: 14px;
       }
 
       .category-header {
-        gap: 14px;
+        gap: 6px;
+        align-items: center;
       }
 
       .tools-row {
-        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-        gap: 4px;
+        gap: 14px;
       }
 
       .tool-item {
-        padding: 6px 2px;
+        padding: 12px 8px;
       }
 
       .tool-icon {
-        width: 52px;
-        height: 52px;
-        border-radius: 14px;
+        width: 76px;
+        height: 76px;
+        border-radius: 18px;
+        margin-bottom: 10px;
       }
 
       .tool-name {
-        font-size: 9px;
-        max-width: 56px;
+        font-size: 12px;
+        font-weight: 500;
+        max-width: 85px;
       }
 
       .tool-tag {
-        font-size: 6px;
-        padding: 1px 4px;
+        font-size: 8px;
+        padding: 3px 8px;
+        top: 8px;
+        right: 4px;
       }
 
       .section-divider {
@@ -1215,7 +1367,7 @@
   </style>
 </head>
 <body>
-  <!-- Header -->
+  <!-- Header (same as index.html) -->
   <header class="header" id="header">
     <div class="header-inner">
       <a href="index.html" class="logo"><span class="logo-free">free</span><span class="logo-university">university</span><span class="logo-tools">tools</span></a>
@@ -1224,7 +1376,8 @@
         <a href="index.html" class="nav-link">Home</a>
         <a href="student.html" class="nav-link active">Students</a>
         <a href="powerful.html" class="nav-link">Powerful Tools</a>
-        <div class="nav-dropdown">
+        <div class="nav-dropdown" id="navDropdown">
+          <button type="button" class="desktop-dropdown-toggle" id="desktopDropdownToggle" aria-label="More menu" aria-expanded="false">☰</button>
           <button class="nav-dropdown-btn">More ▼</button>
           <div class="nav-dropdown-content">
             <a href="about.html" class="nav-link">About Us</a>
@@ -1245,99 +1398,12 @@
       placeholder="Search tools..."
       aria-label="Search tools"
     >
-    <div id="toolsModeToggle" class="tools-toggle-3" data-mode="all" role="group" aria-label="Filter by pricing">
+    <div id="toolsModeToggle" class="tools-toggle-2" data-mode="free" role="group" aria-label="Filter by pricing">
       <span class="tools-toggle-thumb" aria-hidden="true"></span>
-      <button type="button" class="tools-toggle-option active" data-mode="all">All Tools</button>
-      <button type="button" class="tools-toggle-option" data-mode="free">Free Tools</button>
+      <button type="button" class="tools-toggle-option active" data-mode="free">Free Tools</button>
       <button type="button" class="tools-toggle-option" data-mode="paid">Paid Tools</button>
     </div>
   </div>
-
-  <nav class="toc-timeline" id="tocTimeline" aria-label="Category navigation">
-    <div class="toc-track" id="tocTrack">
-      <div class="toc-progress" id="tocProgress"></div>
-      <div class="toc-item" data-target="must-try">
-        <div class="toc-dot"></div>
-        <div class="toc-label">Must Try!</div>
-      </div>
-      <div class="toc-item" data-target="writing">
-        <div class="toc-dot"></div>
-        <div class="toc-label">Writing</div>
-      </div>
-      <div class="toc-item" data-target="research">
-        <div class="toc-dot"></div>
-        <div class="toc-label">Research</div>
-      </div>
-      <div class="toc-item" data-target="mathematics">
-        <div class="toc-dot"></div>
-        <div class="toc-label">Mathematics</div>
-      </div>
-      <div class="toc-item" data-target="programming">
-        <div class="toc-dot"></div>
-        <div class="toc-label">Programming</div>
-      </div>
-      <div class="toc-item" data-target="analytical">
-        <div class="toc-dot"></div>
-        <div class="toc-label">Analytical</div>
-      </div>
-      <div class="toc-item" data-target="ai-browsers">
-        <div class="toc-dot"></div>
-        <div class="toc-label">AI Browsers</div>
-      </div>
-      <div class="toc-item" data-target="conversation">
-        <div class="toc-dot"></div>
-        <div class="toc-label">Conversation</div>
-      </div>
-      <div class="toc-item" data-target="notetakers">
-        <div class="toc-dot"></div>
-        <div class="toc-label">Notetakers</div>
-      </div>
-      <div class="toc-item" data-target="all-in-one">
-        <div class="toc-dot"></div>
-        <div class="toc-label">All-in-one</div>
-      </div>
-      <div class="toc-item" data-target="courses">
-        <div class="toc-dot"></div>
-        <div class="toc-label">Courses</div>
-      </div>
-      <div class="toc-item" data-target="study">
-        <div class="toc-dot"></div>
-        <div class="toc-label">Study</div>
-      </div>
-      <div class="toc-item" data-target="citation-research">
-        <div class="toc-dot"></div>
-        <div class="toc-label">Citation & Research</div>
-      </div>
-      <div class="toc-item" data-target="pdf-tools">
-        <div class="toc-dot"></div>
-        <div class="toc-label">PDF Tools</div>
-      </div>
-      <div class="toc-item" data-target="image-tools">
-        <div class="toc-dot"></div>
-        <div class="toc-label">Image Tools</div>
-      </div>
-      <div class="toc-item" data-target="video-tools">
-        <div class="toc-dot"></div>
-        <div class="toc-label">Video Tools</div>
-      </div>
-      <div class="toc-item" data-target="audio-tools">
-        <div class="toc-dot"></div>
-        <div class="toc-label">Audio Tools</div>
-      </div>
-      <div class="toc-item" data-target="file-sharing">
-        <div class="toc-dot"></div>
-        <div class="toc-label">File Sharing</div>
-      </div>
-      <div class="toc-item" data-target="productivity">
-        <div class="toc-dot"></div>
-        <div class="toc-label">Productivity</div>
-      </div>
-      <div class="toc-item" data-target="code-learning">
-        <div class="toc-dot"></div>
-        <div class="toc-label">Code Learning</div>
-      </div>
-    </div>
-  </nav>
 
   <!-- Pro Tip -->
   <div class="pro-tip-wrapper">
@@ -1355,56 +1421,66 @@
     <!-- MUST TRY -->
     <section class="category-section must-try-section" data-category="must-try">
       <div class="category-header">
-        <div class="category-label" data-tooltip="Essential tools that every student should try! These are our top recommendations for productivity and efficiency.">Must Try!</div>
+        <div class="category-label">Must Try!</div>
         <div class="tools-row">
           <a href="https://eye2.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Eye2.png" alt="Compare AI's" onerror="this.parentElement.innerHTML='👁️'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Eye2.png" alt="Compare AI's" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Compare AI's</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://chromewebstore.google.com/detail/egmgebeelgaakhaoodlmnimbfemfgdah?utm_source=item-share-cb" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/RedirectBlocker.png" alt="Redirect Blocker" onerror="this.parentElement.innerHTML='🚫'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/RedirectBlocker.png" alt="Redirect Blocker" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Redirect Blocker</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://vocalremover.org" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/VocalRemover.jpg" alt="Vocal Remover" onerror="this.parentElement.innerHTML='🎵'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/VocalRemover.jpg" alt="Vocal Remover" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Vocal Remover</div>
             <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://claude.ai" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/claude.jpg" alt="Claude" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Claude</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://perplexity.ai" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/perplexity.jpg" alt="Perplexity" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Perplexity</div>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- WRITING -->
-    <section class="category-section" data-category="writing">
+    <!-- STUDENT -->
+    <section class="category-section" data-category="student">
       <div class="category-header">
-        <div class="category-label" data-tooltip="AI-powered writing assistants to help you write better essays, improve grammar, and enhance your writing style.">Writing</div>
+        <div class="category-label">Student</div>
         <div class="tools-row">
+          <a href="https://quillbot.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Quillbot.png" alt="QuillBot" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">QuillBot</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
           <a href="https://claude.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/claude.jpg" alt="Claude"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/claude.jpg" alt="Claude" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Claude</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://chat.openai.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/ChatGPT.png" alt="ChatGPT"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/ChatGPT.png" alt="ChatGPT" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">ChatGPT</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://anara.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/anara.png" alt="Anara"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/anara.png" alt="Anara" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Anara</div>
-            <span class="tool-tag free">Free</span>
-          </a>
-          <a href="https://quillbot.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Quillbot.png" alt="QuillBot"></div>
-            <div class="tool-name">QuillBot</div>
-            <span class="tool-tag limited">Limited</span>
+            <span class="tool-tag limited">Paid</span>
           </a>
           <a href="https://www.grammarly.com" target="_blank" class="tool-item">
-            <div class="tool-icon">✍️</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Grammarly.png" alt="Grammarly" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Grammarly</div>
-            <span class="tool-tag limited">Limited</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
         </div>
       </div>
@@ -1413,32 +1489,32 @@
     <!-- RESEARCH -->
     <section class="category-section" data-category="research">
       <div class="category-header">
-        <div class="category-label" data-tooltip="AI research assistants that help you find information, analyze data, and conduct thorough research for your studies.">Research</div>
+        <div class="category-label">Research</div>
         <div class="tools-row">
           <a href="https://perplexity.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Perplexity.png" alt="Perplexity"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/perplexity.jpg" alt="Perplexity" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Perplexity</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://gemini.google.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/gemini.png" alt="Gemini"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/gemini.png" alt="Gemini" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Gemini</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://claude.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/claude.jpg" alt="Claude"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/claude.jpg" alt="Claude" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Claude</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://chat.openai.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/ChatGPT.png" alt="ChatGPT"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/ChatGPT.png" alt="ChatGPT" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">ChatGPT</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://chat.deepseek.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/deepseek.png" alt="DeepSeek"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/deepseek.png" alt="DeepSeek" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">DeepSeek</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
         </div>
       </div>
@@ -1447,32 +1523,32 @@
     <!-- MATHEMATICS -->
     <section class="category-section" data-category="mathematics">
       <div class="category-header">
-        <div class="category-label" data-tooltip="Math solvers and AI assistants specialized in solving equations, calculus, algebra, and other mathematical problems.">Mathematics</div>
+        <div class="category-label">Mathematics</div>
         <div class="tools-row">
-          <a href="https://claude.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/claude.jpg" alt="Claude"></div>
-            <div class="tool-name">Claude</div>
-            <span class="tool-tag free">Free</span>
-          </a>
-          <a href="https://chat.deepseek.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/deepseek.png" alt="DeepSeek"></div>
-            <div class="tool-name">DeepSeek</div>
-            <span class="tool-tag free">Free</span>
-          </a>
-          <a href="https://www.wolframalpha.com" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-math">W</div>
-            <div class="tool-name">Wolfram Alpha</div>
-            <span class="tool-tag limited">Limited</span>
-          </a>
-          <a href="https://www.symbolab.com" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-math">∑</div>
-            <div class="tool-name">Symbolab</div>
-            <span class="tool-tag limited">Limited</span>
+          <a href="https://math.bot" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Mathbot.png" alt="Mathobot" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Mathobot</div>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://mathos.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Mathos.png" alt="Mathos"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Mathos.png" alt="Mathos" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Mathos</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://claude.ai" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/claude.jpg" alt="Claude" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Claude</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://chat.deepseek.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/deepseek.png" alt="DeepSeek" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">DeepSeek</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://www.symbolab.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Symbolab.png" alt="Symbolab" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Symbolab</div>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
         </div>
       </div>
@@ -1481,32 +1557,32 @@
     <!-- PROGRAMMING -->
     <section class="category-section" data-category="programming">
       <div class="category-header">
-        <div class="category-label" data-tooltip="AI coding assistants and tools to help you write, debug, and understand code across multiple programming languages.">Programming</div>
+        <div class="category-label">Programming</div>
         <div class="tools-row">
           <a href="https://claude.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/claude.jpg" alt="Claude"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/claude.jpg" alt="Claude" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Claude</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://chat.deepseek.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/deepseek.png" alt="DeepSeek"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/deepseek.png" alt="DeepSeek" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">DeepSeek</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
-          <a href="https://qwenlm.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/qwen.jpg" alt="Qwen"></div>
-            <div class="tool-name">Qwen</div>
-            <span class="tool-tag free">Free</span>
+          <a href="https://copilot.microsoft.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/copilot.jpg" alt="Copilot" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Copilot</div>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://dyad.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Dyad.png" alt="Dyad"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Dyad.png" alt="Dyad" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Dyad</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag limited">Paid</span>
           </a>
-          <a href="https://designarena.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/DesignArena.png" alt="DesignArena"></div>
-            <div class="tool-name">DesignArena</div>
-            <span class="tool-tag limited">Limited</span>
+          <a href="https://chipp.ai" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Chipp.jpg" alt="Chipp" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Chipp</div>
+            <span class="tool-tag limited">Paid</span>
           </a>
         </div>
       </div>
@@ -1515,168 +1591,202 @@
     <!-- ANALYTICAL -->
     <section class="category-section" data-category="analytical">
       <div class="category-header">
-        <div class="category-label" data-tooltip="AI tools for data analysis, statistical analysis, and analytical thinking to help with research and problem-solving.">Analytical</div>
+        <div class="category-label">Analytical</div>
         <div class="tools-row">
           <a href="https://claude.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/claude.jpg" alt="Claude"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/claude.jpg" alt="Claude" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Claude</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://gemini.google.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/gemini.png" alt="Gemini"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/gemini.png" alt="Gemini" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Gemini</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://chat.deepseek.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/deepseek.png" alt="DeepSeek" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">DeepSeek</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://qwenlm.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/qwen.jpg" alt="Qwen" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Qwen</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://perplexity.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Perplexity.png" alt="Perplexity"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/perplexity.jpg" alt="Perplexity" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Perplexity</div>
-            <span class="tool-tag free">Free</span>
-          </a>
-          <a href="https://chat.deepseek.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/deepseek.png" alt="DeepSeek"></div>
-            <div class="tool-name">DeepSeek</div>
-            <span class="tool-tag free">Free</span>
-          </a>
-          <a href="https://qwenlm.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/qwen.jpg" alt="Qwen"></div>
-            <div class="tool-name">Qwen</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
         </div>
       </div>
     </section>
 
     <!-- AI BROWSERS -->
-    <section class="category-section">
+    <section class="category-section" data-category="ai-browsers">
       <div class="category-header">
-        <div class="category-label" data-tooltip="Smart browsers with AI integration that enhance your web browsing experience with intelligent features.">AI Browsers</div>
+        <div class="category-label">AI Browsers</div>
         <div class="tools-row">
           <a href="https://disco.google.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/GoogleDisco.jpg" alt="Google Disco"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/GoogleDisco.jpg" alt="Google Disco" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Google Disco</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag limited">Paid</span>
           </a>
           <a href="https://kortix.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Kortix.jpg" alt="Kortix"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Kortix.jpg" alt="Kortix" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Kortix</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag limited">Paid</span>
           </a>
           <a href="https://manus.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Manus.png" alt="Manus"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Manus.png" alt="Manus" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Manus</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag limited">Paid</span>
           </a>
           <a href="https://arc.net" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-browser">A</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Arc Browser" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Arc Browser</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://www.opera.com" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-browser">O</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Opera AI" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Opera AI</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
         </div>
       </div>
     </section>
 
     <!-- CONVERSATION -->
-    <section class="category-section">
+    <section class="category-section" data-category="conversation">
       <div class="category-header">
-        <div class="category-label" data-tooltip="AI chatbots and conversational assistants for practice, language learning, and interactive conversations.">Conversation</div>
+        <div class="category-label">Conversation</div>
         <div class="tools-row">
-          <a href="https://claude.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/claude.jpg" alt="Claude"></div>
-            <div class="tool-name">Claude</div>
-            <span class="tool-tag free">Free</span>
-          </a>
           <a href="https://character.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/characterai.jpg" alt="Character"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/characterai.jpg" alt="Character" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Character</div>
-            <span class="tool-tag free-tier">Free Tier</span>
+            <span class="tool-tag limited">Paid</span>
           </a>
           <a href="https://chat.openai.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/ChatGPT.png" alt="ChatGPT"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/ChatGPT.png" alt="ChatGPT" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">ChatGPT</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
-          <a href="https://hume.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Hume.png" alt="Hume" onerror="this.parentElement.innerHTML='💬'"></div>
-            <div class="tool-name">Hume</div>
+          <a href="https://claude.ai" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/claude.jpg" alt="Claude" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Claude</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
+          <a href="https://hume.ai" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Hume.png" alt="Hume" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Hume</div>
+            <span class="tool-tag limited">Paid</span>
+          </a>
           <a href="https://venice.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Venice.jpg" alt="Venice" onerror="this.parentElement.innerHTML='🗣️'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Venice.jpg" alt="Venice" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Venice</div>
-            <span class="tool-tag free-tier">Free Tier</span>
+            <span class="tool-tag limited">Paid</span>
           </a>
         </div>
       </div>
     </section>
 
     <!-- NOTETAKERS -->
-    <section class="category-section">
+    <section class="category-section" data-category="notetakers">
       <div class="category-header">
-        <div class="category-label" data-tooltip="Digital note-taking apps and tools to organize your thoughts, lectures, and study materials efficiently.">Notetakers</div>
+        <div class="category-label">Notetakers</div>
         <div class="tools-row">
           <a href="https://notion.so" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Notion.png" alt="Notion"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Notion.png" alt="Notion" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Notion</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
-          <a href="https://obsidian.md" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Obsidian.png" alt="Obsidian" onerror="this.parentElement.innerHTML='💎'"></div>
-            <div class="tool-name">Obsidian</div>
-            <span class="tool-tag free">Free</span>
-          </a>
           <a href="https://mem.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Mem.jpg" alt="Mem" onerror="this.parentElement.innerHTML='🧠'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Mem.jpg" alt="Mem" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Mem</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
-          <a href="https://standardnotes.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/StandardNotes.png" alt="Standard Notes" onerror="this.parentElement.innerHTML='📄'"></div>
-            <div class="tool-name">Standard Notes</div>
-            <span class="tool-tag free">Free</span>
+          <a href="https://granola.ai" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Granola.jpg" alt="Granola" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Granola</div>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
-          <a href="https://cluely.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/cluely.jpg" alt="Cluely"></div>
-            <div class="tool-name">Cluely</div>
-            <span class="tool-tag limited">Limited</span>
+          <a href="https://obsidian.md" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Obsidian.png" alt="Obsidian" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Obsidian</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://standardnotes.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/StandardNotes.png" alt="Standard Notes" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Standard Notes</div>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
         </div>
       </div>
     </section>
 
     <!-- ALL-IN-ONE -->
-    <section class="category-section">
+    <section class="category-section" data-category="all-in-one">
       <div class="category-header">
-        <div class="category-label" data-tooltip="Versatile AI assistants that can handle multiple tasks including writing, research, coding, and analysis all in one.">All-in-one</div>
+        <div class="category-label">All-in-one</div>
         <div class="tools-row">
           <a href="https://claude.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/claude.jpg" alt="Claude"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/claude.jpg" alt="Claude" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Claude</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://gemini.google.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/gemini.png" alt="Gemini"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/gemini.png" alt="Gemini" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Gemini</div>
-            <span class="tool-tag free">Free</span>
-          </a>
-          <a href="https://perplexity.ai" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Perplexity.png" alt="Perplexity"></div>
-            <div class="tool-name">Perplexity</div>
-            <span class="tool-tag free">Free</span>
-          </a>
-          <a href="https://copilot.microsoft.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/copilot.jpg" alt="Copilot" onerror="this.parentElement.innerHTML='🤖'"></div>
-            <div class="tool-name">Copilot</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://chat.openai.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/ChatGPT.png" alt="ChatGPT"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/ChatGPT.png" alt="ChatGPT" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">ChatGPT</div>
             <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://perplexity.ai" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/perplexity.jpg" alt="Perplexity" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Perplexity</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://copilot.microsoft.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/copilot.jpg" alt="Copilot" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Copilot</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAID (shown when "Paid Tools" toggle is selected – paid tag only) -->
+    <section class="category-section paid-section" data-category="paid">
+      <div class="category-header">
+        <div class="category-label">Paid</div>
+        <div class="tools-row">
+          <a href="https://www.grammarly.com/premium" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Grammarly.png" alt="Grammarly Premium" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Grammarly Premium</div>
+            <span class="tool-tag limited">Paid</span>
+          </a>
+          <a href="https://quillbot.com/premium" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Quillbot.png" alt="QuillBot Premium" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">QuillBot Premium</div>
+            <span class="tool-tag limited">Paid</span>
+          </a>
+          <a href="https://chat.openai.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/ChatGPT.png" alt="ChatGPT Plus" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">ChatGPT Plus</div>
+            <span class="tool-tag limited">Paid</span>
+          </a>
+          <a href="https://claude.ai" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/claude.jpg" alt="Claude Pro" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Claude Pro</div>
+            <span class="tool-tag limited">Paid</span>
+          </a>
+          <a href="https://www.notion.so/product" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Notion.png" alt="Notion Plus" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Notion Plus</div>
+            <span class="tool-tag limited">Paid</span>
           </a>
         </div>
       </div>
@@ -1691,67 +1801,34 @@
       </div>
     </div>
 
-    <!-- COURSES -->
-    <section class="category-section">
-      <div class="category-header">
-        <div class="category-label" data-tooltip="Free online courses and educational platforms to learn new skills and expand your knowledge.">Courses</div>
-        <div class="tools-row">
-          <a href="https://www.khanacademy.org" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/KhanAcademy.png" alt="Khan Academy" onerror="this.parentElement.innerHTML='🎓'"></div>
-            <div class="tool-name">Khan Academy</div>
-            <span class="tool-tag free">Free</span>
-          </a>
-          <a href="https://ocw.mit.edu" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/MIT.png" alt="MIT OCW" onerror="this.parentElement.innerHTML='📚'"></div>
-            <div class="tool-name">MIT OCW</div>
-            <span class="tool-tag free">Free</span>
-          </a>
-          <a href="https://www.theodinproject.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/OdinProject.png" alt="The Odin Project" onerror="this.parentElement.innerHTML='⚡'"></div>
-            <div class="tool-name">The Odin Project</div>
-            <span class="tool-tag free">Free</span>
-          </a>
-          <a href="https://www.freecodecamp.org" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/freecodecamp.png" alt="freeCodeCamp" onerror="this.parentElement.innerHTML='💻'"></div>
-            <div class="tool-name">freeCodeCamp</div>
-            <span class="tool-tag free">Free</span>
-          </a>
-          <a href="https://www.coursera.org" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Coursera.png" alt="Coursera" onerror="this.parentElement.innerHTML='📖'"></div>
-            <div class="tool-name">Coursera</div>
-            <span class="tool-tag free-tier">Free Tier</span>
-          </a>
-        </div>
-      </div>
-    </section>
 
     <!-- STUDY -->
     <section class="category-section">
       <div class="category-header">
-        <div class="category-label" data-tooltip="Study aids including flashcards, note-taking tools, and resources to help you study more effectively.">Study</div>
+        <div class="category-label">Study</div>
         <div class="tools-row">
           <a href="https://knowt.io" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Knowt.png" alt="Knowt" onerror="this.parentElement.innerHTML='📚'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Knowt.png" alt="Knowt" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Knowt</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://www.symbolab.com" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-math">∑</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Symbolab" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Symbolab</div>
-            <span class="tool-tag limited">Limited</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://www.quizlet.com" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-study">Q</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Quizlet" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Quizlet</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://www.ankiweb.net" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-study">A</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Anki" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Anki</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://www.studocu.com" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-study">S</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Studocu" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Studocu</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
@@ -1759,34 +1836,34 @@
         </div>
     </section>
 
-    <!-- CITATION & RESEARCH -->
+    <!-- ESSAY TOOLS -->
     <section class="category-section">
       <div class="category-header">
-        <div class="category-label" data-tooltip="Tools for managing citations, creating bibliographies, and organizing your research sources properly.">Citation & Research</div>
+        <div class="category-label">Essay Tools</div>
         <div class="tools-row">
-          <a href="https://www.zotero.org" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Zotero.png" alt="Zotero" onerror="this.parentElement.innerHTML='📚'"></div>
-            <div class="tool-name">Zotero</div>
+          <a href="https://quillbot.com/word-counter" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Quillbot.png" alt="Word Counter" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Word Counter</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://app.gptzero.me" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="AI Detector" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">AI Detector</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://www.scribbr.com/plagiarism-checker" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Scribbr.png" alt="Plagiarism Checker" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Plagiarism Checker</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://www.citationmachine.net" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/CitationMachine.png" alt="Citation Machine" onerror="this.parentElement.innerHTML='📝'"></div>
-            <div class="tool-name">Citation Machine</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/CitationMachine.png" alt="Citation Generator" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Citation Generator</div>
             <span class="tool-tag free">Free</span>
           </a>
-          <a href="https://www.scribbr.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Scribbr.png" alt="Scribbr" onerror="this.parentElement.innerHTML='📄'"></div>
-            <div class="tool-name">Scribbr</div>
-            <span class="tool-tag free">Free</span>
-          </a>
-          <a href="https://www.mendeley.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Mendeley.png" alt="Mendeley" onerror="this.parentElement.innerHTML='📖'"></div>
-            <div class="tool-name">Mendeley</div>
-            <span class="tool-tag free-tier">Free Tier</span>
-          </a>
-          <a href="https://www.easybib.com" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-citation">E</div>
-            <div class="tool-name">EasyBib</div>
+          <a href="https://www.zotero.org" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Zotero.png" alt="Zotero" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Zotero</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
           </div>
@@ -1796,30 +1873,30 @@
     <!-- PDF TOOLS -->
     <section class="category-section">
       <div class="category-header">
-        <div class="category-label" data-tooltip="Free tools to edit, merge, split, convert, and manipulate PDF files for your academic needs.">PDF Tools</div>
+        <div class="category-label">PDF Tools</div>
         <div class="tools-row">
           <a href="https://tinywow.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Tinywow.jpg" alt="TinyWow" onerror="this.parentElement.innerHTML='🔧'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Tinywow.jpg" alt="TinyWow" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">TinyWow</div>
-            <span class="tool-tag free">Free</span>
-          </a>
-          <a href="https://pdf.io" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-pdf">PDF</div>
-            <div class="tool-name">PDF.io</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://www.ilovepdf.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/IlovePDF.png" alt="iLovePDF" onerror="this.parentElement.innerHTML='📄'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/IlovePDF.png" alt="iLovePDF" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">iLovePDF</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://lightpdf.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/LightPDF.png" alt="LightPDF" onerror="this.parentElement.innerHTML='💡'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/LightPDF.png" alt="LightPDF" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">LightPDF</div>
-            <span class="tool-tag limited">Limited</span>
+            <span class="tool-tag limited">Paid</span>
+          </a>
+          <a href="https://pdf.io" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/PDFio.png" alt="PDF.io" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">PDF.io</div>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://smallpdf.com" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-pdf">SP</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="SmallPDF" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">SmallPDF</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
@@ -1830,133 +1907,274 @@
     <!-- IMAGE TOOLS -->
     <section class="category-section">
       <div class="category-header">
-        <div class="category-label" data-tooltip="Image editing, conversion, compression, and manipulation tools for your projects and presentations.">Image Tools</div>
+        <div class="category-label">Image Tools</div>
         <div class="tools-row">
           <a href="https://www.remove.bg" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/RemoveBg.png" alt="Remove.bg" onerror="this.parentElement.innerHTML='🖼️'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/RemoveBg.png" alt="Remove.bg" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Remove.bg</div>
-            <span class="tool-tag limited">Limited</span>
+            <span class="tool-tag limited">Paid</span>
           </a>
           <a href="https://www.iloveimg.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/iLoveIMG.jpg" alt="iLoveIMG" onerror="this.parentElement.innerHTML='🖼️'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/iLoveIMG.jpg" alt="iLoveIMG" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">iLoveIMG</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://www.onlineocr.net" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/OnlineOCR.png" alt="OnlineOCR" onerror="this.parentElement.innerHTML='📝'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/OnlineOCR.png" alt="OnlineOCR" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">OnlineOCR</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag limited">Paid</span>
           </a>
-          <a href="https://www.freeconvert.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/FreeConvert.jpg" alt="FreeConvert" onerror="this.parentElement.innerHTML='🔄'"></div>
-            <div class="tool-name">FreeConvert</div>
-            <span class="tool-tag limited">Limited</span>
+          <a href="https://cloudconvert.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/CloudConvert.png" alt="CloudConvert" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">CloudConvert</div>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
-          <a href="https://www.iloveimg.com/resize-image" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/iLoveIMG.jpg" alt="iLoveIMG Resize" onerror="this.parentElement.innerHTML='📐'"></div>
-            <div class="tool-name">iLoveIMG Resize</div>
+          <a href="https://tinypng.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/TinyPNG.png" alt="TinyPNG" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">TinyPNG</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- VIDEO TOOLS -->
+    <!-- VIDEO CONVERTERS -->
     <section class="category-section">
       <div class="category-header">
-        <div class="category-label" data-tooltip="Video editing, conversion, and processing tools to create and edit videos for your assignments.">Video Tools</div>
+        <div class="category-label">Video Converters</div>
         <div class="tools-row">
-          <a href="https://www.clipchamp.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Clipchamp.png" alt="Clipchamp" onerror="this.parentElement.innerHTML='✂️'"></div>
-            <div class="tool-name">Clipchamp</div>
-            <span class="tool-tag free">Free</span>
+          <a href="https://cloudconvert.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/CloudConvert.png" alt="CloudConvert" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">CloudConvert</div>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://www.online-convert.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/OnlineConvert.png" alt="Online-Convert" onerror="this.parentElement.innerHTML='🔄'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/OnlineConvert.png" alt="Online-Convert" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Online-Convert</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://www.freeconvert.com/video-converter" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/FreeConvert.jpg" alt="FreeConvert" onerror="this.parentElement.innerHTML='🎬'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeConvert.jpg" alt="FreeConvert" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">FreeConvert</div>
-            <span class="tool-tag limited">Limited</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
-          <a href="https://www.openshot.org" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-video">OS</div>
-            <div class="tool-name">OpenShot</div>
+          <a href="https://www.clipchamp.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Clipchamp.png" alt="Clipchamp" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Clipchamp</div>
             <span class="tool-tag free">Free</span>
           </a>
-          <a href="https://www.shotcut.org" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-video">SC</div>
-            <div class="tool-name">Shotcut</div>
+          <a href="https://www.123apps.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="123Apps" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">123Apps</div>
             <span class="tool-tag free">Free</span>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- AUDIO TOOLS -->
+    <!-- AUDIO CONVERTERS -->
     <section class="category-section">
       <div class="category-header">
-        <div class="category-label" data-tooltip="Audio editing, conversion, and processing tools for podcasts, presentations, and multimedia projects.">Audio Tools</div>
+        <div class="category-label">Audio Converters</div>
         <div class="tools-row">
+          <a href="https://www.online-audio-converter.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/OnlineAudioConverter.png" alt="Online Audio Converter" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Online Audio Converter</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://cloudconvert.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/CloudConvert.png" alt="CloudConvert" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">CloudConvert</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://www.freeconvert.com/audio-converter" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeConvert.jpg" alt="FreeConvert" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">FreeConvert</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
           <a href="https://vocalremover.org" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/VocalRemover.jpg" alt="Vocal Remover" onerror="this.parentElement.innerHTML='🎵'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/VocalRemover.jpg" alt="Vocal Remover" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Vocal Remover</div>
             <span class="tool-tag free">Free</span>
           </a>
-          <a href="https://www.online-audio-converter.com" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-audio">OAC</div>
-            <div class="tool-name">OAC</div>
-            <span class="tool-tag free">Free</span>
-          </a>
-          <a href="https://www.freeconvert.com/audio-converter" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/FreeConvert.jpg" alt="FreeConvert" onerror="this.parentElement.innerHTML='🎶'"></div>
-            <div class="tool-name">FreeConvert</div>
-            <span class="tool-tag limited">Limited</span>
-          </a>
           <a href="https://www.audacityteam.org" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-audio">A</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Audacity" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Audacity</div>
-            <span class="tool-tag free">Free</span>
-          </a>
-          <a href="https://www.123apps.com/audio-joiner" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-audio">123</div>
-            <div class="tool-name">123Apps Audio</div>
             <span class="tool-tag free">Free</span>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- FILE SHARING -->
+    <!-- GIF CONVERTERS -->
     <section class="category-section">
       <div class="category-header">
-        <div class="category-label" data-tooltip="Cloud storage and file sharing services to store, sync, and share your documents and files.">File Sharing</div>
+        <div class="category-label">GIF Converters</div>
         <div class="tools-row">
-          <a href="https://mega.nz" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Mega.png" alt="MEGA" onerror="this.parentElement.innerHTML='🔐'"></div>
-            <div class="tool-name">MEGA</div>
+          <a href="https://ezgif.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/EzGIF.png" alt="EZGIF" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">EZGIF</div>
             <span class="tool-tag free">Free</span>
           </a>
+          <a href="https://cloudconvert.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/CloudConvert.png" alt="CloudConvert" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">CloudConvert</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://www.iloveimg.com/resize-image" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/iLoveIMG.jpg" alt="iLoveIMG" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">iLoveIMG</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://www.freeconvert.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeConvert.jpg" alt="FreeConvert" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">FreeConvert</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://www.online-convert.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/OnlineConvert.png" alt="Online-Convert" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Online-Convert</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLLABORATE -->
+    <section class="category-section">
+      <div class="category-header">
+        <div class="category-label">Collaborate</div>
+        <div class="tools-row">
           <a href="https://drive.google.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/GoogleDrive.png" alt="Google Drive" onerror="this.parentElement.innerHTML='📁'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/GoogleDrive.png" alt="Google Drive" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Google Drive</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
-          <a href="https://onedrive.live.com" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-cloud">OD</div>
-            <div class="tool-name">OneDrive</div>
-            <span class="tool-tag limited">Limited</span>
+          <a href="https://mega.nz" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Mega.png" alt="MEGA" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">MEGA</div>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://www.dropbox.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Dropbox.png" alt="Dropbox" onerror="this.parentElement.innerHTML='📦'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Dropbox.png" alt="Dropbox" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Dropbox</div>
-            <span class="tool-tag limited">Limited</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
-          <a href="https://wetransfer.com" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-cloud">WT</div>
-            <div class="tool-name">WeTransfer</div>
+          <a href="https://onedrive.live.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Microsoft" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Microsoft</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://www.box.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Box.png" alt="Box" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Box</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ONLINE POLL -->
+    <section class="category-section">
+      <div class="category-header">
+        <div class="category-label">Online Poll</div>
+        <div class="tools-row">
+          <a href="https://www.poll-maker.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/PollMaker.png" alt="Poll Maker" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Poll Maker</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://www.polleverywhere.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/PollEverywhere.png" alt="Poll Everywhere" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Poll Everywhere</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://www.surveymonkey.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Surveymonkey.png" alt="SurveyMonkey" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">SurveyMonkey</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://www.typeform.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Typeform" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Typeform</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://www.google.com/forms" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Google Forms" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Google Forms</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ONLINE WHITEBOARD -->
+    <section class="category-section">
+      <div class="category-header">
+        <div class="category-label">Online Whiteboard</div>
+        <div class="tools-row">
+          <a href="https://miro.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Miro.png" alt="Miro" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Miro</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://whiteboard.fi" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Whiteboard.png" alt="Whiteboard" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Whiteboard</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://www.canva.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/canva.jpg" alt="Canva" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Canva</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://jamboard.google.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Jamboard" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Jamboard</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://www.figma.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Figma" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Figma</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- COURSE -->
+    <section class="category-section">
+      <div class="category-header">
+        <div class="category-label">Course</div>
+        <div class="tools-row">
+          <a href="https://www.edx.org" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/EdX.png" alt="EdX" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">EdX</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://ocw.mit.edu" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/MIT.png" alt="MIT-OCW" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">MIT-OCW</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://www.mindluster.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/MindLuster.png" alt="MindLuster" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">MindLuster</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://fcsnew.net" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Fcsnew" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Fcsnew</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://www.khanacademy.org" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/KhanAcademy.png" alt="Khan Academy" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Khan Academy</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://www.udemy.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Udemy.png" alt="Udemy" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Udemy</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
         </div>
@@ -1969,27 +2187,27 @@
         <div class="category-label">Productivity</div>
         <div class="tools-row">
           <a href="https://todo.microsoft.com" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-productivity">✓</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Microsoft To Do" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Microsoft To Do</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://ticktick.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/TickTick.png" alt="TickTick" onerror="this.parentElement.innerHTML='⏰'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/TickTick.png" alt="TickTick" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">TickTick</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://standardnotes.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/StandardNotes.png" alt="Standard Notes" onerror="this.parentElement.innerHTML='📄'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/StandardNotes.png" alt="Standard Notes" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Standard Notes</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://evernote.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Evernote.png" alt="Evernote" onerror="this.parentElement.innerHTML='📝'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Evernote.png" alt="Evernote" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Evernote</div>
-            <span class="tool-tag limited">Limited</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://todoist.com" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-productivity">T</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Todoist" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Todoist</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
@@ -2000,32 +2218,32 @@
     <!-- CODE LEARNING -->
     <section class="category-section">
       <div class="category-header">
-        <div class="category-label" data-tooltip="Interactive platforms and resources to learn programming and coding skills from beginner to advanced.">Code Learning</div>
+        <div class="category-label">Code Learning</div>
         <div class="tools-row">
           <a href="https://www.freecodecamp.org" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/freecodecamp.png" alt="freeCodeCamp" onerror="this.parentElement.innerHTML='💻'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/freecodecamp.png" alt="freeCodeCamp" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">freeCodeCamp</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://www.khanacademy.org/computing" target="_blank" class="tool-item">
-            <div class="tool-icon">💡</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Khan Academy" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Khan Academy</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://www.theodinproject.com" target="_blank" class="tool-item">
-            <div class="tool-icon">⚡</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="The Odin Project" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">The Odin Project</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://www.sololearn.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/SoloLearn.png" alt="SoloLearn" onerror="this.parentElement.innerHTML='📱'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/SoloLearn.png" alt="SoloLearn" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">SoloLearn</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://www.codecademy.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Codecademy.png" alt="Codecademy" onerror="this.parentElement.innerHTML='🎓'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Codecademy.png" alt="Codecademy" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Codecademy</div>
-            <span class="tool-tag limited">Limited</span>
+            <span class="tool-tag free-tier">Free Tier</span>
             </a>
           </div>
         </div>
@@ -2037,29 +2255,29 @@
         <div class="category-label">Design Tools</div>
         <div class="tools-row">
           <a href="https://www.gimp.org" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-design">G</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="GIMP" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">GIMP</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://inkscape.org" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Inkscape.png" alt="Inkscape" onerror="this.parentElement.innerHTML='✏️'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Inkscape.png" alt="Inkscape" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Inkscape</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://www.figma.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Figma.png" alt="Figma" onerror="this.parentElement.innerHTML='🎨'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Figma.png" alt="Figma" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Figma</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://www.canva.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/canva.jpg" alt="Canva" onerror="this.parentElement.innerHTML='🎨'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/canva.jpg" alt="Canva" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Canva</div>
-            <span class="tool-tag limited">Limited</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://www.photopea.com" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-design">P</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Photopea" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Photopea</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
         </div>
       </div>
@@ -2068,31 +2286,167 @@
     <!-- LANGUAGE LEARNING -->
     <section class="category-section">
       <div class="category-header">
-        <div class="category-label" data-tooltip="Apps and platforms to learn new languages, practice speaking, and improve your language skills.">Language Learning</div>
+        <div class="category-label">Language Learning</div>
         <div class="tools-row">
           <a href="https://www.duolingo.com" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-language">D</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Duolingo" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Duolingo</div>
             <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://www.hellotalk.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/HelloTalk.png" alt="HelloTalk" onerror="this.parentElement.innerHTML='💬'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/HelloTalk.png" alt="HelloTalk" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">HelloTalk</div>
-            <span class="tool-tag free">Free</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://www.memrise.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Memrise.png" alt="Memrise" onerror="this.parentElement.innerHTML='🧠'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Memrise.png" alt="Memrise" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Memrise</div>
-            <span class="tool-tag limited">Limited</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://www.busuu.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/Busuu.png" alt="Busuu" onerror="this.parentElement.innerHTML='🌍'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Busuu.png" alt="Busuu" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Busuu</div>
-            <span class="tool-tag limited">Limited</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
           <a href="https://www.tandem.net" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-language">T</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Tandem" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Tandem</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMMERSIVE READER -->
+    <section class="category-section">
+      <div class="category-header">
+        <div class="category-label">Immersive Reader</div>
+        <div class="tools-row">
+          <a href="https://elevenreader.io" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/ElevenReader.png" alt="ElevenReader" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">ElevenReader</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://speechify.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Speechify.png" alt="Speechify" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Speechify</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://www.naturalreaders.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Natural Reader" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Natural Reader</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://www.readaloud.app" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Read Aloud" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Read Aloud</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://www.microsoft.com/en-us/edge/features/immersive-reader" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Microsoft Reader" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Microsoft Reader</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TODO LIST -->
+    <section class="category-section">
+      <div class="category-header">
+        <div class="category-label">Todo List</div>
+        <div class="tools-row">
+          <a href="https://todo.microsoft.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/MicrosoftToDo.png" alt="Microsoft To Do" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Microsoft To Do</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://ticktick.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/TickTick.png" alt="TickTick" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">TickTick</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://todoist.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Todoist.png" alt="Todoist" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Todoist</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://apps.apple.com/bs/app/to-do-list-minimalist-task/id993066159" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Minimalist.png" alt="Minimalist" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Minimalist</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://www.any.do" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Any.do" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Any.do</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHROME EXTENSION -->
+    <section class="category-section">
+      <div class="category-header">
+        <div class="category-label">Chrome Extension</div>
+        <div class="tools-row">
+          <a href="https://chromewebstore.google.com/detail/egmgebeelgaakhaoodlmnimbfemfgdah" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/RedirectBlocker.png" alt="Redirect Blocker" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Redirect Blocker</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://chromewebstore.google.com/detail/cecngibhkljoiafhjfmcgbmikfogdiko" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Manus.png" alt="Manus" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Manus</div>
+            <span class="tool-tag limited">Paid</span>
+          </a>
+          <a href="https://chromewebstore.google.com/detail/grammarly-grammar-checker/kbfnbcaeplbcioakkpcpgfkobkghlhen" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Grammarly.png" alt="Grammarly" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Grammarly</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://chromewebstore.google.com/detail/lastpass-free-password-ma/hdokiejnpimakedhajhdlcegeplioahd" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="LastPass" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">LastPass</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://chromewebstore.google.com/detail/adblock-plus-free-ad-bloc/cfhdojbkjhnklbpkdaibdccddilifddb" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="AdBlock Plus" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">AdBlock Plus</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTEPAD -->
+    <section class="category-section">
+      <div class="category-header">
+        <div class="category-label">Notepad</div>
+        <div class="tools-row">
+          <a href="https://notion.so" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Notion.png" alt="Notion" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Notion</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://evernote.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/Evernote.png" alt="Evernote" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Evernote</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://standardnotes.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/StandardNotes.png" alt="Standard Notes" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Standard Notes</div>
+            <span class="tool-tag free-tier">Free Tier</span>
+          </a>
+          <a href="https://simplenote.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Simplenote" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Simplenote</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://www.onenote.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="OneNote" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">OneNote</div>
             <span class="tool-tag free">Free</span>
           </a>
         </div>
@@ -2102,32 +2456,27 @@
     <!-- UTILITIES -->
     <section class="category-section">
       <div class="category-header">
-        <div class="category-label" data-tooltip="Helpful utility tools including randomizers, QR generators, URL shorteners, and other handy resources.">Utilities</div>
+        <div class="category-label">Utilities</div>
         <div class="tools-row">
           <a href="https://www.random.org/lists" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/ListRandomizer.png" alt="List Randomizer" onerror="this.parentElement.innerHTML='🎲'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/ListRandomizer.png" alt="List Randomizer" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">List Randomizer</div>
             <span class="tool-tag free">Free</span>
           </a>
-          <a href="https://www.qr-code-generator.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/QRGenerator.png" alt="QR Generator" onerror="this.parentElement.innerHTML='📱'"></div>
-            <div class="tool-name">QR Generator</div>
-            <span class="tool-tag free">Free</span>
-          </a>
           <a href="https://tinyurl.com" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/TinyURL.png" alt="TinyURL" onerror="this.parentElement.innerHTML='🔗'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/TinyURL.png" alt="TinyURL" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">TinyURL</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://www.passwordgenerator.net" target="_blank" class="tool-item">
-            <div class="tool-icon"><img src="docs/PasswordGenerator.png" alt="Password Generator" onerror="this.parentElement.innerHTML='🔐'"></div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/PasswordGenerator.png" alt="Password Generator" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Password Gen</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://www.wolframalpha.com" target="_blank" class="tool-item">
-            <div class="tool-icon icon-custom icon-utility">W</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Wolfram Alpha" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Wolfram Alpha</div>
-            <span class="tool-tag limited">Limited</span>
+            <span class="tool-tag free-tier">Free Tier</span>
           </a>
         </div>
       </div>
@@ -2138,30 +2487,30 @@
     <!-- FREE BOOKS -->
     <section class="category-section">
       <div class="category-header">
-        <div class="category-label" data-tooltip="Access millions of free books, textbooks, and academic papers for your studies.">Free Books</div>
+        <div class="category-label">Free Books</div>
         <div class="tools-row">
           <a href="https://annas-archive.se/" target="_blank" class="tool-item">
-            <div class="tool-icon">📖</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Anna's Archive" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Anna's Archive</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://oceanofpdf.com/" target="_blank" class="tool-item">
-            <div class="tool-icon">🌊</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Ocean of PDF" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Ocean of PDF</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://libgen.ac/" target="_blank" class="tool-item">
-            <div class="tool-icon">📚</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Library Genesis" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Library Genesis</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://www.gutenberg.org" target="_blank" class="tool-item">
-            <div class="tool-icon">📜</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Project Gutenberg" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Project Gutenberg</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://openlibrary.org" target="_blank" class="tool-item">
-            <div class="tool-icon">📕</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Open Library" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Open Library</div>
             <span class="tool-tag free">Free</span>
           </a>
@@ -2172,30 +2521,30 @@
     <!-- FREE MOVIES -->
     <section class="category-section">
       <div class="category-header">
-        <div class="category-label" data-tooltip="Stream movies and TV shows for free. Use at your own discretion.">Free Movies</div>
+        <div class="category-label">Free Movies</div>
         <div class="tools-row">
           <a href="https://plantain-green-rtlj.squarespace.com/soapwarning" target="_blank" class="tool-item">
-            <div class="tool-icon">🎬</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Soap2Day" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Soap2Day</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://plantain-green-rtlj.squarespace.com/vipwarning" target="_blank" class="tool-item">
-            <div class="tool-icon">🎥</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="VIP Stream" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">VIP Stream</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://tubitv.com" target="_blank" class="tool-item">
-            <div class="tool-icon">📺</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Tubi" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Tubi</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://pluto.tv" target="_blank" class="tool-item">
-            <div class="tool-icon">🛸</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Pluto TV" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Pluto TV</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://www.crackle.com" target="_blank" class="tool-item">
-            <div class="tool-icon">🎞️</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Crackle" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Crackle</div>
             <span class="tool-tag free">Free</span>
           </a>
@@ -2206,30 +2555,30 @@
     <!-- FREE STUFF -->
     <section class="category-section">
       <div class="category-header">
-        <div class="category-label" data-tooltip="Curated directories of free media, software, tools, and resources across the internet.">Free Stuff</div>
+        <div class="category-label">Free Stuff</div>
         <div class="tools-row">
           <a href="https://fmhy.net/" target="_blank" class="tool-item">
-            <div class="tool-icon">🆓</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="FMHY" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">FMHY</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://deepwebnest.com/" target="_blank" class="tool-item">
-            <div class="tool-icon">☁️</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Deep Web Nest" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Deep Web Nest</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://alternativeto.net" target="_blank" class="tool-item">
-            <div class="tool-icon">🔀</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="AlternativeTo" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">AlternativeTo</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://www.producthunt.com" target="_blank" class="tool-item">
-            <div class="tool-icon">🚀</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Product Hunt" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Product Hunt</div>
             <span class="tool-tag free">Free</span>
           </a>
           <a href="https://github.com/topics/awesome" target="_blank" class="tool-item">
-            <div class="tool-icon">⭐</div>
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Awesome Lists" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
             <div class="tool-name">Awesome Lists</div>
             <span class="tool-tag free">Free</span>
           </a>
@@ -2240,8 +2589,33 @@
     <!-- SECRET -->
     <section class="category-section">
       <div class="category-header">
-        <div class="category-label" data-tooltip="You found a secret section! These are hidden gems that most people don't know about.">Secret</div>
+        <div class="category-label">Secret</div>
         <div class="tools-row">
+          <a href="https://12ft.io" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="12ft Ladder" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">12ft Ladder</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://archive.ph" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Archive.ph" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Archive.ph</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://www.removepaywall.com" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Remove Paywall" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Remove Paywall</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://www.bibliogram.art" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Bibliogram" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Bibliogram</div>
+            <span class="tool-tag free">Free</span>
+          </a>
+          <a href="https://nitter.net" target="_blank" class="tool-item">
+            <div class="tool-icon"><img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Nitter" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png'"></div>
+            <div class="tool-name">Nitter</div>
+            <span class="tool-tag free">Free</span>
+          </a>
         </div>
       </div>
     </section>
@@ -2258,10 +2632,23 @@
       <a href="contact.html" class="footer-link">Contact</a>
       <a href="https://buy.stripe.com/4gMaEW87U7IO8C8azDcjS01" target="_blank" class="footer-link">Donate</a>
     </div>
-    <p class="footer-copyright">© 2026 Free University Tools. All rights reserved.</p>
+    <div class="footer-copyright">© 2026 Free University Tools. Helping students succeed with free tools.</div>
   </footer>
 
   <script src="js/common.js"></script>
+  <a href="report.html" class="bug-report-button" aria-label="Report a bug or suggest new tools">
+    <span class="bug-report-msg bug-report-msg-a">Report a bug</span>
+    <span class="bug-report-msg bug-report-msg-b">Add new tools!</span>
+  </a>
+
   <script src="js/student.js"></script>
+  <script>
+    (function(){
+      var baseRaw = 'https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/';
+      document.querySelectorAll('img[src^="docs/"]').forEach(function(img){
+        img.setAttribute('src', baseRaw + img.getAttribute('src').slice('docs/'.length));
+      });
+    })();
+  </script>
 </body>
 </html>

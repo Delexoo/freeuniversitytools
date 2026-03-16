@@ -3,20 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Report a Bug - Free University Tools</title>
+  <title>Report a Bug or Add New Tools - Free University Tools</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png">
   <style>
-    /* CSS Variables - Apple-inspired colors */
+    /* CSS Variables – Apple-style (from about.html) */
     :root {
       --bg-white: #FFFFFF;
       --bg-light: #F5F5F7;
+      --bg-page: #F5F5F7;
       --text-primary: #1D1D1F;
       --text-secondary: #86868B;
-      --accent-blue: #007AFF;
+      --text-muted: #6E6E73;
+      --accent: #007AFF;
+      --border: #D2D2D7;
       --border-gray: #D2D2D7;
       --hover-gray: #FAFAFA;
-      --success-green: #34C759;
-      --warning-orange: #FF9500;
+      --radius: 12px;
+      --radius-lg: 16px;
     }
 
     /* Reset & Base Styles */
@@ -32,11 +35,12 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: linear-gradient(145deg, #ffffff 0%, #f8f9fb 100%);
+      background: var(--bg-page);
       color: var(--text-primary);
       line-height: 1.6;
       overflow-x: hidden;
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* Header */
@@ -65,6 +69,7 @@
       align-items: center;
       justify-content: space-between;
       height: 64px;
+      flex-wrap: wrap;
     }
 
     .mobile-menu-toggle {
@@ -181,29 +186,75 @@
       background: var(--bg-light);
     }
 
+    .desktop-dropdown-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: var(--text-primary);
+      padding: 6px 10px;
+      line-height: 1;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .desktop-dropdown-toggle:hover {
+      background: var(--bg-light);
+    }
+
+    @media (min-width: 769px) {
+      .nav-dropdown-btn {
+        display: none;
+      }
+      .desktop-dropdown-toggle {
+        display: flex;
+      }
+      .nav-dropdown-content {
+        display: none;
+      }
+      .nav-dropdown:hover .nav-dropdown-content {
+        display: none;
+      }
+      .nav-dropdown.is-open .nav-dropdown-content {
+        display: block;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .desktop-dropdown-toggle {
+        display: none !important;
+      }
+    }
+
     .nav-dropdown-content {
       display: none;
       position: absolute;
       top: 100%;
       right: 0;
+      margin-top: 4px;
       background: var(--bg-white);
-      border: 1px solid var(--border-gray);
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-      padding: 8px 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      padding: 0;
       min-width: 150px;
       z-index: 1000;
     }
 
-    .nav-dropdown:hover .nav-dropdown-content {
-      display: block;
+    @media (min-width: 769px) {
+      .nav-dropdown.is-open .nav-dropdown-content {
+        display: block;
+      }
     }
 
     .nav-dropdown-content .nav-link {
       display: block;
       padding: 12px 16px;
       text-align: left;
-      border-bottom: 1px solid var(--border-gray);
+      border-bottom: 1px solid var(--border);
       margin: 0;
       font-size: 12px;
       font-weight: 400;
@@ -244,333 +295,239 @@
       border-bottom: none;
     }
 
-    /* Main Content */
+    /* Main Content – about-style layout */
     .main-content {
-      max-width: 980px;
+      max-width: 640px;
       margin: 0 auto;
       padding: 120px 24px 80px;
-    }
-
-    .page-header {
-      text-align: center;
-      margin-bottom: 100px;
-    }
-
-    .page-title {
-      font-size: 64px;
-      font-weight: 700;
-      margin-bottom: 24px;
-      letter-spacing: -2px;
-      color: var(--text-primary);
-      line-height: 1.1;
-      background: linear-gradient(145deg, #1d1d1f 0%, #4a4a52 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .page-subtitle {
-      font-size: 21px;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.5;
-      font-weight: 400;
-    }
-
-    /* Report Form Section */
-    .report-section {
-      background: var(--bg-white);
-      border-radius: 32px;
-      padding: 60px 48px;
-      margin-bottom: 80px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-      border: 1px solid var(--border-gray);
       position: relative;
-      overflow: hidden;
     }
 
-    .report-section::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(0, 122, 255, 0.03) 0%, transparent 70%);
-      animation: float 25s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) rotate(0deg); }
-      50% { transform: translate(30px, -30px) rotate(180deg); }
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-
-    .section-eyebrow {
-      font-size: 13px;
-      letter-spacing: 0.1em;
+    .page-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #8e8e93;
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
-
-    .section-title {
-      font-size: 42px;
-      font-weight: 600;
-      margin-bottom: 16px;
-      letter-spacing: -0.7px;
-      color: var(--text-primary);
-    }
-
-    .section-description {
-      font-size: 18px;
       color: var(--text-secondary);
-      line-height: 1.6;
-      max-width: 680px;
-      margin: 0 auto 40px;
+      margin-bottom: 8px;
     }
 
-    /* Report Options Grid */
-    .report-options {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-      margin-bottom: 48px;
-    }
-
-    .report-option {
-      background: var(--bg-light);
-      border-radius: 24px;
-      padding: 32px 28px;
-      text-decoration: none;
+    .page-hero-title {
+      font-size: clamp(32px, 4vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
       color: var(--text-primary);
-      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      border: 1px solid var(--border-gray);
-      display: block;
-      position: relative;
-      overflow: hidden;
+      margin-bottom: 56px;
+      line-height: 1.15;
     }
 
-    .report-option::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 28px;
-      right: 28px;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.02));
-    }
-
-    .report-option:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);
-      border-color: rgba(0, 122, 255, 0.3);
-      background: var(--bg-white);
-    }
-
-    .option-icon {
-      width: 72px;
-      height: 72px;
-      background: var(--bg-white);
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      margin-bottom: 20px;
-      border: 1px solid var(--border-gray);
-      transition: all 0.4s ease;
-    }
-
-    .report-option:hover .option-icon {
-      transform: scale(1.1) rotate(5deg);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-    }
-
-    .option-title {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 12px;
-      color: var(--text-primary);
-      letter-spacing: -0.3px;
-    }
-
-    .option-description {
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    /* Priority Section */
-    .priority-section {
-      background: linear-gradient(145deg, #f8f9fb 0%, #ffffff 100%);
-      border: 1px solid var(--border-gray);
-      border-radius: 24px;
-      padding: 40px 32px;
+    /* Profile card (same as about.html / contact.html) */
+    .about-profile {
       margin-bottom: 48px;
-    }
-
-    .priority-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-    }
-
-    .priority-option {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 20px;
+      padding: 36px 40px 32px;
       background: var(--bg-white);
-      border: 2px solid var(--border-gray);
-      border-radius: 16px;
-      cursor: pointer;
-      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
     }
 
-    .priority-option:hover {
-      border-color: var(--accent-blue);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 122, 255, 0.15);
+    .about-profile-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 28px;
+      margin-bottom: 22px;
     }
 
-    .priority-option.selected {
-      border-color: var(--accent-blue);
-      background: rgba(0, 122, 255, 0.05);
-    }
-
-    .priority-dot {
-      width: 12px;
-      height: 12px;
+    .about-profile-image-wrap {
+      width: 96px;
+      height: 96px;
+      flex-shrink: 0;
       border-radius: 50%;
+      overflow: hidden;
+      background: #fff;
+      border: 4px solid #000;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-profile-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .about-profile-head {
+      flex: 1;
+      min-width: 0;
+      padding-top: 4px;
+    }
+
+    .about-profile-name-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .about-profile-name {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .about-profile-verified {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
       flex-shrink: 0;
     }
 
-    .priority-low .priority-dot {
-      background: var(--success-green);
+    .about-profile-role {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      text-transform: uppercase;
     }
 
-    .priority-medium .priority-dot {
-      background: var(--warning-orange);
-    }
-
-    .priority-high .priority-dot {
-      background: #FF3B30;
-    }
-
-    .priority-label {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    /* Contact Section */
-    .contact-section {
-      background: linear-gradient(145deg, #ffffff 0%, #f8f9fb 100%);
-      border: 1px solid var(--border-gray);
-      border-radius: 32px;
-      padding: 60px 48px;
-      margin: 80px 0;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .contact-section::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(225, 48, 108, 0.05) 0%, transparent 70%);
-      animation: float 30s ease-in-out infinite reverse;
-    }
-
-    .contact-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .contact-title {
-      font-size: 42px;
-      font-weight: 600;
-      margin-bottom: 16px;
-      letter-spacing: -0.7px;
-      line-height: 1.1;
-      color: var(--text-primary);
-    }
-
-    .contact-description {
-      font-size: 19px;
+    .about-profile-bio {
+      font-size: 15px;
       color: var(--text-secondary);
-      line-height: 1.55;
-      margin-bottom: 32px;
-      max-width: 560px;
-      margin-left: auto;
-      margin-right: auto;
+      line-height: 1.75;
+      margin-bottom: 0;
+      max-width: 52ch;
     }
 
-    .instagram-button {
+    .profile-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px 24px;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .profile-buttons {
+      display: inline-flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .profile-buttons .btn-primary,
+    .profile-buttons .btn-secondary {
       display: inline-flex;
       align-items: center;
-      gap: 16px;
-      background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-      font-weight: 600;
-      padding: 18px 36px;
-      border-radius: 999px;
-      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      box-shadow: 0 12px 32px rgba(225, 48, 108, 0.3);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .instagram-button::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      animation: shimmer 2s ease-in-out infinite;
-    }
-
-    @keyframes shimmer {
-      0% { left: -100%; }
-      100% { left: 100%; }
-    }
-
-    .instagram-button:hover {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 16px 40px rgba(225, 48, 108, 0.4);
-    }
-
-    .instagram-icon {
-      width: 32px;
-      height: 32px;
-      background: white;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
       justify-content: center;
-      font-size: 18px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      min-width: 120px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .profile-buttons .btn-primary {
+      background: var(--text-primary);
+      color: var(--bg-white);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+    }
+
+    .profile-buttons .btn-primary:hover {
+      background: #000;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .profile-buttons .btn-secondary {
+      background: var(--bg-white);
+      color: var(--text-primary);
+      border: 1px solid var(--border-gray);
+    }
+
+    .profile-buttons .btn-secondary:hover {
+      background: var(--hover-gray);
+      transform: translateY(-1px);
+    }
+
+    .profile-actions .about-qr-wrap {
+      margin-left: 8px;
+      flex-shrink: 0;
+    }
+
+    .about-qr-wrap {
+      display: inline-block;
+      line-height: 0;
+      flex-shrink: 0;
+    }
+
+    .about-qr {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      display: block;
+      border-radius: 0;
+    }
+
+    .page-section {
+      margin-bottom: 0;
+      padding: 32px 0 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .page-section:first-of-type {
+      padding-top: 40px;
+    }
+
+    .page-section:last-of-type {
+      padding-bottom: 24px;
+    }
+
+    .page-section-title {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      padding-left: 12px;
+      border-left: 3px solid var(--text-primary);
+    }
+
+    .page-section-body {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .page-section-body p {
+      margin-bottom: 12px;
+    }
+
+    .page-section-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .page-link {
+      color: var(--text-primary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .page-link:hover {
+      color: var(--text-secondary);
     }
 
     /* Footer */
     .footer {
       background: var(--bg-white);
-      border-top: 1px solid var(--border-gray);
+      border-top: 1px solid var(--border);
       padding: 40px 24px;
       text-align: center;
     }
@@ -628,20 +585,33 @@
         gap: 0;
         padding: 12px 0;
         order: 3;
-        border-top: 1px solid var(--border-gray);
+        border-top: 1px solid var(--border);
         margin-top: 8px;
       }
 
       .nav.mobile-open {
         display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 12px 16px 16px;
+        order: 3;
+        border-top: 1px solid var(--border);
+        margin-top: 8px;
+        align-items: stretch;
       }
 
       .nav-link {
         font-size: 16px;
-        padding: 12px 0;
+        padding: 14px 0;
         width: 100%;
         text-align: left;
-        border-bottom: 1px solid var(--border-gray);
+        border-bottom: 1px solid var(--border);
+        display: block;
+        box-sizing: border-box;
+      }
+
+      .nav.mobile-open .nav-link::after {
+        display: none;
       }
 
       .nav-link:last-child {
@@ -659,8 +629,10 @@
         border-radius: 0;
         box-shadow: none;
         min-width: auto;
+        width: 100%;
         z-index: auto;
-        margin-bottom: 12px;
+        margin-bottom: 0;
+        align-items: stretch;
       }
 
       .nav.mobile-open .nav-dropdown-btn {
@@ -668,7 +640,7 @@
       }
 
       .nav.mobile-open .nav-dropdown-content {
-        display: flex;
+        display: flex !important;
         flex-direction: column;
         padding: 0;
         gap: 0;
@@ -677,20 +649,28 @@
         border: none;
         box-shadow: none;
         min-width: auto;
+        width: 100%;
         z-index: auto;
+        align-items: stretch;
       }
 
       .nav.mobile-open .nav-dropdown-content .nav-link {
-        padding: 12px 0;
-        border-bottom: 1px solid var(--border-gray);
+        padding: 14px 0;
+        border-bottom: 1px solid var(--border);
         margin: 0;
         font-size: 16px;
         text-align: left;
         width: 100%;
+        display: block;
+        box-sizing: border-box;
         background: transparent;
         position: static;
         color: var(--text-primary);
         text-decoration: none;
+      }
+
+      .nav.mobile-open .nav-dropdown-content .nav-link::after {
+        display: none;
       }
 
       .nav.mobile-open .nav-dropdown-content .nav-link:last-child {
@@ -704,7 +684,7 @@
         background: var(--text-primary);
         color: var(--bg-white);
         border-radius: 999px;
-        padding: 10px 16px;
+        padding: 12px 16px;
         font-size: 14px;
         font-weight: 500;
         letter-spacing: 0.02em;
@@ -712,6 +692,8 @@
         text-decoration: none;
         transition: background 0.2s ease, transform 0.2s ease;
         border-bottom: none;
+        display: block;
+        box-sizing: border-box;
       }
 
       .nav.mobile-open .btn-donate:hover {
@@ -728,103 +710,117 @@
       }
 
       .main-content {
-        padding: 180px 16px 60px;
+        padding: 96px 20px 56px;
       }
 
-      .page-title {
-        font-size: 48px;
-        margin-bottom: 16px;
-      }
-
-      .page-subtitle {
-        font-size: 18px;
-      }
-
-      .report-section,
-      .contact-section {
-        padding: 40px 24px;
-        margin-bottom: 60px;
-      }
-
-      .section-title {
-        font-size: 32px;
-        margin-bottom: 12px;
-      }
-
-      .section-description {
-        font-size: 16px;
+      .page-hero-title {
         margin-bottom: 32px;
       }
 
-      .report-options {
-        grid-template-columns: 1fr;
+      .about-profile-top {
+        flex-direction: column;
         gap: 16px;
-        margin-bottom: 32px;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 20px;
       }
 
-      .report-option {
-        padding: 24px 20px;
+      .about-profile-head {
+        text-align: center;
       }
 
-      .option-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 28px;
-        margin-bottom: 16px;
+      .about-profile-bio {
+        text-align: center;
       }
 
-      .option-title {
+      .about-profile-image-wrap {
+        width: min(88px, 28vw);
+        height: min(88px, 28vw);
+        max-width: 100%;
+        border-width: 3px;
+      }
+
+      .about-profile-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      .about-profile-name {
         font-size: 20px;
       }
 
-      .priority-section {
-        padding: 32px 24px;
+      .about-profile-verified {
+        width: 20px;
+        height: 20px;
       }
 
-      .priority-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
+      .about-profile-role {
+        font-size: 13px;
       }
 
-      .priority-option {
-        padding: 16px;
+      .about-profile-bio {
+        font-size: 14px;
       }
 
-      .contact-title {
-        font-size: 32px;
+      .about-profile {
+        padding: 28px 20px 24px;
       }
 
-      .contact-description {
-        font-size: 17px;
-        margin-bottom: 24px;
+      .profile-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
       }
 
-      .instagram-button {
-        font-size: 16px;
-        padding: 16px 28px;
+      .profile-actions .about-qr-wrap {
+        margin-left: 0;
       }
 
-      .instagram-icon {
-        width: 28px;
-        height: 28px;
-        font-size: 16px;
+      .profile-buttons {
+        justify-content: center;
+      }
+
+      .profile-buttons .btn-primary,
+      .profile-buttons .btn-secondary {
+        min-width: 100px;
+        padding: 10px 18px;
+        font-size: 14px;
+      }
+
+      .about-qr {
+        width: 56px;
+        height: 56px;
+      }
+
+      .page-section {
+        padding-top: 32px;
+      }
+
+      .page-section-title {
+        font-size: 14px;
+      }
+
+      .page-section-body {
+        font-size: 14px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
+  <!-- Header (same as index.html) -->
   <header class="header" id="header">
     <div class="header-inner">
-      <a href="index.html" class="logo">
-        <span class="logo-free">free</span><span class="logo-university">university</span><span class="logo-tools">tools</span>
-      </a>
+      <a href="index.html" class="logo"><span class="logo-free">free</span><span class="logo-university">university</span><span class="logo-tools">tools</span></a>
       <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">☰</button>
       <nav class="nav" id="mainNav">
         <a href="index.html" class="nav-link">Home</a>
         <a href="student.html" class="nav-link">Students</a>
         <a href="powerful.html" class="nav-link">Powerful Tools</a>
-        <div class="nav-dropdown">
+        <div class="nav-dropdown" id="navDropdown">
+          <button type="button" class="desktop-dropdown-toggle" id="desktopDropdownToggle" aria-label="More menu" aria-expanded="false">☰</button>
           <button class="nav-dropdown-btn">More ▼</button>
           <div class="nav-dropdown-content">
             <a href="about.html" class="nav-link">About Us</a>
@@ -839,81 +835,44 @@
 
   <!-- Main Content -->
   <main class="main-content">
-    <!-- Page Header -->
-    <div class="page-header">
-      <h1 class="page-title">Report a Bug</h1>
-      <p class="page-subtitle">Help us improve Free University Tools by reporting any issues you encounter.</p>
-    </div>
+    <p class="page-eyebrow">Report</p>
+    <h1 class="page-hero-title">Report a bug or add new tools!</h1>
 
-        <!-- Contact Section -->
-    <section class="contact-section">
-      <div class="contact-content">
-        <h2 class="contact-title">Fastest Way to Contact Us</h2>
-        <p class="contact-description">
-          For the fastest response, reach out to us directly on Instagram. Upload any image, message me anything, if you ever need anything let me know.
-        </p>
-        <a href="https://instagram.com/freeuniversitytools" target="_blank" class="instagram-button">
-          <div class="instagram-icon">📷</div>
-          Contact on Instagram
-        </a>
+    <section class="page-section" aria-label="How to report or suggest">
+      <h2 class="page-section-title">How to report or suggest</h2>
+      <div class="page-section-body">
+        <p>Help us improve by reporting broken links, wrong info, or suggesting tools to add. Reach out to us on Instagram with a message or screenshot for the fastest response.</p>
+        <p>We don't bite!</p>
       </div>
     </section>
-    
-    <!-- Report Options Section -->
-    <section class="report-section">
-      <div class="section-header">
-        <div class="section-eyebrow">Quick Report</div>
-        <h2 class="section-title">What would you like to report?</h2>
-        <p class="section-description">Select the type of issue you're experiencing to help us understand and fix it faster.</p>
+
+    <section class="about-profile" aria-label="Profile">
+      <div class="about-profile-top">
+        <div class="about-profile-image-wrap">
+          <img
+            src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/D.png"
+            alt="Delexo"
+            class="about-profile-image"
+          />
+        </div>
+        <div class="about-profile-head">
+          <div class="about-profile-name-wrap">
+            <h2 class="about-profile-name">Delexo</h2>
+            <img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/Verified.png" alt="" class="about-profile-verified" aria-hidden="true" />
+          </div>
+          <p class="about-profile-role">Creator</p>
+        </div>
       </div>
-      
-      <div class="report-options">
-        <a href="https://instagram.com/freeuniversitytools" target="_blank" class="report-option">
-          <div class="option-icon">�</div>
-          <h3 class="option-title">Misleading Information</h3>
-          <p class="option-description">App marked as free but has extreme limitations or hidden costs</p>
-        </a>
-
-        <a href="https://instagram.com/freeuniversitytools" target="_blank" class="report-option">
-          <div class="option-icon">⚡</div>
-          <h3 class="option-title">Website Bug</h3>
-          <p class="option-description">Functional issues with website interface or performance</p>
-        </a>
-
-        <a href="https://instagram.com/freeuniversitytools" target="_blank" class="report-option">
-          <div class="option-icon">🎨</div>
-          <h3 class="option-title">Visual Bug</h3>
-          <p class="option-description">Display issues, broken layouts, or design problems</p>
-        </a>
-
-        <a href="https://instagram.com/freeuniversitytools" target="_blank" class="report-option">
-          <div class="option-icon">🔗</div>
-          <h3 class="option-title">Wrong Link</h3>
-          <p class="option-description">Incorrect or broken external links to tool websites</p>
-        </a>
-
-        <a href="https://instagram.com/freeuniversitytools" target="_blank" class="report-option">
-          <div class="option-icon">🏷️</div>
-          <h3 class="option-title">Wrong Logo/Name</h3>
-          <p class="option-description">Incorrect company logo, app name, or branding information</p>
-        </a>
-
-        <a href="https://instagram.com/freeuniversitytools" target="_blank" class="report-option">
-          <div class="option-icon">📡</div>
-          <h3 class="option-title">Connection Issues</h3>
-          <p class="option-description">Tools not connecting to their websites or services</p>
-        </a>
-
-        <a href="https://instagram.com/freeuniversitytools" target="_blank" class="report-option">
-          <div class="option-icon">🛡️</div>
-          <h3 class="option-title">Malicious Content</h3>
-          <p class="option-description">Suspicious or harmful websites, malware, or security concerns</p>
-        </a>
-
-        <a href="https://instagram.com/freeuniversitytools" target="_blank" class="report-option">
-          <div class="option-icon">�</div>
-          <h3 class="option-title">Other Issues</h3>
-          <p class="option-description">Any other problems not listed above</p>
+      <p class="about-profile-bio">
+        Student and builder. I made this site so you don't have to hunt for free tools, one place, no paywalls, no fluff.
+      </p>
+      <div class="profile-actions">
+        <div class="profile-buttons">
+          <a href="https://instagram.com/freeuniversitytools" target="_blank" rel="noopener noreferrer" class="btn-primary">Instagram</a>
+          <a href="https://link.me/delexo" target="_blank" rel="noopener noreferrer" class="btn-secondary">More projects</a>
+        </div>
+        <a href="https://link.me/delexo" target="_blank" rel="noopener noreferrer" class="about-qr-wrap" aria-label="Delexo digital card (QR)">
+          <img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/QR-Delexo.png" alt="QR code: Delexo digital card" class="about-qr" />
         </a>
       </div>
     </section>
@@ -930,40 +889,9 @@
       <a href="contact.html" class="footer-link">Contact</a>
       <a href="https://buy.stripe.com/4gMaEW87U7IO8C8azDcjS01" target="_blank" class="footer-link">Donate</a>
     </div>
-    <div class="footer-copyright">
-      2026 Free University Tools. Helping students succeed with free tools.
-    </div>
+    <div class="footer-copyright">© 2026 Free University Tools. Helping students succeed with free tools.</div>
   </footer>
 
-  <script>
-    // Mobile menu toggle
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const mainNav = document.getElementById('mainNav');
-    
-    mobileMenuToggle.addEventListener('click', () => {
-      mainNav.classList.toggle('mobile-open');
-    });
-
-    // Header scroll effect
-    window.addEventListener('scroll', () => {
-      const header = document.getElementById('header');
-      if (window.scrollY > 10) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
-
-    // Add interactive hover effects
-    document.querySelectorAll('.report-option').forEach(option => {
-      option.addEventListener('mouseenter', () => {
-        option.style.transform = 'translateY(-8px) scale(1.02)';
-      });
-      
-      option.addEventListener('mouseleave', () => {
-        option.style.transform = 'translateY(0) scale(1)';
-      });
-    });
-  </script>
+  <script src="js/common.js"></script>
 </body>
 </html>

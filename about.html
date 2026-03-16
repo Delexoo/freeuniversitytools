@@ -3,16 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About - Free University Tools</title>
+  <title>About, Free University Tools</title>
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png">
   <style>
-    /* CSS Variables - Apple-inspired colors */
+    /* CSS Variables – Apple-style (from index.html) */
     :root {
       --bg-white: #FFFFFF;
       --bg-light: #F5F5F7;
+      --bg-page: #F5F5F7;
       --text-primary: #1D1D1F;
       --text-secondary: #86868B;
-      --accent-blue: #007AFF;
+      --text-muted: #6E6E73;
+      --accent: #007AFF;
+      --border: #D2D2D7;
       --border-gray: #D2D2D7;
+      --hover-gray: #FAFAFA;
+      --radius: 12px;
+      --radius-lg: 16px;
     }
 
     /* Reset & Base Styles */
@@ -28,11 +35,12 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: linear-gradient(145deg, #ffffff 0%, #f8f9fb 100%);
+      background: var(--bg-page);
       color: var(--text-primary);
       line-height: 1.6;
       overflow-x: hidden;
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* Header */
@@ -62,7 +70,6 @@
       justify-content: space-between;
       height: 64px;
       flex-wrap: wrap;
-      gap: 24px;
     }
 
     .mobile-menu-toggle {
@@ -179,29 +186,75 @@
       background: var(--bg-light);
     }
 
+    .desktop-dropdown-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: var(--text-primary);
+      padding: 6px 10px;
+      line-height: 1;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .desktop-dropdown-toggle:hover {
+      background: var(--bg-light);
+    }
+
+    @media (min-width: 769px) {
+      .nav-dropdown-btn {
+        display: none;
+      }
+      .desktop-dropdown-toggle {
+        display: flex;
+      }
+      .nav-dropdown-content {
+        display: none;
+      }
+      .nav-dropdown:hover .nav-dropdown-content {
+        display: none;
+      }
+      .nav-dropdown.is-open .nav-dropdown-content {
+        display: block;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .desktop-dropdown-toggle {
+        display: none !important;
+      }
+    }
+
     .nav-dropdown-content {
       display: none;
       position: absolute;
       top: 100%;
       right: 0;
+      margin-top: 4px;
       background: var(--bg-white);
-      border: 1px solid var(--border-gray);
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       padding: 0;
       min-width: 150px;
       z-index: 1000;
     }
 
-    .nav-dropdown:hover .nav-dropdown-content {
-      display: block;
+    @media (min-width: 769px) {
+      .nav-dropdown.is-open .nav-dropdown-content {
+        display: block;
+      }
     }
 
     .nav-dropdown-content .nav-link {
       display: block;
       padding: 12px 16px;
       text-align: left;
-      border-bottom: 1px solid var(--border-gray);
+      border-bottom: 1px solid var(--border);
       margin: 0;
       font-size: 12px;
       font-weight: 400;
@@ -244,80 +297,242 @@
 
     /* Main Content */
     .main-content {
-      max-width: 980px;
+      max-width: 640px;
       margin: 0 auto;
       padding: 120px 24px 80px;
       position: relative;
-      min-height: calc(100vh - 200px);
     }
 
-    /* About Section */
-    .about-section {
-      background: var(--bg-white);
-      border-radius: 32px;
-      padding: 80px 60px;
-      margin-bottom: 80px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-      border: 1px solid var(--border-gray);
-      text-align: center;
-    }
-
-    .profile-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 60px;
-    }
-
-    .profile-image {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      margin-bottom: 24px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-      border: 4px solid var(--bg-white);
-    }
-
-    .profile-comment {
-      background: var(--bg-light);
-      border-radius: 16px;
-      padding: 16px 24px;
-      font-size: 16px;
-      color: var(--text-secondary);
-      font-style: italic;
-      margin-bottom: 40px;
-      max-width: 400px;
-      border: 1px solid var(--border-gray);
-    }
-
-    .profile-name {
-      font-size: 18px;
+    .about-eyebrow {
+      font-size: 12px;
       font-weight: 600;
-      color: var(--text-primary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
       margin-bottom: 8px;
     }
 
-    .profile-handle {
-      font-size: 14px;
+    .about-hero-title {
+      font-size: clamp(32px, 4vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--text-primary);
+      margin-bottom: 56px;
+      line-height: 1.15;
+    }
+
+    /* Profile – card */
+    .about-profile {
+      margin-bottom: 48px;
+      padding: 36px 40px 32px;
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .about-profile-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 28px;
+      margin-bottom: 22px;
+    }
+
+    .about-profile-image-wrap {
+      width: 96px;
+      height: 96px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #fff;
+      border: 4px solid #000;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-profile-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .about-profile-head {
+      flex: 1;
+      min-width: 0;
+      padding-top: 4px;
+    }
+
+    .about-profile-name-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .about-profile-name {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .about-profile-verified {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .about-profile-role {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .about-profile-bio {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 0;
+      max-width: 52ch;
+    }
+
+    .profile-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px 24px;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .profile-buttons {
+      display: inline-flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .profile-buttons .btn-primary,
+    .profile-buttons .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 120px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .profile-buttons .btn-primary {
+      background: var(--text-primary);
+      color: var(--bg-white);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+    }
+
+    .profile-buttons .btn-primary:hover {
+      background: #000;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .profile-buttons .btn-secondary {
+      background: var(--bg-white);
+      color: var(--text-primary);
+      border: 1px solid var(--border-gray);
+    }
+
+    .profile-buttons .btn-secondary:hover {
+      background: var(--hover-gray);
+      transform: translateY(-1px);
+    }
+
+    .about-profile-footer {
+      display: none;
+    }
+
+    .profile-actions .about-qr-wrap {
+      margin-left: 8px;
+      flex-shrink: 0;
+    }
+
+    .about-qr-wrap {
+      display: inline-block;
+      line-height: 0;
+      flex-shrink: 0;
+    }
+
+    .about-qr {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      display: block;
+      border-radius: 0;
+    }
+
+    .about-inline-link {
+      color: var(--text-primary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-weight: 500;
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+
+    .about-inline-link:hover {
       color: var(--text-secondary);
     }
 
-    .center-message {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      font-size: 18px;
-      font-weight: 400;
+    /* Sections, clean blocks */
+    .about-section {
+      margin-bottom: 0;
+      padding: 32px 0 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .about-section:first-of-type {
+      padding-top: 40px;
+    }
+
+    .about-section:last-of-type {
+      padding-bottom: 24px;
+    }
+
+    .about-section-title {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
       color: var(--text-primary);
-      text-align: center;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      margin-bottom: 10px;
+      padding-left: 12px;
+      border-left: 3px solid var(--text-primary);
+    }
+
+    .about-section-body {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .about-section-body p {
+      margin-bottom: 12px;
+    }
+
+    .about-section-body p:last-child {
+      margin-bottom: 0;
     }
 
     /* Footer */
     .footer {
       background: var(--bg-white);
-      border-top: 1px solid var(--border-gray);
+      border-top: 1px solid var(--border);
       padding: 40px 24px;
       text-align: center;
     }
@@ -383,24 +598,30 @@
         display: flex;
         flex-direction: column;
         gap: 0;
-        padding: 12px 0;
+        padding: 12px 16px 16px;
         order: 3;
         border-top: 1px solid var(--border-gray);
         margin-top: 8px;
+        align-items: stretch;
       }
 
       .nav.mobile-open .nav-link,
       .nav.mobile-open .btn-donate {
         font-size: 16px;
-        padding: 12px 0;
+        padding: 14px 0;
         width: 100%;
         text-align: left;
         border-bottom: 1px solid var(--border-gray);
         margin: 0;
+        display: block;
+        box-sizing: border-box;
       }
 
-      .nav.mobile-open .nav-link:last-child,
-      .nav.mobile-open .btn-donate {
+      .nav.mobile-open .nav-link::after {
+        display: none;
+      }
+
+      .nav.mobile-open .nav-link:last-child {
         border-bottom: none;
       }
 
@@ -415,8 +636,10 @@
         border-radius: 0;
         box-shadow: none;
         min-width: auto;
+        width: 100%;
         z-index: auto;
-        margin-bottom: 12px;
+        margin-bottom: 0;
+        align-items: stretch;
       }
 
       .nav.mobile-open .nav-dropdown-btn {
@@ -424,7 +647,7 @@
       }
 
       .nav.mobile-open .nav-dropdown-content {
-        display: flex;
+        display: flex !important;
         flex-direction: column;
         padding: 0;
         gap: 0;
@@ -433,20 +656,28 @@
         border: none;
         box-shadow: none;
         min-width: auto;
+        width: 100%;
         z-index: auto;
+        align-items: stretch;
       }
 
       .nav.mobile-open .nav-dropdown-content .nav-link {
-        padding: 12px 0;
+        padding: 14px 0;
         border-bottom: 1px solid var(--border-gray);
         margin: 0;
         font-size: 16px;
         text-align: left;
         width: 100%;
+        display: block;
+        box-sizing: border-box;
         background: transparent;
         position: static;
         color: var(--text-primary);
         text-decoration: none;
+      }
+
+      .nav.mobile-open .nav-dropdown-content .nav-link::after {
+        display: none;
       }
 
       .nav.mobile-open .nav-dropdown-content .nav-link:last-child {
@@ -460,7 +691,7 @@
         background: var(--text-primary);
         color: var(--bg-white);
         border-radius: 999px;
-        padding: 10px 16px;
+        padding: 12px 16px;
         font-size: 14px;
         font-weight: 500;
         letter-spacing: 0.02em;
@@ -468,6 +699,8 @@
         text-decoration: none;
         transition: background 0.2s ease, transform 0.2s ease;
         border-bottom: none;
+        display: block;
+        box-sizing: border-box;
       }
 
       .nav.mobile-open .btn-donate:hover {
@@ -484,41 +717,117 @@
       }
 
       .main-content {
-        padding: 180px 16px 60px;
+        padding: 96px 20px 56px;
       }
 
-      .about-section {
-        padding: 60px 32px;
-        margin-bottom: 60px;
+      .about-hero-title {
+        margin-bottom: 32px;
       }
 
-      .profile-image {
-        width: 100px;
-        height: 100px;
+      .about-profile-top {
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+        text-align: center;
         margin-bottom: 20px;
       }
 
-      .profile-comment {
-        font-size: 15px;
-        padding: 14px 20px;
+      .about-profile-head {
+        text-align: center;
+      }
+
+      .about-profile-bio {
+        text-align: center;
+      }
+
+      .about-profile-image-wrap {
+        width: min(88px, 28vw);
+        height: min(88px, 28vw);
         max-width: 100%;
+        border-width: 3px;
+      }
+
+      .about-profile-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      .about-profile-name {
+        font-size: 20px;
+      }
+
+      .about-profile-verified {
+        width: 20px;
+        height: 20px;
+      }
+
+      .about-profile-role {
+        font-size: 13px;
+      }
+
+      .about-profile-bio {
+        font-size: 14px;
+      }
+
+      .about-profile {
+        padding: 28px 20px 24px;
+      }
+
+      .profile-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .profile-actions .about-qr-wrap {
+        margin-left: 0;
+      }
+
+      .profile-buttons {
+        justify-content: center;
+      }
+
+      .profile-buttons .btn-primary,
+      .profile-buttons .btn-secondary {
+        min-width: 100px;
+        padding: 10px 18px;
+        font-size: 14px;
+      }
+
+      .about-qr {
+        width: 56px;
+        height: 56px;
+      }
+
+      .about-section {
+        margin-bottom: 32px;
+      }
+
+      .about-section-title {
+        font-size: 14px;
+      }
+
+      .about-section-body {
+        font-size: 14px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
+  <!-- Header (same as index.html) -->
   <header class="header" id="header">
     <div class="header-inner">
-      <a href="index.html" class="logo">
-        <span class="logo-free">free</span><span class="logo-university">university</span><span class="logo-tools">tools</span>
-      </a>
+      <a href="index.html" class="logo"><span class="logo-free">free</span><span class="logo-university">university</span><span class="logo-tools">tools</span></a>
       <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">☰</button>
       <nav class="nav" id="mainNav">
         <a href="index.html" class="nav-link">Home</a>
         <a href="student.html" class="nav-link">Students</a>
         <a href="powerful.html" class="nav-link">Powerful Tools</a>
-        <div class="nav-dropdown">
+        <div class="nav-dropdown" id="navDropdown">
+          <button type="button" class="desktop-dropdown-toggle" id="desktopDropdownToggle" aria-label="More menu" aria-expanded="false">☰</button>
           <button class="nav-dropdown-btn">More ▼</button>
           <div class="nav-dropdown-content">
             <a href="about.html" class="nav-link active">About Us</a>
@@ -533,12 +842,60 @@
 
   <!-- Main Content -->
   <main class="main-content">
-    <div class="center-message">
-      a broke CSUSM student <i>(me)</i> got tired of searching for utilities for hours…
-      <br>so I made this instead. now it's all here for you! 🥀
-      <br>
-      <br>thats literally the whole reason why this entire website exist! LOL
-    </div>
+    <p class="about-eyebrow">About</p>
+    <h1 class="about-hero-title">About the creator</h1>
+
+    <section class="about-section" aria-label="Why this exists">
+      <h2 class="about-section-title">Why this exists</h2>
+      <div class="about-section-body">
+        <p>
+          As a CSUSM student I kept wasting hours jumping between bookmarks and random blogs to find free study tools and AI utilities. So I built this: one curated hub, no ads, no clutter.
+        </p>
+        <p>
+          Everything here is hand-picked. If it’s on the list, it’s useful and free (or has a solid free tier). The goal: help you study smarter and spend less time searching.
+        </p>
+      </div>
+    </section>
+
+    <section class="about-section" aria-label="For students">
+      <h2 class="about-section-title">For students, by a student</h2>
+      <div class="about-section-body">
+        <p>
+          Maintained as a side project. New tools get added when I find something worth sharing. Suggestions or broken links? Use <a href="report.html" class="about-inline-link">Report a Bug</a>, it helps.
+        </p>
+      </div>
+    </section>
+
+    <section class="about-profile" aria-label="Profile">
+      <div class="about-profile-top">
+        <div class="about-profile-image-wrap">
+          <img
+            src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/D.png"
+            alt="Delexo"
+            class="about-profile-image"
+          />
+        </div>
+        <div class="about-profile-head">
+          <div class="about-profile-name-wrap">
+            <h2 class="about-profile-name">Delexo</h2>
+            <img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/Verified.png" alt="" class="about-profile-verified" aria-hidden="true" />
+          </div>
+          <p class="about-profile-role">Creator</p>
+        </div>
+      </div>
+      <p class="about-profile-bio">
+          Student and builder. I made this site so you don't have to hunt for free tools, one place, no paywalls, no fluff.
+        </p>
+<div class="profile-actions">
+        <div class="profile-buttons">
+          <a href="https://instagram.com/freeuniversitytools" target="_blank" rel="noopener noreferrer" class="btn-primary">Instagram</a>
+          <a href="https://link.me/delexo" target="_blank" rel="noopener noreferrer" class="btn-secondary">More projects</a>
+        </div>
+        <a href="https://link.me/delexo" target="_blank" rel="noopener noreferrer" class="about-qr-wrap" aria-label="Delexo digital card (QR)">
+          <img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/QR-Delexo.png" alt="QR code: Delexo digital card" class="about-qr" />
+        </a>
+      </div>
+    </section>
   </main>
 
   <!-- Footer -->
@@ -557,24 +914,6 @@
     </div>
   </footer>
 
-  <script>
-    // Mobile menu toggle
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const mainNav = document.getElementById('mainNav');
-    
-    mobileMenuToggle.addEventListener('click', () => {
-      mainNav.classList.toggle('mobile-open');
-    });
-
-    // Header scroll effect
-    window.addEventListener('scroll', () => {
-      const header = document.getElementById('header');
-      if (window.scrollY > 10) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
-  </script>
+  <script src="js/common.js"></script>
 </body>
 </html>

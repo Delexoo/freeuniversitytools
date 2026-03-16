@@ -156,7 +156,7 @@ body {
 }
 
 /* Index hero variant */
-.hero-landing{background-image:linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),url('docs/FreeUniversityTools.png');background-size:cover;background-position:center;color:#fff;padding:6rem 0 5rem;text-align:center}
+.hero-landing{background-image:linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),url('https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png');background-size:cover;background-position:center;color:#fff;padding:6rem 0 5rem;text-align:center}
 .hero-landing h1{font-size:56px;margin:0 0 12px;letter-spacing:-1px}
 .hero-landing p{max-width:900px;margin:0 auto 28px;font-size:18px;opacity:0.95}
 .hero-cta{display:inline-block;background:#eee;color:#000;padding:18px 38px;border-radius:60px;font-weight:800;text-decoration:none;box-shadow:8px 8px 0 rgba(0,0,0,0.7)}
