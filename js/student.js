@@ -44,17 +44,39 @@ const allToolItems = Array.from(document.querySelectorAll('.tool-item'));
 const allCategorySections = Array.from(document.querySelectorAll('.category-section'));
 let currentMode = 'free';
 
-// Tag types: free | free-tier | limited → show on "Free Tools"; paid | limited → show on "Paid Tools".
-// On Free view, limited tags display "Limited"; on Paid view they display "Paid".
-function updateLimitedTagLabels() {
-  const label = currentMode === 'free' ? 'Limited' : 'Paid';
-  document.querySelectorAll('.tool-tag.limited').forEach((el) => { el.textContent = label; });
+// Tag types:
+// - free → Free mode only
+// - free-tier → shows in Free + Paid modes (paid option exists)
+// - limited → shows in Free + Paid modes (paid / limited access)
+// - paid → Paid mode only
+function getPaidLabelForItem(item) {
+  const name = (item.querySelector('.tool-name')?.textContent || '').toLowerCase();
+  if (name.includes('chatgpt')) return 'Plus';
+  if (name.includes('claude')) return 'Pro';
+  if (name.includes('grammarly')) return 'Premium';
+  if (name.includes('quillbot')) return 'Premium';
+  if (name.includes('notion')) return 'Plus';
+  return 'Paid';
+}
+
+function updatePricingTagLabels() {
+  // Limited: show "Limited" on Free, "Paid" on Paid
+  const limitedLabel = currentMode === 'free' ? 'Limited' : 'Paid';
+  document.querySelectorAll('.tool-tag.limited').forEach((el) => { el.textContent = limitedLabel; });
+
+  // Free-tier: show "Free Tier" on Free, and a paid label on Paid (Plus/Pro/Premium/Paid)
+  document.querySelectorAll('.tool-item').forEach((item) => {
+    const tag = item.querySelector('.tool-tag.free-tier');
+    if (!tag) return;
+    tag.textContent = currentMode === 'free' ? 'Free Tier' : 'Paid Tier';
+  });
 }
 
 function getItemPricing(item) {
   const tag = item.querySelector('.tool-tag');
   if (!tag) return 'free';
   if (tag.classList.contains('paid')) return 'paid';
+  if (tag.classList.contains('free-tier')) return 'free-tier';
   if (tag.classList.contains('limited')) return 'limited';
   return 'free';
 }
@@ -111,7 +133,9 @@ function applyFilters() {
     const searchable = getSearchableText(item);
     const matchesQuery = !isSearching || queryWords.every((word) => searchable.includes(word));
     const pricing = getItemPricing(item);
-    const matchesMode = currentMode === 'paid' ? (pricing === 'paid' || pricing === 'limited') : (pricing !== 'paid');
+    const matchesMode = currentMode === 'paid'
+      ? (pricing === 'paid' || pricing === 'limited' || pricing === 'free-tier')
+      : (pricing !== 'paid');
     const show = matchesQuery && matchesMode;
     item.style.display = show ? '' : 'none';
     if (show) item.classList.add('is-visible');
@@ -126,7 +150,13 @@ function applyFilters() {
     }
     const items = section.querySelectorAll('.tool-item');
     const anyVisible = Array.from(items).some((i) => i.style.display !== 'none');
-    section.style.display = anyVisible ? '' : 'none';
+    // In "Paid Tools" view, keep all categories visible (even if empty) unless searching.
+    // When searching, we still hide categories that have no matches to reduce noise.
+    if (currentMode === 'paid' && !isSearching) {
+      section.style.display = '';
+    } else {
+      section.style.display = anyVisible ? '' : 'none';
+    }
     if (anyVisible) section.classList.add('is-visible');
   });
 
@@ -135,10 +165,11 @@ function applyFilters() {
 
   const aiContainer = document.querySelector('.top-ai-assistants-container');
   if (aiContainer) {
-    if (isSearching || currentMode === 'paid') {
+    if (isSearching) {
       const hasVisible = Array.from(aiContainer.querySelectorAll('.tool-item')).some(i => i.style.display !== 'none');
       aiContainer.style.display = hasVisible ? '' : 'none';
     } else {
+      // Not searching: always show the container in both Free and Paid modes.
       aiContainer.style.display = '';
     }
   }
@@ -146,12 +177,15 @@ function applyFilters() {
 
 function setMode(nextMode) {
   currentMode = nextMode;
+  if (document.body) {
+    document.body.dataset.mode = nextMode;
+  }
   if (toolsModeToggle) toolsModeToggle.dataset.mode = nextMode;
   toggleOptions.forEach((opt) => {
     opt.classList.toggle('active', opt.dataset.mode === nextMode);
   });
   applyFilters();
-  updateLimitedTagLabels();
+  updatePricingTagLabels();
 }
 
 if (toolsSearch) {
@@ -163,4 +197,4 @@ toggleOptions.forEach((opt) => {
 });
 
 applyFilters();
-updateLimitedTagLabels();
+updatePricingTagLabels();

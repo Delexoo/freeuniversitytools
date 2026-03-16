@@ -1,5 +1,13 @@
 const ctaPanel = document.querySelector('.cta-panel');
+const heroSection = document.querySelector('.hero');
+const heroContent = heroSection ? heroSection.querySelector('.hero-content') : null;
 const featureSection = document.querySelector('.features');
+const dmSection = document.querySelector('.dm-section');
+const dmContainerEl = document.getElementById('dmContainer');
+const featuresInline = document.querySelector('.features-inline');
+const toolsPreviewSection = document.querySelector('.tools-preview');
+const toolsHeader = toolsPreviewSection ? toolsPreviewSection.querySelector('.tools-header') : null;
+const toolsTrack = toolsPreviewSection ? toolsPreviewSection.querySelector('.tools-track') : null;
 const featureCards = Array.from(document.querySelectorAll('.features-grid .feature-card'));
 const floatingStartBrowsing = document.getElementById('floatingStartBrowsing');
 let lastDuckScrollY = window.scrollY;
@@ -108,7 +116,95 @@ function updateFeatureDuckMotion() {
   lastDuckScrollY = window.scrollY;
 }
 
+function updateDmMotion() {
+  if (!dmSection || !dmContainerEl) return;
+
+  const rect = dmSection.getBoundingClientRect();
+  const viewport = window.innerHeight || document.documentElement.clientHeight;
+
+  // Start from the current position and slide the phone UP as you scroll past it.
+  const startY = viewport * 0.9;   // when the section is just entering view
+  const endY = viewport * 0.1;     // let it keep moving until it's very high on the screen
+  const progress = clamp((startY - rect.top) / (startY - endY), 0, 1);
+
+  // At the start it's at its normal spot (0), then it slides far up (negative Y) as you scroll.
+  const offset = lerp(0, -260, progress); // move up about 260px
+  dmContainerEl.style.transform = `translateY(${offset}px)`;
+}
+
 function updateScrollEffects() {
+  // Subtle hero text parallax: slide the hero copy down a bit as you scroll
+  if (heroSection && heroContent) {
+    const heroRect = heroSection.getBoundingClientRect();
+    const viewport = window.innerHeight || document.documentElement.clientHeight;
+    // Progress from 0 (top of page) to 1 (hero mostly passed)
+    const heroProgress = clamp((0 - heroRect.top) / (heroRect.height || 1), 0, 1);
+    // Move down up to ~160px as you scroll for a strong parallax effect
+    const heroOffset = lerp(0, 160, heroProgress);
+    // Also gently scale the hero content down a bit as you scroll
+    const heroScale = lerp(1, 0.9, heroProgress);
+    heroContent.style.transform = `translateY(${heroOffset.toFixed(1)}px) scale(${heroScale.toFixed(3)})`;
+    // Fade out as you scroll further down
+    const heroOpacity = lerp(1, 0, heroProgress);
+    heroContent.style.opacity = heroOpacity.toFixed(2);
+  }
+
+  // Inline "Why choose us" text: as you scroll DOWN it grows, moves down, and fades in (smoothed)
+  if (featuresInline) {
+    const rect = featuresInline.getBoundingClientRect();
+    const viewport = window.innerHeight || document.documentElement.clientHeight;
+    // Progress: 0 when just off-screen at bottom, 1 when clearly in view (made faster)
+    const rawProgress = (viewport - rect.top) / viewport;
+    const progress = clamp(rawProgress * 2.2, 0, 1); // faster response to scroll
+    // Start reasonably high and end lower (moves DOWN as you scroll)
+    const offset = lerp(-140, 40, progress);
+    // Start slightly smaller, grow as you scroll down
+    const scale = lerp(0.94, 1.08, progress);
+    // Fade in from mostly transparent to fully visible
+    const opacity = lerp(0.1, 1, progress);
+
+    featuresInline.style.transform =
+      `translateY(${offset.toFixed(1)}px) scale(${scale.toFixed(3)})`;
+    featuresInline.style.opacity = opacity.toFixed(2);
+  }
+
+  // Featured Tools section: text and buttons animate separately from opposite directions
+  if (toolsPreviewSection && (toolsHeader || toolsTrack)) {
+    const rect = toolsPreviewSection.getBoundingClientRect();
+    const viewport = window.innerHeight || document.documentElement.clientHeight;
+    // Start animation earlier so it begins as the section enters the viewport
+    const raw = (viewport - rect.top) / viewport;
+    const progress = clamp(raw * 1.2, 0, 1); // quicker ramp-up from 0 → 1
+
+    // Header (eyebrow + title + subtitle) – slide IN from the left only (vertical position handled by CSS)
+    if (toolsHeader) {
+      const headerOffsetX = lerp(-140, 0, progress);
+      const headerOffsetY = 0;  // keep vertical position fixed; CSS controls base Y offset
+      const headerScale = lerp(0.95, 1.04, progress);
+      const headerOpacity = lerp(0, 1, progress);
+      toolsHeader.style.transform =
+        `translate(${headerOffsetX.toFixed(1)}px, ${headerOffsetY.toFixed(1)}px) scale(${headerScale.toFixed(3)})`;
+      toolsHeader.style.opacity = headerOpacity.toFixed(2);
+    }
+
+    // Track (stacked cards) – each card slides IN from the right & slightly down, with a small stagger
+    if (toolsTrack) {
+      const cards = Array.from(toolsTrack.querySelectorAll('.tool-card'));
+      cards.forEach((card, index) => {
+        // Each subsequent card starts a bit later (reduced delay so last card like Eleven Reader doesn't feel "too late")
+        const delay = index * 0.08;
+        const localProgress = clamp((progress - delay) * 1.2, 0, 1);
+        const cardOffsetX = lerp(120, 0, localProgress);
+        const cardOffsetY = lerp(30, 0, localProgress);
+        const cardScale = lerp(0.95, 1.03, localProgress);
+        const cardOpacity = lerp(0, 1, localProgress);
+        card.style.transform =
+          `translate(${cardOffsetX.toFixed(1)}px, ${cardOffsetY.toFixed(1)}px) scale(${cardScale.toFixed(3)})`;
+        card.style.opacity = cardOpacity.toFixed(2);
+      });
+    }
+  }
+
   if (floatingStartBrowsing) {
     const isVisible = window.scrollY > 120;
     floatingStartBrowsing.classList.toggle('is-visible', isVisible);
@@ -130,6 +226,7 @@ function updateScrollEffects() {
 
   updateFeatureCardMotion();
   updateFeatureDuckMotion();
+  updateDmMotion();
 
   if (!ctaPanel) return;
 

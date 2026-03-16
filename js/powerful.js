@@ -6,13 +6,14 @@ const categorySections = Array.from(document.querySelectorAll('.tool-category'))
 const toggleOptions = Array.from(document.querySelectorAll('.tools-toggle-option'));
 let currentMode = 'free';
 
-// Page 1 (Free Tools): free | free-tier | limited. Page 2 (Paid Tools): paid | limited (limited = will require payment eventually, labeled "Paid").
+// Page 1 (Free Tools): free | free-tier | limited.
+// Page 2 (Paid Tools): paid | limited | free-tier (all tools that have a paid tier).
 function matchesPricingMode(pricing, mode) {
   if (mode === 'free') {
     return pricing === 'free' || pricing === 'free-tier' || pricing === 'limited';
   }
   if (mode === 'paid') {
-    return pricing === 'paid' || pricing === 'limited';
+    return pricing === 'paid' || pricing === 'limited' || pricing === 'free-tier';
   }
   return false;
 }
@@ -98,48 +99,83 @@ function applyToolFilters() {
   });
 }
 
-// Add usability labels. On Free view: limited shows "Limited"; on Paid view: limited shows "Paid".
-function getLabelText(pricing) {
-  if (pricing === 'limited') return currentMode === 'free' ? 'Limited' : 'Paid';
-  const labels = { free: 'Free', 'free-tier': 'Free Tier', paid: 'Paid' };
-  return labels[pricing] || 'Free';
+// Choose Plus / Pro / Premium / Paid based on tool name when in Paid mode
+function getPaidLabelForLink(linkEl) {
+  const name = (linkEl.querySelector('.tool-link-name')?.textContent || '').toLowerCase();
+  if (name.includes('chatgpt')) return 'Plus';
+  if (name.includes('claude')) return 'Pro';
+  if (name.includes('grammarly')) return 'Premium';
+  if (name.includes('quillbot')) return 'Premium';
+  if (name.includes('notion')) return 'Plus';
+  return 'Paid';
 }
 
 function injectPricingLabels() {
   toolLinks.forEach((link) => {
     if (link.querySelector('.tool-pricing-label')) return;
-    const pricing = link.dataset.pricing || 'free';
     const span = document.createElement('span');
     span.className = 'tool-pricing-label';
-    span.setAttribute('data-label', pricing);
-    span.textContent = getLabelText(pricing);
     link.appendChild(span);
   });
 }
 
-function updateLimitedLabels() {
+// Keep label text and data-label in sync with current mode (Free vs Paid)
+function updatePricingLabels() {
   toolLinks.forEach((link) => {
     const pricing = link.dataset.pricing || 'free';
-    if (pricing !== 'limited') return;
     const labelEl = link.querySelector('.tool-pricing-label');
-    if (labelEl) labelEl.textContent = getLabelText('limited');
+    if (!labelEl) return;
+
+    let labelText = 'Free';
+    let labelKey = pricing;
+
+    if (currentMode === 'free') {
+      if (pricing === 'free') {
+        labelText = 'Free';
+        labelKey = 'free';
+      } else if (pricing === 'free-tier') {
+        labelText = 'Free Tier';
+        labelKey = 'free-tier';
+      } else if (pricing === 'limited') {
+        labelText = 'Limited';
+        labelKey = 'limited';
+      } else if (pricing === 'paid') {
+        labelText = 'Paid';
+        labelKey = 'paid';
+      }
+    } else {
+      // Paid mode – anything that has or is a paid tier shows Plus / Pro / Premium / Paid
+      if (pricing === 'free') {
+        labelText = 'Free';
+        labelKey = 'free';
+      } else if (pricing === 'paid' || pricing === 'limited' || pricing === 'free-tier') {
+        labelText = getPaidLabelForLink(link);
+        labelKey = 'paid';
+      }
+    }
+
+    labelEl.textContent = labelText;
+    labelEl.setAttribute('data-label', labelKey);
   });
 }
 
 injectPricingLabels();
-updateLimitedLabels();
+updatePricingLabels();
 applyToolFilters();
 
 function setMode(nextMode) {
   if (nextMode !== 'free' && nextMode !== 'paid') return;
   currentMode = nextMode;
+  if (document.body) {
+    document.body.dataset.mode = nextMode;
+  }
   if (toolsModeToggle) {
     toolsModeToggle.dataset.mode = nextMode;
   }
   toggleOptions.forEach((option) => {
     option.classList.toggle('active', option.dataset.mode === nextMode);
   });
-  updateLimitedLabels();
+  updatePricingLabels();
   applyToolFilters();
 }
 
