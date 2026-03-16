@@ -2200,13 +2200,16 @@
   <script src="js/common.js"></script>
   <script src="js/index.js"></script>
   <script>
-    // Reset dynamic page state on significant resize (so everything goes back to original layout)
+    // Reset dynamic desktop game state on significant resize (so everything goes back to original layout)
     (function () {
       let resizeTimeout = null;
       let lastWidth = window.innerWidth;
       let lastHeight = window.innerHeight;
 
       window.addEventListener('resize', function () {
+        // Skip reload behavior on small/mobile screens to avoid jank
+        if (window.innerWidth <= 768) return;
+
         // Ignore tiny jitters
         const dw = Math.abs(window.innerWidth - lastWidth);
         const dh = Math.abs(window.innerHeight - lastHeight);
