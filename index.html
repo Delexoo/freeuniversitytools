@@ -26,6 +26,8 @@
 
     html {
       scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
 
     /* Mobile-only banner (hidden on desktop) */
@@ -303,11 +305,13 @@
     /* Hero Section */
     .hero {
       min-height: 100vh;
+      min-height: 100svh;
+      min-height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 120px 24px 60px;
+      padding: clamp(88px, 14vh, 120px) clamp(16px, 4vw, 24px) clamp(40px, 8vh, 60px);
       background: var(--bg-white);
       position: relative;
       overflow: hidden;
@@ -349,20 +353,27 @@
     }
 
     .hero h1 {
-      font-size: 60px;
+      font-size: clamp(32px, 4.2vw + 1rem, 60px);
       font-weight: 600;
-      line-height: 1.1;
-      margin-bottom: 20px;
-      letter-spacing: -1px;
+      line-height: 1.08;
+      margin-bottom: clamp(12px, 2vw, 20px);
+      letter-spacing: -0.03em;
       color: var(--text-primary);
+      max-width: 18ch;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .hero .subheadline {
-      font-size: 23px;
+      font-size: clamp(17px, 1.1vw + 0.95rem, 23px);
       color: var(--text-secondary);
-      margin-bottom: 40px;
+      margin-bottom: clamp(28px, 4vw, 40px);
       line-height: 1.5;
       font-weight: 400;
+      max-width: 38rem;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 clamp(4px, 2vw, 12px);
     }
 
     .btn-primary,
@@ -433,8 +444,8 @@
 
     .floating-start-browsing {
       position: fixed;
-      right: 24px;
-      bottom: 24px;
+      right: max(16px, env(safe-area-inset-right, 0px));
+      bottom: max(16px, env(safe-area-inset-bottom, 0px));
       z-index: 1100;
       display: flex;
       align-items: center;
@@ -562,24 +573,34 @@
 
     /* DM Conversation Section */
     .dm-section {
-      padding: 40px 24px 0; /* no bottom padding so next section sits directly beneath */
+      padding: clamp(28px, 6vw, 48px) clamp(12px, 4vw, 24px) clamp(16px, 4vw, 32px);
       background: var(--bg-white);
       position: relative;
+      overflow-x: hidden;
+      overflow-y: visible;
+    }
+
+    @supports (overflow: clip) {
+      .dm-section {
+        overflow-x: clip;
+      }
     }
 
     .dm-container {
       position: relative;
-      max-width: 520px;
+      max-width: min(520px, 100%);
       margin: 0 auto;
-      padding: 190px 32px 170px; /* base (mobile/tablet fallback) */
+      padding: clamp(110px, 20vw, 240px) clamp(12px, 4vw, 32px) clamp(88px, 16vw, 200px);
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: clamp(8px, 1.2vw, 10px);
     }
 
     .dm-phone-frame {
       position: absolute;
-      inset: 0;
+      left: 0;
+      right: 0;
+      top: 0;
       border-radius: 32px;
       overflow: hidden;
       pointer-events: none;
@@ -593,7 +614,9 @@
     }
 
     .dm-bubble {
-      max-width: 320px;
+      position: relative;
+      z-index: 1;
+      max-width: min(320px, 85vw);
       padding: 10px 18px;
       font-size: 17px;
       font-weight: 500;
@@ -609,7 +632,7 @@
       align-self: flex-end;
       border-radius: 30px 30px 18px 30px; /* slightly more rounded, still with a soft tail */
       box-shadow: 0 2px 12px rgba(0, 122, 255, 0.25);
-      transform: translateX(40px) scale(0.92);
+      transform: translateX(min(40px, 10vw)) scale(0.92);
     }
 
     .dm-bubble.received {
@@ -618,7 +641,7 @@
       align-self: flex-start;
       border-radius: 30px 30px 30px 18px; /* slightly more rounded, still with a soft tail */
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-      transform: translateX(-40px) scale(0.92);
+      transform: translateX(calc(-1 * min(40px, 10vw))) scale(0.92);
     }
 
     .dm-bubble.is-visible {
@@ -638,11 +661,10 @@
 
     /* Inline "Why choose us" block under the DM phone */
     .features-inline {
-      max-width: 900px;
-      margin: -350px auto 0;        /* move initial position much further up toward the phone */
-      padding: 4px 24px 32px;
+      max-width: min(900px, 100%);
+      margin: clamp(-260px, -18vw - 48px, -100px) auto 0;
+      padding: 4px clamp(16px, 4vw, 24px) clamp(20px, 4vw, 32px);
       transform-origin: top center;
-      will-change: transform, opacity;
     }
 
     .features-inline-header {
@@ -682,7 +704,7 @@
       .features-inline {
         max-width: 100%;
         padding: 8px 16px 28px;
-        margin: -130px auto 0; /* lower than desktop's -350px so it sits further down on mobile */
+        margin: clamp(-140px, -22vw, -72px) auto 0;
       }
 
       .features-inline-grid {
@@ -734,18 +756,34 @@
       text-underline-offset: 2px;
     }
 
+    /* Tablet: balance phone, bubbles, and following sections */
+    @media (min-width: 481px) and (max-width: 1023px) {
+      .dm-container {
+        max-width: min(580px, 92vw);
+        padding: clamp(140px, 22vw, 280px) clamp(14px, 3vw, 36px) clamp(100px, 16vw, 240px);
+      }
+
+      .features-inline {
+        margin-top: clamp(-200px, -16vw - 24px, -88px);
+      }
+
+      .dm-bubble {
+        max-width: min(340px, 78vw);
+      }
+    }
+
     @media (max-width: 480px) {
       .dm-section {
-        padding: 60px 16px 80px;
+        padding: clamp(40px, 10vw, 60px) clamp(12px, 4vw, 16px) clamp(48px, 12vw, 80px);
       }
 
       .dm-container {
         max-width: 100%;
-        padding: 135px 12px 150px; /* shift DMs slightly further up on mobile */
+        padding: clamp(100px, 28vw, 150px) clamp(10px, 3vw, 14px) clamp(88px, 24vw, 150px);
       }
 
       .dm-bubble {
-        max-width: 200px;
+        max-width: min(200px, 82vw);
         font-size: 13px;   /* slightly smaller text on mobile */
         padding: 6px 10px; /* smaller, tighter bubbles on mobile */
       }
@@ -765,12 +803,16 @@
     /* Desktop: make phone + DMs much bigger */
     @media (min-width: 1024px) {
       .dm-section {
-        padding: 60px 24px 10px; /* almost no bottom padding on desktop */
+        padding: clamp(48px, 5vw, 72px) clamp(20px, 3vw, 32px) clamp(8px, 2vw, 16px);
       }
 
       .dm-container {
-        max-width: 700px;
-        padding: 360px 64px 440px; /* shift DMs slightly up on desktop */
+        max-width: min(700px, 94vw);
+        padding: clamp(280px, 32vw, 400px) clamp(40px, 5vw, 72px) clamp(300px, 34vw, 480px);
+      }
+
+      .features-inline {
+        margin-top: clamp(-300px, -24vw - 32px, -160px);
       }
 
       .dm-phone-frame {
@@ -778,9 +820,9 @@
       }
 
       .dm-bubble {
-        max-width: 420px; /* narrower so long messages wrap to more lines and don't cross over */
-        padding: 18px 28px;
-        font-size: 21px;
+        max-width: min(420px, 52vw);
+        padding: clamp(14px, 1.4vw, 18px) clamp(20px, 2vw, 28px);
+        font-size: clamp(17px, 1.1vw + 0.75rem, 21px);
       }
     }
 
@@ -810,7 +852,6 @@
         scale(var(--card-scale));
       transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease,
         filter 0.35s ease;
-      will-change: transform, opacity, filter;
     }
 
     .feature-card:hover .feature-card-body {
@@ -855,10 +896,17 @@
 
     /* Tools Preview Section */
     .tools-preview {
-      padding: 100px 24px;
+      padding: clamp(56px, 10vw, 100px) clamp(16px, 4vw, 24px);
       background: linear-gradient(180deg, #ffffff 0%, #f7f7fa 100%);
       position: relative;
-      overflow: visible;
+      overflow-x: hidden;
+      overflow-y: visible;
+    }
+
+    @supports (overflow: clip) {
+      .tools-preview {
+        overflow-x: clip;
+      }
     }
 
     .tools-container {
@@ -868,7 +916,7 @@
 
     .tools-header {
       text-align: center;
-      margin: 125px 0 28px; /* push Featured Tools text down by 300px statically */
+      margin: clamp(36px, 10vw, 125px) 0 clamp(18px, 3vw, 28px);
     }
 
     .tools-header-copy {
@@ -926,7 +974,7 @@
       min-height: 96px;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
       width: 100%;
-      max-width: 420px; /* fixed width so they stack like a vertical list */
+      max-width: min(420px, 100%);
     }
 
     .tool-card:hover {
@@ -1379,8 +1427,15 @@
 
     /* CTA Section */
     .cta-section {
-      padding: 100px 24px;
+      padding: clamp(64px, 12vw, 100px) clamp(16px, 4vw, 24px);
       background: #fafcf9;
+      overflow-x: hidden;
+    }
+
+    @supports (overflow: clip) {
+      .cta-section {
+        overflow-x: clip;
+      }
     }
 
     .cta-content {
@@ -1414,6 +1469,14 @@
       border: none;
       padding: 0;
       cursor: pointer;
+    }
+
+    /* Decorative CTA asset sits off-canvas; hide before it forces horizontal scroll */
+    @media (max-width: 1280px) {
+      .cta-content::after,
+      .cta-huh-trigger {
+        display: none;
+      }
     }
 
     .cta-panel {
@@ -1542,6 +1605,37 @@
     .fade-in {
       animation: fadeInUp 0.6s ease forwards;
       opacity: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-content,
+      .features-inline,
+      #dmContainer,
+      .tools-header,
+      .tools-track .tool-card {
+        transition: none !important;
+      }
+
+      .dm-bubble {
+        transition: opacity 0.15s ease !important;
+      }
+
+      .dm-bubble,
+      .dm-bubble.is-visible {
+        opacity: 1 !important;
+        transform: translateX(0) scale(1) !important;
+      }
+
+      .feature-card-body {
+        transition: none !important;
+        filter: none !important;
+      }
+
+      .fade-in {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
     }
 
     /* Responsive Design */
@@ -1724,7 +1818,7 @@
       }
 
       .hero {
-        padding: 100px 16px 60px;
+        padding: clamp(72px, 16vw, 100px) 16px clamp(40px, 10vw, 60px);
       }
 
       .hero::after {
@@ -1732,11 +1826,12 @@
       }
 
       .hero h1 {
-        font-size: 38px;
+        font-size: clamp(30px, 6vw + 1rem, 40px);
+        max-width: 22ch;
       }
 
       .hero .subheadline {
-        font-size: 19px;
+        font-size: clamp(17px, 2.2vw + 0.85rem, 20px);
       }
 
       .section-title {
@@ -1786,12 +1881,12 @@
       }
 
       .tools-header {
-        margin: 100px 0 32px;
+        margin: clamp(28px, 10vw, 80px) 0 28px;
       }
 
       /* Featured tools: on mobile show full content including descriptions */
       .tools-preview {
-        padding: 80px 16px 60px;
+        padding: clamp(48px, 12vw, 80px) 16px clamp(40px, 10vw, 60px);
       }
 
       .tools-preview .tool-card {
@@ -1955,7 +2050,7 @@
 
     @media (max-width: 480px) {
       .hero h1 {
-        font-size: 34px;
+        font-size: clamp(28px, 7vw + 0.75rem, 34px);
       }
 
       .tool-card {
@@ -1984,7 +2079,6 @@
       <nav class="nav" id="mainNav">
         <a href="index.html" class="nav-link active">Home</a>
         <a href="student.html" class="nav-link">Students</a>
-        <a href="powerful.html" class="nav-link">Powerful Tools</a>
         <div class="nav-dropdown" id="navDropdown">
           <button type="button" class="desktop-dropdown-toggle" id="desktopDropdownToggle" aria-label="More menu" aria-expanded="false">☰</button>
           <button class="nav-dropdown-btn">More ▼</button>
@@ -1994,7 +2088,7 @@
             <a href="report.html" class="nav-link">Report a Bug</a>
           </div>
         </div>
-        <a href="https://buy.stripe.com/4gMaEW87U7IO8C8azDcjS01" target="_blank" class="btn-donate">Donate</a>
+        <a href="https://buy.stripe.com/9B63cu3RE2ouaKgcHLcjS00" target="_blank" class="btn-donate">Donate</a>
       </nav>
     </div>
   </header>
@@ -2004,7 +2098,7 @@
     <button class="hero-cat-trigger" type="button" aria-label="Play meow sound"></button>
     <div class="hero-content">
       <h1>Study smarter.</h1>
-      <p class="subheadline">Find the best AI tools, study resources, books, and courses.<br>All hand-picked for students. <strong>100% free, forever.</strong></p>
+      <p class="subheadline">Browse through our thousands of insane tools!</p>
       <div class="hero-buttons">
         <a href="student.html" class="btn-primary btn-compare-motion">
           <span class="btn-label">Start Browsing</span>
@@ -2075,7 +2169,7 @@
           </div>
           <div class="tool-content">
             <div class="tool-name">Free Movies</div>
-            <div class="tool-note">Tubi, Pluto TV, and more free streaming</div>
+            <div class="tool-note">Streaming links on the student tools page</div>
           </div>
         </a>
         <a href="https://elevenreader.io" target="_blank" rel="noopener noreferrer" class="tool-card">
@@ -2177,7 +2271,7 @@
         </div>
         <div class="cta-actions">
           <a href="student.html" class="btn-primary">Get Started</a>
-          <a href="powerful.html" class="btn-secondary">Browse All</a>
+          <a href="student.html" class="btn-secondary">Browse All</a>
         </div>
       </div>
     </div>
@@ -2188,11 +2282,10 @@
     <div class="footer-links">
       <a href="index.html" class="footer-link">Home</a>
       <a href="student.html" class="footer-link">Students</a>
-      <a href="powerful.html" class="footer-link">Powerful Tools</a>
       <a href="report.html" class="footer-link">Report a Bug</a>
       <a href="about.html" class="footer-link">About</a>
       <a href="contact.html" class="footer-link">Contact</a>
-      <a href="https://buy.stripe.com/4gMaEW87U7IO8C8azDcjS01" target="_blank" class="footer-link">Donate</a>
+      <a href="https://buy.stripe.com/9B63cu3RE2ouaKgcHLcjS00" target="_blank" class="footer-link">Donate</a>
     </div>
     <div class="footer-copyright">© 2026 Free University Tools. Helping students succeed with free tools.</div>
   </footer>
