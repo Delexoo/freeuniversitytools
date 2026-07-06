@@ -8,7 +8,6 @@
 
 [![Website](https://img.shields.io/badge/website-freeuniversitytools.com-007AFF?style=for-the-badge&logo=safari&logoColor=white)](https://freeuniversitytools.com)
 [![Students](https://img.shields.io/badge/browse-student_tools-34C759?style=for-the-badge&logo=googlechrome&logoColor=white)](https://freeuniversitytools.com/student.html)
-[![Powerful](https://img.shields.io/badge/browse-powerful_tools-5856D6?style=for-the-badge&logo=bolt&logoColor=white)](https://freeuniversitytools.com/powerful.html)
 [![Report Bug](https://img.shields.io/badge/report-bug_%2F_suggestion-FF3B30?style=for-the-badge&logo=githubissues&logoColor=white)](https://freeuniversitytools.com/report.html)
 
 [![GitHub stars](https://img.shields.io/github/stars/Delexoo/freeuniversitytools?style=social)](https://github.com/Delexoo/freeuniversitytools/stargazers)
@@ -42,10 +41,9 @@
 
 **Free University Tools** is a student-focused resource hub that collects high-quality free (and free-tier) web apps in one place. Instead of digging through random lists, you get:
 
-- A **searchable student tools page** with Free / Paid filters
-- **Organized categories** — AI, study, PDF, books, courses, converters, and more
+- A **searchable student tools page** with Free / Paid filters — study, creator, and productivity tools in one place
+- **Organized categories** — AI, study, PDF, books, courses, converters, GitHub powerhouses, and more
 - A **polished landing page** with featured tools and quick navigation
-- A **Powerful Tools** page for creator-focused utilities
 
 Everything is static, fast, and hosted on **GitHub Pages** at [freeuniversitytools.com](https://freeuniversitytools.com).
 
@@ -55,7 +53,7 @@ Everything is static, fast, and hosted on **GitHub Pages** at [freeuniversitytoo
 
 | Feature | Description |
 | --- | --- |
-| **Live search** | Filter 150+ student tools by name, category, or keyword |
+| **Live search** | Filter 270+ student tools by name, category, or keyword |
 | **Pricing filters** | Toggle between Free Tools and Paid / free-tier options |
 | **Responsive layout** | Works on desktop, tablet, and mobile |
 | **Curated categories** | Must-try picks, AI suites, study apps, converters, and utilities |
@@ -69,8 +67,7 @@ Everything is static, fast, and hosted on **GitHub Pages** at [freeuniversitytoo
 | Page | URL | Purpose |
 | --- | --- | --- |
 | Home | [freeuniversitytools.com](https://freeuniversitytools.com) | Landing page, featured tools, contact CTA |
-| Students | [/student.html](https://freeuniversitytools.com/student.html) | Main tool directory with search & filters |
-| Powerful Tools | [/powerful.html](https://freeuniversitytools.com/powerful.html) | Creator & productivity tool collection |
+| Students | [/student.html](https://freeuniversitytools.com/student.html) | Full tool directory — study, creator, and productivity tools with search & filters |
 | About | [/about.html](https://freeuniversitytools.com/about.html) | Mission, team context, social links |
 | Contact | [/contact.html](https://freeuniversitytools.com/contact.html) | Get in touch |
 | Report a Bug | [/report.html](https://freeuniversitytools.com/report.html) | Report issues or suggest new tools |
@@ -183,8 +180,7 @@ Everything is static, fast, and hosted on **GitHub Pages** at [freeuniversitytoo
 ```
 freeuniversitytools/
 ├── index.html          # Homepage
-├── student.html        # Student tool directory (search + filters)
-├── powerful.html       # Powerful / creator tools
+├── student.html        # Tool directory (search + filters)
 ├── about.html
 ├── contact.html
 ├── donate.html
@@ -194,7 +190,6 @@ freeuniversitytools/
 │   ├── common.js       # Shared nav & header behavior
 │   ├── index.js        # Homepage scroll effects
 │   ├── student.js      # Student page search & filters
-│   └── powerful.js     # Powerful page search & filters
 ├── doc/                # Logos, images, audio, and doc mirror
 ├── scripts/            # Maintenance scripts
 ├── CNAME               # Custom domain (freeuniversitytools.com)

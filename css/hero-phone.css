@@ -1,0 +1,324 @@
+/* Split hero + scroll-locked phone conversation */
+
+html {
+  overflow-x: clip;
+}
+
+html.hero-scroll-locked {
+  scroll-behavior: auto;
+}
+
+.hero-stage {
+  --hero-msg-count: 9;
+  --hero-scroll-per-msg: 42vh;
+  position: relative;
+  overflow: visible;
+  height: calc(100vh + (var(--hero-msg-count) - 1) * var(--hero-scroll-per-msg));
+  background: #fff;
+  border-bottom: 1px solid #e4e4e7;
+}
+
+.hero.hero--split {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  min-height: 100svh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(64px + 24px) 20px 48px;
+  background: #fff;
+  border-bottom: none;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow: hidden;
+}
+
+.hero.hero--split.is-pinned {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+}
+
+.hero-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+  width: min(1140px, 100%);
+  margin: 0 auto;
+}
+
+.hero--split .hero-content {
+  max-width: none;
+  width: 100%;
+  text-align: left;
+  animation: none;
+}
+
+.hero--split h1 {
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  color: #09090b;
+  margin: 0 0 16px;
+  max-width: 14ch;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.hero--split .subheadline {
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  color: #52525b;
+  line-height: 1.55;
+  margin: 0 0 28px;
+  max-width: 34ch;
+  padding: 0;
+}
+
+.hero--split .hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+/* Phone column */
+.hero-phone-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.hero-phone {
+  position: relative;
+  width: min(300px, 100%);
+  padding: 21% 6.25% 16%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.12));
+}
+
+.hero-phone-frame {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  line-height: 0;
+  border-radius: 32px;
+  overflow: hidden;
+}
+
+.hero-phone-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-phone-messages {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-height: min(380px, 46vh);
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hero-phone-messages::-webkit-scrollbar {
+  display: none;
+}
+
+/* Bubbles inside phone */
+.hero-phone-messages .dm-bubble {
+  position: relative;
+  z-index: 1;
+  max-width: 86%;
+  padding: 7px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.28;
+  opacity: 0;
+  transform: translateY(10px) scale(0.96);
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+.hero-phone-messages .dm-bubble.sent {
+  align-self: flex-end;
+  background: #007aff;
+  color: #fff;
+  border-radius: 16px 16px 6px 16px;
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.22);
+}
+
+.hero-phone-messages .dm-bubble.received {
+  align-self: flex-start;
+  background: #3a3a3c;
+  color: #fff;
+  border-radius: 16px 16px 16px 6px;
+}
+
+.hero-phone-messages .dm-bubble.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.hero-phone-messages .dm-bubble.sent + .dm-bubble.sent,
+.hero-phone-messages .dm-bubble.received + .dm-bubble.received {
+  margin-top: -2px;
+}
+
+.hero-phone-messages .dm-bubble.sent + .dm-bubble.received,
+.hero-phone-messages .dm-bubble.received + .dm-bubble.sent {
+  margin-top: 8px;
+}
+
+.hero-phone-messages .dm-link {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Scroll progress */
+.hero-scroll-progress {
+  width: min(200px, 60%);
+  height: 3px;
+  background: #e4e4e7;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.hero-scroll-progress-bar {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: #09090b;
+  border-radius: inherit;
+  transition: width 0.2s ease;
+}
+
+.hero-scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #a1a1aa;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.hero-scroll-cue svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  animation: heroCueBounce 1.6s ease-in-out infinite;
+}
+
+.hero-stage.is-complete .hero-scroll-cue {
+  opacity: 0;
+}
+
+@keyframes heroCueBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+/* Hide old standalone DM phone block (legacy) */
+.dm-section .dm-container {
+  display: none;
+}
+
+.dm-section {
+  padding-top: clamp(40px, 6vw, 64px);
+}
+
+/* Mobile: stacked, auto-play, no scroll lock */
+@media (max-width: 900px) {
+  .hero-stage {
+    height: auto;
+  }
+
+  .hero.hero--split {
+    position: relative;
+    min-height: auto;
+    padding: calc(52px + 20px) 16px 32px;
+  }
+
+  .hero-split {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .hero--split .hero-content {
+    text-align: center;
+  }
+
+  .hero--split h1 {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero--split .subheadline {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero--split .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-phone {
+    width: min(280px, 88vw);
+  }
+
+  .hero-scroll-cue {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-stage {
+    height: auto;
+  }
+
+  .hero.hero--split {
+    position: relative;
+  }
+
+  .hero-phone-messages .dm-bubble {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .hero-scroll-cue,
+  .hero-scroll-progress {
+    display: none;
+  }
+}

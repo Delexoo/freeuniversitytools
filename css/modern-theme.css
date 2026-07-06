@@ -1,0 +1,327 @@
+/* Shared modern theme — clean, minimal, professional */
+:root {
+  --bg-white: #FAFAFA;
+  --bg-light: #F4F4F5;
+  --bg-page: #FAFAFA;
+  --bg-subtle: #F4F4F5;
+  --surface: #FFFFFF;
+  --text-primary: #09090B;
+  --text-secondary: #52525B;
+  --text-muted: #A1A1AA;
+  --accent-blue: #2563EB;
+  --accent: #2563EB;
+  --border-gray: #E4E4E7;
+  --border-light: #E4E4E7;
+  --border: #E4E4E7;
+  --hover-gray: #F4F4F5;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius: 12px;
+}
+
+body {
+  background-color: var(--bg-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* —— Header —— */
+.header {
+  background: rgba(250, 250, 250, 0.8);
+  border-bottom: 1px solid var(--border-gray);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+}
+
+.header.scrolled {
+  box-shadow: 0 1px 0 var(--border-gray);
+}
+
+.logo {
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.logo-free {
+  color: var(--text-primary);
+}
+
+.logo-university {
+  color: var(--text-secondary);
+}
+
+.logo-tools {
+  color: var(--text-muted);
+}
+
+.nav-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-primary);
+}
+
+.nav-link::after {
+  background-color: var(--accent-blue);
+  height: 1.5px;
+}
+
+.nav-dropdown-content {
+  border-color: var(--border-gray);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-donate {
+  text-transform: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  padding: 9px 16px;
+  background: var(--text-primary);
+}
+
+.btn-donate:hover {
+  background: #27272A;
+  transform: none;
+}
+
+/* —— Homepage hero —— */
+.hero {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-gray);
+}
+
+.hero h1 {
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+}
+
+.hero .subheadline {
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.btn-primary,
+.btn-contact-dark {
+  background: var(--text-primary);
+  box-shadow: none;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.btn-primary:hover,
+.btn-contact-dark:hover {
+  background: #27272A;
+  box-shadow: none;
+  transform: none;
+}
+
+.btn-secondary,
+.btn-contact-outline {
+  background: var(--surface);
+  border-color: var(--border-gray);
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.btn-secondary:hover {
+  background: var(--bg-light);
+  transform: none;
+}
+
+/* —— Sections —— */
+.dm-section,
+.tools-preview {
+  background: var(--bg-white);
+}
+
+.section-title,
+.tools-preview .section-title,
+.cta-title {
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+}
+
+.tools-eyebrow,
+.cta-eyebrow,
+.features-intro-eyebrow {
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.tools-subtitle,
+.features-tagline,
+.cta-text {
+  color: var(--text-secondary);
+}
+
+.tool-card {
+  border: 1px solid var(--border-gray);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+  background: var(--surface);
+}
+
+.tool-card:hover {
+  border-color: #D4D4D8;
+  box-shadow: var(--shadow-md);
+  transform: none;
+}
+
+.features-inline-item {
+  border: 1px solid var(--border-gray);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+  background: var(--surface);
+}
+
+.contact-strip {
+  background: #18181B;
+  border-color: #27272A;
+}
+
+.contact-strip-badge {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.cta-section {
+  background: var(--bg-white);
+}
+
+.cta-panel {
+  background: var(--surface);
+  border: 1px solid var(--border-gray);
+  border-radius: var(--radius-lg);
+  box-shadow: none;
+}
+
+.floating-start-browsing {
+  background: var(--surface);
+  border-color: var(--border-gray);
+  box-shadow: var(--shadow-md);
+}
+
+.footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border-gray);
+}
+
+.footer-link {
+  color: var(--text-secondary);
+}
+
+.footer-link:hover {
+  color: var(--text-primary);
+}
+
+/* —— Student / tools pages —— */
+.tools-widget {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--border-gray);
+  box-shadow: var(--shadow-md);
+  border-radius: 14px;
+}
+
+.tools-search,
+.tools-toggle-3 {
+  border-color: var(--border-gray);
+  border-radius: 10px;
+}
+
+.tools-search:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.main-title {
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+}
+
+.main-subtitle {
+  color: var(--text-secondary);
+}
+
+.tool-category {
+  border: 1px solid var(--border-gray);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+  background: var(--surface);
+}
+
+.tool-category:hover {
+  border-color: #D4D4D8;
+  box-shadow: var(--shadow-md);
+}
+
+.category-title {
+  background: var(--bg-light);
+  color: var(--text-secondary);
+  border-bottom-color: var(--border-gray);
+}
+
+.tool-category[data-category="must-try"] .category-title {
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.06) 0%, var(--bg-light) 100%);
+  color: var(--accent-blue);
+  border-left-color: var(--accent-blue);
+}
+
+.tool-link {
+  border-radius: var(--radius-sm);
+}
+
+.tool-link:hover {
+  color: var(--accent-blue);
+  background: var(--bg-light);
+}
+
+.tool-link-icon {
+  border-color: var(--border-gray);
+  background: var(--bg-light);
+  border-radius: var(--radius-sm);
+}
+
+.future-category-card {
+  border-color: var(--border-gray);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+.future-category-card:hover {
+  border-color: #D4D4D8;
+  box-shadow: var(--shadow-md);
+  transform: none;
+}
+
+/* —— About / contact / inner pages —— */
+.about-card,
+.contact-card,
+.donate-card,
+.report-card,
+.page-card {
+  border-color: var(--border-gray);
+  box-shadow: none;
+}
+
+.bug-report-button {
+  background: var(--text-primary);
+  box-shadow: var(--shadow-md);
+  border: 1px solid transparent;
+}
+
+.bug-report-button:hover {
+  background: #27272A;
+  transform: none;
+}

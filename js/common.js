@@ -1,3 +1,25 @@
+// Fixed legal / disclaimer badge (bottom-right on every page)
+(function () {
+  if (document.getElementById('legalBadge')) return;
+
+  const script = document.currentScript || document.querySelector('script[src*="common.js"]');
+  const scriptSrc = script && script.getAttribute('src') ? script.getAttribute('src') : 'js/common.js';
+  const inSubfolder = scriptSrc.includes('../');
+  const policyHref = inSubfolder ? '../policy.html' : 'policy.html';
+
+  const onPolicyPage = /policy\.html$/i.test(window.location.pathname);
+  if (onPolicyPage) return;
+
+  const badge = document.createElement('a');
+  badge.id = 'legalBadge';
+  badge.className = 'legal-badge';
+  badge.href = policyHref;
+  badge.setAttribute('aria-label', 'Terms and Disclaimer');
+  badge.textContent = 'Terms & Disclaimer';
+
+  document.body.appendChild(badge);
+})();
+
 // Mobile menu toggle
 const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 const mainNav = document.getElementById('mainNav');
