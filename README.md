@@ -24,25 +24,6 @@
 
 ---
 
-## Preview
-
-<table>
-  <tr>
-    <td align="center" width="50%">
-      <img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/iPhoneDMs.png" alt="Homepage DM conversation preview" width="100%" />
-      <br />
-      <sub><b>Homepage</b> — animated intro & featured stack</sub>
-    </td>
-    <td align="center" width="50%">
-      <img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/cluely.jpg" alt="Featured tool example" width="120" style="border-radius: 16px;" />
-      <br />
-      <sub><b>Student directory</b> — searchable categories with icons & pricing tags</sub>
-    </td>
-  </tr>
-</table>
-
----
-
 ## Table of contents
 
 - [About](#about)
@@ -51,10 +32,9 @@
 - [Tool categories](#tool-categories)
 - [Tech stack](#tech-stack)
 - [Project structure](#project-structure)
-- [Local development](#local-development)
 - [Contributing](#contributing)
 - [Disclaimer](#disclaimer)
-- [License & credits](#license--credits)
+- [Credits](#credits)
 
 ---
 
@@ -177,7 +157,7 @@ Everything is static, fast, and hosted on **GitHub Pages** at [freeuniversitytoo
 
 </details>
 
-> **Note:** Third-party sites are not owned or controlled by this project. Use external links at your own discretion. See [Disclaimer](#disclaimer).
+> All linked tools are third-party services. See the [Disclaimer](#disclaimer) before using any external site.
 
 ---
 
@@ -223,22 +203,6 @@ freeuniversitytools/
 
 ---
 
-## Local development
-
-No install step is required — open any `.html` file in a browser, or serve the folder locally:
-
-```bash
-# Python 3
-python -m http.server 8080
-
-# Node (if npx is available)
-npx serve .
-```
-
-Then visit `http://localhost:8080`.
-
----
-
 ## Contributing
 
 We welcome tool suggestions, bug reports, and improvements.
@@ -264,11 +228,27 @@ We welcome tool suggestions, bug reports, and improvements.
 
 ## Disclaimer
 
-> **For educational purposes only.** Free University Tools does not host third-party content and is not responsible for external websites. Always verify terms of service for any tool you use. Where appropriate, use safe browsing practices (e.g. Redirect Blocker, VPN) when visiting third-party resources.
+**READ CAREFULLY BEFORE USING THIS SITE OR ANY LINKED TOOL.**
+
+Free University Tools is a **link directory only**. We do **not** host, operate, endorse, guarantee, or take responsibility for any third-party website, app, extension, file, stream, download, or service listed here.
+
+**By using this project, you agree that:**
+
+- You use every linked resource **entirely at your own risk**.
+- You are solely responsible for complying with the **laws, school policies, copyright rules, and terms of service** that apply to you and to each third-party site.
+- **We do not support, encourage, or condone piracy, copyright infringement, cheating, plagiarism, paywall bypassing for unlawful purposes, or any illegal activity.**
+- Listings are provided for **general information and educational discovery only** — not as legal, academic, financial, or safety advice.
+- We **do not verify** that third-party links are safe, accurate, malware-free, permanent, or appropriate for your age, region, or institution.
+- Linked sites can change, break, collect data, show ads, require payment, or contain content we do not control. **We are not liable** for any loss, damage, account action, disciplinary outcome, malware, data exposure, or other harm arising from your use of third-party tools.
+- Tool names, logos, and trademarks belong to their **respective owners**. This project is not affiliated with, sponsored by, or officially connected to any listed brand unless explicitly stated.
+
+**If you are unsure whether a tool is allowed for your use case, do not use it.** When browsing third-party sites, protect yourself: use strong security practices, respect platform rules, and prefer official sources when available.
+
+**No warranty.** This site and repository are provided **“as is”** without warranties of any kind.
 
 ---
 
-## License & credits
+## Credits
 
 - **Project:** [Delexoo / Free University Tools](https://github.com/Delexoo/freeuniversitytools)
 - **Website:** [freeuniversitytools.com](https://freeuniversitytools.com)
