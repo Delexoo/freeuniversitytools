@@ -1,19 +1,19 @@
-/* Shared modern theme — clean, minimal, professional */
+/* Shared modern theme, clean, minimal, professional */
 :root {
-  --bg-white: #FAFAFA;
-  --bg-light: #F4F4F5;
-  --bg-page: #FAFAFA;
-  --bg-subtle: #F4F4F5;
-  --surface: #FFFFFF;
-  --text-primary: #09090B;
-  --text-secondary: #52525B;
-  --text-muted: #A1A1AA;
-  --accent-blue: #2563EB;
-  --accent: #2563EB;
-  --border-gray: #E4E4E7;
-  --border-light: #E4E4E7;
-  --border: #E4E4E7;
-  --hover-gray: #F4F4F5;
+  --bg-white: #fafafa;
+  --bg-light: #f4f4f5;
+  --bg-page: #fafafa;
+  --bg-subtle: #f4f4f5;
+  --surface: #ffffff;
+  --text-primary: #09090b;
+  --text-secondary: #52525b;
+  --text-muted: #a1a1aa;
+  --accent-blue: #2563eb;
+  --accent: #2563eb;
+  --border-gray: #e4e4e7;
+  --border-light: #e4e4e7;
+  --border: #e4e4e7;
+  --hover-gray: #f4f4f5;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
   --radius-sm: 8px;
@@ -28,7 +28,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* —— Header —— */
+/* Header */
 .header {
   background: rgba(250, 250, 250, 0.8);
   border-bottom: 1px solid var(--border-gray);
@@ -89,11 +89,11 @@ body {
 }
 
 .btn-donate:hover {
-  background: #27272A;
+  background: #27272a;
   transform: none;
 }
 
-/* —— Homepage hero —— */
+/* Homepage hero */
 .hero {
   background: var(--surface);
   border-bottom: 1px solid var(--border-gray);
@@ -120,7 +120,7 @@ body {
 
 .btn-primary:hover,
 .btn-contact-dark:hover {
-  background: #27272A;
+  background: #27272a;
   box-shadow: none;
   transform: none;
 }
@@ -139,7 +139,7 @@ body {
   transform: none;
 }
 
-/* —— Sections —— */
+/* Sections */
 .dm-section,
 .tools-preview {
   background: var(--bg-white);
@@ -173,7 +173,7 @@ body {
 }
 
 .tool-card:hover {
-  border-color: #D4D4D8;
+  border-color: #d4d4d8;
   box-shadow: var(--shadow-md);
   transform: none;
 }
@@ -186,8 +186,8 @@ body {
 }
 
 .contact-strip {
-  background: #18181B;
-  border-color: #27272A;
+  background: #18181b;
+  border-color: #27272a;
 }
 
 .contact-strip-badge {
@@ -225,7 +225,7 @@ body {
   color: var(--text-primary);
 }
 
-/* —— Student / tools pages —— */
+/* Student / tools pages */
 .tools-widget {
   background: rgba(255, 255, 255, 0.92);
   border: 1px solid var(--border-gray);
@@ -262,7 +262,7 @@ body {
 }
 
 .tool-category:hover {
-  border-color: #D4D4D8;
+  border-color: #d4d4d8;
   box-shadow: var(--shadow-md);
 }
 
@@ -273,7 +273,11 @@ body {
 }
 
 .tool-category[data-category="must-try"] .category-title {
-  background: linear-gradient(90deg, rgba(37, 99, 235, 0.06) 0%, var(--bg-light) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(37, 99, 235, 0.06) 0%,
+    var(--bg-light) 100%
+  );
   color: var(--accent-blue);
   border-left-color: var(--accent-blue);
 }
@@ -300,12 +304,12 @@ body {
 }
 
 .future-category-card:hover {
-  border-color: #D4D4D8;
+  border-color: #d4d4d8;
   box-shadow: var(--shadow-md);
   transform: none;
 }
 
-/* —— About / contact / inner pages —— */
+/* About / contact / inner pages */
 .about-card,
 .contact-card,
 .donate-card,
@@ -322,6 +326,6 @@ body {
 }
 
 .bug-report-button:hover {
-  background: #27272A;
+  background: #27272a;
   transform: none;
 }

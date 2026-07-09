@@ -1,28 +1,31 @@
-/* Split hero + scroll-locked phone conversation */
+/* Split hero + phone conversation (auto-revealed messages on desktop) */
 
 html {
   overflow-x: clip;
 }
 
-html.hero-scroll-locked {
-  scroll-behavior: auto;
-}
-
 .hero-stage {
   --hero-msg-count: 9;
-  --hero-scroll-per-msg: 42vh;
   position: relative;
   overflow: visible;
-  height: calc(100vh + (var(--hero-msg-count) - 1) * var(--hero-scroll-per-msg));
+  height: 100vh;
+  height: 100svh;
+  min-height: 100vh;
+  min-height: 100svh;
   background: #fff;
   border-bottom: 1px solid #e4e4e7;
 }
 
 .hero.hero--split {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 2;
+  height: 100vh;
+  height: 100svh;
   min-height: 100vh;
   min-height: 100svh;
+  max-height: 100vh;
+  max-height: 100svh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -30,16 +33,21 @@ html.hero-scroll-locked {
   padding: calc(64px + 24px) 20px 48px;
   background: #fff;
   border-bottom: none;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
   overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
 }
 
-.hero.hero--split.is-pinned {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 50;
+.hero--split .hero-terms-note {
+  bottom: clamp(12px, 2vh, 22px);
+  z-index: 3;
 }
 
 .hero-split {
@@ -92,22 +100,20 @@ html.hero-scroll-locked {
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  min-width: 0;
 }
 
 .hero-phone {
   position: relative;
   width: min(300px, 100%);
-  padding: 21% 6.25% 16%;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  aspect-ratio: 300 / 600;
   filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.12));
 }
 
 .hero-phone-frame {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 1;
   pointer-events: none;
   line-height: 0;
   border-radius: 32px;
@@ -116,18 +122,26 @@ html.hero-scroll-locked {
 
 .hero-phone-frame img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
   display: block;
 }
 
 .hero-phone-messages {
-  position: relative;
-  z-index: 1;
+  position: absolute;
+  z-index: 2;
+  top: 25%;
+  left: 6.25%;
+  right: 6.25%;
+  bottom: 16%;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
   gap: 5px;
-  max-height: min(380px, 46vh);
+  overflow-x: hidden;
   overflow-y: auto;
+  pointer-events: none;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -136,22 +150,34 @@ html.hero-scroll-locked {
   display: none;
 }
 
+@keyframes heroBubbleIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 /* Bubbles inside phone */
 .hero-phone-messages .dm-bubble {
   position: relative;
   z-index: 1;
+  flex-shrink: 0;
   max-width: 86%;
   padding: 7px 10px;
   font-size: 11px;
   font-weight: 500;
   line-height: 1.28;
-  opacity: 0;
-  transform: translateY(10px) scale(0.96);
-  transition:
-    opacity 0.35s ease,
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  margin: 0 !important;
   word-wrap: break-word;
   overflow-wrap: anywhere;
+}
+
+.hero-phone-messages .dm-bubble:not(.is-visible) {
+  display: none;
 }
 
 .hero-phone-messages .dm-bubble.sent {
@@ -170,8 +196,9 @@ html.hero-scroll-locked {
 }
 
 .hero-phone-messages .dm-bubble.is-visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+  display: block;
+  animation: heroBubbleIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  pointer-events: auto;
 }
 
 .hero-phone-messages .dm-bubble.sent + .dm-bubble.sent,
@@ -192,60 +219,85 @@ html.hero-scroll-locked {
 
 /* Scroll progress */
 .hero-scroll-progress {
-  width: min(200px, 60%);
-  height: 3px;
+  width: min(240px, 72%);
+  height: 4px;
   background: #e4e4e7;
   border-radius: 999px;
   overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .hero-scroll-progress-bar {
   display: block;
   height: 100%;
   width: 0%;
-  background: #09090b;
+  background: linear-gradient(90deg, #007aff 0%, #09090b 100%);
   border-radius: inherit;
-  transition: width 0.2s ease;
+  transition: width 0.2s ease-out;
+  will-change: width;
 }
 
-.hero-scroll-cue {
-  position: absolute;
-  left: 50%;
-  bottom: 20px;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #a1a1aa;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.hero-scroll-cue svg {
-  width: 18px;
-  height: 18px;
-  stroke: currentColor;
-  fill: none;
-  animation: heroCueBounce 1.6s ease-in-out infinite;
+.hero-stage.is-complete .hero-scroll-progress-bar {
+  width: 100% !important;
 }
 
 .hero-stage.is-complete .hero-scroll-cue {
-  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  position: absolute;
+  bottom: clamp(36px, 5vh, 52px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #a1a1aa;
+  z-index: 3;
+  animation: heroCueBounce 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero-stage.is-complete .hero-scroll-cue svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+}
+
+.hero-stage.is-complete .hero-terms-note {
+  opacity: 0.65;
+}
+
+.hero-page-progress {
+  display: none;
+}
+
+.hero-scroll-cue {
+  display: none;
+}
+@media (min-width: 901px) {
+  .hero.hero--split .hero-cat-trigger,
+  .hero.hero--split::after {
+    display: none !important;
+  }
+
+  .hero-scroll-progress,
+  .hero-stage.is-complete .hero-scroll-cue,
+  .hero-page-progress {
+    display: none !important;
+  }
 }
 
 @keyframes heroCueBounce {
   0%,
   100% {
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
   }
   50% {
-    transform: translateY(4px);
+    transform: translateX(-50%) translateY(4px);
   }
 }
 
@@ -258,53 +310,83 @@ html.hero-scroll-locked {
   padding-top: clamp(40px, 6vw, 64px);
 }
 
-/* Mobile: stacked, auto-play, no scroll lock */
+/* Mobile: centered hero copy only (no phone conversation) */
 @media (max-width: 900px) {
   .hero-stage {
-    height: auto;
+    height: 100vh;
+    height: 100svh;
+    min-height: 100vh;
+    min-height: 100svh;
   }
 
   .hero.hero--split {
-    position: relative;
-    min-height: auto;
-    padding: calc(52px + 20px) 16px 32px;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    height: 100vh;
+    height: 100svh;
+    min-height: 100vh;
+    min-height: 100svh;
+    max-height: 100vh;
+    max-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: calc(56px + 20px) 20px 56px;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 
   .hero-split {
-    grid-template-columns: 1fr;
-    gap: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 36rem;
+    margin: 0 auto;
   }
 
   .hero--split .hero-content {
+    width: 100%;
     text-align: center;
   }
 
   .hero--split h1 {
-    margin-left: auto;
-    margin-right: auto;
+    font-size: clamp(1.85rem, 7vw, 2.35rem);
+    margin: 0 auto 12px;
+    max-width: none;
   }
 
   .hero--split .subheadline {
-    margin-left: auto;
-    margin-right: auto;
+    font-size: clamp(0.95rem, 3.5vw, 1.08rem);
+    margin: 0 auto 20px;
+    max-width: none;
   }
 
   .hero--split .hero-buttons {
     justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
   }
 
-  .hero-phone {
-    width: min(280px, 88vw);
+  .hero-phone-col,
+  .hero-scroll-progress,
+  .hero-scroll-cue,
+  .hero-page-progress {
+    display: none !important;
   }
 
-  .hero-scroll-cue {
-    display: none;
+  .hero--split .hero-terms-note {
+    bottom: clamp(16px, 3vh, 28px);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-stage {
-    height: auto;
+    min-height: auto;
   }
 
   .hero.hero--split {
@@ -314,10 +396,10 @@ html.hero-scroll-locked {
   .hero-phone-messages .dm-bubble {
     opacity: 1 !important;
     transform: none !important;
+    animation: none !important;
     transition: none !important;
   }
 
-  .hero-scroll-cue,
   .hero-scroll-progress {
     display: none;
   }

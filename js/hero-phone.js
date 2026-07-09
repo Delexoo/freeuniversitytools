@@ -1,209 +1,156 @@
 (function () {
-  const stage = document.getElementById('heroStage');
-  const hero = document.getElementById('hero');
-  const messagesEl = document.getElementById('heroPhoneMessages');
-  const progressBar = document.getElementById('heroProgressBar');
+  const stage = document.getElementById("heroStage");
+  const hero = document.getElementById("hero");
+  const messagesEl = document.getElementById("heroPhoneMessages");
+  const progressBar = document.getElementById("heroProgressBar");
+  const progressRoot = document.querySelector(".hero-scroll-progress");
+  const pageProgressFill = document.getElementById("heroPageProgressFill");
 
   if (!stage || !hero || !messagesEl) return;
 
-  const bubbles = Array.from(messagesEl.querySelectorAll('.dm-bubble'));
+  const bubbles = Array.from(messagesEl.querySelectorAll(".dm-bubble"));
   if (bubbles.length === 0) return;
 
-  const DESKTOP_MIN = 901;
-  let mobileTimer = null;
-  let lastVisible = -1;
-  let isPinned = false;
-  let scrollEnabled = false;
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  const desktopMq = window.matchMedia("(min-width: 901px)");
 
-  stage.style.setProperty('--hero-msg-count', String(bubbles.length));
+  let lastVisible = -1;
+  let lastProgress = -1;
+  let revealTimer = null;
+  let nextIndex = 0;
+
+  stage.style.setProperty("--hero-msg-count", String(bubbles.length));
 
   function clamp(value, min, max) {
     return Math.min(max, Math.max(min, value));
   }
 
-  function isDesktopMode() {
-    return (
-      window.innerWidth >= DESKTOP_MIN &&
-      !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    );
+  function isDesktop() {
+    return desktopMq.matches;
   }
 
-  function getStageMetrics() {
-    const stageTop = stage.getBoundingClientRect().top + window.scrollY;
-    const scrollable = Math.max(stage.offsetHeight - window.innerHeight, 1);
-    return { stageTop, scrollable };
+  function randomBetween(min, max) {
+    return min + Math.random() * (max - min);
   }
 
-  function scrollMessagesToEnd() {
-    messagesEl.scrollTop = messagesEl.scrollHeight;
+  function delayBeforeBubble(index) {
+    if (index === 0) return randomBetween(500, 1100);
+
+    const bubble = bubbles[index];
+    const prev = bubbles[index - 1];
+    const sameSide =
+      bubble.classList.contains("sent") === prev.classList.contains("sent");
+
+    if (sameSide) return randomBetween(280, 720);
+    if (bubble.classList.contains("received")) {
+      return randomBetween(900, 1900);
+    }
+    return randomBetween(650, 1400);
   }
 
-  function setVisibleCount(count) {
-    const next = clamp(count, 0, bubbles.length);
-    if (next === lastVisible) return;
-    lastVisible = next;
-
-    bubbles.forEach((bubble, index) => {
-      bubble.classList.toggle('is-visible', index < next);
+  function scrollMessagesToBottom() {
+    const top = messagesEl.scrollHeight - messagesEl.clientHeight;
+    if (top <= 0) return;
+    messagesEl.scrollTo({
+      top,
+      behavior: reducedMotion ? "auto" : "smooth",
     });
+  }
 
-    if (progressBar) {
-      const pct = bubbles.length <= 1 ? 100 : ((next - 1) / (bubbles.length - 1)) * 100;
-      progressBar.style.width = `${clamp(pct, 0, 100)}%`;
+  function setVisibleCount(count, progress) {
+    const next = clamp(count, 0, bubbles.length);
+    const pct = clamp(progress * 100, 0, 100);
+    const complete = next >= bubbles.length;
+
+    if (next !== lastVisible) {
+      lastVisible = next;
+      bubbles.forEach((bubble, index) => {
+        bubble.classList.toggle("is-visible", index < next);
+      });
+      if (next > 0) scrollMessagesToBottom();
     }
 
-    if (next > 0) {
-      requestAnimationFrame(scrollMessagesToEnd);
-    }
+    stage.classList.toggle("is-complete", complete);
+    hero.classList.toggle("is-complete", complete);
 
-    stage.classList.toggle('is-complete', next >= bubbles.length);
-  }
-
-  function visibleFromScrollY(y) {
-    const { stageTop, scrollable } = getStageMetrics();
-    const segment = scrollable / bubbles.length;
-    if (y <= stageTop) return 1;
-    const index = Math.floor((y - stageTop) / segment) + 1;
-    return clamp(index, 1, bubbles.length);
-  }
-
-  function maxScrollForVisible(visible) {
-    const { stageTop, scrollable } = getStageMetrics();
-    if (visible >= bubbles.length) return stageTop + scrollable;
-    const segment = scrollable / bubbles.length;
-    return stageTop + visible * segment;
-  }
-
-  function setPinned(pinned) {
-    if (pinned === isPinned) return;
-    isPinned = pinned;
-    hero.classList.toggle('is-pinned', pinned);
-    stage.classList.toggle('is-pinned', pinned);
-    document.documentElement.classList.toggle('hero-scroll-locked', pinned);
-  }
-
-  function updateFromScroll() {
-    if (!isDesktopMode()) return;
-
-    const { stageTop, scrollable } = getStageMetrics();
-    const y = window.scrollY;
-    const stageEnd = stageTop + scrollable;
-
-    if (y < stageTop) {
-      setPinned(false);
-      setVisibleCount(1);
-      return;
-    }
-
-    if (y <= stageEnd + 2) {
-      setPinned(true);
-
-      const visible = visibleFromScrollY(y);
-      setVisibleCount(visible);
-
-      if (visible < bubbles.length) {
-        const maxY = maxScrollForVisible(visible);
-        if (y > maxY + 1) {
-          window.scrollTo({ top: maxY, left: 0, behavior: 'auto' });
-        }
+    if (progress !== lastProgress) {
+      lastProgress = progress;
+      if (progressBar) progressBar.style.width = `${pct}%`;
+      if (progressRoot) {
+        progressRoot.setAttribute("aria-valuenow", String(Math.round(pct)));
       }
+      if (pageProgressFill) pageProgressFill.style.height = `${pct}%`;
+    }
+  }
+
+  function clearRevealTimer() {
+    if (revealTimer) {
+      window.clearTimeout(revealTimer);
+      revealTimer = null;
+    }
+  }
+
+  function scheduleNextReveal() {
+    clearRevealTimer();
+
+    if (!isDesktop() || document.hidden) return;
+
+    if (nextIndex >= bubbles.length) {
+      setVisibleCount(bubbles.length, 1);
       return;
     }
 
-    if (lastVisible < bubbles.length) {
-      setPinned(true);
-      setVisibleCount(bubbles.length);
-      window.scrollTo({ top: stageEnd, left: 0, behavior: 'auto' });
+    const wait = delayBeforeBubble(nextIndex);
+    revealTimer = window.setTimeout(() => {
+      nextIndex += 1;
+      setVisibleCount(nextIndex, nextIndex / bubbles.length);
+      scheduleNextReveal();
+    }, wait);
+  }
+
+  function startConversation() {
+    clearRevealTimer();
+    nextIndex = 0;
+    setVisibleCount(0, 0);
+    scheduleNextReveal();
+  }
+
+  function stopConversation() {
+    clearRevealTimer();
+  }
+
+  function init() {
+    if (!isDesktop()) {
+      stopConversation();
+      setVisibleCount(0, 0);
+      stage.classList.remove("is-complete");
+      hero.classList.remove("is-complete");
       return;
     }
 
-    setPinned(false);
-  }
-
-  function onWheel(event) {
-    if (!isDesktopMode() || !isPinned) return;
-    if (lastVisible >= bubbles.length) return;
-
-    const { stageTop, scrollable } = getStageMetrics();
-    const y = window.scrollY;
-    const maxY = maxScrollForVisible(lastVisible);
-
-    if (event.deltaY > 0 && y >= maxY - 1) {
-      event.preventDefault();
-    }
-
-    if (event.deltaY > 0 && y >= stageTop + scrollable - 1 && lastVisible < bubbles.length) {
-      event.preventDefault();
-    }
-  }
-
-  function startMobileSequence() {
-    if (mobileTimer) clearInterval(mobileTimer);
-    setPinned(false);
-    setVisibleCount(0);
-
-    let step = 0;
-    mobileTimer = setInterval(() => {
-      step += 1;
-      setVisibleCount(step);
-      if (step >= bubbles.length) {
-        clearInterval(mobileTimer);
-        mobileTimer = null;
-      }
-    }, 650);
-  }
-
-  function enableDesktop() {
-    if (mobileTimer) {
-      clearInterval(mobileTimer);
-      mobileTimer = null;
-    }
-    setVisibleCount(1);
-    updateFromScroll();
-    if (!scrollEnabled) {
-      window.addEventListener('scroll', updateFromScroll, { passive: true });
-      window.addEventListener('wheel', onWheel, { passive: false });
-      scrollEnabled = true;
-    }
-  }
-
-  function enableMobile() {
-    if (scrollEnabled) {
-      window.removeEventListener('scroll', updateFromScroll);
-      window.removeEventListener('wheel', onWheel);
-      scrollEnabled = false;
-    }
-    setPinned(false);
-    setVisibleCount(1);
-    startMobileSequence();
-  }
-
-  function onResize() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      if (scrollEnabled) {
-        window.removeEventListener('scroll', updateFromScroll);
-        window.removeEventListener('wheel', onWheel);
-        scrollEnabled = false;
-      }
-      setPinned(false);
-      setVisibleCount(bubbles.length);
+    if (reducedMotion) {
+      stopConversation();
+      setVisibleCount(bubbles.length, 1);
       return;
     }
 
-    if (window.innerWidth < DESKTOP_MIN) {
-      enableMobile();
-    } else {
-      enableDesktop();
+    startConversation();
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (!isDesktop() || reducedMotion) return;
+    if (document.hidden) {
+      stopConversation();
+      return;
     }
-  }
+    if (nextIndex < bubbles.length) {
+      scheduleNextReveal();
+    }
+  });
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    setVisibleCount(bubbles.length);
-  } else if (window.innerWidth < DESKTOP_MIN) {
-    enableMobile();
-  } else {
-    enableDesktop();
-  }
+  desktopMq.addEventListener("change", init);
 
-  window.addEventListener('resize', onResize, { passive: true });
+  init();
 })();

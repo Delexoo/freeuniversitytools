@@ -1,16 +1,16 @@
-/* Free University Tools — unified design system */
+/* Free University Tools, unified design system */
 
 :root {
-  --bg: #FAFAFA;
-  --bg-muted: #F4F4F5;
-  --surface: #FFFFFF;
-  --text: #09090B;
-  --text-secondary: #52525B;
-  --text-muted: #A1A1AA;
-  --accent: #2563EB;
-  --accent-hover: #1D4ED8;
-  --border: #E4E4E7;
-  --border-strong: #D4D4D8;
+  --bg: #fafafa;
+  --bg-muted: #f4f4f5;
+  --surface: #ffffff;
+  --text: #09090b;
+  --text-secondary: #52525b;
+  --text-muted: #a1a1aa;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --border: #e4e4e7;
+  --border-strong: #d4d4d8;
   --radius-sm: 8px;
   --radius: 12px;
   --radius-lg: 16px;
@@ -20,7 +20,8 @@
   --content-max: 1080px;
   --narrow-max: 640px;
   --directory-max: 1200px;
-  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* legacy aliases */
   --bg-white: var(--bg);
@@ -32,7 +33,9 @@
   --hover-gray: var(--bg-muted);
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -64,7 +67,7 @@ a {
   color: inherit;
 }
 
-/* —— Buttons —— */
+/* Buttons */
 .btn-primary,
 .btn-contact-dark {
   display: inline-flex;
@@ -86,7 +89,7 @@ a {
 
 .btn-primary:hover,
 .btn-contact-dark:hover {
-  background: #27272A;
+  background: #27272a;
 }
 
 .btn-secondary,
@@ -105,7 +108,9 @@ a {
   border-radius: var(--radius-sm);
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .btn-secondary:hover,
@@ -120,7 +125,7 @@ a {
   flex-shrink: 0;
 }
 
-/* —— Eyebrows & section titles —— */
+/* Eyebrows & section titles */
 .section-eyebrow,
 .tools-eyebrow,
 .cta-eyebrow,
@@ -157,7 +162,7 @@ a {
   line-height: 1.6;
 }
 
-/* —— Homepage hero —— */
+/* Homepage hero */
 .hero {
   padding: calc(var(--header-h) + 72px) 20px 80px;
   background: var(--surface);
@@ -204,7 +209,7 @@ a {
   letter-spacing: 0.01em;
 }
 
-/* —— Value section —— */
+/* Value section */
 .value-section {
   padding: 72px 20px;
   background: var(--bg);
@@ -267,7 +272,7 @@ a {
   line-height: 1.55;
 }
 
-/* —— Tools preview —— */
+/* Tools preview */
 .tools-preview {
   padding: 72px 20px;
   background: var(--bg);
@@ -299,7 +304,9 @@ a {
   border-radius: var(--radius);
   text-decoration: none;
   color: inherit;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .tool-card:hover {
@@ -340,7 +347,7 @@ a {
   line-height: 1.4;
 }
 
-/* —— Contact strip —— */
+/* Contact strip */
 .contact-strip {
   padding: 64px 20px;
   background: var(--surface);
@@ -400,7 +407,7 @@ a {
   gap: 10px;
 }
 
-/* —— CTA —— */
+/* CTA */
 .cta-section {
   padding: 72px 20px;
   background: var(--bg-muted);
@@ -429,7 +436,7 @@ a {
   flex-shrink: 0;
 }
 
-/* —— Footer —— */
+/* Footer */
 .footer {
   padding: 36px 20px;
   background: var(--surface);
@@ -462,7 +469,7 @@ a {
   color: var(--text-muted);
 }
 
-/* —— Student tools page —— */
+/* Student tools page */
 body:has(.header--tools) main {
   max-width: var(--content-max);
   margin: 0 auto;
@@ -507,7 +514,9 @@ body:has(.header--tools) main {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .tool-category:hover {
@@ -587,7 +596,10 @@ body:has(.header--tools) main {
   border: 1px solid rgba(37, 99, 235, 0.15);
   border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .category-see-more:hover {
@@ -639,7 +651,10 @@ body:has(.header--tools) main {
   line-height: 1.35;
   border-radius: var(--radius-sm);
   border: 1px solid transparent;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .tool-link:hover {
@@ -660,16 +675,29 @@ body:has(.header--tools) main {
 }
 
 .tool-link-icon {
-  width: 28px;
-  height: 28px;
-  min-width: 28px;
-  min-height: 28px;
-  border-radius: 6px;
-  object-fit: contain;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  max-width: 32px;
+  max-height: 32px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  object-position: center;
   background: var(--bg-muted);
   border: 1px solid var(--border);
-  padding: 2px;
+  padding: 0;
   flex-shrink: 0;
+  display: block;
+  box-sizing: border-box;
+  aspect-ratio: 1;
+}
+
+img.tool-link-icon {
+  width: 32px;
+  height: 32px;
+  max-width: 32px;
+  max-height: 32px;
 }
 
 .tool-pricing-label {
@@ -684,27 +712,27 @@ body:has(.header--tools) main {
 }
 
 .tool-pricing-label[data-label="free"] {
-  color: #15803D;
+  color: #15803d;
   background: rgba(21, 128, 61, 0.1);
 }
 
 .tool-pricing-label[data-label="free-tier"] {
-  color: #B45309;
+  color: #b45309;
   background: rgba(180, 83, 9, 0.1);
 }
 
 .tool-pricing-label[data-label="limited"] {
-  color: #C2410C;
+  color: #c2410c;
   background: rgba(194, 65, 12, 0.1);
 }
 
 .tool-pricing-label[data-label="paid"] {
-  color: #DC2626;
+  color: #dc2626;
   background: rgba(220, 38, 38, 0.1);
 }
 
 body[data-mode="paid"] .tool-pricing-label {
-  color: #DC2626;
+  color: #dc2626;
   background: rgba(220, 38, 38, 0.12);
 }
 
@@ -715,16 +743,73 @@ body[data-mode="paid"] .tool-pricing-label {
   font-style: italic;
 }
 
-.secret-disclaimer {
+.secret-disclaimer,
+.legal-disclaimer {
   font-size: 12px;
   color: var(--text-muted);
   text-align: center;
   margin: 0 auto 24px;
   padding: 0 20px;
   max-width: var(--content-max);
+  line-height: 1.55;
 }
 
-/* —— Modal —— */
+.legal-disclaimer {
+  font-size: 11px;
+  max-width: 52rem;
+}
+
+.legal-disclaimer a {
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.legal-disclaimer a:hover {
+  color: var(--text);
+}
+
+.terms-notice {
+  max-width: var(--directory-max);
+  margin: 0 auto 28px;
+  padding: 16px 18px;
+  border: 1px solid #f0c2c2;
+  border-radius: var(--radius);
+  background: #fff8f8;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.terms-notice-title {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #b42318;
+}
+
+.terms-notice p {
+  margin: 0 0 8px;
+}
+
+.terms-notice p:last-child {
+  margin-bottom: 0;
+}
+
+.terms-notice a {
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.terms-notice a:hover {
+  color: var(--accent);
+}
+
+/* Modal */
 .modal-overlay {
   display: none;
   position: fixed;
@@ -748,6 +833,17 @@ body[data-mode="paid"] .tool-pricing-label {
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
+}
+
+.modal-card--legal {
+  max-width: 520px;
+}
+
+.modal-card--legal a {
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .modal-card h2 {
@@ -798,7 +894,7 @@ body[data-mode="paid"] .tool-pricing-label {
   background: var(--accent-hover);
 }
 
-/* —— Inner pages (about, contact, report, donate) —— */
+/* Inner pages (about, contact, report, donate) */
 .main-content {
   max-width: var(--narrow-max);
   margin: 0 auto;
@@ -1020,10 +1116,10 @@ main:not(.main-content) {
 }
 
 .btn-donation:hover {
-  background: #27272A;
+  background: #27272a;
 }
 
-/* —— Responsive —— */
+/* Responsive */
 @media (max-width: 900px) {
   .value-grid {
     grid-template-columns: 1fr;
@@ -1090,11 +1186,46 @@ main:not(.main-content) {
   }
 }
 
-/* —— Policy page —— */
+/* Policy page */
 .policy-updated {
   font-size: 13px;
   color: var(--text-muted);
-  margin: -28px 0 32px;
+  margin: -28px 0 20px;
+}
+
+.policy-alert {
+  margin: 0 0 36px;
+  padding: 18px 20px;
+  border: 1px solid #f0c2c2;
+  border-radius: var(--radius);
+  background: #fff8f8;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.policy-alert-title {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #b42318;
+}
+
+.policy-alert p {
+  margin: 0 0 10px;
+}
+
+.policy-alert p:last-child {
+  margin-bottom: 0;
+}
+
+.policy-alert a {
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .policy-list {
@@ -1121,7 +1252,7 @@ main:not(.main-content) {
   border-radius: var(--radius-sm);
 }
 
-/* —— Fixed legal badge (all pages via common.js) —— */
+/* Fixed legal badge (all pages via common.js) */
 .legal-badge {
   position: fixed;
   bottom: 14px;
@@ -1140,7 +1271,10 @@ main:not(.main-content) {
   opacity: 0.8;
   backdrop-filter: blur(6px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition:
+    opacity 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .legal-badge:hover {
