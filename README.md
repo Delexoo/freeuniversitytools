@@ -59,5 +59,5 @@ Found a useful tool or a broken link? Use the [report form](https://freeuniversi
 This site is a link directory only. We do not run or guarantee third-party services. Use linked tools at your own risk and follow your school rules and each site's terms.
 
 <p align="center">
-  <sub>By <a href="https://github.com/Delexoo">Delexoo</a> · <a href="https://www.instagram.com/freeuniversitytools/">@freeuniversitytools</a></sub>
+  <sub>By <a href="https://github.com/Delexoo">Delexoo</a></sub>
 </p>
