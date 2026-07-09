@@ -1,160 +1,74 @@
-<div align="center">
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Free University Tools" width="120" />
+</p>
 
-<img src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/main/doc/FreeUniversityTools.png" alt="Free University Tools logo" width="120" />
+<h1 align="center">Free University Tools</h1>
 
-# Free University Tools
+<p align="center">
+  <strong>The curated directory of free tools for students.</strong><br />
+  AI · study apps · books · courses · converters · productivity — 270+ hand-picked links.
+</p>
 
-**A clean, curated directory of free tools for students — AI, study, books, courses, converters, and more.**
+<p align="center">
+  <a href="https://freeuniversitytools.com"><img src="https://img.shields.io/badge/Website-freeuniversitytools.com-007AFF?style=for-the-badge&logo=safari&logoColor=white" alt="Website" /></a>
+  <a href="https://freeuniversitytools.com/student.html"><img src="https://img.shields.io/badge/Browse-Student_Tools-34C759?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Student tools" /></a>
+  <a href="https://github.com/Delexoo/freeuniversitytools/stargazers"><img src="https://img.shields.io/github/stars/Delexoo/freeuniversitytools?style=for-the-badge&logo=github&label=Stars" alt="Stars" /></a>
+</p>
 
-[![Website](https://img.shields.io/badge/website-freeuniversitytools.com-007AFF?style=for-the-badge&logo=safari&logoColor=white)](https://freeuniversitytools.com)
-[![Students](https://img.shields.io/badge/browse-student_tools-34C759?style=for-the-badge&logo=googlechrome&logoColor=white)](https://freeuniversitytools.com/student.html)
-[![Report Bug](https://img.shields.io/badge/report-bug_%2F_suggestion-FF3B30?style=for-the-badge&logo=githubissues&logoColor=white)](https://freeuniversitytools.com/report.html)
-
-[![GitHub stars](https://img.shields.io/github/stars/Delexoo/freeuniversitytools?style=social)](https://github.com/Delexoo/freeuniversitytools/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/Delexoo/freeuniversitytools?style=social)](https://github.com/Delexoo/freeuniversitytools/network/members)
-[![Instagram](https://img.shields.io/badge/Instagram-@freeuniversitytools-E4405F?style=flat-square&logo=instagram&logoColor=white)](https://www.instagram.com/freeuniversitytools/)
-[![Donate](https://img.shields.io/badge/support-donate-1D1D1F?style=flat-square&logo=stripe&logoColor=white)](https://buy.stripe.com/9B63cu3RE2ouaKgcHLcjS00)
-
-*Hand-picked links. No clutter. Built for students who want useful tools fast.*
-
-[Live site](https://freeuniversitytools.com) · [Student tools](https://freeuniversitytools.com/student.html) · [About](https://freeuniversitytools.com/about.html) · [Contact](https://freeuniversitytools.com/contact.html)
-
-</div>
-
----
-
-## Table of contents
-
-- [About](#about)
-- [Features](#features)
-- [Pages](#pages)
-- [Tool categories](#tool-categories)
-- [Tech stack](#tech-stack)
-- [Project structure](#project-structure)
-- [Contributing](#contributing)
-- [Disclaimer](#disclaimer)
-- [Credits](#credits)
+<p align="center">
+  <a href="https://www.instagram.com/freeuniversitytools/"><img src="https://img.shields.io/badge/Instagram-@freeuniversitytools-E4405F?style=flat-square&logo=instagram&logoColor=white" alt="Instagram" /></a>
+  <a href="https://freeuniversitytools.com/report.html"><img src="https://img.shields.io/badge/Report-Bug_or_Suggestion-FF3B30?style=flat-square&logo=githubissues&logoColor=white" alt="Report" /></a>
+</p>
 
 ---
 
 ## About
 
-**Free University Tools** is a student-focused resource hub that collects high-quality free (and free-tier) web apps in one place. Instead of digging through random lists, you get:
+**Free University Tools** is an open-source, student-focused resource hub that collects high-quality free (and free-tier) web applications in one searchable place. No accounts, no clutter — just useful tools organized for students who want to work smarter.
 
-- A **searchable student tools page** with Free / Paid filters — study, creator, and productivity tools in one place
-- **Organized categories** — AI, study, PDF, books, courses, converters, GitHub powerhouses, and more
-- A **polished landing page** with featured tools and quick navigation
-
-Everything is static, fast, and hosted on **GitHub Pages** at [freeuniversitytools.com](https://freeuniversitytools.com).
+| | |
+|---|---|
+| **Live site** | [freeuniversitytools.com](https://freeuniversitytools.com) |
+| **Maintainer** | [Delexoo](https://github.com/Delexoo) |
+| **Hosting** | GitHub Pages + custom domain |
+| **Tools listed** | 270+ with live search & filters |
 
 ---
 
 ## Features
 
 | Feature | Description |
-| --- | --- |
-| **Live search** | Filter 270+ student tools by name, category, or keyword |
-| **Pricing filters** | Toggle between Free Tools and Paid / free-tier options |
-| **Responsive layout** | Works on desktop, tablet, and mobile |
-| **Curated categories** | Must-try picks, AI suites, study apps, converters, and utilities |
-| **No account required** | Open the site and start browsing immediately |
-| **Open source** | Site files live in this repo — suggest tools or report bugs anytime |
+|---------|-------------|
+| **Live search** | Filter tools by name, category, or keyword |
+| **Pricing filters** | Toggle Free vs Paid / free-tier options |
+| **Curated categories** | AI, study, PDF, books, courses, converters, design, and more |
+| **Responsive** | Desktop, tablet, and mobile |
+| **Open source** | Suggest tools or report issues on GitHub |
+| **No sign-up** | Open the site and start browsing immediately |
 
 ---
 
 ## Pages
 
-| Page | URL | Purpose |
-| --- | --- | --- |
-| Home | [freeuniversitytools.com](https://freeuniversitytools.com) | Landing page, featured tools, contact CTA |
-| Students | [/student.html](https://freeuniversitytools.com/student.html) | Full tool directory — study, creator, and productivity tools with search & filters |
-| About | [/about.html](https://freeuniversitytools.com/about.html) | Mission, team context, social links |
-| Contact | [/contact.html](https://freeuniversitytools.com/contact.html) | Get in touch |
-| Report a Bug | [/report.html](https://freeuniversitytools.com/report.html) | Report issues or suggest new tools |
-| Donate | [/donate.html](https://freeuniversitytools.com/donate.html) | Support the project |
+| Page | URL |
+|------|-----|
+| Home | [freeuniversitytools.com](https://freeuniversitytools.com) |
+| Student tools | [/student.html](https://freeuniversitytools.com/student.html) |
+| About | [/about.html](https://freeuniversitytools.com/about.html) |
+| Contact | [/contact.html](https://freeuniversitytools.com/contact.html) |
+| Report / suggest | [/report.html](https://freeuniversitytools.com/report.html) |
+| Donate | [/donate.html](https://freeuniversitytools.com/donate.html) |
 
 ---
 
-## Tool categories
+## Categories
 
-<details>
-<summary><b>Must try & essentials</b> — top picks every student should see</summary>
-
-<br />
-
-- Compare AI's, Redirect Blocker, Vocal Remover, Uncensored AI, Cluely
-- Curated “start here” tools with high utility for daily student work
-
-</details>
-
-<details>
-<summary><b>AI tools</b> — research, writing, math, programming, conversation, notetakers</summary>
-
-<br />
-
-| Category | Examples |
-| --- | --- |
-| Research AI | Perplexity, Claude, ChatGPT, Gemini, DeepSeek, Grok, Copilot |
-| Essay & writing | QuillBot, Grammarly, Zotero, Citation Machine, AI Detector |
-| Mathematics AI | MathBot, Symbolab, Wolfram Alpha |
-| Programming AI | Cursor, Claude, Copilot, AI Studio, Design Arena |
-| Conversation AI | Character.ai, MagicHour, Hume, Venice |
-| AI notetakers | Notion, Obsidian, Granola, Mem, Standard Notes |
-
-</details>
-
-<details>
-<summary><b>Study & learning</b> — courses, flashcards, language, code</summary>
-
-<br />
-
-- **Study:** Knowt, Quizlet, Anki, Studocu, Cluely, YouLearn AI
-- **Courses:** Khan Academy, MIT OCW, Coursera, edX, freeCodeCamp, The Odin Project
-- **Code learning:** freeCodeCamp, SoloLearn, The Odin Project
-- **Language learning:** Duolingo, HelloTalk, Memrise, Busuu
-- **Immersive reader:** ElevenReader, Speechify, Natural Reader, Edge Immersive Reader
-
-</details>
-
-<details>
-<summary><b>Media & files</b> — books, movies, PDF, image, video, audio, GIF</summary>
-
-<br />
-
-- **Free books:** Anna's Archive, OpenStax, LibGen, Project Gutenberg, Open Library
-- **PDF tools:** iLovePDF, TinyWow, LightPDF, SmallPDF, PDF.io
-- **Image tools:** Remove.bg, iLoveIMG, TinyPNG, CloudConvert, OnlineOCR
-- **Video / audio / GIF:** FreeConvert, Clipchamp, Vocal Remover, EZGIF, Audacity
-- **File sharing:** Google Drive, Dropbox, MEGA, OneDrive, WeTransfer
-
-</details>
-
-<details>
-<summary><b>Productivity & utilities</b> — polls, whiteboards, todos, notepad, design</summary>
-
-<br />
-
-- **Design:** Canva, GIMP, Figma, Photopea, Inkscape
-- **Todo lists:** Microsoft To Do, TickTick, Todoist, Minimalist
-- **Notepad:** Notion, Evernote, Simplenote, OneNote, Standard Notes
-- **Online poll:** Google Forms, Poll Maker, Typeform, SurveyMonkey
-- **Whiteboard:** Miro, Canva, Whiteboard.fi, Figma
-- **Utilities:** TinyURL, QR generators, password tools, ToolFK, 10015.io
-
-</details>
-
-<details>
-<summary><b>Discovery & misc</b> — free stuff, movies, chrome extensions, secret tools</summary>
-
-<br />
-
-- **Free stuff:** FMHY, AlternativeTo, Product Hunt, Awesome Lists
-- **Chrome extensions:** Redirect Blocker, Grammarly, Manus, AdBlock Plus
-- **Secret / paywall tools:** 12ft Ladder, Archive.ph, Remove Paywall *(educational use only)*
-
-</details>
-
-> All linked tools are third-party services. See the [Disclaimer](#disclaimer) before using any external site.
+- **Must-try essentials** — top picks for daily student work
+- **AI tools** — research, writing, math, programming, notetakers
+- **Study & learning** — courses, flashcards, language, code
+- **Media & files** — books, PDF, image, video, audio, sharing
+- **Productivity** — design, todos, whiteboards, polls, utilities
+- **Discovery** — extensions, alternatives, educational resources
 
 ---
 
@@ -165,99 +79,30 @@ Everything is static, fast, and hosted on **GitHub Pages** at [freeuniversitytoo
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white" alt="CSS3" />
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black" alt="JavaScript" />
   <img src="https://img.shields.io/badge/GitHub_Pages-222?style=flat-square&logo=githubpages&logoColor=white" alt="GitHub Pages" />
-  <img src="https://img.shields.io/badge/No_build_step-required-6E40C9?style=flat-square" alt="No build step" />
 </p>
 
-- **Frontend:** Vanilla HTML, CSS, and JavaScript (no framework required)
-- **Hosting:** GitHub Pages with custom domain via `CNAME`
-- **Assets:** Icons and media stored in [`doc/`](doc/)
-- **Scripts:** Optional Python helper in [`scripts/download_logos.py`](scripts/download_logos.py)
-
----
-
-## Project structure
-
-```
-freeuniversitytools/
-├── index.html          # Homepage
-├── student.html        # Tool directory (search + filters)
-├── about.html
-├── contact.html
-├── donate.html
-├── report.html
-├── styles.css
-├── js/
-│   ├── common.js       # Shared nav & header behavior
-│   ├── index.js        # Homepage scroll effects
-│   ├── student.js      # Student page search & filters
-├── doc/                # Logos, images, audio, and doc mirror
-├── scripts/            # Maintenance scripts
-├── CNAME               # Custom domain (freeuniversitytools.com)
-└── README.md
-```
+Vanilla HTML/CSS/JS · no build step · assets in `doc/` · optional Python helpers in `scripts/`
 
 ---
 
 ## Contributing
 
-We welcome tool suggestions, bug reports, and improvements.
-
-1. **Suggest a tool** — [Report / suggest form](https://freeuniversitytools.com/report.html)
+1. **Suggest a tool** — [Report form](https://freeuniversitytools.com/report.html)
 2. **Open an issue** — [GitHub Issues](https://github.com/Delexoo/freeuniversitytools/issues)
-3. **Submit a PR** — Fork the repo, edit the relevant HTML/JS, and open a pull request
-
-<details>
-<summary><b>Pull request checklist</b></summary>
-
-<br />
-
-- [ ] Tool link works and is relevant for students
-- [ ] Icon added under `doc/` when possible (or fallback logo used)
-- [ ] `data-pricing` set correctly (`free`, `free-tier`, `limited`, or `paid`)
-- [ ] Student search keywords still make sense for the new entry
-- [ ] Tested on mobile and desktop viewport sizes
-
-</details>
+3. **Submit a PR** — fork, edit HTML/JS, open a pull request
 
 ---
 
 ## Disclaimer
 
-**READ CAREFULLY BEFORE USING THIS SITE OR ANY LINKED TOOL.**
-
-Free University Tools is a **link directory only**. We do **not** host, operate, endorse, guarantee, or take responsibility for any third-party website, app, extension, file, stream, download, or service listed here.
-
-**By using this project, you agree that:**
-
-- You use every linked resource **entirely at your own risk**.
-- You are solely responsible for complying with the **laws, school policies, copyright rules, and terms of service** that apply to you and to each third-party site.
-- **We do not support, encourage, or condone piracy, copyright infringement, cheating, plagiarism, paywall bypassing for unlawful purposes, or any illegal activity.**
-- Listings are provided for **general information and educational discovery only** — not as legal, academic, financial, or safety advice.
-- We **do not verify** that third-party links are safe, accurate, malware-free, permanent, or appropriate for your age, region, or institution.
-- Linked sites can change, break, collect data, show ads, require payment, or contain content we do not control. **We are not liable** for any loss, damage, account action, disciplinary outcome, malware, data exposure, or other harm arising from your use of third-party tools.
-- Tool names, logos, and trademarks belong to their **respective owners**. This project is not affiliated with, sponsored by, or officially connected to any listed brand unless explicitly stated.
-
-**If you are unsure whether a tool is allowed for your use case, do not use it.** When browsing third-party sites, protect yourself: use strong security practices, respect platform rules, and prefer official sources when available.
-
-**No warranty.** This site and repository are provided **“as is”** without warranties of any kind.
+Free University Tools is a **link directory only**. We do not host, operate, or guarantee any third-party service. You use every linked resource **at your own risk** and must comply with applicable laws, school policies, and terms of service. We do not support piracy, plagiarism, or illegal activity. See the full disclaimer on the live site.
 
 ---
 
-## Credits
+## Support the project
 
-- **Project:** [Delexoo / Free University Tools](https://github.com/Delexoo/freeuniversitytools)
-- **Website:** [freeuniversitytools.com](https://freeuniversitytools.com)
-- **Instagram:** [@freeuniversitytools](https://www.instagram.com/freeuniversitytools/)
-- Tool names and logos belong to their respective owners.
+If this directory helped you, **[star the repo](https://github.com/Delexoo/freeuniversitytools)** or [donate](https://buy.stripe.com/9B63cu3RE2ouaKgcHLcjS00) to help keep it running.
 
----
-
-<div align="center">
-
-**If this project helped you, consider starring the repo or [donating](https://buy.stripe.com/9B63cu3RE2ouaKgcHLcjS00) to keep it running.**
-
-<br />
-
-Made with care for students everywhere.
-
-</div>
+<p align="center">
+  <sub>Made with care for students everywhere · © Delexoo</sub>
+</p>
