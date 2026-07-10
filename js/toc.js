@@ -19,6 +19,7 @@
   let spyObserver = null;
   let panelExpanded = DESKTOP_MQ.matches;
   let pendingScrollId = null;
+  let pendingScrollTimers = [];
   let pendingScrollFrame = 0;
 
   function isDesktop() {
@@ -67,6 +68,69 @@
     meta.textContent = count > 0 ? `${count} sections` : "";
   }
 
+  function clearPendingScrollWork() {
+    if (pendingScrollFrame) {
+      cancelAnimationFrame(pendingScrollFrame);
+      pendingScrollFrame = 0;
+    }
+    pendingScrollTimers.forEach((id) => window.clearTimeout(id));
+    pendingScrollTimers = [];
+  }
+
+  function getHeaderOffset() {
+    const headerEl = document.getElementById("header");
+    if (!headerEl) return HEADER_OFFSET;
+    return Math.max(HEADER_OFFSET, Math.ceil(headerEl.getBoundingClientRect().height) + 12);
+  }
+
+  function scrollToCategory(id, options = {}) {
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    pendingScrollId = id;
+    clearPendingScrollWork();
+
+    const runScroll = (behavior) => {
+      const el = document.getElementById(id);
+      if (!el || pendingScrollId !== id) return;
+      const y =
+        el.getBoundingClientRect().top + window.scrollY - getHeaderOffset();
+      window.scrollTo({
+        top: Math.max(0, y),
+        left: 0,
+        behavior: behavior || "auto",
+      });
+    };
+
+    // Instant jump after layout settles — smooth scroll fights expanding sections
+    const settleAndScroll = () => {
+      pendingScrollFrame = requestAnimationFrame(() => {
+        runScroll("auto");
+        pendingScrollFrame = requestAnimationFrame(() => {
+          runScroll("auto");
+          pendingScrollFrame = 0;
+        });
+      });
+
+      pendingScrollTimers.push(window.setTimeout(() => runScroll("auto"), 50));
+      pendingScrollTimers.push(window.setTimeout(() => runScroll("auto"), 150));
+      pendingScrollTimers.push(
+        window.setTimeout(() => {
+          runScroll("auto");
+          if (pendingScrollId === id) pendingScrollId = null;
+        }, 320),
+      );
+    };
+
+    if (options.waitForLoad) {
+      // Path already loaded synchronously; wait for collapse/pricing layout
+      settleAndScroll();
+      return;
+    }
+
+    settleAndScroll();
+  }
+
   function buildList() {
     list.innerHTML = "";
     links = [];
@@ -95,17 +159,23 @@
         ) {
           window.FUTStudentSearch.setQuery("", true);
         }
-        const slug = section.dataset.category;
-        const needsLoad =
-          window.FUTCategoryLoader &&
-          slug &&
-          window.FUTCategoryLoader.isDeferred(section);
 
-        if (needsLoad) {
-          window.FUTCategoryLoader.ensureCategory(slug);
+        const categorySlug = section.dataset.category;
+        let needsLoad = false;
+
+        if (window.FUTCategoryLoader && categorySlug) {
+          // Load target + all categories above it so heights don't shift mid-scroll
+          if (typeof window.FUTCategoryLoader.ensureCategoryPath === "function") {
+            needsLoad = window.FUTCategoryLoader.ensureCategoryPath(categorySlug);
+          } else if (window.FUTCategoryLoader.isDeferred(section)) {
+            needsLoad = window.FUTCategoryLoader.ensureCategory(categorySlug, {
+              immediate: true,
+            });
+          }
         }
 
-        scrollToCategory(id, { waitForLoad: Boolean(needsLoad), slug });
+        history.replaceState(null, "", `#${id}`);
+        scrollToCategory(id, { waitForLoad: needsLoad, slug: categorySlug });
         setActiveLink(a, true);
         if (!isDesktop()) setPanelExpanded(false);
       });
@@ -116,51 +186,6 @@
     });
 
     updateMeta(false);
-  }
-
-  function scrollToCategory(id, options = {}) {
-    const target = document.getElementById(id);
-    if (!target) return;
-
-    pendingScrollId = id;
-    if (pendingScrollFrame) {
-      cancelAnimationFrame(pendingScrollFrame);
-      pendingScrollFrame = 0;
-    }
-
-    const runScroll = () => {
-      const el = document.getElementById(id);
-      if (!el || pendingScrollId !== id) return;
-      const y =
-        el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
-      window.scrollTo({ top: Math.max(0, y), left: 0, behavior: "smooth" });
-    };
-
-    // First pass after layout; second pass after deferred content expands height
-    pendingScrollFrame = requestAnimationFrame(() => {
-      runScroll();
-      pendingScrollFrame = requestAnimationFrame(() => {
-        runScroll();
-        pendingScrollFrame = 0;
-      });
-    });
-
-    if (options.waitForLoad && options.slug) {
-      const onLoaded = (event) => {
-        if (event.detail?.slug !== options.slug) return;
-        window.removeEventListener("fut:category-loaded", onLoaded);
-        // Wait for collapse/expand + icon wiring to settle
-        window.setTimeout(() => {
-          runScroll();
-          window.setTimeout(runScroll, 120);
-        }, 40);
-      };
-      window.addEventListener("fut:category-loaded", onLoaded);
-      window.setTimeout(() => {
-        window.removeEventListener("fut:category-loaded", onLoaded);
-        runScroll();
-      }, 1200);
-    }
   }
 
   function setActiveLink(active, scrollTocPanel) {
@@ -196,6 +221,8 @@
 
     spyObserver = new IntersectionObserver(
       (entries) => {
+        // Don't fight an in-progress TOC jump
+        if (pendingScrollId) return;
         if (spyFrame) return;
         spyFrame = requestAnimationFrame(() => {
           spyFrame = 0;
@@ -283,6 +310,17 @@
     "scroll",
     () => {
       if (links.length === 0) return;
+      if (pendingScrollId) {
+        // Clear lock once we're near the target
+        const el = document.getElementById(pendingScrollId);
+        if (el) {
+          const top = el.getBoundingClientRect().top;
+          if (top >= 40 && top <= getHeaderOffset() + 80) {
+            pendingScrollId = null;
+          }
+        }
+        return;
+      }
       if (window.scrollY < 80 && links[0]) {
         setActiveLink(links[0].link, false);
       }

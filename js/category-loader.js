@@ -106,7 +106,7 @@
     });
   }
 
-  function notifyCategoryLoaded(section, slug) {
+  function notifyCategoryLoaded(section, slug, immediate) {
     const run = () => {
       window.dispatchEvent(
         new CustomEvent("fut:category-loaded", {
@@ -115,6 +115,11 @@
       );
     };
 
+    if (immediate) {
+      run();
+      return;
+    }
+
     if ("requestIdleCallback" in window) {
       window.requestIdleCallback(run, { timeout: 250 });
     } else {
@@ -122,7 +127,7 @@
     }
   }
 
-  function loadCategory(section) {
+  function loadCategory(section, options = {}) {
     const slug = section.dataset.category;
     if (!slug || loaded.has(slug)) {
       return false;
@@ -141,7 +146,7 @@
 
     if (scrollObserver) scrollObserver.unobserve(section);
 
-    notifyCategoryLoaded(section, slug);
+    notifyCategoryLoaded(section, slug, Boolean(options.immediate));
     return true;
   }
 
@@ -149,10 +154,26 @@
     return sections.find((section) => section.dataset.category === slug) || null;
   }
 
-  function ensureCategory(slug) {
+  function ensureCategory(slug, options = {}) {
     const section = getSectionBySlug(slug);
     if (!section) return false;
-    return loadCategory(section);
+    return loadCategory(section, options);
+  }
+
+  /** Load target + every deferred category before it so scroll positions stay stable. */
+  function ensureCategoryPath(slug) {
+    const targetIndex = sections.findIndex(
+      (section) => section.dataset.category === slug,
+    );
+    if (targetIndex < 0) return false;
+
+    let loadedAny = false;
+    for (let i = 0; i <= targetIndex; i += 1) {
+      const section = sections[i];
+      if (!section.classList.contains("is-deferred")) continue;
+      if (loadCategory(section, { immediate: true })) loadedAny = true;
+    }
+    return loadedAny;
   }
 
   function queueDeferredSections(targetSections) {
@@ -227,20 +248,24 @@
     const hash = window.location.hash.slice(1);
     if (!hash.startsWith("category-")) return;
     const slug = hash.slice("category-".length);
-    ensureCategory(slug);
+    ensureCategoryPath(slug);
     const section = getSectionBySlug(slug);
     if (!section) return;
 
     const scrollToHash = () => {
-      const y =
-        section.getBoundingClientRect().top + window.scrollY - 72;
+      const headerEl = document.getElementById("header");
+      const offset = headerEl
+        ? Math.max(72, Math.ceil(headerEl.getBoundingClientRect().height) + 12)
+        : 72;
+      const y = section.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top: Math.max(0, y), left: 0, behavior: "auto" });
     };
 
     requestAnimationFrame(() => {
       scrollToHash();
-      window.setTimeout(scrollToHash, 80);
-      window.setTimeout(scrollToHash, 250);
+      window.setTimeout(scrollToHash, 50);
+      window.setTimeout(scrollToHash, 150);
+      window.setTimeout(scrollToHash, 320);
     });
   }
 
@@ -253,6 +278,7 @@
     loaded,
     loadCategory,
     ensureCategory,
+    ensureCategoryPath,
     loadAllDeferred,
     isDeferred(section) {
       return section.classList.contains("is-deferred");
