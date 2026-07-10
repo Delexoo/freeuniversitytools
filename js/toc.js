@@ -163,7 +163,7 @@
     }
   }
 
-  function setActiveLink(active, scrollTocPanel)
+  function setActiveLink(active, scrollTocPanel) {
     links.forEach(({ link }) => {
       link.classList.toggle("is-active", link === active);
     });

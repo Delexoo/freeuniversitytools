@@ -586,7 +586,12 @@ body:has(.header--tools) main {
   }
 
   .nav.mobile-open .btn-donate {
-    display: none !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-top: 6px !important;
+    padding: 11px 16px !important;
+    text-align: center;
+    justify-content: center;
   }
 
   .header:not(.header--tools) .nav.mobile-open,

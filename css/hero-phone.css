@@ -309,15 +309,17 @@ html {
   padding-top: clamp(40px, 6vw, 64px);
 }
 
-/* Mobile: centered hero copy only (no phone conversation) */
+/* Mobile: full-screen centered hero (no phone conversation) */
 @media (max-width: 900px) {
   .hero-stage,
   .hero-stage.hero-stage--mobile {
     position: relative;
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
-    overflow: visible !important;
+    height: 100vh;
+    height: 100svh;
+    min-height: 100vh;
+    min-height: 100svh;
+    max-height: none;
+    overflow: hidden;
     border-bottom: 1px solid #e4e4e7;
   }
 
@@ -326,14 +328,17 @@ html {
     position: relative !important;
     top: auto !important;
     z-index: 1;
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
-    display: block;
+    height: 100%;
+    min-height: 100%;
+    max-height: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: calc(var(--header-h, 52px) + env(safe-area-inset-top, 0px) + 28px)
-      20px 32px;
-    overflow: visible !important;
+    padding: calc(var(--header-h, 52px) + env(safe-area-inset-top, 0px) + 16px)
+      20px calc(20px + env(safe-area-inset-bottom, 0px));
+    overflow: hidden;
     box-sizing: border-box;
     transform: none !important;
     will-change: auto !important;
@@ -343,11 +348,11 @@ html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     width: 100%;
     max-width: 36rem;
     margin: 0 auto;
-    flex: none;
+    flex: 1 1 auto;
     gap: 0;
   }
 
@@ -393,7 +398,7 @@ html {
     bottom: auto !important;
     width: 100%;
     max-width: 34rem;
-    margin: 24px auto 0;
+    margin: 20px auto 0;
     padding: 0 4px;
     opacity: 1 !important;
     flex-shrink: 0;

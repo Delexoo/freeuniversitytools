@@ -80,73 +80,15 @@ html {
     print-color-adjust: exact;
   }
 
-  /* App-tile grid — icons fill each tool container */
-  .category-tools,
-  .tool-category.is-search-active .category-tools {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-    padding: 12px;
-    flex-direction: unset;
-  }
-
-  .tool-link {
-    position: relative;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 8px;
-    padding: 0;
-    min-width: 0;
-    border: none;
-    background: transparent;
-  }
-
-  .tool-link:hover,
-  .tool-link:focus-visible {
-    background: transparent;
-    border-color: transparent;
-  }
-
+  /* Tool favicons — same list layout as desktop, accurate colors */
   .tool-link-icon,
   img.tool-link-icon {
-    width: 100% !important;
-    height: auto !important;
-    min-width: 0 !important;
-    min-height: 0 !important;
-    max-width: none !important;
-    max-height: none !important;
-    aspect-ratio: 1;
-    border-radius: 18px;
     object-fit: contain !important;
     object-position: center;
-    padding: 0 !important;
+    padding: 0;
     background: #ffffff !important;
-    border: 1px solid var(--border, #e4e4e7) !important;
     image-rendering: auto;
-    box-sizing: border-box;
-  }
-
-  .tool-link-name {
-    font-size: 11px;
-    font-weight: 500;
-    line-height: 1.25;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 0 2px;
-  }
-
-  .tool-pricing-label {
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    margin: 0;
-    font-size: 8px;
-    padding: 2px 5px;
-    pointer-events: none;
-    z-index: 1;
+    border-color: var(--border, #e4e4e7) !important;
   }
 
   .tools-preview .tool-icon,
@@ -162,35 +104,16 @@ html {
     border-color: var(--border, #e4e4e7) !important;
   }
 
-  .category-see-more {
-    width: calc(100% - 24px);
-    margin-top: 2px;
-  }
-
   /* Prevent muted/washed text from opacity stacking */
   .hero--split .hero-terms-note {
     opacity: 1;
     color: var(--text-muted, #a1a1aa);
   }
 
-  .hero-stage,
-  .hero.hero--split {
-    overflow: visible !important;
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
-    position: relative !important;
-  }
-
   .hero--split .hero-content {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
-  }
-
-  .hero--split .hero-terms-note {
-    position: static !important;
-    opacity: 1 !important;
   }
 }
 
