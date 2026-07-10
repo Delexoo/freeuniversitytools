@@ -15,6 +15,19 @@
   <a href="https://freeuniversitytools.com/student.html">Browse tools</a>
 </p>
 
+<p align="center">
+  <a href="https://hits.sh/freeuniversitytools.com/">
+    <img
+      src="https://hits.sh/freeuniversitytools.com.svg?view=today-total&style=for-the-badge&label=website%20visits&color=2563eb&labelColor=09090b"
+      alt="Website visits"
+    >
+  </a>
+</p>
+
+<p align="center">
+  <sub>Live page-view count from <a href="https://freeuniversitytools.com">freeuniversitytools.com</a> · <a href="https://hits.sh/freeuniversitytools.com/">stats</a></sub>
+</p>
+
 ---
 
 ## About

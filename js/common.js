@@ -1,3 +1,33 @@
+// Anonymous site visit counter (hits.sh) — no cookies, no personal data
+(function () {
+  try {
+    const host = window.location.hostname || "";
+    if (
+      !host ||
+      host === "localhost" ||
+      host === "127.0.0.1" ||
+      host.endsWith(".local")
+    ) {
+      return;
+    }
+
+    const img = new Image();
+    img.alt = "";
+    img.width = 1;
+    img.height = 1;
+    img.decoding = "async";
+    img.referrerPolicy = "no-referrer-when-downgrade";
+    img.style.cssText =
+      "position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999px;top:-9999px";
+    img.src =
+      "https://hits.sh/freeuniversitytools.com.svg?view=today-total&style=flat-square&label=visits&color=2563eb&labelColor=09090b&" +
+      Date.now();
+    document.documentElement.appendChild(img);
+  } catch {
+    /* ignore tracking failures */
+  }
+})();
+
 // Fixed legal / disclaimer badge (bottom-right on every page)
 (function () {
   if (document.getElementById("legalBadge")) return;
