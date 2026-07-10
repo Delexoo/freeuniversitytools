@@ -1,7 +1,7 @@
 /* Professional navigation, shared across all pages */
 
 :root {
-  --nav-h: 52px;
+  --nav-h: var(--header-h, 52px);
   --nav-max: 1200px;
   --nav-pad: 20px;
   --nav-border: #e4e4e7;
@@ -488,11 +488,32 @@ body:has(.header--tools) main {
     overflow: hidden;
   }
 
+  .header--tools .header-inner {
+    position: relative;
+  }
+
   .header--tools .header-inner:has(.nav.mobile-open) {
-    flex-wrap: wrap !important;
-    height: auto !important;
+    flex-wrap: nowrap !important;
+    height: var(--nav-h) !important;
     min-height: var(--nav-h) !important;
-    padding-bottom: 10px !important;
+    padding-bottom: 0 !important;
+  }
+
+  .header--tools .nav.mobile-open {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1101;
+    display: flex !important;
+    width: 100%;
+    margin: 0 calc(var(--nav-pad) * -1);
+    padding: 8px var(--nav-pad) 12px !important;
+    background: rgba(255, 255, 255, 0.98);
+    border-top: 1px solid var(--nav-border);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
   }
 
   .nav.mobile-open {
@@ -553,7 +574,9 @@ body:has(.header--tools) main {
   }
 
   body:has(.header--tools) main {
-    padding-top: var(--nav-h) !important;
+    padding-top: calc(var(--nav-h) + 20px) !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
 }
 

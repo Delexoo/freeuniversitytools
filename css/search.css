@@ -200,6 +200,11 @@
 @media (max-width: 768px) {
   .header--tools .tools-search {
     padding-right: 40px;
+    font-size: 14px;
+  }
+
+  .header--tools .tools-search::placeholder {
+    font-size: 13px;
   }
 
   .search-kbd-hint {
@@ -208,7 +213,7 @@
 
   .search-suggestions {
     position: fixed;
-    z-index: 200;
-    max-height: 45vh;
+    z-index: 1200;
+    max-height: min(45vh, 360px);
   }
 }

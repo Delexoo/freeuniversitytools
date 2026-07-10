@@ -25,7 +25,7 @@
 /* Mobile FAB */
 .page-toc-toggle {
   position: fixed;
-  left: var(--toc-offset);
+  left: max(var(--toc-offset), env(safe-area-inset-left, 0px));
   bottom: max(var(--toc-offset), env(safe-area-inset-bottom, 0px));
   z-index: 3;
   display: inline-flex;
@@ -107,7 +107,7 @@
 /* Floating panel */
 .page-toc-panel {
   position: fixed;
-  left: var(--toc-offset);
+  left: max(var(--toc-offset), env(safe-area-inset-left, 0px));
   bottom: max(var(--toc-offset), env(safe-area-inset-bottom, 0px));
   z-index: 2;
   width: min(var(--toc-float-w), calc(100vw - var(--toc-offset) * 2));

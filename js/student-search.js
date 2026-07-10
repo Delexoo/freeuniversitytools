@@ -515,6 +515,21 @@
     const mode = getMode();
     let visibleCount = 0;
     const sectionScores = new Map();
+    const sectionsToLoad = new Set();
+
+    if (parsed.raw && window.FUTCategoryLoader) {
+      searchIndex.forEach((entry) => {
+        const score = scoreEntry(entry, parsed);
+        const matchesQuery = score >= 0;
+        const matchesMode = matchesPricingMode(entry.pricing, mode);
+        if (matchesQuery && matchesMode) {
+          sectionsToLoad.add(entry.section);
+        }
+      });
+      sectionsToLoad.forEach((section) => {
+        window.FUTCategoryLoader.loadCategory(section);
+      });
+    }
 
     searchIndex.forEach((entry) => {
       const score = scoreEntry(entry, parsed);
@@ -522,27 +537,39 @@
       const matchesMode = matchesPricingMode(entry.pricing, mode);
       const show = matchesQuery && matchesMode;
 
-      entry.el.style.display = show ? "" : "none";
-      entry.el.style.order = show && parsed.raw ? String(1000 - score) : "";
+      if (entry.el) {
+        entry.el.style.display = show ? "" : "none";
+        entry.el.style.order = show && parsed.raw ? String(1000 - score) : "";
 
-      if (show) {
+        if (show) {
+          visibleCount += 1;
+          highlightName(entry, parsed);
+          const prev = sectionScores.get(entry.section) || 0;
+          sectionScores.set(entry.section, Math.max(prev, score));
+        } else {
+          const nameEl = entry.el.querySelector(".tool-link-name");
+          if (nameEl) {
+            nameEl.textContent = nameEl.dataset.searchOriginal || entry.name;
+          }
+        }
+      } else if (show) {
         visibleCount += 1;
-        highlightName(entry, parsed);
         const prev = sectionScores.get(entry.section) || 0;
         sectionScores.set(entry.section, Math.max(prev, score));
-      } else {
-        const nameEl = entry.el.querySelector(".tool-link-name");
-        if (nameEl) {
-          nameEl.textContent = nameEl.dataset.searchOriginal || entry.name;
-        }
       }
     });
 
     categorySections.forEach((section) => {
-      const links = section.querySelectorAll(".tool-link");
-      const anyVisible = Array.from(links).some(
-        (link) => link.style.display !== "none",
+      const sectionEntries = searchIndex.filter(
+        (entry) => entry.section === section,
       );
+      const anyVisible = sectionEntries.some((entry) => {
+        const score = scoreEntry(entry, parsed);
+        const matchesQuery = score >= 0;
+        const matchesMode = matchesPricingMode(entry.pricing, mode);
+        return matchesQuery && matchesMode;
+      });
+
       section.classList.toggle("is-hidden", !anyVisible);
       section.classList.toggle("is-search-active", Boolean(parsed.raw));
 
@@ -587,14 +614,17 @@
     }
   }
 
+  function getSearchPlaceholder() {
+    return window.matchMedia("(max-width: 768px)").matches
+      ? "Search tools…"
+      : "Search tools, domains, categories…  (/ or Ctrl+K)";
+  }
+
   function buildSearchUi() {
     const wrap = searchInput?.closest(".header-search-wrap");
     if (!wrap || !searchInput) return;
 
-    searchInput.setAttribute(
-      "placeholder",
-      'Search tools, domains, categories…  (/ or Ctrl+K)',
-    );
+    searchInput.setAttribute("placeholder", getSearchPlaceholder());
     searchInput.setAttribute("autocomplete", "off");
     searchInput.setAttribute("spellcheck", "false");
     searchInput.setAttribute(
@@ -756,6 +786,7 @@
     window.addEventListener(
       "resize",
       () => {
+        searchInput.setAttribute("placeholder", getSearchPlaceholder());
         positionSuggestions();
       },
       { passive: true },
@@ -764,18 +795,49 @@
 
   let toolsDirectory = null;
 
+  function enrichSearchIndex() {
+    searchIndex.forEach((entry) => {
+      const keywords = (categoryKeywords[entry.categorySlug] || []).join(" ");
+      entry.keywordNorm = normalizeSearchText(keywords);
+      entry.fullText = normalizeSearchText(
+        [
+          entry.name,
+          entry.categoryNorm,
+          entry.categorySlug,
+          entry.domain,
+          keywords,
+        ].join(" "),
+      );
+      if (entry.el) {
+        const nameEl = entry.el.querySelector(".tool-link-name");
+        if (nameEl && !nameEl.dataset.searchOriginal) {
+          nameEl.dataset.searchOriginal = entry.name;
+        }
+      }
+    });
+  }
+
   window.FUTStudentSearch = {
     init(options) {
       searchInput = options.input;
-      toolLinks = options.toolLinks || [];
-      categorySections = options.categorySections || [];
+      categorySections =
+        options.categorySections ||
+        window.FUTCategoryLoader?.sections ||
+        [];
       categoryKeywords = options.categoryKeywords || {};
       getMode = options.getMode || getMode;
       matchesPricingMode = options.matchesPricingMode || matchesPricingMode;
       onFilterComplete = options.onFilterComplete || onFilterComplete;
       toolsDirectory = document.querySelector(".tools-directory");
 
-      searchIndex = toolLinks.map(buildIndexEntry);
+      if (options.searchIndex?.length) {
+        searchIndex = options.searchIndex;
+      } else {
+        toolLinks = options.toolLinks || [];
+        searchIndex = toolLinks.map(buildIndexEntry);
+      }
+
+      enrichSearchIndex();
       buildSearchUi();
 
       const urlQuery = new URLSearchParams(window.location.search).get("q");

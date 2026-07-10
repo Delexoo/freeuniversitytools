@@ -553,20 +553,41 @@ body {
     top: var(--header-h, 52px);
   }
 
-  .features-intro-section {
-    padding: clamp(64px, 16vw, 96px) 16px;
+  body:has(.mobile-banner:not(.hide)) .hero.hero--split {
+    padding-top: calc(var(--header-h, 52px) + 36px);
   }
 
-  .features-intro-section .features-inline-header {
-    margin-bottom: 0;
+  .hero--split h1 {
+    max-width: none;
+  }
+
+  .hero--split .subheadline {
+    max-width: 34ch;
+    margin-inline: auto;
+  }
+
+  .features-intro-section {
+    padding: clamp(56px, 12vw, 80px) 16px;
   }
 
   .features-intro-section .section-title {
-    font-size: clamp(2rem, 7vw, 2.5rem);
+    font-size: clamp(1.75rem, 6vw, 2.25rem);
+  }
+
+  .features-intro-section .features-tagline {
+    font-size: clamp(1rem, 3.5vw, 1.125rem);
   }
 
   .tools-preview.tools-preview--minimal {
-    padding: clamp(64px, 16vw, 96px) 16px;
+    padding: clamp(56px, 12vw, 80px) 16px;
+  }
+
+  .tools-preview--minimal .section-title {
+    font-size: clamp(1.75rem, 6vw, 2.25rem);
+  }
+
+  .tools-preview--minimal .tools-subtitle {
+    font-size: clamp(1rem, 3.5vw, 1.125rem);
   }
 
   .tools-preview.tools-preview--minimal .tool-card {
@@ -581,7 +602,7 @@ body {
   }
 
   .cta-section.cta-section--minimal {
-    padding: clamp(56px, 14vw, 88px) 16px;
+    padding: clamp(48px, 10vw, 72px) 16px;
   }
 
   .cta-section.cta-section--minimal .cta-panel {

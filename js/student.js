@@ -1,13 +1,17 @@
 const toolsSearch = document.getElementById("toolsSearch");
 const toolsModeToggle = document.getElementById("toolsModeToggle");
 const toolsDirectory = document.querySelector(".tools-directory");
-const toolLinks = toolsDirectory
-  ? Array.from(toolsDirectory.querySelectorAll(".tool-link"))
-  : Array.from(document.querySelectorAll(".tool-link"));
-const categorySections = toolsDirectory
-  ? Array.from(toolsDirectory.querySelectorAll(".tool-category"))
-  : Array.from(document.querySelectorAll(".tool-category"));
-const toggleOptions = Array.from(
+const categorySections = window.FUTCategoryLoader?.sections?.length
+  ? window.FUTCategoryLoader.sections
+  : toolsDirectory
+    ? Array.from(toolsDirectory.querySelectorAll(".tool-category"))
+    : Array.from(document.querySelectorAll(".tool-category"));
+
+function getToolLinks() {
+  return toolsDirectory
+    ? Array.from(toolsDirectory.querySelectorAll(".tool-link"))
+    : Array.from(document.querySelectorAll(".tool-link"));
+}const toggleOptions = Array.from(
   document.querySelectorAll(".tools-toggle-option"),
 );
 let currentMode = "free";
@@ -1897,54 +1901,72 @@ function toggleCategoryExpand(section) {
   expandCategory(section);
 }
 
+function initLoadedCategory(section) {
+  if (section.querySelector(".category-see-more")) return;
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "category-see-more";
+  btn.hidden = true;
+  btn.setAttribute("aria-expanded", "false");
+  btn.addEventListener("click", () => toggleCategoryExpand(section));
+  section.appendChild(btn);
+}
+
 function initCategorySeeMore() {
   categorySections.forEach((section) => {
-    if (section.querySelector(".category-see-more")) return;
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "category-see-more";
-    btn.hidden = true;
-    btn.setAttribute("aria-expanded", "false");
-    btn.addEventListener("click", () => toggleCategoryExpand(section));
-    section.appendChild(btn);
+    if (window.FUTCategoryLoader?.isDeferred(section)) return;
+    initLoadedCategory(section);
   });
 }
 
-function updateCategoryCollapse() {
+function onCategoryLoaded(event) {
+  const section = event.detail?.section;
+  if (!section) return;
+
+  injectPricingLabelsIn(section);
+  updatePricingLabelsIn(section);
+  initLoadedCategory(section);
+  updateCategoryCollapseForSection(section);
+}
+
+function updateCategoryCollapseForSection(section) {
   const queryActive = Boolean((toolsSearch?.value || "").trim());
+  const tools = section.querySelector(".category-tools");
+  const btn = section.querySelector(".category-see-more");
+  if (!tools || !btn) return;
 
+  const visible = getVisibleLinksInSection(section);
+  const categoryId = section.dataset.category;
+  const shouldCollapse =
+    !queryActive && visible.length > CATEGORY_VISIBLE_LIMIT;
+
+  if (!shouldCollapse) {
+    section.classList.remove("is-collapsed", "is-expanded");
+    tools.style.maxHeight = "none";
+    btn.hidden = true;
+    if (categoryId) expandedCategories.delete(categoryId);
+    return;
+  }
+
+  btn.hidden = false;
+  const isExpanded = categoryId && expandedCategories.has(categoryId);
+
+  if (isExpanded) {
+    section.classList.add("is-expanded");
+    section.classList.remove("is-collapsed");
+    tools.style.maxHeight = "none";
+  } else {
+    section.classList.remove("is-expanded");
+    section.classList.add("is-collapsed");
+    tools.style.maxHeight = `${measureCollapsedToolsHeight(section, visible)}px`;
+  }
+
+  updateSeeMoreButton(section, visible.length);
+}
+
+function updateCategoryCollapse() {
   categorySections.forEach((section) => {
-    const tools = section.querySelector(".category-tools");
-    const btn = section.querySelector(".category-see-more");
-    if (!tools || !btn) return;
-
-    const visible = getVisibleLinksInSection(section);
-    const categoryId = section.dataset.category;
-    const shouldCollapse =
-      !queryActive && visible.length > CATEGORY_VISIBLE_LIMIT;
-
-    if (!shouldCollapse) {
-      section.classList.remove("is-collapsed", "is-expanded");
-      tools.style.maxHeight = "none";
-      btn.hidden = true;
-      if (categoryId) expandedCategories.delete(categoryId);
-      return;
-    }
-
-    btn.hidden = false;
-    const isExpanded = categoryId && expandedCategories.has(categoryId);
-
-    if (isExpanded) {
-      section.classList.add("is-expanded");
-      section.classList.remove("is-collapsed");
-      tools.style.maxHeight = "none";
-    } else {
-      section.classList.remove("is-expanded");
-      section.classList.add("is-collapsed");
-      tools.style.maxHeight = `${measureCollapsedToolsHeight(section, visible)}px`;
-    }
-
-    updateSeeMoreButton(section, visible.length);
+    updateCategoryCollapseForSection(section);
   });
 }
 
@@ -1973,8 +1995,8 @@ function getPaidLabelForLink(linkEl) {
   return "Paid";
 }
 
-function injectPricingLabels() {
-  toolLinks.forEach((link) => {
+function injectPricingLabelsIn(root) {
+  root.querySelectorAll(".tool-link").forEach((link) => {
     if (link.querySelector(".tool-pricing-label")) return;
     const span = document.createElement("span");
     span.className = "tool-pricing-label";
@@ -1982,8 +2004,12 @@ function injectPricingLabels() {
   });
 }
 
-function updatePricingLabels() {
-  toolLinks.forEach((link) => {
+function injectPricingLabels() {
+  injectPricingLabelsIn(document);
+}
+
+function updatePricingLabelsIn(root) {
+  root.querySelectorAll(".tool-link").forEach((link) => {
     const pricing = link.dataset.pricing || "free";
     const labelEl = link.querySelector(".tool-pricing-label");
     if (!labelEl) return;
@@ -2022,6 +2048,10 @@ function updatePricingLabels() {
   });
 }
 
+function updatePricingLabels() {
+  updatePricingLabelsIn(document);
+}
+
 function setMode(nextMode) {
   if (nextMode !== "free" && nextMode !== "paid") return;
   currentMode = nextMode;
@@ -2049,7 +2079,8 @@ initCategorySeeMore();
 if (toolsSearch && window.FUTStudentSearch) {
   window.FUTStudentSearch.init({
     input: toolsSearch,
-    toolLinks,
+    searchIndex: window.FUTCategoryLoader?.searchIndex,
+    toolLinks: getToolLinks(),
     categorySections,
     categoryKeywords: CATEGORY_KEYWORDS,
     getMode: () => currentMode,
@@ -2070,21 +2101,6 @@ if (toolsSearch && window.FUTStudentSearch) {
   applyFilters();
 }
 
+window.addEventListener("fut:category-loaded", onCategoryLoaded);
+
 window.addEventListener("resize", scheduleCategoryCollapseUpdate);
-
-const sectionObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.style.opacity = "1";
-      entry.target.style.animation = "fadeInUp 0.6s ease forwards";
-      sectionObserver.unobserve(entry.target);
-    });
-  },
-  { threshold: 0.05, rootMargin: "0px 0px -50px 0px" },
-);
-
-categorySections.forEach((section) => {
-  section.style.opacity = "0";
-  sectionObserver.observe(section);
-});

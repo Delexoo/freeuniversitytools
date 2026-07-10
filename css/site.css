@@ -46,6 +46,10 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+html.page-student-scroll {
+  scroll-behavior: auto;
+}
+
 body {
   font-family: var(--font);
   font-size: 15px;
@@ -502,7 +506,7 @@ body:has(.header--tools) main {
 
 .tools-directory {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
   gap: 14px;
   align-items: start;
 }
@@ -514,6 +518,9 @@ body:has(.header--tools) main {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 120px;
+  contain: layout style paint;
   transition:
     border-color 0.15s ease,
     box-shadow 0.15s ease;
@@ -526,6 +533,19 @@ body:has(.header--tools) main {
 
 .tool-category.is-hidden {
   display: none;
+}
+
+.tool-category.is-deferred .category-tools {
+  min-height: 48px;
+  background: var(--bg-muted);
+  border-top: 1px solid var(--border);
+}
+
+.category-load-sentinel {
+  width: 100%;
+  height: 1px;
+  pointer-events: none;
+  visibility: hidden;
 }
 
 .category-title {
@@ -576,6 +596,10 @@ body:has(.header--tools) main {
   gap: 6px;
   padding: 12px;
   overflow: hidden;
+}
+
+.tool-category.is-collapsed .category-tools,
+.tool-category.is-expanded .category-tools {
   transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -672,6 +696,9 @@ body:has(.header--tools) main {
   font-weight: 500;
   flex: 1;
   min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .tool-link-icon {
@@ -682,9 +709,9 @@ body:has(.header--tools) main {
   max-width: 32px;
   max-height: 32px;
   border-radius: var(--radius-sm);
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
-  background: var(--bg-muted);
+  background: #ffffff;
   border: 1px solid var(--border);
   padding: 0;
   flex-shrink: 0;
@@ -1285,9 +1312,36 @@ main:not(.main-content) {
 
 @media (max-width: 768px) {
   .legal-badge {
-    bottom: 10px;
-    right: 10px;
+    bottom: max(10px, env(safe-area-inset-bottom, 0px));
+    right: max(10px, env(safe-area-inset-right, 0px));
     font-size: 9px;
     padding: 5px 7px;
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  body:has(.page-toc:not([hidden])) .legal-badge {
+    bottom: max(72px, calc(56px + env(safe-area-inset-bottom, 0px)));
+  }
+
+  .main-title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    padding: 0 4px;
+  }
+
+  .main-subtitle {
+    font-size: 0.9375rem;
+    margin-bottom: 28px;
+    padding: 0 4px;
+  }
+
+  .content-container {
+    padding-bottom: 32px;
+  }
+
+  body:has(.header--tools) main {
+    padding-bottom: max(72px, calc(48px + env(safe-area-inset-bottom, 0px)));
   }
 }

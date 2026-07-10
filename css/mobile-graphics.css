@@ -1,0 +1,143 @@
+/* Mobile graphics — accurate colors and cleaner icon rendering */
+
+html {
+  color-scheme: light only;
+}
+
+@media (max-width: 768px) {
+  /* Backdrop + saturate() shifts colors on iOS/Android — use solid surfaces */
+  .header,
+  .header.scrolled {
+    background: #ffffff !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .header--tools .nav.mobile-open {
+    background: #ffffff !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08) !important;
+  }
+
+  .page-toc-toggle,
+  .page-toc-panel {
+    background: #ffffff !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    border-color: var(--border, #e4e4e7) !important;
+  }
+
+  .page-toc-backdrop {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    background: rgba(9, 9, 11, 0.45) !important;
+  }
+
+  .legal-badge {
+    background: #ffffff !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    opacity: 1 !important;
+    color: var(--text-muted, #a1a1aa) !important;
+  }
+
+  .floating-start-browsing,
+  .floating-start-browsing.is-expanded {
+    background: #ffffff !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    border-color: var(--border, #e4e4e7) !important;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1) !important;
+  }
+
+  .search-suggestions {
+    background: #ffffff !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .mobile-banner {
+    background: #27272a !important;
+    color: #fafafa !important;
+  }
+
+  /* Scroll blur/opacity effects wash out cards on mobile GPUs */
+  .feature-card-body {
+    filter: none !important;
+    opacity: 1 !important;
+  }
+
+  /* Prevent iOS from auto-adjusting icon/logo colors */
+  img,
+  .tool-link-icon,
+  .tool-icon img,
+  .tools-preview .tool-icon img {
+    -webkit-color-adjust: exact;
+    color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Tool favicons — contain, white backing, no crop/stretch */
+  .tool-link-icon,
+  img.tool-link-icon {
+    object-fit: contain !important;
+    object-position: center;
+    padding: 4px;
+    background: #ffffff !important;
+    image-rendering: auto;
+    border-color: var(--border, #e4e4e7) !important;
+  }
+
+  .tools-preview .tool-icon,
+  .tools-preview .tool-icon img,
+  .tools-preview .tool-icon.tool-icon-logo img {
+    object-fit: contain;
+    padding: 2px;
+    background: #ffffff !important;
+  }
+
+  .tool-category {
+    background: #ffffff !important;
+    border-color: var(--border, #e4e4e7) !important;
+  }
+
+  /* Prevent muted/washed text from opacity stacking */
+  .hero--split .hero-terms-note {
+    opacity: 1;
+    color: var(--text-muted, #a1a1aa);
+  }
+}
+
+@media (max-width: 768px) and (prefers-color-scheme: dark) {
+  /* Keep site in light palette even when OS is dark */
+  :root {
+    color-scheme: light only;
+  }
+
+  body {
+    background: #fafafa !important;
+    color: #09090b !important;
+  }
+
+  .header,
+  .header.scrolled,
+  .header--tools .nav.mobile-open,
+  .page-toc-toggle,
+  .page-toc-panel,
+  .legal-badge,
+  .floating-start-browsing,
+  .search-suggestions,
+  .tool-category,
+  .tool-link-icon,
+  .tools-preview .tool-icon {
+    background: #ffffff !important;
+    color: inherit;
+  }
+
+  .tool-link-icon,
+  img.tool-link-icon,
+  .tools-preview .tool-icon img {
+    background: #ffffff !important;
+  }
+}

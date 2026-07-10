@@ -93,12 +93,20 @@
         ) {
           window.FUTStudentSearch.setQuery("", true);
         }
+        const slug = section.dataset.category;
+        if (
+          window.FUTCategoryLoader &&
+          slug &&
+          window.FUTCategoryLoader.isDeferred(section)
+        ) {
+          window.FUTCategoryLoader.ensureCategory(slug);
+        }
         const target = document.getElementById(id);
         if (!target) return;
         const y =
           target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
         window.scrollTo({ top: y, left: 0, behavior: "smooth" });
-        setActiveLink(a);
+        setActiveLink(a, true);
         if (!isDesktop()) setPanelExpanded(false);
       });
 
@@ -110,13 +118,13 @@
     updateMeta(false);
   }
 
-  function setActiveLink(active) {
+  function setActiveLink(active, scrollTocPanel) {
     links.forEach(({ link }) => {
       link.classList.toggle("is-active", link === active);
     });
 
-    if (active && isDesktop()) {
-      active.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    if (active && isDesktop() && scrollTocPanel) {
+      active.scrollIntoView({ block: "nearest", behavior: "instant" });
     }
   }
 
@@ -139,17 +147,25 @@
         );
     if (visibleLinks.length === 0) return;
 
+    let spyFrame = 0;
+
     spyObserver = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (spyFrame) return;
+        spyFrame = requestAnimationFrame(() => {
+          spyFrame = 0;
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort(
+              (a, b) => a.boundingClientRect.top - b.boundingClientRect.top,
+            );
 
-        if (visible.length === 0) return;
+          if (visible.length === 0) return;
 
-        const id = visible[0].target.id;
-        const match = links.find(({ section }) => section.id === id);
-        if (match) setActiveLink(match.link);
+          const id = visible[0].target.id;
+          const match = links.find(({ section }) => section.id === id);
+          if (match) setActiveLink(match.link, false);
+        });
       },
       {
         root: null,
@@ -223,7 +239,7 @@
     () => {
       if (links.length === 0) return;
       if (window.scrollY < 80 && links[0]) {
-        setActiveLink(links[0].link);
+        setActiveLink(links[0].link, false);
       }
     },
     { passive: true },

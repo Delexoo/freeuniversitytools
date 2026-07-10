@@ -42,7 +42,6 @@ html {
     sans-serif;
   overflow: hidden;
   box-sizing: border-box;
-  position: relative;
 }
 
 .hero--split .hero-terms-note {
@@ -313,29 +312,24 @@ html {
 /* Mobile: centered hero copy only (no phone conversation) */
 @media (max-width: 900px) {
   .hero-stage {
-    height: 100vh;
-    height: 100svh;
-    min-height: 100vh;
-    min-height: 100svh;
+    height: auto;
+    min-height: 0;
   }
 
   .hero.hero--split {
-    position: sticky;
-    top: 0;
+    position: relative;
+    top: auto;
     z-index: 2;
-    height: 100vh;
-    height: 100svh;
-    min-height: 100vh;
-    min-height: 100svh;
-    max-height: 100vh;
-    max-height: 100svh;
+    height: auto;
+    min-height: calc(100svh - var(--header-h, 52px));
+    max-height: none;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: calc(56px + 20px) 20px 56px;
-    overflow: hidden;
+    padding: calc(var(--header-h, 52px) + 28px) 20px 40px;
+    overflow: visible;
     box-sizing: border-box;
   }
 
