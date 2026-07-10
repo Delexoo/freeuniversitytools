@@ -314,12 +314,13 @@ html {
   .hero-stage {
     height: auto;
     min-height: 0;
+    overflow: visible;
   }
 
   .hero.hero--split {
     position: relative;
     top: auto;
-    z-index: 2;
+    z-index: 1;
     height: auto;
     min-height: calc(100svh - var(--header-h, 52px));
     max-height: none;
@@ -328,9 +329,11 @@ html {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: calc(var(--header-h, 52px) + 28px) 20px 40px;
+    padding: calc(var(--header-h, 52px) + env(safe-area-inset-top, 0px) + 24px)
+      20px calc(28px + env(safe-area-inset-bottom, 0px));
     overflow: visible;
     box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
   }
 
   .hero-split {
@@ -341,11 +344,15 @@ html {
     width: 100%;
     max-width: 36rem;
     margin: 0 auto;
+    flex: 1 1 auto;
   }
 
   .hero--split .hero-content {
     width: 100%;
     text-align: center;
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 
   .hero--split h1 {
@@ -369,12 +376,22 @@ html {
   .hero-phone-col,
   .hero-scroll-progress,
   .hero-scroll-cue,
-  .hero-page-progress {
+  .hero-page-progress,
+  .hero--split .hero-cat-trigger {
     display: none !important;
   }
 
   .hero--split .hero-terms-note {
-    bottom: clamp(16px, 3vh, 28px);
+    position: static;
+    transform: none;
+    left: auto;
+    bottom: auto;
+    width: 100%;
+    max-width: 34rem;
+    margin: 20px auto 0;
+    padding: 0 4px;
+    opacity: 1;
+    flex-shrink: 0;
   }
 }
 

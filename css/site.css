@@ -873,6 +873,49 @@ body[data-mode="paid"] .tool-pricing-label {
   text-underline-offset: 2px;
 }
 
+.modal-safety-tips {
+  margin: 14px 0 12px;
+  padding: 14px 16px;
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.modal-safety-tips p {
+  margin-bottom: 8px;
+}
+
+.modal-safety-tips p:last-child {
+  margin-bottom: 0;
+}
+
+.modal-safety-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.modal-safety-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text) !important;
+  text-decoration: none !important;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.modal-safety-link:hover {
+  border-color: var(--border-strong);
+  background: var(--bg);
+}
+
 .modal-card h2 {
   font-size: 17px;
   font-weight: 600;

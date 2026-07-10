@@ -107,6 +107,17 @@ html {
     opacity: 1;
     color: var(--text-muted, #a1a1aa);
   }
+
+  .hero-stage,
+  .hero.hero--split {
+    overflow: visible !important;
+  }
+
+  .hero--split .hero-content {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 @media (max-width: 768px) and (prefers-color-scheme: dark) {

@@ -403,6 +403,41 @@ body:has(.header--tools) main {
     --nav-pad: 16px;
   }
 
+  /* Homepage/static pages: keep header one row; menu overlays instead of pushing layout */
+  .header:not(.header--tools) .header-inner {
+    flex-wrap: nowrap !important;
+    height: var(--nav-h) !important;
+    min-height: var(--nav-h) !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    position: relative;
+  }
+
+  .header:not(.header--tools) .nav {
+    order: 3;
+  }
+
+  .header:not(.header--tools) .nav:not(.mobile-open) {
+    display: none !important;
+  }
+
+  .header:not(.header--tools) .nav.mobile-open {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1101;
+    display: flex !important;
+    width: auto;
+    margin: 0 calc(var(--nav-pad) * -1);
+    padding: 8px var(--nav-pad) 12px !important;
+    background: rgba(255, 255, 255, 0.98);
+    border-top: 1px solid var(--nav-border);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+  }
+
   .header-inner {
     flex-wrap: wrap !important;
     height: auto !important;

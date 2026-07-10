@@ -553,10 +553,6 @@ body {
     top: var(--header-h, 52px);
   }
 
-  body:has(.mobile-banner:not(.hide)) .hero.hero--split {
-    padding-top: calc(var(--header-h, 52px) + 36px);
-  }
-
   .hero--split h1 {
     max-width: none;
   }
