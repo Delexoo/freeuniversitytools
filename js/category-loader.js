@@ -226,7 +226,22 @@
   function handleInitialHash() {
     const hash = window.location.hash.slice(1);
     if (!hash.startsWith("category-")) return;
-    ensureCategory(hash.slice("category-".length));
+    const slug = hash.slice("category-".length);
+    ensureCategory(slug);
+    const section = getSectionBySlug(slug);
+    if (!section) return;
+
+    const scrollToHash = () => {
+      const y =
+        section.getBoundingClientRect().top + window.scrollY - 72;
+      window.scrollTo({ top: Math.max(0, y), left: 0, behavior: "auto" });
+    };
+
+    requestAnimationFrame(() => {
+      scrollToHash();
+      window.setTimeout(scrollToHash, 80);
+      window.setTimeout(scrollToHash, 250);
+    });
   }
 
   handleInitialHash();

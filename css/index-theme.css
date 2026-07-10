@@ -562,6 +562,12 @@ body {
     margin-inline: auto;
   }
 
+  .hero-stage,
+  .hero.hero--split {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
   .features-intro-section {
     padding: clamp(56px, 12vw, 80px) 16px;
   }

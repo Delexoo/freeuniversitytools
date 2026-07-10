@@ -556,56 +556,49 @@ body:has(.header--tools) main {
     width: 100%;
   }
 
-  .nav.mobile-open .nav-link,
-  .nav.mobile-open .nav-dropdown-btn {
+  .nav.mobile-open .nav-link {
     width: 100% !important;
     justify-content: flex-start;
-    padding: 11px 10px !important;
-    font-size: 14px !important;
+    padding: 12px 12px !important;
+    font-size: 15px !important;
     border-radius: var(--nav-radius) !important;
     border-bottom: none !important;
     text-align: left;
   }
 
+  /* Flat mobile menu: Home, Students, About, Terms — no "More" */
   .nav.mobile-open .nav-dropdown {
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
+    display: contents;
   }
 
-  .nav.mobile-open .desktop-dropdown-toggle {
+  .nav.mobile-open .desktop-dropdown-toggle,
+  .nav.mobile-open .nav-dropdown-btn {
     display: none !important;
   }
 
-  .nav.mobile-open .nav-dropdown-btn {
-    display: block !important;
-  }
-
   .nav.mobile-open .nav-dropdown-content {
-    display: flex !important;
-    flex-direction: column;
-    position: static !important;
-    width: 100%;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
-    background: transparent !important;
-    gap: 2px;
+    display: contents !important;
   }
 
   .nav.mobile-open .nav-dropdown-content .nav-link {
-    padding-left: 14px !important;
+    padding-left: 12px !important;
     color: var(--nav-muted) !important;
   }
 
   .nav.mobile-open .btn-donate {
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-top: 6px !important;
-    padding: 11px 16px !important;
-    text-align: center;
-    justify-content: center;
+    display: none !important;
+  }
+
+  .header:not(.header--tools) .nav.mobile-open,
+  .header--tools .nav.mobile-open {
+    max-height: min(70vh, 420px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    border-radius: 0 0 14px 14px;
+    background: #ffffff !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
   }
 
   body:has(.header--tools) main {

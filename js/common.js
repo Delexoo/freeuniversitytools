@@ -30,16 +30,43 @@ const mobileMenuToggle = document.getElementById("mobileMenuToggle");
 const mainNav = document.getElementById("mainNav");
 
 if (mobileMenuToggle && mainNav) {
-  mobileMenuToggle.addEventListener("click", function () {
-    mainNav.classList.toggle("mobile-open");
-    this.textContent = mainNav.classList.contains("mobile-open") ? "✕" : "☰";
+  function closeMobileNav() {
+    mainNav.classList.remove("mobile-open");
+    mobileMenuToggle.textContent = "☰";
+    document.body.classList.remove("mobile-nav-open");
+  }
+
+  function openMobileNav() {
+    mainNav.classList.add("mobile-open");
+    mobileMenuToggle.textContent = "✕";
+    document.body.classList.add("mobile-nav-open");
+  }
+
+  mobileMenuToggle.addEventListener("click", function (e) {
+    e.stopPropagation();
+    if (mainNav.classList.contains("mobile-open")) {
+      closeMobileNav();
+    } else {
+      openMobileNav();
+    }
   });
 
   mainNav.querySelectorAll(".nav-link, .btn-donate").forEach((link) => {
-    link.addEventListener("click", function () {
-      mainNav.classList.remove("mobile-open");
-      mobileMenuToggle.textContent = "☰";
-    });
+    link.addEventListener("click", closeMobileNav);
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!mainNav.classList.contains("mobile-open")) return;
+    if (mainNav.contains(e.target) || mobileMenuToggle.contains(e.target)) {
+      return;
+    }
+    closeMobileNav();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && mainNav.classList.contains("mobile-open")) {
+      closeMobileNav();
+    }
   });
 }
 

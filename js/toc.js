@@ -18,6 +18,8 @@
   let links = [];
   let spyObserver = null;
   let panelExpanded = DESKTOP_MQ.matches;
+  let pendingScrollId = null;
+  let pendingScrollFrame = 0;
 
   function isDesktop() {
     return DESKTOP_MQ.matches;
@@ -94,18 +96,16 @@
           window.FUTStudentSearch.setQuery("", true);
         }
         const slug = section.dataset.category;
-        if (
+        const needsLoad =
           window.FUTCategoryLoader &&
           slug &&
-          window.FUTCategoryLoader.isDeferred(section)
-        ) {
+          window.FUTCategoryLoader.isDeferred(section);
+
+        if (needsLoad) {
           window.FUTCategoryLoader.ensureCategory(slug);
         }
-        const target = document.getElementById(id);
-        if (!target) return;
-        const y =
-          target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
-        window.scrollTo({ top: y, left: 0, behavior: "smooth" });
+
+        scrollToCategory(id, { waitForLoad: Boolean(needsLoad), slug });
         setActiveLink(a, true);
         if (!isDesktop()) setPanelExpanded(false);
       });
@@ -118,7 +118,52 @@
     updateMeta(false);
   }
 
-  function setActiveLink(active, scrollTocPanel) {
+  function scrollToCategory(id, options = {}) {
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    pendingScrollId = id;
+    if (pendingScrollFrame) {
+      cancelAnimationFrame(pendingScrollFrame);
+      pendingScrollFrame = 0;
+    }
+
+    const runScroll = () => {
+      const el = document.getElementById(id);
+      if (!el || pendingScrollId !== id) return;
+      const y =
+        el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+      window.scrollTo({ top: Math.max(0, y), left: 0, behavior: "smooth" });
+    };
+
+    // First pass after layout; second pass after deferred content expands height
+    pendingScrollFrame = requestAnimationFrame(() => {
+      runScroll();
+      pendingScrollFrame = requestAnimationFrame(() => {
+        runScroll();
+        pendingScrollFrame = 0;
+      });
+    });
+
+    if (options.waitForLoad && options.slug) {
+      const onLoaded = (event) => {
+        if (event.detail?.slug !== options.slug) return;
+        window.removeEventListener("fut:category-loaded", onLoaded);
+        // Wait for collapse/expand + icon wiring to settle
+        window.setTimeout(() => {
+          runScroll();
+          window.setTimeout(runScroll, 120);
+        }, 40);
+      };
+      window.addEventListener("fut:category-loaded", onLoaded);
+      window.setTimeout(() => {
+        window.removeEventListener("fut:category-loaded", onLoaded);
+        runScroll();
+      }, 1200);
+    }
+  }
+
+  function setActiveLink(active, scrollTocPanel)
     links.forEach(({ link }) => {
       link.classList.toggle("is-active", link === active);
     });

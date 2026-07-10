@@ -192,9 +192,11 @@
   flex-direction: column;
 }
 
-.tool-category.is-search-active .category-tools {
-  display: flex;
-  flex-direction: column;
+@media (min-width: 769px) {
+  .tool-category.is-search-active .category-tools {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 768px) {

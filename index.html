@@ -1717,7 +1717,7 @@
           padding: 6px 10px !important;
           gap: 6px !important;
           right: 16px !important;
-          bottom: 16px !important;
+          bottom: max(48px, calc(16px + env(safe-area-inset-bottom, 0px))) !important;
         }
 
         .floating-start-arrow {
