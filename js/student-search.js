@@ -516,8 +516,10 @@
     let visibleCount = 0;
     const sectionScores = new Map();
     const sectionsToLoad = new Set();
+    const eagerLoad =
+      window.FUTCategoryLoader && (Boolean(parsed.raw) || mode === "paid");
 
-    if (parsed.raw && window.FUTCategoryLoader) {
+    if (eagerLoad) {
       searchIndex.forEach((entry) => {
         const score = scoreEntry(entry, parsed);
         const matchesQuery = score >= 0;

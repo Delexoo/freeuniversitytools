@@ -1940,6 +1940,14 @@ function onCategoryLoaded(event) {
   injectPricingLabelsIn(section);
   updatePricingLabelsIn(section);
   initLoadedCategory(section);
+
+  section.querySelectorAll(".tool-link").forEach((link) => {
+    const pricing = link.dataset.pricing || "free";
+    link.style.display = matchesPricingMode(pricing, currentMode) ? "" : "none";
+  });
+
+  const anyVisible = getVisibleLinksInSection(section).length > 0;
+  section.classList.toggle("is-hidden", !anyVisible);
   updateCategoryCollapseForSection(section);
 }
 
