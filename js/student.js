@@ -834,6 +834,9 @@ const CATEGORY_KEYWORDS = {
     "compress",
     "iloveimg",
     "tinywow",
+    "round corner",
+    "rounded corners",
+    "imageonline",
   ],
   "immersive-reader": [
     "reader",
