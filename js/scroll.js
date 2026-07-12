@@ -27,18 +27,9 @@
   let touchStartY = 0;
   let touchStartX = 0;
   const iconPreloads = new Map();
-
-  const SLOW_ICON_RE =
-    /raw\.githubusercontent\.com|google\.com\/s2\/favicons|gstatic\.com\/faviconV2|duckduckgo\.com\/ip3\//i;
-  const FAST_ICON_RE = /icon\.horse\/icon\/|github\.com\/.+\.png/i;
-
-  function isSlowIcon(src) {
-    return SLOW_ICON_RE.test(src || "");
-  }
-
-  function isFastIcon(src) {
-    return FAST_ICON_RE.test(src || "");
-  }
+  const iconWaiters = new Map();
+  let panelBuilt = false;
+  let panel = null;
 
   function networkIconForTool(tool) {
     if (!tool?.domain) return "";
@@ -55,41 +46,95 @@
 
   function resolveIconUrl(tool) {
     const icon = (tool?.icon || "").trim();
-    const fallback = (tool?.fallback || "").trim();
-    const network = networkIconForTool(tool);
-
-    if (icon && isFastIcon(icon) && !isSlowIcon(icon)) return icon;
-    if (fallback && isFastIcon(fallback) && !isSlowIcon(fallback)) return fallback;
-    if (network) return network;
-    if (icon && !isSlowIcon(icon)) return icon;
-    if (fallback) return fallback;
-    return FALLBACK_ICON;
+    if (icon && /FreeUniversityTools\.png|\/doc\//i.test(icon)) return icon;
+    return networkIconForTool(tool) || FALLBACK_ICON;
   }
 
-  function preloadIcon(url) {
-    if (!url || iconPreloads.has(url)) return;
-    const img = new Image();
-    img.referrerPolicy = "no-referrer";
-    img.decoding = "async";
-    img.onload = () => iconPreloads.set(url, "loaded");
-    img.onerror = () => iconPreloads.set(url, "error");
-    iconPreloads.set(url, "pending");
-    img.src = url;
+  function warmIcon(url) {
+    const src = url || FALLBACK_ICON;
+    const state = iconPreloads.get(src);
+    if (state === "loaded") return Promise.resolve(src);
+    if (state === "error") return Promise.resolve(FALLBACK_ICON);
+    if (state === "pending") {
+      return new Promise((resolve) => {
+        const list = iconWaiters.get(src) || [];
+        list.push(resolve);
+        iconWaiters.set(src, list);
+      });
+    }
+
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.referrerPolicy = "no-referrer";
+      img.decoding = "async";
+      img.onload = () => {
+        iconPreloads.set(src, "loaded");
+        resolve(src);
+        (iconWaiters.get(src) || []).forEach((fn) => fn(src));
+        iconWaiters.delete(src);
+      };
+      img.onerror = () => {
+        iconPreloads.set(src, "error");
+        resolve(FALLBACK_ICON);
+        (iconWaiters.get(src) || []).forEach((fn) => fn(FALLBACK_ICON));
+        iconWaiters.delete(src);
+      };
+      iconPreloads.set(src, "pending");
+      img.src = src;
+    });
   }
 
-  function preloadIconsForTools(tools) {
-    tools.forEach((tool) => preloadIcon(resolveIconUrl(tool)));
+  function warmIconsForTools(tools) {
+    tools.forEach((tool) => {
+      warmIcon(resolveIconUrl(tool));
+    });
   }
 
   function preloadAdjacentIcons() {
     const list = currentList();
     if (!list.length) return;
-    const offsets = [-2, -1, 1, 2, 3];
-    offsets.forEach((offset) => {
+    [-3, -2, -1, 0, 1, 2, 3, 4, 5].forEach((offset) => {
       const tool = list[index + offset];
-      if (tool) preloadIcon(resolveIconUrl(tool));
+      if (tool) warmIcon(resolveIconUrl(tool));
     });
-    preloadIcon(resolveIconUrl(list[index]));
+  }
+
+  function hintIconPreload(url) {
+    if (!url || document.querySelector(`link[data-scroll-icon="${url}"]`)) return;
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = url;
+    link.dataset.scrollIcon = url;
+    document.head.appendChild(link);
+  }
+
+  function applyIcon(img, tool) {
+    if (!img) return;
+    const url = resolveIconUrl(tool);
+    img.dataset.pendingIcon = url;
+    hintIconPreload(url);
+
+    if (iconPreloads.get(url) === "loaded") {
+      img.src = url;
+      img.dataset.iconUrl = url;
+      return;
+    }
+
+    if (img.dataset.iconUrl && img.complete && img.naturalWidth > 0) {
+      warmIcon(url).then((ready) => {
+        if (img.dataset.pendingIcon !== url) return;
+        img.src = ready;
+        img.dataset.iconUrl = ready;
+      });
+      return;
+    }
+
+    warmIcon(url).then((ready) => {
+      if (img.dataset.pendingIcon !== url) return;
+      img.src = ready;
+      img.dataset.iconUrl = ready;
+    });
   }
 
   function loadSaved() {
@@ -202,14 +247,64 @@
     }
   }
 
-  function iconFallback(img, tool) {
-    const fallback = tool.fallback || networkIconForTool(tool);
-    if (img.dataset.fallbackStep === "1" || img.src === fallback || img.src === FALLBACK_ICON) {
-      if (img.src !== FALLBACK_ICON) img.src = FALLBACK_ICON;
-      return;
-    }
-    img.dataset.fallbackStep = "1";
-    img.src = fallback;
+  function iconFallback(img) {
+    if (img.src !== FALLBACK_ICON) img.src = FALLBACK_ICON;
+    img.dataset.iconUrl = FALLBACK_ICON;
+  }
+
+  function ensurePanel() {
+    if (panelBuilt || !els.card) return;
+    els.card.innerHTML = `
+      <div class="scroll-panel">
+        <header class="scroll-panel-header">
+          <span class="scroll-panel-eyebrow"></span>
+          <span class="scroll-pricing tool-pricing-label"></span>
+        </header>
+        <div class="scroll-panel-hero">
+          <div class="scroll-icon-wrap">
+            <img class="scroll-icon" alt="" loading="eager" fetchpriority="high" decoding="sync" referrerpolicy="no-referrer">
+          </div>
+          <div class="scroll-panel-identity">
+            <h1 class="scroll-name"></h1>
+            <a class="scroll-domain" target="_blank" rel="noopener noreferrer"></a>
+          </div>
+        </div>
+        <div class="scroll-panel-body">
+          <p class="scroll-about"></p>
+        </div>
+        <div class="scroll-panel-actions">
+          <a class="btn-primary" target="_blank" rel="noopener noreferrer">
+            Open tool
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M7 17L17 7M17 7H9M17 7V15" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <button type="button" class="scroll-save" aria-label="Save tool" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+            </svg>
+            <span class="scroll-save-label">Save</span>
+          </button>
+        </div>
+      </div>
+    `;
+
+    panel = {
+      eyebrow: els.card.querySelector(".scroll-panel-eyebrow"),
+      pricing: els.card.querySelector(".scroll-pricing"),
+      icon: els.card.querySelector(".scroll-icon"),
+      name: els.card.querySelector(".scroll-name"),
+      domain: els.card.querySelector(".scroll-domain"),
+      about: els.card.querySelector(".scroll-about"),
+      open: els.card.querySelector(".btn-primary"),
+      save: els.card.querySelector(".scroll-save"),
+      saveLabel: els.card.querySelector(".scroll-save-label"),
+      saveIcon: els.card.querySelector(".scroll-save svg"),
+    };
+
+    panel.icon?.addEventListener("error", () => iconFallback(panel.icon), { once: false });
+    panel.save?.addEventListener("click", toggleSave);
+    panelBuilt = true;
   }
 
   function aboutText(tool) {
@@ -222,53 +317,30 @@
   function renderCard(tool) {
     if (!tool || !els.card) return;
 
+    ensurePanel();
+    if (!panel) return;
+
     const isSaved = saved.has(tool.id);
     const pricing = tool.pricing || "free";
-    const iconUrl = resolveIconUrl(tool);
 
-    els.card.innerHTML = `
-      <div class="scroll-panel">
-        <header class="scroll-panel-header">
-          <span class="scroll-panel-eyebrow">${escapeHtml(tool.category)}</span>
-          <span class="scroll-pricing tool-pricing-label" data-label="${escapeAttr(pricing)}">${escapeHtml(pricingLabel(pricing))}</span>
-        </header>
-        <div class="scroll-panel-hero">
-          <div class="scroll-icon-wrap">
-            <img class="scroll-icon" src="${escapeAttr(iconUrl)}" alt="" loading="eager" fetchpriority="high" decoding="sync" referrerpolicy="no-referrer">
-          </div>
-          <div class="scroll-panel-identity">
-            <h1 class="scroll-name">${escapeHtml(tool.name)}</h1>
-            <a class="scroll-domain" href="${escapeAttr(tool.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(tool.domain)}</a>
-          </div>
-        </div>
-        <div class="scroll-panel-body">
-          <p class="scroll-about">${escapeHtml(aboutText(tool))}</p>
-        </div>
-        <div class="scroll-panel-actions">
-          <a class="btn-primary" href="${escapeAttr(tool.url)}" target="_blank" rel="noopener noreferrer">
-            Open tool
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M7 17L17 7M17 7H9M17 7V15" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-          <button type="button" class="scroll-save${isSaved ? " is-saved" : ""}" aria-label="${isSaved ? "Remove from saved" : "Save tool"}" aria-pressed="${isSaved}">
-            <svg viewBox="0 0 24 24" fill="${isSaved ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
-            </svg>
-            <span class="scroll-save-label">${isSaved ? "Saved" : "Save"}</span>
-          </button>
-        </div>
-      </div>
-    `;
+    panel.eyebrow.textContent = tool.category || "";
+    panel.pricing.textContent = pricingLabel(pricing);
+    panel.pricing.dataset.label = pricing;
+    panel.name.textContent = tool.name || "";
+    panel.domain.textContent = tool.domain || "";
+    panel.domain.href = tool.url || "#";
+    panel.about.textContent = aboutText(tool);
+    panel.open.href = tool.url || "#";
 
-    const img = els.card.querySelector(".scroll-icon");
-    if (img) {
-      img.addEventListener("error", () => iconFallback(img, tool), { once: false });
+    panel.save.classList.toggle("is-saved", isSaved);
+    panel.save.setAttribute("aria-label", isSaved ? "Remove from saved" : "Save tool");
+    panel.save.setAttribute("aria-pressed", isSaved ? "true" : "false");
+    if (panel.saveLabel) panel.saveLabel.textContent = isSaved ? "Saved" : "Save";
+    if (panel.saveIcon) {
+      panel.saveIcon.setAttribute("fill", isSaved ? "currentColor" : "none");
     }
 
-    const saveBtn = els.card.querySelector(".scroll-save");
-    if (saveBtn) saveBtn.addEventListener("click", toggleSave);
-
+    applyIcon(panel.icon, tool);
     preloadAdjacentIcons();
   }
 
@@ -323,6 +395,9 @@
 
     const nextIndex = index + direction;
     if (nextIndex < 0 || nextIndex >= list.length) return;
+
+    const nextTool = list[nextIndex];
+    if (nextTool) warmIcon(resolveIconUrl(nextTool));
 
     animating = true;
     const exitClass = direction > 0 ? "is-exit-up" : "is-exit-down";
@@ -492,7 +567,6 @@
     }
     allTools = allTools.filter((tool) => !isBadToolName(tool.name));
     feedTools = shuffle(allTools);
-    preloadIconsForTools(feedTools.slice(0, 8));
   }
 
   function bindEvents() {
@@ -561,6 +635,7 @@
   async function init() {
     updateSavedBadge();
     bindEvents();
+    warmIcon(FALLBACK_ICON);
 
     if (window.location.protocol === "file:") {
       if (els.loading) {
@@ -572,6 +647,12 @@
 
     try {
       await loadTools();
+      const first = feedTools[0];
+      if (first) {
+        setLoadingMessage("Loading icons…");
+        await warmIcon(resolveIconUrl(first));
+      }
+      warmIconsForTools(feedTools.slice(0, 24));
       refreshView(false);
     } catch (err) {
       if (els.loading) {
