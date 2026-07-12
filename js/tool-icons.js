@@ -178,4 +178,6 @@
   } else {
     initToolIcons();
   }
+
+  window.FUTWireToolImage = wireImage;
 })();

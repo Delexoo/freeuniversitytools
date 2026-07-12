@@ -1,0 +1,30 @@
+{
+  "added_total": 1158,
+  "skipped_duplicates": 139,
+  "added_by_category": {
+    "github-powerhouses": 10,
+    "courses": 1,
+    "free-movies": 2,
+    "free-stuff": 99,
+    "design": 19,
+    "utilities": 81,
+    "ai": 11,
+    "osint-username": 8,
+    "osint-email-address": 20,
+    "osint-domain-name": 12,
+    "osint-cloud-infrastructure": 6,
+    "osint-ip-mac-address": 8,
+    "osint-images-videos-docs": 14,
+    "osint-social-networks": 28,
+    "osint-instant-messaging": 10,
+    "osint-telephone-numbers": 11,
+    "osint-geolocation-tools-maps": 56,
+    "osint-search-engines": 4,
+    "osint-archives": 10,
+    "osint-dark-web": 54,
+    "osint-blockchain-cryptocurrency": 9,
+    "osint-tools": 681,
+    "osint-ai-tools": 3,
+    "osint-cyber-threat-intelligence": 1
+  }
+}

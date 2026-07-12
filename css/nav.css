@@ -611,6 +611,10 @@ body:has(.header--tools) main {
     padding-left: 16px !important;
     padding-right: 16px !important;
   }
+
+  body.page-scroll:has(.header--tools) main.scroll-main {
+    padding: 0 !important;
+  }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {

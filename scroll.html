@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#fafafa">
+  <meta name="description" content="Swipe through free student tools one at a time. Save your favorites.">
+  <title>Scroll | Free University Tools</title>
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/FreeUniversityTools.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://icon.horse" crossorigin>
+  <link rel="preconnect" href="https://github.com" crossorigin>
+  <link rel="dns-prefetch" href="https://icon.horse">
+  <link rel="dns-prefetch" href="https://github.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/scroll.css">
+</head>
+<body class="page-scroll">
+  <header class="header header--tools" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><span class="logo-free">free</span><span class="logo-university">university</span><span class="logo-tools">tools</span></a>
+      <div class="header-toolbar scroll-toolbar">
+        <div class="scroll-tabs" role="tablist" aria-label="Scroll feed">
+          <button type="button" class="scroll-tab active" data-mode="discover" role="tab" aria-selected="true">Discover</button>
+          <button type="button" class="scroll-tab" data-mode="saved" role="tab" aria-selected="false">
+            Saved
+            <span class="scroll-tab-badge" id="scrollSavedBadge" hidden>0</span>
+          </button>
+        </div>
+      </div>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">☰</button>
+      <nav class="nav" id="mainNav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="student.html" class="nav-link">Students</a>
+        <a href="scroll.html" class="nav-link active">Scroll</a>
+        <div class="nav-dropdown" id="navDropdown">
+          <button type="button" class="desktop-dropdown-toggle" id="desktopDropdownToggle" aria-label="More menu" aria-expanded="false">☰</button>
+          <button class="nav-dropdown-btn">More ▼</button>
+          <div class="nav-dropdown-content">
+            <a href="about.html" class="nav-link">About Us</a>
+            <a href="policy.html" class="nav-link">Terms &amp; Disclaimer</a>
+          </div>
+        </div>
+        <a href="https://buy.stripe.com/9B63cu3RE2ouaKgcHLcjS00" target="_blank" class="btn-donate">Donate</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="scroll-main">
+    <div class="scroll-stage" id="scrollStage">
+      <article class="scroll-card" id="scrollCard" aria-live="polite" hidden></article>
+
+      <footer class="scroll-dock" id="scrollDock" hidden>
+        <div class="scroll-dock-progress-row">
+          <div class="scroll-dock-progress" aria-hidden="true">
+            <div class="scroll-dock-progress-fill" id="scrollProgressBar"></div>
+          </div>
+          <span class="scroll-dock-count" id="scrollProgress">1 / 1</span>
+        </div>
+        <div class="scroll-dock-nav">
+          <button type="button" class="scroll-dock-btn" id="scrollPrev" aria-label="Previous tool">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
+            <span>Previous</span>
+          </button>
+          <p class="scroll-dock-hint" aria-hidden="true">Swipe up for next</p>
+          <button type="button" class="scroll-dock-btn" id="scrollNext" aria-label="Next tool">
+            <span>Next</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+        </div>
+      </footer>
+
+      <div class="scroll-loading" id="scrollLoading">
+        <div class="scroll-loading-spinner" aria-hidden="true"></div>
+        <p>Loading tools…</p>
+      </div>
+
+      <div class="scroll-empty" id="scrollEmpty" hidden>
+        <div class="scroll-empty-inner">
+          <h2>No saved tools yet</h2>
+          <p>Bookmark any tool in Discover to build your personal shortlist.</p>
+          <button type="button" class="btn-primary" id="scrollEmptyDiscover">Browse Discover</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/common.js"></script>
+  <script src="js/scroll.js"></script>
+</body>
+</html>

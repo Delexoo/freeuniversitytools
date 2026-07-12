@@ -66,7 +66,7 @@ html {
 }
 
 .hero--split h1 {
-  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  font-size: clamp(2.85rem, 5.5vw, 4.75rem);
   font-weight: 600;
   line-height: 1.08;
   letter-spacing: -0.04em;
@@ -365,7 +365,7 @@ html {
   }
 
   .hero--split h1 {
-    font-size: clamp(1.85rem, 7vw, 2.35rem);
+    font-size: clamp(2.25rem, 8vw, 3rem);
     margin: 0 auto 12px;
     max-width: none;
   }
