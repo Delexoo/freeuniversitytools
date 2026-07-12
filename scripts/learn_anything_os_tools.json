@@ -1,0 +1,3200 @@
+{
+  "open_source_maps": [
+    {
+      "map_id": 1727,
+      "key": "open source development",
+      "title": "learn anything - programming - software development - open source"
+    }
+  ],
+  "open_source_github_from_maps": [
+    {
+      "url": "https://github.com/jwaterfaucett/awesome-foss-apps",
+      "title": "Awesome foss apps",
+      "category": "github",
+      "map_id": 1727
+    },
+    {
+      "url": "https://github.com/MunGell/awesome-for-beginners",
+      "title": "Awesome for beginners",
+      "category": "github",
+      "map_id": 1727
+    },
+    {
+      "url": "https://github.com/ossfriendly/open-source-supporters",
+      "title": "Open source supporters",
+      "category": "github",
+      "map_id": 1727
+    },
+    {
+      "url": "https://github.com/unicodeveloper/awesome-opensource-apps",
+      "title": "Awesome open source apps",
+      "category": "github",
+      "map_id": 1727
+    }
+  ],
+  "tool_category_github_from_maps": [],
+  "curated_list_github": [
+    {
+      "url": "https://github.com/1whatleytay/kara)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/738/alfred-inko)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/Aaronepower/tokei)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/abs-lang/abs)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/AccelerateHS/accelerate)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/Acidham/rsync-folders)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/Acidham/search-alfred-workflows)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/actonlang/acton)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/adam-mcdaniel/oakc)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/adamsol/Pyxell)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/agda/agda)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/agermanidis/livepython)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/aharris88/awesome-cli-apps)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/AInoob/NooBoss)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/aionescu/dynasty)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/AjayMT/silk)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/ajeetdsouza/zoxide)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/AkikoZ/alfred-web-search-suggest",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/akkartik/mu)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/akyoto/q)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/alantech/alan)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/albertlatacz/java-repl)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/alebcay/awesome-shell)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/alecthomas/chroma)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/AleoHQ/leo)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/alexander-heimbuch/linguee-alfred-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/alexhallam/tv)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/alfred-workflows/awesome-alfred-workflows)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/algolia/github-awesome-autocomplete)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/aliceml/aliceml)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/alliedmodders/sourcepawn)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/allinurl/goaccess)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/amadvance/advancecomp)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/amarcu5/PiPer",
+      "from_list": "learn-anything/safari-extensions"
+    },
+    {
+      "url": "https://github.com/amarcu5/PiPer)",
+      "from_list": "learn-anything/safari-extensions"
+    },
+    {
+      "url": "https://github.com/amuletml/amulet)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/ancient-software/husky)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/andmarti1424/sc-im)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/andreasabel/miniagda)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/andrewchambers/orderly)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/Angoll/KPass)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/anishathalye/lumen)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/anmolnagpal/alfred-docker-workflows)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/anoff/alfred-github)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/antifuchs/chars)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/antimony-lang/antimony)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/antonmedv/red)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/apex/static)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/apex/up)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/apple/swift)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/aria2/aria2)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/arp242/uni)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/arturo-lang/arturo)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/ascandroli/menudump",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/asdf-vm/asdf)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/ashchan/safarikai)",
+      "from_list": "learn-anything/safari-extensions"
+    },
+    {
+      "url": "https://github.com/aspiers/stow)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/astampoulis/makam)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/astrofrog/psrecord)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/astrolang/astro)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/aswinkarthik/csvdiff)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/atanunq/viu)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/attaswift/alfred-swift-evolution)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/aurooba/alfred-workflow-zoom-meetings)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/austral/austral)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/awesomekling/jakt)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/awinecki/karabiner-elements-profile-switcher)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/aymericbeaumet/squeeze)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/azai91/alfred-drive-workflow)-",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/azur1s/hazure)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/b4b4r07/gomi)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/bakpakin/Fennel)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/BaksiLi/AlfredWorkflows",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/ballerina-platform/ballerina-lang)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/BalliAsghar/mailsy-alfred)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/basilTeam/basil)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/bchatard/alfred-jetbrains)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/bcicen/ctop)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/beardedspice/beardedspice)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/beefytech/Beef)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/Beluga-lang/Beluga)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/BenchR267/Pod-Search-Alfred)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/BenziAhamed/alfred-battery)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/bevesce/unicode-symbols-search)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/bigluck/alfred2-transmit)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/bigskysoftware/_hyperscript)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/bitwarden/browser",
+      "from_list": "learn-anything/firefox-extensions"
+    },
+    {
+      "url": "https://github.com/BlazifyOrg/blazex)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/blinry/habitctl)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/bootandy/dust)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/boyter/scc)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/bradfitz/undent)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/bradford-hamilton/monkey-lang)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/bradford-hamilton/monkey_lang_rust)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/bradyjoslin/wifi-password)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/BranchTaken/Hemlock)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/BrianHicks/tree-grepper)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/brightly-salty/mlatu)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/brookhong/Surfingkeys)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/brownplt/pyret-lang))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/brundonsmith/bagel)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/BSVino/JaiPrimer",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/BurntSushi/xsv)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/buunguyen/octotree)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/bvaisvil/zenith)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/Byron/dua-cli)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/bysiber/cleardisk)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/c3d/xl)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/caleb531/play-song)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/callumlocke/json-formatter)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/calypso-lang/calypso)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/cannorin/nml)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/Canop/broot)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/cantino/mcfly)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/carp-lang/Carp)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/carpentry-org/snippets))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/casey/just)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/cespare/reflex)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/ceu-lang/ceu)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/cgag/hostblock)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/cgag/loc)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/chaos-lang/chaos)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/chaosprint/glicol)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/charmbracelet/glow)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/chmln/sd)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/Chris911/iStats)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/ChuckDaniels87/rnr)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/ciao-lang/ciao)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/cjbassi/ytop)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/cjlucas/tower-alfred-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/cl4cnam/funcSug)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/ClementTsang/bottom)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/client9/misspell)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/clio-lang/clio)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/clvv/fasd)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/cmcaine/tridactyl)",
+      "from_list": "learn-anything/firefox-extensions"
+    },
+    {
+      "url": "https://github.com/codeinred/untree)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/codr7/liblg)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/collections/programming-languages)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/Cookie-AutoDelete/Cookie-AutoDelete",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/Cookie-AutoDelete/Cookie-AutoDelete)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/cortesi/modd)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/cotowali/cotowali)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/cqfn/eo)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/cs1707/tldr-alfred)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/cube2222/jql)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/d5/tengo)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/dalance/amber)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/dalance/procs)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/dandavison/delta)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/danielecook/gist-alfred)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/darius/cant)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/darkreader/darkreader)",
+      "from_list": "learn-anything/firefox-extensions"
+    },
+    {
+      "url": "https://github.com/daxaur/openpaw)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/dbcli/mycli)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/dbcli/pgcli)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/dbohdan/structured-text-tools)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/dbrgn/tealdeer)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/ddddxxx/LyricsX)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/ddjfreedom/recent-downloads-alfred-v2)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-convert)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-errnum)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-fakeum)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-firefox)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-gcal)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-goodreads)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-mailto)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-mpd)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-network-location)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-pwgen)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-reddit)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-repos)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-safari-assistant)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-searchio)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-similar-image-search)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-ssh)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-stackoverflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-viscosity)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/alfred-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/deanishe/awgo)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/denisidoro/navi)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/dennis-tra/alfred-dict.cc-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/derimagia/awesome-alfred-workflows)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/dessant/buster)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/dessant/search-by-image)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/dessant/web-archives)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/developit/preact-cli)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/deweller/switchaudio-osx)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/dflemstr/tin)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/dictu-lang/Dictu)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/diku-dk/futhark)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/dineshgowda24/alfred-gcp-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/dinfuehr/dora)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/direnv/direnv)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/disco-lang/disco)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/discus-lang/ddc)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/discus-lang/salt)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/ditto-lang/ditto)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/ditto/ditto)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/dkhamsing/open-source-ios-apps)",
+      "from_list": "learn-anything/ios-apps"
+    },
+    {
+      "url": "https://github.com/doctorn/micro-mitten)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/dogescript/dogescript)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/dotnet/fsharp)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/dotson/Discogs-Explorer)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/dragostis/Functa)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/drgrib/alfred-bear)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/dundalek/liz)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/dundee/gdu)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/dylanaraps/neofetch)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/edubart/nelua-lang)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/eeue56/derw)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/effekt-lang/effekt)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/egison/egison))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/egoist/spin)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/ein-lang/ein)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/einaregilsson/Redirector",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/elpinal/bright-ml)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/elsaland/elsa)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/emojicode/emojicode))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/enso-org/ide)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/eradman/entr))",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/ErisBlastar/cplusequality)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/euank/pazi)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/evanw/skew)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/evanw/skew))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/evanw/thinscript)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/evincarofautumn/kitten",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/facebookexperimental/starlark-rust)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/facebookincubator/create-react-app)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/facet-lang/facet)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/fanzeyi/alfred-rustdoc)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/FastVM/paka)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/fatih-yavuz/alfred-string-operations)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/fatih-yavuz/alfred-timer-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/fbeline/luneta)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/fcanas/ogol)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/federico-terzi/espanso)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/Felienne/hedy)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/felix-lang/felix)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/FGRibreau/alfred-crates)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/fiatjaf/jiq)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/fika-lang/fika)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/flawyte/whats-new-github)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/flax-lang/flax)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/flipxfx/sVim)",
+      "from_list": "learn-anything/safari-extensions"
+    },
+    {
+      "url": "https://github.com/flix/flix)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/fniephaus/alfred-brightness)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/fniephaus/alfred-network)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/fniephaus/alfred-pocket)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/fniephaus/alfred-travis-ci)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/fniephaus/alfred-vmcontrol)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/fogleman/primitive)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/frdmn/alfred-dongers)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/Freaky/rtss)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/fwouts/prmonitor))",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/gabamnml/Keynote-remote)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/gabamnml/unlock-your-mac)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/Gabriel439/grace)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/Genivia/ugrep)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/getantibody/antibody)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/ggreer/the_silver_searcher)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/gharlan/alfred-github-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/ghewgill/neon-lang))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/ghost-language/ghost)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/giann/buzz)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/gioblu/BIPLAN)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/github/hub)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/gitpoint/git-point)",
+      "from_list": "learn-anything/ios-apps"
+    },
+    {
+      "url": "https://github.com/gluon-lang/gluon)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/glushchenko/fsnotes)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/gnachman/iTerm2)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/Gofake1/Nightlight)",
+      "from_list": "learn-anything/safari-extensions"
+    },
+    {
+      "url": "https://github.com/golang/dep)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/golang/go)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/google/material-design-icons).",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/google/wuffs)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/GoogleChromeLabs/ProjectVisBug)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/gorhill/uBlock",
+      "from_list": "learn-anything/firefox-extensions"
+    },
+    {
+      "url": "https://github.com/gorhill/uMatrix)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/gosu-lang/gosu-lang))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/granule-project/granule)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/greymd/teip)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/gsamokovarov/jump)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/guidojo/eisd)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/guoxbin/dtool)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/Gwion/Gwion)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/h3rald/min)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/hackademix/noscript",
+      "from_list": "learn-anything/firefox-extensions"
+    },
+    {
+      "url": "https://github.com/hamler-lang/hamler))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/hanjm/alfred-json-beautifier-in-fehelper-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/hannob/snallygaster)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/hascal/hascal)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/HaxeFoundation/haxe)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/helix-editor/helix)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/herloct/url-parser)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/herrbischoff/awesome-command-line-apps)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/hime-lang/Hime)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/honestbleeps/Reddit-Enhancement-Suite)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/hook-lang/hook)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/horse64/core.horse64.org)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/httpie/http-prompt)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/httpie/httpie)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/hug33k/Alfred-ShellVariables)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/iamadamdev/bypass-paywalls-chrome)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/iansinnott/alfred-maestro)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/icetee/pv)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/iCHAIT/awesome-macOS)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/igrigorik/videospeed)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/ilGur1132/Smart-HTTPS)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/ilstar/http_status_code)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/ImageOptim/gifski)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/importre/alfred-figlet)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/importre/alfred-gi)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/importre/alfred-hl)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/importre/alfred-mdi)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/importre/alfred-tidy)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/imsnif/bandwhich)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/innocenzi/rename)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/insanoid/treehopper)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/IoLanguage/io)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/isometry/alfred-pipe)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/isometry/alfred-tty)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/itchyny/gojq)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/itchyny/mmv)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/Jackojc/cane)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/jakehilborn/displayplacer)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/jameshaydon/lawvere)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/Jamesits/alfred-workflow-telegram)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/janet-lang/janet)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/jarlefosen/alfred-gcloud-shortcuts)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/jarun/buku)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/jarun/googler)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/jason0x43/alfred-toggl)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/jason0x43/alfred-weather)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/jaywcjlove/awesome-mac)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/jckarter/clay)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/jeeftor/alfredAirports)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/jeeftor/AlfredWorkflowDirectory)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/JeffBezanson/femtolisp)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/jeffreyjackson/mac-apps)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/jemc/mare)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/jeppestaerk/alfred-currency-conversion)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/jeppestaerk/alfred-show-network-info)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/jessfraz/weather)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/JetBrains-Research/Lama)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/jez/as-tree)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/jfecher/ante))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/jhawthorn/fzy)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/jin5354/alfred3-workflow-CurrencyConvert)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/jingweno/ccat)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/jknight/MacWindowLayoutTiles)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/jnewland/alfred-open-windows)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/johnkerl/miller)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/johnynek/bosatsu)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/jomo/imgur-screenshot)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/jonathandturner/rhai)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/jondgoodwin/cone)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/jopemachine/alfred-chromium-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/josefglatz/folder2iso-alfredworkflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/joshsharp/braid)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/joshtronic/alfred-workflow-flush)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/joshuatvernon/cbf)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/jsumners/alfred-emoji)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/JuliaLang/julia)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/JulianKahnert/PDF-Archiver)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/junegunn/fzf)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/jvandyke/alfred-hastebin)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/jzelinskie/faq)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/K4rakara/freshfetch)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/Kapeli/Dash-Alfred-Workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/Keats/kickstart)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/KeliLanguage/compiler)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/kellyjonbrazil/jc)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/KevinRamsunder/alfred3-imdb-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/kishikawakatsumi/SourceKitForSafari)",
+      "from_list": "learn-anything/safari-extensions"
+    },
+    {
+      "url": "https://github.com/kit-ty-kate/labrys)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/Kixiron/crunch-lang)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/klaascuvelier/alfred-mdn)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/KMahoney/kuljet))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/kocircuit/kocircuit)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/koka-lang/koka)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/koraa/huniq)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/kornelski/dupe-krill)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/koto-lang/koto)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/kovidgoyal/kitty)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/Kray-G/kinx)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/kwantam/lviv)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/kyoh86/richgo)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/kyren/luster)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/kzys/wfh)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/larryxiao/openquack)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/larsaugustin/StarShip)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/laurent22/massren)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/lautis/refined-github-safari)",
+      "from_list": "learn-anything/safari-extensions"
+    },
+    {
+      "url": "https://github.com/lbragile/TabMerger)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/learn-anything/alfred-workflows",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/learn-anything/alfred-workflows)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/learn-anything/alfred-workflows)`",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/learn-anything/curated-lists)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/LeEnno/alfred-date-calculator)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/leozhang2018/alfred-httpstat)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/lhartikk/ArnoldC)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/lhc70000/iina)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/libfuse/sshfs)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/lilyball/alfred-rs)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/LingDong-/wax)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/linkchecker/linkchecker)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/loeffel-io/ls-lint)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/Lord-Kamina/SwiftDefaultApps",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/LordManta/SugarCubesJS)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/lorentzca/alfred-circleci-workflow",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/loris/alfred-producthunt-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/lotabout/rargs)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/lotabout/skim)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/lox/alfred-github-jump)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/lox/alfred-timezone)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/lra/mackup)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/lukakerr/feather)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/lukechu10/ellalang)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/lunaryorn/mdcat)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/luoyuctl/agenttrace)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/Luukdegram/luf)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/LuxLang/lux)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/lycheeverse/lychee)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/lys-lang/lys)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/m3ng9i/ran)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/mabako/alientube)",
+      "from_list": "learn-anything/safari-extensions"
+    },
+    {
+      "url": "https://github.com/madjar/nox)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/makoni/select-like-a-boss-for-safari)",
+      "from_list": "learn-anything/safari-extensions"
+    },
+    {
+      "url": "https://github.com/mandrigin/AlfredSwitchWindows)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/manosim/gitify)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/ManticoreProject/manticore)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/marcobambini/gravity))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/marcopennekamp/lore)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/mas-cli/mas)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/MasterQ32/LoLa)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/MasterQ32/makeshift)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/matryer/bitbar)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/mattn/qq)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/mauricecruz/chrome-devtools-zerodarkmatrix-theme)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/mawww/kakoune)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/MaxDesiatov/Kara)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/maxpert/drep)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/mech-lang/mech)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/meck/alfred-footman)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/meck/alfred-hoogle)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/melbahja/got)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/mi-ca/alfredapp_flatuicolors_workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/Microsoft/BosqueLanguage)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/microsoft/Power-Fx)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/Microsoft/TypeScript)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/microsoft/verona)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/Microsoft/vscode)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/mietek/charity-lang))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/mike-engel/jwt-cli)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/mikefarah/yq)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/mikegrb/Alfred-Audio-Device)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/mint-lang/mint))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/mirage/conan)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/mithrandie/csvq)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/mkchoi212/fac)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/mklement0/speak.awf)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/mmirman/caledon)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/moranje/alfred-workflow-todoist)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/morloc-project/morloc)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/morsamatias/UltraTabSaver)",
+      "from_list": "learn-anything/safari-extensions"
+    },
+    {
+      "url": "https://github.com/Mortennn/Dozer)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/mozilla/grcov)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/mptre/yank)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/mrakgr/The-Spiral-Language)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/mre/fcat)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/mrnugget/fzz)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/ms-jpq/sad)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/msoedov/Alfred-collection)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/mth/yeti)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/muesli/duf)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/muesli/prism)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/mukul-rathi/bolt)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/mum4k/termdash)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/mun-lang/mun)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/murarth/ketos)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/murisi/L2)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/musically-ut/lovely-forks)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/mustafaquraish/cup)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/mutdmour/alfred-workflow-cheatsheet)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/myst-lang/myst)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/nakabonne/pbgopy)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/Narasimha1997/boson-lang)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/naver/tamgu)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/neilotoole/sq)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/neovim/neovim)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/never-lang/never)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/neverRare/butter)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/nickmqb/muon)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/NicoNex/tau)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/nikersify/alfred-polyglot)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/nikitavoloboev/alfred-awesome-lists)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/nikitavoloboev/alfred-learn-anything)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/nikitavoloboev/alfred-my-mind)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/nikitavoloboev/alfred-web-searches)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/nikitavoloboev/license-up)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/nikitavoloboev/my-ios)",
+      "from_list": "learn-anything/ios-apps"
+    },
+    {
+      "url": "https://github.com/nikitavoloboev/my-mac-os)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/nikitavoloboev/small-workflows",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/nikitavoloboev/small-workflows)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/nikodemus/foolang)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/nikoksr/proji)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/nikolaydubina/calendarheatmap)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/nilq/hugorm)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/nim-lang/nim)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/nire0510/d2)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/nivekuil/rip)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/nkcmr/alfred-apple-app-search)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/nothingmagical/ZoomIn)",
+      "from_list": "learn-anything/safari-extensions"
+    },
+    {
+      "url": "https://github.com/Nuclides/github-highlight-selected)",
+      "from_list": "learn-anything/safari-extensions"
+    },
+    {
+      "url": "https://github.com/Nukesor/pueue)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/obstschale/NSC)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/ocaml/camlp4)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/odin-lang/Odin)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/ogham/exa)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/okbob/pspg)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/ollef/sixten)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/openstyles/stylus",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/orf/gping)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/orhun/menyoki)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/otabat/shen-c)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/owenwater/alfred-cal)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/PabloLec/neoss)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/PabloLec/RecoverPy)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/PaddiM8/kalk)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/parttimenerd/temci)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/passcod/catflap)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/patorjk/figlet.js)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/paul-nameless/tg)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/pauldreik/rdfind)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/Peltoche/lsd)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/pen-lang/pen))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/per9000/lorem)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/peregrine-lang/Peregrine)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/pfusik/cito)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/phallstrom/AlfredDig)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/pharo-project/pharo)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/phiresky/ripgrep-all)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/pigpigyyy/Yuescript))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/pikatchu/LinearML)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/pikelet-lang/pikelet)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/pkolaczk/fclones)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/PLSysSec/FaCT)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/plutov/playgo)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/pochemuto/alfred-help-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/podgorniy/alfred-translate)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/pointbazaar/smalldragon)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/pointless-lang/pointless)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/ponylang/ponyc))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/PowerShell/PowerShell)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/prasmussen/chrome-cli)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/preslavmihaylov/todocheck)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/projen/projen)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/pstadler/alfred-screensharing)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/python/cpython)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/qarmin/czkawka)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/r-darwish/idnt)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/rabite0/hunter)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/raghavnautiyal/Dip))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/rand-net/visa-cli)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/raptorjit/raptorjit)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/rauchg/wifi-password)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/raviqqe/fmm)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/RazrFalcon/svgcleaner)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/rbenv/rbenv)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/rbenv/ruby-build)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/rcoh/angle-grinder)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/reactiveml/rml)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/reblws/tab-search)",
+      "from_list": "learn-anything/firefox-extensions"
+    },
+    {
+      "url": "https://github.com/red/red)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/ReedOei/Enki)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/remyzorg/pendulum)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/ren-lang/compiler)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/renuo/semaphoreci-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/rfletcher/safari-json-formatter)",
+      "from_list": "learn-anything/safari-extensions"
+    },
+    {
+      "url": "https://github.com/rgcr/m-cli)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/rhlsthrm/alfred-crypto-tracker)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/richardkall/pinboard-pro-chrome-extension)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/ridiculousfish/HexFiend",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/ring-lang/ring)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/rknightuk/alfred-workflows)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/rkoval/alfred-aws-console-services-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/robiot/rustcat)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/robwalton/alfred-taskpaper-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/robwalton/alfred-ulysses-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/ronami/typelang)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/rq/rq)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/rs/curlie)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/rsms/wlang)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/ruedap/alfred-font-awesome-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/rune-rs/rune",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/russellallen/self))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/rust-lang-nursery/rustup.rs)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/rust-playground/alfred-workflows-rs)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/RustScan/RustScan)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/rxi/fe)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/sachaos/viddy)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/sammacbeth/dat-fox)",
+      "from_list": "learn-anything/firefox-extensions"
+    },
+    {
+      "url": "https://github.com/samskivert/compose)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/samtay/so)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/SamVerschueren/alfred-fkill)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/saulpw/visidata)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/sayanarijit/xplr)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/sballin/alfred-search-notes-app)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/schachmat/wego)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/schollz/cowyo)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/schollz/croc)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/scipy/scipy)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/sclevine/yj)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/SCons/scons)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/sergeche/xmlview)",
+      "from_list": "learn-anything/safari-extensions"
+    },
+    {
+      "url": "https://github.com/serhii-londar/open-source-mac-os-apps)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/Sh1d0w/alfred-flutter-docs)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/sharkdp/diskus)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/sharkdp/fd)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/sharkdp/hexyl)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/sharkdp/hyperfine)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/sheepla/fzwiki)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/shenwei356/rush)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/shmulvad/alfred-nightshift)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/shmulvad/alfred-tinypng)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/shortercode/Radiance)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/shura-v/alfred-time-calculator)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/silt-lang/silt)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/simeg/eureka)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/simeg/urlsup)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/simple-login/browser-extension)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/sindresorhus/alfred-npms)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/sindresorhus/alfy)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/sindresorhus/do-not-disturb-cli)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/sindresorhus/fkill-cli)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/sindresorhus/refined-github)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/sitkevij/hex)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/sjl/friendly-find)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/skiplang/skip)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/skotzko/shhhhh)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/Slackadays/Clipboard)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/slunak/abuseipdb-alfred-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/smallhadroncollider/brok)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/smmr-software/privacy-redirect-safari)",
+      "from_list": "learn-anything/safari-extensions"
+    },
+    {
+      "url": "https://github.com/smudgelang/smudge)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/soimort/you-get)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/soveran/map)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/sozercan/kaset)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/spamwax/alfred-pinboard-rs)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/spamwax/alfred-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/spcl/dace)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/spinscale/alfred-workflow-elastic-docs)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/spolu/warp",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/squatto/alfred-imessage-2fa)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/SquidDev/urn))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/Srinivasa314/neptune-lang)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/sshuttle/sshuttle)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/sstadick/hck)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/starkware-libs/cairo-lang)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/stavromulabeta/cognate)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/stedolan/jq)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/stefanbuck/awesome-browser-extensions-for-github).",
+      "from_list": "learn-anything/firefox-extensions"
+    },
+    {
+      "url": "https://github.com/SteliosHa/Alfred_File_Creator)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/StonkDragon/Scale)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/Storyyeller/IntercalScript)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/strawberryhacker/luxury)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/suBDavis/Tusk)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/surrealroad/alfred-notes)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/sveinbjornt/Platypus)",
+      "from_list": "learn-anything/macos-apps"
+    },
+    {
+      "url": "https://github.com/Svetlitski/fcp)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/Synzvato/decentraleyes",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/Synzvato/decentraleyes)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/tadeuzagallo/verve-lang)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/taichi-dev/taichi)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/TankerHQ/ruplacer)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/tarka/xcp)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/TartanLlama/vizh)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/tavianator/bfs)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/taylorludwig/Resolutions-Alfred)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/TerminallyLazy/Tree-Ring-Memory)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/ThakeeNathees/pocketlang)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/theryangeary/choose)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/thesephist/ink)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/thesephist/oak))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/thma/lambda-ski)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/tiancaiamao/shen-go)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/tillkruss/alfred-lorem-ipsum)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/timvisee/ffsend)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/titan-lang/titan)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/titzer/virgil)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/tldr-pages/tldr)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/tmerten/spotify-ripper)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/tmpim/amulet)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/tokay-lang/tokay))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/tomnomnom/anew)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/tomnomnom/gf)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/TomWright/dasel)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/TooSchoolForCool/LeetCode-Search)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/topshell-language/topshell)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/trailofbits/graphtage)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/tstack/lnav)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/tuqqu/oxide-lang)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/typelead/eta)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/u2zv1wx/neut)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/uchida/alfred-switch-bluetooth)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/ueokande/vim-vixen)",
+      "from_list": "learn-anything/firefox-extensions"
+    },
+    {
+      "url": "https://github.com/uetchy/Polyglot)",
+      "from_list": "learn-anything/safari-extensions"
+    },
+    {
+      "url": "https://github.com/umutphp/github-stats)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/unisonweb/unison)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/untoldwind/alfred2-layout)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/uptech/alt)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/urweb/urweb)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/utkusen/urlhunter)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/val-lang/val)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/ValeLang/Vale))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/variadico/noti)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/vdesabou/alfred-spotify-mini-player)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/vegardinho/alfred_bluetooth_controller)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/Vexu/bog)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/vhpoet/alfred-text-to-calendar)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/viktomas/godu)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/vim/vim)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/violentmonkey/violentmonkey)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/vitorgalvao/alfred-workflows",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/vitorgalvao/alfred-workflows)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/VladimirMarkelov/pwatch)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/vmchale/hask-replace)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/vmchale/kempe)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/vmchale/project-init)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/vmchale/tin-summer)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/VoltLang/Volta)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/vookimedlo/alfred-various-screenshots)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/vrothberg/vgrep)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/vrtbl/passerine)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/vtereshkov/umka-lang)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/Wafelack/nixt)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/wasp-lang/wasp)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/watchexec/watchexec)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/wensonsmith/QRcodeCreator)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/WheretIB/nullc)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/Whiley/WhileyCompiler))",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/whoiscc/shattuck)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/wilbowma/cur)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/Wilfred/difftastic)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/willcrichton/lia)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/willcrichton/tyrade)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/willdoescode/nat)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/willfarrell/alfred-caniuse-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/willfarrell/alfred-encode-decode-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/willfarrell/alfred-pkgman-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/willtim/Expresso)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/WindSoilder/hors)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/winkerVSbecks/alfred-react-launcher)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/witheve/Eve)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/wookayin/alfred-latex-symbols-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/wookayin/alfred-papers3-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/woubuc/sweep)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/wren-lang/wren)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/wrjlewis/notion-search-alfred-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/wtetsu/gaze)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/wtfutil/wtf)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/wu-lang/wu)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/wvanlint/twf)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/xdamman/mediumexporter)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/xilopaint/alfred-pdf-tools)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/xilopaint/alfred-things)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/xyproto/pastefile)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/yaa110/nomino)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/yamafaktory/jql)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/yannickglt/alfred-devdocs)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/yatta-lang/yatta)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/yhara/shiika)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/ymte/metamine)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/YorickPeterse/inko)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/yubrot/llrl)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/yudai/gotty)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/zalmoxisus/redux-devtools-extension)",
+      "from_list": "learn-anything/chrome-extensions"
+    },
+    {
+      "url": "https://github.com/zeit/now)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/zeit/pkg)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/zenorocha/alfred-workflows)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/zesterer/atto)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/zesterer/tao)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/zeta-lang/zeta)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/zhaocai/alfred2-top-workflow)",
+      "from_list": "learn-anything/alfred-workflows"
+    },
+    {
+      "url": "https://github.com/zig-lang/zig)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/zilch-lang/zilch)",
+      "from_list": "learn-anything/programming-languages"
+    },
+    {
+      "url": "https://github.com/zquestz/s)",
+      "from_list": "learn-anything/command-line-tools"
+    },
+    {
+      "url": "https://github.com/zyedidia/micro)",
+      "from_list": "learn-anything/command-line-tools"
+    }
+  ],
+  "stats": {
+    "open_source_maps": 1,
+    "open_source_github_repos": 4,
+    "tool_category_github_repos": 0,
+    "curated_list_github_repos": 789
+  }
+}

@@ -1,0 +1,662 @@
+[
+  {
+    "name": "Global Forest Watch",
+    "url": "https://globalforestwatch.org",
+    "profile": "https://osint4all.com/tool/global-forest-watch/",
+    "category": "osint-geolocation-tools-maps"
+  },
+  {
+    "name": "ACLED",
+    "url": "https://acleddata.com",
+    "profile": "https://osint4all.com/tool/acled/",
+    "category": "osint-disinformation-media-verification"
+  },
+  {
+    "name": "Pulsedive",
+    "url": "https://pulsedive.com",
+    "profile": "https://osint4all.com/tool/pulsedive/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "FullHunt",
+    "url": "https://fullhunt.io",
+    "profile": "https://osint4all.com/tool/fullhunt/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "Chainabuse",
+    "url": "https://chainabuse.com",
+    "profile": "https://osint4all.com/tool/chainabuse/",
+    "category": "osint-blockchain-cryptocurrency"
+  },
+  {
+    "name": "Etherscan",
+    "url": "https://etherscan.io",
+    "profile": "https://osint4all.com/tool/etherscan/",
+    "category": "osint-blockchain-cryptocurrency"
+  },
+  {
+    "name": "OpenSky Network",
+    "url": "https://opensky-network.org",
+    "profile": "https://osint4all.com/tool/opensky-network/",
+    "category": "osint-geolocation-tools-maps"
+  },
+  {
+    "name": "ICIJ Offshore Leaks Database",
+    "url": "https://offshoreleaks.icij.org",
+    "profile": "https://osint4all.com/tool/icij-offshore-leaks-database/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "GLEIF LEI Search",
+    "url": "https://search.gleif.org",
+    "profile": "https://osint4all.com/tool/gleif-lei-search/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "LinkedIn Ad Library",
+    "url": "https://linkedin.com",
+    "profile": "https://osint4all.com/tool/linkedin-ad-library/",
+    "category": "osint-disinformation-media-verification"
+  },
+  {
+    "name": "TikTok Commercial Content Library",
+    "url": "https://library.tiktok.com",
+    "profile": "https://osint4all.com/tool/tiktok-commercial-content-library/",
+    "category": "osint-social-networks"
+  },
+  {
+    "name": "Google Ads Transparency Center",
+    "url": "https://adstransparency.google.com",
+    "profile": "https://osint4all.com/tool/google-ads-transparency-center/",
+    "category": "osint-disinformation-media-verification"
+  },
+  {
+    "name": "MapChecking",
+    "url": "https://mapchecking.com",
+    "profile": "https://osint4all.com/tool/mapchecking/",
+    "category": "osint-geolocation-tools-maps"
+  },
+  {
+    "name": "OpenAerialMap",
+    "url": "https://openaerialmap.org",
+    "profile": "https://osint4all.com/tool/openaerialmap/",
+    "category": "osint-geolocation-tools-maps"
+  },
+  {
+    "name": "SunCalc",
+    "url": "https://suncalc.org",
+    "profile": "https://osint4all.com/tool/suncalc/",
+    "category": "osint-geolocation-tools-maps"
+  },
+  {
+    "name": "Copernicus Browser",
+    "url": "https://browser.dataspace.copernicus.eu",
+    "profile": "https://osint4all.com/tool/copernicus-browser/",
+    "category": "osint-geolocation-tools-maps"
+  },
+  {
+    "name": "NASA Worldview",
+    "url": "https://worldview.earthdata.nasa.gov",
+    "profile": "https://osint4all.com/tool/nasa-worldview/",
+    "category": "osint-geolocation-tools-maps"
+  },
+  {
+    "name": "GeoNames",
+    "url": "https://geonames.org",
+    "profile": "https://osint4all.com/tool/geonames/",
+    "category": "osint-geolocation-tools-maps"
+  },
+  {
+    "name": "Nominatim",
+    "url": "https://nominatim.openstreetmap.org",
+    "profile": "https://osint4all.com/tool/nominatim/",
+    "category": "osint-geolocation-tools-maps"
+  },
+  {
+    "name": "OpenRefine",
+    "url": "https://openrefine.org",
+    "profile": "https://osint4all.com/tool/openrefine/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "OpenOwnership Register",
+    "url": "https://register.openownership.org",
+    "profile": "https://osint4all.com/tool/openownership-register/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "CourtListener",
+    "url": "https://courtlistener.com",
+    "profile": "https://osint4all.com/tool/courtlistener/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "SEC EDGAR",
+    "url": "https://sec.gov",
+    "profile": "https://osint4all.com/tool/sec-edgar/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "Companies House",
+    "url": "https://find-and-update.company-information.service.gov.uk",
+    "profile": "https://osint4all.com/tool/companies-house/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "Wikidata",
+    "url": "https://wikidata.org",
+    "profile": "https://osint4all.com/tool/wikidata/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "Google Dataset Search",
+    "url": "https://datasetsearch.research.google.com",
+    "profile": "https://osint4all.com/tool/google-dataset-search/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "Ahrefs",
+    "url": "https://ahrefs.com",
+    "profile": "https://osint4all.com/tool/ahrefs/",
+    "category": "osint-disinformation-media-verification"
+  },
+  {
+    "name": "Semrush",
+    "url": "https://semrush.com",
+    "profile": "https://osint4all.com/tool/semrush/",
+    "category": "osint-disinformation-media-verification"
+  },
+  {
+    "name": "Similarweb",
+    "url": "https://similarweb.com",
+    "profile": "https://osint4all.com/tool/similarweb/",
+    "category": "osint-disinformation-media-verification"
+  },
+  {
+    "name": "Meltwater",
+    "url": "https://meltwater.com",
+    "profile": "https://osint4all.com/tool/meltwater/",
+    "category": "osint-disinformation-media-verification"
+  },
+  {
+    "name": "Brandwatch",
+    "url": "https://brandwatch.com",
+    "profile": "https://osint4all.com/tool/brandwatch/",
+    "category": "osint-social-networks"
+  },
+  {
+    "name": "Talkwalker",
+    "url": "https://talkwalker.com",
+    "profile": "https://osint4all.com/tool/talkwalker/",
+    "category": "osint-social-networks"
+  },
+  {
+    "name": "Brand24",
+    "url": "https://brand24.com",
+    "profile": "https://osint4all.com/tool/brand24/",
+    "category": "osint-social-networks"
+  },
+  {
+    "name": "Mention",
+    "url": "https://mention.com",
+    "profile": "https://osint4all.com/tool/mention/",
+    "category": "osint-social-networks"
+  },
+  {
+    "name": "Social Searcher",
+    "url": "https://social-searcher.com",
+    "profile": "https://osint4all.com/tool/social-searcher/",
+    "category": "osint-social-networks"
+  },
+  {
+    "name": "Media Cloud",
+    "url": "https://mediacloud.org",
+    "profile": "https://osint4all.com/tool/media-cloud/",
+    "category": "osint-disinformation-media-verification"
+  },
+  {
+    "name": "Google Trends",
+    "url": "https://trends.google.com",
+    "profile": "https://osint4all.com/tool/google-trends/",
+    "category": "osint-disinformation-media-verification"
+  },
+  {
+    "name": "GDELT Project",
+    "url": "https://gdeltproject.org",
+    "profile": "https://osint4all.com/tool/gdelt-project/",
+    "category": "osint-disinformation-media-verification"
+  },
+  {
+    "name": "Common Crawl",
+    "url": "https://commoncrawl.org",
+    "profile": "https://osint4all.com/tool/common-crawl/",
+    "category": "osint-archives"
+  },
+  {
+    "name": "Library of Congress Web Archives",
+    "url": "https://loc.gov",
+    "profile": "https://osint4all.com/tool/library-of-congress-web-archives/",
+    "category": "osint-archives"
+  },
+  {
+    "name": "Perma.cc",
+    "url": "https://perma.cc",
+    "profile": "https://osint4all.com/tool/perma-cc/",
+    "category": "osint-archives"
+  },
+  {
+    "name": "Joe Sandbox",
+    "url": "https://joesandbox.com",
+    "profile": "https://osint4all.com/tool/joe-sandbox/",
+    "category": "osint-compliance-risk-intelligence"
+  },
+  {
+    "name": "ANY.RUN",
+    "url": "https://any.run",
+    "profile": "https://osint4all.com/tool/any-run/",
+    "category": "osint-compliance-risk-intelligence"
+  },
+  {
+    "name": "Hybrid Analysis",
+    "url": "https://hybrid-analysis.com",
+    "profile": "https://osint4all.com/tool/hybrid-analysis/",
+    "category": "osint-compliance-risk-intelligence"
+  },
+  {
+    "name": "CyberChef",
+    "url": "https://gchq.github.io",
+    "profile": "https://osint4all.com/tool/cyberchef/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "MISP",
+    "url": "https://misp-project.org",
+    "profile": "https://osint4all.com/tool/misp/",
+    "category": "osint-compliance-risk-intelligence"
+  },
+  {
+    "name": "AlienVault OTX",
+    "url": "https://otx.alienvault.com",
+    "profile": "https://osint4all.com/tool/alienvault-otx/",
+    "category": "osint-compliance-risk-intelligence"
+  },
+  {
+    "name": "Cisco Talos Intelligence",
+    "url": "https://talosintelligence.com",
+    "profile": "https://osint4all.com/tool/cisco-talos-intelligence/",
+    "category": "osint-compliance-risk-intelligence"
+  },
+  {
+    "name": "PhishTank",
+    "url": "https://phishtank.org",
+    "profile": "https://osint4all.com/tool/phishtank/",
+    "category": "osint-compliance-risk-intelligence"
+  },
+  {
+    "name": "URLhaus",
+    "url": "https://urlhaus.abuse.ch",
+    "profile": "https://osint4all.com/tool/urlhaus/",
+    "category": "osint-compliance-risk-intelligence"
+  },
+  {
+    "name": "BinaryEdge",
+    "url": "https://binaryedge.io",
+    "profile": "https://osint4all.com/tool/binaryedge/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "FOFA",
+    "url": "https://en.fofa.info",
+    "profile": "https://osint4all.com/tool/fofa/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "Netlas.io",
+    "url": "https://netlas.io",
+    "profile": "https://osint4all.com/tool/netlas-io/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "ONYPHE",
+    "url": "https://onyphe.io",
+    "profile": "https://osint4all.com/tool/onyphe/",
+    "category": "osint-compliance-risk-intelligence"
+  },
+  {
+    "name": "ZoomEye",
+    "url": "https://zoomeye.ai",
+    "profile": "https://osint4all.com/tool/zoomeye/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "DNSlytics",
+    "url": "https://dnslytics.com",
+    "profile": "https://osint4all.com/tool/dnslytics/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "ViewDNS.info",
+    "url": "https://viewdns.info",
+    "profile": "https://osint4all.com/tool/viewdns-info/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "WhoisXML API",
+    "url": "https://whoisxmlapi.com",
+    "profile": "https://osint4all.com/tool/whoisxml-api/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "MXToolbox",
+    "url": "https://mxtoolbox.com",
+    "profile": "https://osint4all.com/tool/mxtoolbox/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "DNSDumpster",
+    "url": "https://dnsdumpster.com",
+    "profile": "https://osint4all.com/tool/dnsdumpster/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "Hoaxy",
+    "url": "https://hoaxy.osome.iu.edu",
+    "profile": "https://osint4all.com/tool/hoaxy/",
+    "category": "osint-social-networks"
+  },
+  {
+    "name": "Babel Street",
+    "url": "https://babelstreet.com",
+    "profile": "https://osint4all.com/tool/babel-street/",
+    "category": "osint-social-networks"
+  },
+  {
+    "name": "Namechk",
+    "url": "https://namechk.com",
+    "profile": "https://osint4all.com/tool/namechk/",
+    "category": "osint-social-networks"
+  },
+  {
+    "name": "Nmap",
+    "url": "https://nmap.org",
+    "profile": "https://osint4all.com/tool/nmap/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "OSINT Framework",
+    "url": "https://osintframework.com",
+    "profile": "https://osint4all.com/tool/osint-framework/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "Mapillary",
+    "url": "https://mapillary.com",
+    "profile": "https://osint4all.com/tool/mapillary/",
+    "category": "osint-geolocation-tools-maps"
+  },
+  {
+    "name": "EmailRep.io",
+    "url": "https://emailrep.io",
+    "profile": "https://osint4all.com/tool/emailrep-io/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "AbuseIPDB",
+    "url": "https://abuseipdb.com",
+    "profile": "https://osint4all.com/tool/abuseipdb/",
+    "category": "osint-compliance-risk-intelligence"
+  },
+  {
+    "name": "OpenSecrets",
+    "url": "https://opensecrets.org",
+    "profile": "https://osint4all.com/tool/opensecrets/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "theHarvester",
+    "url": "https://github.com",
+    "profile": "https://osint4all.com/tool/theharvester/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "Mitaka",
+    "url": "https://github.com",
+    "profile": "https://osint4all.com/tool/mitaka/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "Recon-ng",
+    "url": "https://github.com",
+    "profile": "https://osint4all.com/tool/recon-ng/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "Holehe",
+    "url": "https://github.com",
+    "profile": "https://osint4all.com/tool/holehe/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "LittleSis",
+    "url": "https://littlesis.org",
+    "profile": "https://osint4all.com/tool/littlesis/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "FOCA",
+    "url": "https://github.com",
+    "profile": "https://osint4all.com/tool/foca/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "DomainTools",
+    "url": "https://domaintools.com",
+    "profile": "https://osint4all.com/tool/domaintools/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "Maigret",
+    "url": "https://github.com",
+    "profile": "https://osint4all.com/tool/maigret/",
+    "category": "osint-social-networks"
+  },
+  {
+    "name": "Sherlock",
+    "url": "https://github.com",
+    "profile": "https://osint4all.com/tool/sherlock/",
+    "category": "osint-social-networks"
+  },
+  {
+    "name": "GHunt",
+    "url": "https://github.com",
+    "profile": "https://osint4all.com/tool/ghunt/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "Hunchly",
+    "url": "https://hunch.ly",
+    "profile": "https://osint4all.com/tool/hunchly/",
+    "category": "osint-archives"
+  },
+  {
+    "name": "WhatsMyName",
+    "url": "https://github.com",
+    "profile": "https://osint4all.com/tool/whatsmyname/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "Sentinel Hub EO Browser",
+    "url": "https://sentinel-hub.com",
+    "profile": "https://osint4all.com/tool/sentinel-hub-eo-browser/",
+    "category": "osint-geolocation-tools-maps"
+  },
+  {
+    "name": "Overpass Turbo",
+    "url": "https://overpass-turbo.eu",
+    "profile": "https://osint4all.com/tool/overpass-turbo/",
+    "category": "osint-geolocation-tools-maps"
+  },
+  {
+    "name": "Google Fact Check Explorer",
+    "url": "https://toolbox.google.com",
+    "profile": "https://osint4all.com/tool/google-fact-check-explorer/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "OpenSanctions",
+    "url": "https://opensanctions.org",
+    "profile": "https://osint4all.com/tool/opensanctions/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "BuiltWith",
+    "url": "https://builtwith.com",
+    "profile": "https://osint4all.com/tool/builtwith/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "Wappalyzer",
+    "url": "https://wappalyzer.com",
+    "profile": "https://osint4all.com/tool/wappalyzer/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "VirusTotal",
+    "url": "https://virustotal.com",
+    "profile": "https://osint4all.com/tool/virustotal/",
+    "category": "osint-compliance-risk-intelligence"
+  },
+  {
+    "name": "ExifTool",
+    "url": "https://exiftool.org",
+    "profile": "https://osint4all.com/tool/exiftool/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "Google Earth",
+    "url": "https://earth.google.com",
+    "profile": "https://osint4all.com/tool/google-earth/",
+    "category": "osint-geolocation-tools-maps"
+  },
+  {
+    "name": "RiskIQ PassiveTotal",
+    "url": "https://community.riskiq.com",
+    "profile": "https://osint4all.com/tool/riskiq-passivetotal/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "urlscan.io",
+    "url": "https://urlscan.io",
+    "profile": "https://osint4all.com/tool/urlscan-io/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "GreyNoise",
+    "url": "https://greynoise.io",
+    "profile": "https://osint4all.com/tool/greynoise/",
+    "category": "osint-compliance-risk-intelligence"
+  },
+  {
+    "name": "Aleph",
+    "url": "https://aleph.occrp.org",
+    "profile": "https://osint4all.com/tool/aleph/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "OpenCorporates",
+    "url": "https://opencorporates.com",
+    "profile": "https://osint4all.com/tool/opencorporates/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "InVID Verification Toolkit",
+    "url": "https://invid-project.eu",
+    "profile": "https://osint4all.com/tool/invid-verification-toolkit/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "TinEye",
+    "url": "https://tineye.com",
+    "profile": "https://osint4all.com/tool/tineye/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "Archive.today",
+    "url": "https://archive.ph",
+    "profile": "https://osint4all.com/tool/archive-today/",
+    "category": "osint-archives"
+  },
+  {
+    "name": "Wayback Machine",
+    "url": "https://web.archive.org",
+    "profile": "https://osint4all.com/tool/wayback-machine/",
+    "category": "osint-archives"
+  },
+  {
+    "name": "Hunter",
+    "url": "https://hunter.io",
+    "profile": "https://osint4all.com/tool/hunter/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "Epieos",
+    "url": "https://epieos.com",
+    "profile": "https://osint4all.com/tool/epieos/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "Hudson Rock Exposure Intelligence",
+    "url": "https://hudsonrock.com",
+    "profile": "https://osint4all.com/tool/hudson-rock-exposure-intelligence/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "Have I Been Pwned",
+    "url": "https://haveibeenpwned.com",
+    "profile": "https://osint4all.com/tool/have-i-been-pwned/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "Maltego",
+    "url": "https://maltego.com",
+    "profile": "https://osint4all.com/tool/maltego/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "SpiderFoot",
+    "url": "https://spiderfoot.net",
+    "profile": "https://osint4all.com/tool/spiderfoot/",
+    "category": "osint-search-engines"
+  },
+  {
+    "name": "WHOIS Lookup Workflow",
+    "url": "https://lookup.icann.org",
+    "profile": "https://osint4all.com/tool/whois-lookup-workflow/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "crt.sh",
+    "url": "https://crt.sh",
+    "profile": "https://osint4all.com/tool/crt-sh/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "SecurityTrails",
+    "url": "https://securitytrails.com",
+    "profile": "https://osint4all.com/tool/securitytrails/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "Censys",
+    "url": "https://search.censys.io",
+    "profile": "https://osint4all.com/tool/censys/",
+    "category": "osint-domain-name"
+  },
+  {
+    "name": "Shodan",
+    "url": "https://shodan.io",
+    "profile": "https://osint4all.com/tool/shodan/",
+    "category": "osint-domain-name"
+  }
+]

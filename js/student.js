@@ -47,6 +47,9 @@ const CATEGORY_KEYWORDS = {
     "qwen",
     "cluely",
     "assistant",
+    "arena ai",
+    "lmarena",
+    "llm leaderboard",
   ],
   "ai-agents": [
     "ai agent",
@@ -441,6 +444,10 @@ const CATEGORY_KEYWORDS = {
     "datacamp",
     "analytics vidhya",
     "learnpython",
+    "learn anything",
+    "learning paths",
+    "knowledge maps",
+    "mind maps",
   ],
   "creator-tools": [
     "creator",
@@ -550,6 +557,9 @@ const CATEGORY_KEYWORDS = {
     "lunacy",
     "penpot",
     "krita",
+    "font tester",
+    "typography",
+    "google fonts preview",
   ],
   email: [
     "email",
@@ -667,6 +677,8 @@ const CATEGORY_KEYWORDS = {
     "primewire",
     "cineby",
     "flixer",
+    "cinevice",
+    "streaming",
   ],
   "live-streaming": [
     "live",
@@ -1094,6 +1106,9 @@ const CATEGORY_KEYWORDS = {
     "build your own x",
     "roadmap",
     "shadcn",
+    "learn anything",
+    "awesome oss apps",
+    "awesome foss apps",
   ],
   "online-whiteboard": [
     "whiteboard",
@@ -1174,6 +1189,9 @@ const CATEGORY_KEYWORDS = {
     "scratch",
     "zed",
     "code editor",
+    "free for dev",
+    "free-for.dev",
+    "developer tiers",
   ],
   "programming-ai": [
     "code",
@@ -1304,7 +1322,16 @@ const CATEGORY_KEYWORDS = {
     "outline",
     "wayback",
   ],
-  security: ["password", "security", "generator", "keepass", "bitwarden"],
+  security: [
+    "password",
+    "security",
+    "generator",
+    "keepass",
+    "bitwarden",
+    "kaspersky",
+    "cybermap",
+    "cyberthreat",
+  ],
   "social-media": [
     "social media",
     "buffer",
@@ -1373,6 +1400,8 @@ const CATEGORY_KEYWORDS = {
     "goblin tools",
     "brainscape",
     "cram",
+    "learn anything",
+    "learning paths",
   ],
   "student-discounts": [
     "student discount",
@@ -1511,6 +1540,8 @@ const CATEGORY_KEYWORDS = {
     "email to address r",
     "voilanorbert",
     "ghunt t",
+    "behind the email",
+    "email osint",
   ],
   "osint-domain-name": [
     "osint",
@@ -1531,6 +1562,9 @@ const CATEGORY_KEYWORDS = {
     "aadinternals t",
     "gcpbucketbrute t",
     "microburst t",
+    "grayhat",
+    "grayhatwarfare",
+    "public buckets",
   ],
   "osint-ip-mac-address": [
     "osint",
@@ -1621,6 +1655,8 @@ const CATEGORY_KEYWORDS = {
     "dilisense",
     "namescan",
     "openscreening",
+    "world monitor",
+    "global intelligence",
   ],
   "osint-business-records": [
     "osint",
@@ -1650,6 +1686,10 @@ const CATEGORY_KEYWORDS = {
     "geospy",
     "gpsvisualizer",
     "military grid reference system coordinates",
+    "oceanir",
+    "geospy",
+    "mapchecking",
+    "global forest watch",
   ],
   "osint-search-engines": [
     "osint",
@@ -1660,6 +1700,8 @@ const CATEGORY_KEYWORDS = {
     "yahoo advanced web search",
     "startpage",
     "yandex",
+    "osint4all",
+    "osint directory",
   ],
   "osint-online-communities": [
     "osint",
