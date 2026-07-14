@@ -15,7 +15,7 @@ function getToolLinks() {
   document.querySelectorAll(".tools-toggle-option"),
 );
 let currentMode = "free";
-const CATEGORY_VISIBLE_LIMIT = 10;
+const CATEGORY_VISIBLE_LIMIT = 36;
 const expandedCategories = new Set();
 
 // Free mode: free | free-tier | limited. Paid mode: paid | limited | free-tier.
@@ -34,6 +34,177 @@ function matchesPricingMode(pricing, mode) {
 }
 
 const CATEGORY_KEYWORDS = {
+  "api-data-ml": [
+    "api data ml",
+    "apis, data & ml",
+    "api",
+    "machine learning",
+    "ml api",
+    "free api",
+  ],
+  "artifact-repos": [
+    "artifact repos",
+  ],
+  "authentication": [
+    "authentication",
+    "oauth",
+    "sso",
+    "auth0",
+    "login",
+    "identity",
+  ],
+  "baas": [
+    "baas",
+    "firebase",
+    "supabase",
+    "backend as a service",
+  ],
+  "cdn": [
+    "cdn",
+    "cdn & protection",
+    "cloudflare",
+    "fastly",
+  ],
+  "ci-cd": [
+    "ci cd",
+    "ci/cd",
+    "ci",
+    "cd",
+    "continuous integration",
+    "github actions",
+    "circleci",
+  ],
+  "cloud-management": [
+    "cloud management",
+  ],
+  "cloud-providers": [
+    "cloud providers",
+    "aws",
+    "azure",
+    "gcp",
+    "oracle cloud",
+    "free tier",
+  ],
+  "code-generation": [
+    "code generation",
+  ],
+  "code-quality": [
+    "code quality",
+  ],
+  "code-search": [
+    "code search",
+  ],
+  "commenting": [
+    "commenting",
+    "commenting platforms",
+  ],
+  "crash-reporting": [
+    "crash reporting",
+  ],
+  "dev-blogging": [
+    "dev blogging",
+  ],
+  "dev-education": [
+    "dev education",
+    "dev education & career",
+  ],
+  "dev-misc": [
+    "dev misc",
+    "dev misc free tiers",
+  ],
+  "dev-resources": [
+    "dev resources",
+    "dev free resources",
+  ],
+  "domains": [
+    "domains",
+  ],
+  "feature-flags": [
+    "feature flags",
+  ],
+  "flutter-tools": [
+    "flutter tools",
+  ],
+  "fonts": [
+    "fonts",
+  ],
+  "iaas": [
+    "iaas",
+  ],
+  "issue-tracking": [
+    "issue tracking",
+  ],
+  "log-management": [
+    "log management",
+  ],
+  "low-code": [
+    "low code",
+    "low-code platforms",
+  ],
+  "managed-data": [
+    "managed data",
+    "managed data services",
+  ],
+  "management-systems": [
+    "management systems",
+  ],
+  "mobile-distribution": [
+    "mobile distribution",
+  ],
+  "package-build": [
+    "package build",
+  ],
+  "payment-billing": [
+    "payment billing",
+    "payment & billing",
+  ],
+  "phone-apis": [
+    "phone apis",
+    "phone number apis",
+  ],
+  "privacy-management": [
+    "privacy management",
+  ],
+  "remote-desktop": [
+    "remote desktop",
+  ],
+  "screenshot-apis": [
+    "screenshot apis",
+  ],
+  "search-tools": [
+    "search tools",
+  ],
+  "security-pki": [
+    "security pki",
+    "security & pki",
+  ],
+  "session-recording": [
+    "session recording",
+  ],
+  "source-code-repos": [
+    "source code repos",
+  ],
+  "storage-media": [
+    "storage media",
+    "storage & media",
+  ],
+  "team-collaboration": [
+    "team collaboration",
+  ],
+  "testing-tools": [
+    "testing tools",
+    "testing",
+  ],
+  "translation-management": [
+    "translation management",
+  ],
+  "tunneling": [
+    "tunneling",
+    "tunneling & webrtc",
+  ],
+  "web-hosting": [
+    "web hosting",
+  ],
   ai: [
     "ai",
     "claude",
