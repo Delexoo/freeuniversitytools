@@ -284,7 +284,7 @@ const CATEGORY_KEYWORDS = {
     "docs",
     "api reference",
   ],
-  cloud: [
+  cloud: ["free for developers", "free cloud tier", 
     "collaborate",
     "share",
     "drive",
@@ -473,7 +473,7 @@ const CATEGORY_KEYWORDS = {
     "analytics",
     "python",
   ],
-  deployment: [
+  deployment: ["paas", "free hosting", "cicd free tier", 
     "deployment",
     "deploy",
     "hosting",
@@ -559,7 +559,7 @@ const CATEGORY_KEYWORDS = {
     "font tester",
     "design.md",
   ],
-  email: [
+  email: ["transactional email free", "free smtp", 
     "email",
     "form",
     "formspree",
