@@ -15,10 +15,10 @@
   }
 
   const SYNONYMS = {
-    ai: ["artificial intelligence", "llm", "gpt", "chatbot", "machine learning"],
-    ml: ["machine learning", "ai"],
-    pdf: ["document", "acrobat"],
-    vpn: ["virtual private network", "privacy", "proxy"],
+    ai: ["artificial intelligence", "llm", "gpt", "chatbot", "machine learning", "claude", "chatgpt"],
+    ml: ["machine learning", "ai", "deep learning"],
+    pdf: ["document", "acrobat", "ebook"],
+    vpn: ["virtual private network", "privacy", "proxy", "mullvad", "protonvpn"],
     note: [
       "notes",
       "notetaking",
@@ -49,7 +49,12 @@
       "google keep",
       "keep",
     ],
-    study: ["learning", "homework", "exam", "flashcards", "school"],
+    study: ["learning", "homework", "exam", "flashcards", "school", "quiz", "anki"],
+    book: ["books", "ebook", "ebooks", "textbook", "textbooks", "library", "libgen", "zlibrary", "anna"],
+    books: ["book", "ebook", "ebooks", "textbook", "textbooks", "library", "libgen", "zlibrary"],
+    textbook: ["textbooks", "book", "ebook", "openstax", "libretexts"],
+    movie: ["movies", "film", "streaming", "watch", "cinema"],
+    movies: ["movie", "film", "streaming", "watch"],
     video: ["movie", "stream", "youtube", "clip", "mp4", "mp3"],
     image: ["photo", "picture", "png", "jpg", "jpeg", "webp", "gif"],
     audio: ["music", "sound", "mp3", "wav", "song"],
@@ -72,15 +77,26 @@
     mp4: ["cloudconvert", "freeconvert", "convertio", "online-convert"],
     mp3: ["cloudconvert", "freeconvert", "convertio", "online-audio-converter"],
     svg: ["cloudconvert", "convertio", "svgedit"],
-    code: ["programming", "developer", "ide", "coding"],
-    math: ["mathematics", "calculator", "algebra"],
+    code: ["programming", "developer", "ide", "coding", "github"],
+    coding: ["code", "programming", "developer", "ide"],
+    programming: ["code", "coding", "developer", "ide", "github"],
+    math: ["mathematics", "calculator", "algebra", "wolfram", "symbolab"],
     write: ["writing", "essay", "grammar", "citation"],
     writing: ["write", "essay", "grammar", "citation", "notes"],
     design: ["ui", "figma", "canva", "graphics"],
-    email: ["mail", "inbox"],
+    email: ["mail", "inbox", "temp mail", "temporary"],
     free: ["gratis", "no cost", "opensource", "open source"],
-    security: ["password", "privacy", "antivirus", "breach"],
+    security: ["password", "privacy", "antivirus", "breach", "bitwarden"],
+    password: ["passwords", "bitwarden", "vault", "security"],
     osint: ["open source intelligence", "investigation", "lookup"],
+    dark: ["darkweb", "dark web", "onion", "tor", "ahmia"],
+    darkweb: ["dark", "dark web", "onion", "tor", "ahmia"],
+    onion: ["tor", "darkweb", "dark web", "ahmia"],
+    github: ["git", "repo", "repository", "open source", "oss"],
+    repo: ["github", "repository", "repos"],
+    resume: ["cv", "curriculum", "job", "career"],
+    translate: ["translation", "translator", "language"],
+    compress: ["compressor", "shrink", "optimize", "zip"],
     convert: [
       "converter",
       "converters",
@@ -234,7 +250,9 @@
   }
 
   function termGroups(queryText) {
-    return queryText
+    const cleaned = normalize(queryText);
+    if (!cleaned) return [];
+    return cleaned
       .split(/\s+/)
       .filter(Boolean)
       .map((word) => variantsFor(word))
@@ -246,9 +264,17 @@
     return normalize(
       String(value || "")
         .replace(/([a-z])([A-Z])/g, "$1 $2")
+        .replace(/([A-Z]+)([A-Z][a-z])/g, "$1 $2")
         .replace(/([a-zA-Z])(\d)/g, "$1 $2")
         .replace(/(\d)([a-zA-Z])/g, "$1 $2")
+        .replace(/([a-z])([A-Z])/g, "$1 $2")
     );
+  }
+
+  function addToken(tokens, stems, tok) {
+    if (!tok) return;
+    tokens.add(tok);
+    stems.add(stem(tok));
   }
 
   function buildSearchIndex(tool) {
@@ -256,27 +282,67 @@
     const nameParts = splitCompounds(tool.n);
     const domainRaw = (tool.d || "").toLowerCase().replace(/^www\./, "");
     const domain = normalize(domainRaw.replace(/\./g, " "));
-    const domainNoTld = normalize(domainRaw.replace(/\.[a-z]{2,24}$/i, "").replace(/\./g, " "));
+    const domainNoTld = normalize(
+      domainRaw.replace(/\.[a-z]{2,24}$/i, "").replace(/\./g, " ")
+    );
     const cat = normalize(`${tool.c || ""} ${(tool.s || "").replace(/-/g, " ")}`);
     const blurb = normalize(tool.x || "");
-    const kind = normalize(toolKind(tool));
-    const url = normalize((tool.u || "").replace(/https?:\/\//, "").replace(/[/?#=&._-]+/g, " "));
+    const kind = normalize(`${toolKind(tool)} ${kindLabel(toolKind(tool))}`);
+    const pricing = normalize(
+      `${tool.p || "free"} ${pricingLabel(tool.p || "free")}`
+    );
+    const id = normalize((tool.id || "").replace(/[/?#=&._-]+/g, " "));
+    const urlRaw = (tool.u || "").toLowerCase();
+    const url = normalize(urlRaw.replace(/https?:\/\//, "").replace(/[/?#=&._-]+/g, " "));
+    const pathBits = normalize(
+      urlRaw
+        .replace(/^https?:\/\//, "")
+        .split(/[/?#]/)
+        .slice(1)
+        .join(" ")
+        .replace(/[-_]+/g, " ")
+    );
 
-    const blob = [name, nameParts, domain, domainNoTld, cat, blurb, kind, url]
+    const blob = [
+      name,
+      nameParts,
+      domain,
+      domainNoTld,
+      cat,
+      blurb,
+      kind,
+      pricing,
+      id,
+      url,
+      pathBits,
+    ]
       .filter(Boolean)
       .join(" ");
 
+    // Compact form catches "cloud convert" ↔ cloudconvert style queries
+    const compact = blob.replace(/\s+/g, "");
+
     const tokens = new Set();
     const stems = new Set();
-    blob.split(/\s+/).forEach((tok) => {
-      if (!tok) return;
-      tokens.add(tok);
-      stems.add(stem(tok));
-      // Keep long compounds for substring checks
-      if (tok.length >= 6) tokens.add(tok);
-    });
+    blob.split(/\s+/).forEach((tok) => addToken(tokens, stems, tok));
+    nameParts.split(/\s+/).forEach((tok) => addToken(tokens, stems, tok));
 
-    return { name, domain, domainNoTld, cat, blurb, blob, tokens, stems };
+    return {
+      name,
+      nameParts,
+      domain,
+      domainNoTld,
+      cat,
+      blurb,
+      kind,
+      pricing,
+      id,
+      url,
+      blob,
+      compact,
+      tokens,
+      stems,
+    };
   }
 
   function ensureIndex(tool) {
@@ -331,11 +397,14 @@
 
   function matchesCategory(tool) {
     if (!categoryFilter) return true;
+    // Typed queries search the entire catalog, not only the open shelf
+    if (normalize(query)) return true;
     if (categoryFilter === "github-repos") return isGithubTool(tool);
     return tool.s === categoryFilter;
   }
 
   function displayRank(tool) {
+    if (normalize(query)) return 0;
     if (categoryFilter === "github-repos") {
       return virtualCategoryRank(tool, "github-repos");
     }
@@ -470,39 +539,60 @@
   }
 
   function scoreTermAgainst(term, idx) {
-    if (!term || term.length < 2) return 0;
+    if (!term || term.length < 1) return 0;
+    // Allow 1-char only for exact token hits (e.g. "c", "r"); otherwise need 2+
+    if (term.length < 2 && !idx.tokens.has(term) && idx.name !== term) return 0;
     const rooted = stem(term);
+    const compactTerm = term.replace(/\s+/g, "");
 
-    if (idx.name === term || idx.name === rooted) return 130;
-    if (idx.name.startsWith(term) || idx.name.startsWith(rooted)) return 95;
-    if (idx.name.includes(term) || idx.name.includes(rooted)) return 70;
+    if (idx.name === term || idx.name === rooted) return 140;
+    if (idx.nameParts === term || idx.nameParts === rooted) return 130;
+    if (idx.name.startsWith(term) || idx.name.startsWith(rooted)) return 110;
+    if (idx.nameParts.startsWith(term) || idx.nameParts.startsWith(rooted)) return 100;
+    if (idx.name.includes(term) || idx.name.includes(rooted)) return 85;
+    if (idx.nameParts.includes(term) || idx.nameParts.includes(rooted)) return 78;
 
     if (
       idx.domain === term ||
       idx.domainNoTld === term ||
+      idx.domain.startsWith(term) ||
+      idx.domainNoTld.startsWith(term) ||
       idx.domain.includes(term) ||
       idx.domainNoTld.includes(term) ||
       idx.domain.includes(rooted) ||
       idx.domainNoTld.includes(rooted)
     ) {
-      return 55;
+      return 70;
     }
 
-    if (idx.tokens.has(term) || idx.tokens.has(rooted)) return 48;
-    if (idx.stems.has(rooted) || idx.stems.has(term)) return 42;
+    if (idx.id.includes(term) || idx.id.includes(rooted)) return 62;
+    if (idx.url.includes(term) || idx.url.includes(rooted)) return 58;
 
-    if (idx.cat.includes(term) || idx.cat.includes(rooted)) return 34;
-    if (idx.blurb.includes(term) || idx.blurb.includes(rooted)) return 28;
+    if (idx.tokens.has(term) || idx.tokens.has(rooted)) return 55;
+    if (idx.stems.has(rooted) || idx.stems.has(term)) return 50;
 
-    // Compound domains/names: freeconvert contains convert
-    // Short format codes (gif, mp3, pdf) still need substring matches
-    if (rooted.length >= 3) {
-      for (const tok of idx.tokens) {
-        if (tok.length >= rooted.length && tok.includes(rooted)) return 24;
+    // Prefix against any indexed token (partial typing)
+    for (const tok of idx.tokens) {
+      if (tok.length >= term.length && tok.startsWith(term)) return 46;
+      if (rooted.length >= 2 && tok.length >= rooted.length && tok.startsWith(rooted)) {
+        return 44;
       }
-      if (idx.blob.includes(rooted) || idx.blob.includes(term)) return 18;
-    } else if (idx.blob.includes(term)) {
-      return 14;
+    }
+
+    if (idx.cat.includes(term) || idx.cat.includes(rooted)) return 40;
+    if (idx.kind.includes(term) || idx.kind.includes(rooted)) return 36;
+    if (idx.pricing.includes(term) || idx.pricing.includes(rooted)) return 34;
+    if (idx.blurb.includes(term) || idx.blurb.includes(rooted)) return 32;
+
+    // Compound domains/names: freeconvert contains convert; short formats too
+    if (rooted.length >= 2) {
+      for (const tok of idx.tokens) {
+        if (tok.length >= rooted.length && tok.includes(rooted)) return 28;
+      }
+      if (idx.compact.includes(compactTerm) || idx.compact.includes(rooted)) return 24;
+      if (idx.blob.includes(rooted) || idx.blob.includes(term)) return 20;
+    } else if (idx.blob.includes(term) || idx.compact.includes(compactTerm)) {
+      return 16;
     }
 
     return 0;
@@ -526,6 +616,16 @@
 
     const idx = ensureIndex(tool);
     let score = 0;
+    const phrase = normalize(query);
+    const compactPhrase = phrase.replace(/\s+/g, "");
+
+    // Exact / phrase boosts across the whole typed query
+    if (phrase) {
+      if (idx.name === phrase || idx.nameParts === phrase) score += 80;
+      else if (idx.name.startsWith(phrase) || idx.nameParts.startsWith(phrase)) score += 55;
+      else if (idx.name.includes(phrase) || idx.nameParts.includes(phrase)) score += 35;
+      else if (idx.blob.includes(phrase) || idx.compact.includes(compactPhrase)) score += 22;
+    }
 
     // AND across query words; OR across morph/synonym variants
     for (const group of groups) {
@@ -821,11 +921,25 @@
   }
 
   function setQuery(next, { render = true } = {}) {
+    const prevHadQuery = Boolean(normalize(query));
     query = next;
     els.input.value = next;
     els.clear.hidden = !next;
     visible = PAGE_SIZE;
-    if (render) renderResults();
+
+    // Typing searches the whole catalog — leave the shelf when a query starts
+    const nowHasQuery = Boolean(normalize(query));
+    if (nowHasQuery && categoryFilter) {
+      categoryFilter = "";
+      renderCategories();
+    } else if (prevHadQuery && !nowHasQuery) {
+      renderCategories();
+    }
+
+    if (render) {
+      renderResults({ animate: Boolean(nowHasQuery || prevHadQuery) });
+      if (suggestionsWanted()) renderSuggestions(filteredTools());
+    }
   }
 
   function runSearch(scroll) {

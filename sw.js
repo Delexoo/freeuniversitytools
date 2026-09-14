@@ -1,5 +1,5 @@
 /* Minimal service worker — required for installable PWA */
-const CACHE = "fut-shell-v4";
+const CACHE = "fut-shell-v5";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest"];
 
 self.addEventListener("install", (event) => {
