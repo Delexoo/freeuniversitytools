@@ -709,11 +709,21 @@
     const thumb = thumbEl || els.thumb;
     const chips = chipsEl || els.chips;
     if (!thumb || !chips || !activeBtn) return;
+    // Keep thumb painted even if a prior fit pass hid overflow measurements
+    thumb.style.display = "block";
     const parent = chips.getBoundingClientRect();
     const btn = activeBtn.getBoundingClientRect();
-    const left = btn.left - parent.left;
+    const left = btn.left - parent.left + chips.scrollLeft;
     thumb.style.width = `${btn.width}px`;
     thumb.style.transform = `translateX(${left}px)`;
+  }
+
+  function pulseThumb(chipsEl, thumbEl) {
+    const thumb = thumbEl || (chipsEl === els.kindChips ? els.kindThumb : els.thumb);
+    if (!thumb) return;
+    thumb.classList.remove("is-pulse");
+    void thumb.offsetWidth;
+    thumb.classList.add("is-pulse");
   }
 
   function animateResultsSwap() {
@@ -907,7 +917,13 @@
       Array.from(els.chips?.querySelectorAll(".home-filter") || []).forEach((c) => {
         c.classList.toggle("is-active", c === chip);
       });
-      if (chip) moveFilterThumb(chip, els.thumb, els.chips);
+      requestAnimationFrame(() => {
+        if (chip) {
+          moveFilterThumb(chip, els.thumb, els.chips);
+          pulseThumb(els.chips, els.thumb);
+          chip.scrollIntoView({ inline: "nearest", block: "nearest", behavior: "smooth" });
+        }
+      });
       visible = PAGE_SIZE;
       visibleCats = catPageSize();
       renderCategories({ animate: true });
@@ -922,7 +938,13 @@
       Array.from(els.kindChips?.querySelectorAll(".home-filter") || []).forEach((c) => {
         c.classList.toggle("is-active", c === chip);
       });
-      if (chip) moveFilterThumb(chip, els.kindThumb, els.kindChips);
+      requestAnimationFrame(() => {
+        if (chip) {
+          moveFilterThumb(chip, els.kindThumb, els.kindChips);
+          pulseThumb(els.kindChips, els.kindThumb);
+          chip.scrollIntoView({ inline: "nearest", block: "nearest", behavior: "smooth" });
+        }
+      });
       visible = PAGE_SIZE;
       visibleCats = catPageSize();
       renderCategories({ animate: true });
@@ -985,6 +1007,35 @@
       visible += PAGE_SIZE;
       renderResults();
     });
+
+    // Touch-friendly press feedback (filters, badges, category chips)
+    const pressRoot = document.querySelector(".home-main") || document;
+    const pressSelector = ".home-filter, a.home-badge, .home-cat-card";
+    pressRoot.addEventListener(
+      "pointerdown",
+      (e) => {
+        const el = e.target.closest(pressSelector);
+        if (!el) return;
+        el.classList.add("is-pressed");
+      },
+      { passive: true }
+    );
+    const clearPress = (e) => {
+      const el = e.target.closest?.(pressSelector) || document.querySelector(".is-pressed");
+      if (!el) return;
+      el.classList.remove("is-pressed");
+    };
+    pressRoot.addEventListener("pointerup", clearPress, { passive: true });
+    pressRoot.addEventListener("pointercancel", clearPress, { passive: true });
+    pressRoot.addEventListener(
+      "pointerleave",
+      (e) => {
+        if (e.target?.classList?.contains("is-pressed")) {
+          e.target.classList.remove("is-pressed");
+        }
+      },
+      true
+    );
 
     window.addEventListener("resize", () => {
       scheduleFitFilterBars();

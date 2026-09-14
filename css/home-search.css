@@ -407,9 +407,15 @@
   border-radius: 7px;
   background: var(--ink);
   pointer-events: none;
+  z-index: 0;
   transition:
     transform 0.28s var(--ease),
-    width 0.28s var(--ease);
+    width 0.28s var(--ease),
+    box-shadow 0.28s var(--ease);
+}
+
+.home-filters-thumb.is-pulse {
+  box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.12);
 }
 
 .home-filter {
@@ -433,9 +439,11 @@
   cursor: pointer;
   border-radius: 7px;
   white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   transition:
     color 0.2s var(--ease),
-    transform 0.18s var(--ease);
+    transform 0.16s var(--ease);
 }
 
 .home-filter-count {
@@ -457,7 +465,8 @@
   transform: scale(1.04);
 }
 
-.home-filter:active {
+.home-filter:active,
+.home-filter.is-pressed {
   transform: scale(0.96);
 }
 
@@ -740,8 +749,8 @@
 
 @keyframes resultsSwap {
   0% {
-    opacity: 0.35;
-    transform: translateY(6px);
+    opacity: 0.2;
+    transform: translateY(10px);
   }
   100% {
     opacity: 1;
@@ -849,10 +858,22 @@
   line-height: 1;
   text-decoration: none;
   cursor: pointer;
+  transition:
+    transform 0.16s var(--ease),
+    filter 0.16s var(--ease),
+    background 0.16s var(--ease),
+    border-color 0.16s var(--ease),
+    color 0.16s var(--ease);
 }
 
 a.home-badge:hover {
   filter: brightness(0.92);
+}
+
+a.home-badge:active,
+a.home-badge.is-pressed {
+  transform: scale(0.94);
+  filter: brightness(0.88);
 }
 
 .home-badge--kind,
@@ -1169,7 +1190,7 @@ a.home-badge:hover {
   }
 
   .home-filters-thumb {
-    display: none;
+    display: block;
   }
 
   .home-filter {
@@ -1188,7 +1209,7 @@ a.home-badge:hover {
   }
 
   .home-filter.is-active {
-    background: var(--ink);
+    background: transparent;
     color: #fff;
   }
 
@@ -1209,6 +1230,11 @@ a.home-badge:hover {
 
   .home-filter:hover {
     transform: none;
+  }
+
+  .home-filter:active,
+  .home-filter.is-pressed {
+    transform: scale(0.95);
   }
 
   .home-suggestions {
@@ -1235,10 +1261,18 @@ a.home-badge:hover {
     height: 30px;
     padding: 0 7px;
     gap: 5px;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
 
   .home-cat-card:hover {
     transform: none;
+  }
+
+  .home-cat-card:active,
+  .home-cat-card.is-pressed {
+    transform: scale(0.97);
+    background: #f3f3f3;
   }
 
   .home-cat-icon {
@@ -1264,6 +1298,23 @@ a.home-badge:hover {
 
   .home-result:hover {
     transform: none;
+  }
+
+  .home-result:active,
+  .home-result.is-pressed {
+    transform: none;
+    background: #f5f5f5;
+  }
+
+  .home-badge--kind,
+  .home-badge--price {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  a.home-badge:active,
+  a.home-badge.is-pressed {
+    transform: scale(0.93);
   }
 
   .home-result img {
