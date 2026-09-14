@@ -244,6 +244,23 @@
   .nav-dropdown-content .nav-link:hover {
     background: var(--nav-subtle) !important;
   }
+
+  button.nav-link.nav-hard-refresh {
+    appearance: none;
+    -webkit-appearance: none;
+    margin: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  button.nav-link.nav-hard-refresh:hover {
+    background: var(--nav-subtle) !important;
+  }
 }
 
 /* Mobile toggle */
@@ -576,16 +593,24 @@ body:has(.header--tools) main {
     text-align: center !important;
     border-radius: 14px !important;
     border-bottom: none !important;
+    background: transparent !important;
+    order: 1;
   }
 
-  .nav.mobile-open .nav-link:hover,
+  /* Press feedback only — no persistent “active page” pill */
+  .nav.mobile-open .nav-link.active {
+    color: var(--nav-text) !important;
+    background: transparent !important;
+  }
+
   .nav.mobile-open .nav-link:active {
     background: #f4f4f5 !important;
   }
 
-  .nav.mobile-open .nav-link.active {
-    color: var(--nav-text) !important;
-    background: #f4f4f5 !important;
+  @media (hover: hover) and (pointer: fine) {
+    .nav.mobile-open .nav-link:hover {
+      background: #f4f4f5 !important;
+    }
   }
 
   /* Flat mobile menu: About/Terms inline — no "More" */
@@ -608,16 +633,63 @@ body:has(.header--tools) main {
     font-size: clamp(1.5rem, 7vw, 2rem) !important;
   }
 
+  /* Donate sits with the link stack; Hard refresh pins to bottom */
   .nav.mobile-open .btn-donate {
+    order: 2;
     width: 100% !important;
-    margin: auto 0 0 !important;
+    margin: 0 !important;
     margin-left: 0 !important;
-    padding: 16px 18px !important;
-    font-size: 15px !important;
+    min-height: 56px;
+    padding: 16px 12px !important;
+    font-size: clamp(1.5rem, 7vw, 2rem) !important;
     font-weight: 600 !important;
+    letter-spacing: -0.035em !important;
+    line-height: 1.15 !important;
     text-align: center;
     justify-content: center;
+    border-radius: 14px !important;
+    background: transparent !important;
+    color: var(--nav-text) !important;
+    border-color: transparent !important;
+  }
+
+  .nav.mobile-open .btn-donate:active {
+    background: #f4f4f5 !important;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .nav.mobile-open .btn-donate:hover {
+      background: #f4f4f5 !important;
+      color: var(--nav-text) !important;
+    }
+  }
+
+  .nav.mobile-open button.nav-link.nav-hard-refresh[data-hard-refresh] {
+    order: 3;
+    appearance: none;
+    -webkit-appearance: none;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin: auto 0 0 !important;
+    min-height: 0;
+    padding: 16px 18px !important;
+    border: 1px solid var(--nav-text) !important;
     border-radius: 12px !important;
+    background: var(--nav-text) !important;
+    color: #fff !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.01em !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    cursor: pointer;
+  }
+
+  .nav.mobile-open button.nav-link.nav-hard-refresh[data-hard-refresh]:active {
+    background: #333 !important;
+    color: #fff !important;
   }
 
 body:has(.header--tools) main {

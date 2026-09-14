@@ -1,7 +1,7 @@
 {
   "name": "Free University Tools",
   "short_name": "Free Uni Tools",
-  "description": "Search for thousands of free tools.",
+  "description": "Curated directory of 2,000+ free tools for students. AI, study apps, books, courses, converters, and productivity.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

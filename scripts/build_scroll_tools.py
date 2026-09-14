@@ -16,7 +16,7 @@ LINK_RE = re.compile(
 )
 
 SECTION_RE = re.compile(
-    r'<section class="tool-category" data-category="([^"]+)">.*?'
+    r'<section class="tool-category"[^>]*\bdata-category="([^"]+)"[^>]*>.*?'
     r'<h3 class="category-title">([^<]*)</h3>.*?'
     r'<div class="category-tools">(.*?)</div>\s*</section>',
     re.DOTALL,
@@ -37,6 +37,10 @@ CATEGORY_BLURBS = {
     "programming": "Coding references, docs, practice, and developer utilities.",
     "programming-ai": "AI coding assistants, completions, and dev-focused AI tools.",
     "pdf": "PDF viewing, editing, conversion, chat, and document utilities.",
+    "image": "Edit, compress, and convert images — PNG, JPG, WebP, GIF, and more.",
+    "video": "Video converters, compressors, editors, and download helpers.",
+    "audio": "Audio converters, editors, and sound utilities.",
+    "gif-converters": "Make and convert GIFs from images or video online.",
     "utilities": "Handy everyday utilities: converters, helpers, and small tools.",
     "productivity": "Productivity apps for focus, planning, and getting work done.",
     "security": "Security, privacy, and safety tools for your accounts and devices.",
@@ -1221,6 +1225,8 @@ CATEGORY_TOP3: dict[str, list[str]] = {
     "productivity": ["notion", "todoist", "obsidian"],
     "notepad": ["notion", "obsidian", "standard notes"],
     "courses": ["coursera", "khanacademy", "edx"],
+    "free-books": ["annas-archive.is", "oceanofpdf.com", "z-lib.gd"],
+    "gif-converters": ["ezgif.com", "cloudconvert.com/gif-converter", "freeconvert.com"],
     "study": ["youlearn", "anki", "quizlet"],
     "free-movies": ["flixer.su", "movy.sx", "stellar.gdn"],
     "immersive-reader": ["elevenreader", "readaloud.net", "speechify"],
@@ -1239,6 +1245,13 @@ CATEGORY_TOP3: dict[str, list[str]] = {
     "cloud": ["mega", "google drive", "syncthing"],
     "screen-recording": ["obs studio", "sharex", "screenity"],
     "website-builders": ["webild", "carrd", "wix"],
+    "api-data-ml": ["openrouter", "developer.deepar.ai", "hoppscotch.io"],
+    "osint-community-search": [
+        "disboard.org",
+        "top.gg/discord/servers/tag/community",
+        "discord.bots.gg",
+    ],
+    "osint-dark-web": ["ahmia.fi", "torbot", "onionsearch"],
     "email": ["temp-mail", "10minutemail", "guerrillamail"],
     "security": ["bitwarden", "haveibeenpwned", "virustotal"],
     "privacy-tools": ["privacyguides", "proton", "tor"],

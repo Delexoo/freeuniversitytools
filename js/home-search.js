@@ -53,6 +53,25 @@
     video: ["movie", "stream", "youtube", "clip", "mp4", "mp3"],
     image: ["photo", "picture", "png", "jpg", "jpeg", "webp", "gif"],
     audio: ["music", "sound", "mp3", "wav", "song"],
+    // File-format queries should surface converters (gif → CloudConvert / FreeConvert / EZGIF)
+    gif: [
+      "ezgif",
+      "gifmaker",
+      "cloudconvert",
+      "freeconvert",
+      "convertio",
+      "iloveimg",
+      "giphy",
+      "imgflip",
+      "kapwing",
+    ],
+    png: ["cloudconvert", "freeconvert", "iloveimg", "squoosh", "convertio"],
+    jpg: ["cloudconvert", "freeconvert", "iloveimg", "jpeg", "convertio"],
+    jpeg: ["cloudconvert", "freeconvert", "iloveimg", "jpg", "convertio"],
+    webp: ["cloudconvert", "freeconvert", "squoosh", "convertio"],
+    mp4: ["cloudconvert", "freeconvert", "convertio", "online-convert"],
+    mp3: ["cloudconvert", "freeconvert", "convertio", "online-audio-converter"],
+    svg: ["cloudconvert", "convertio", "svgedit"],
     code: ["programming", "developer", "ide", "coding"],
     math: ["mathematics", "calculator", "algebra"],
     write: ["writing", "essay", "grammar", "citation"],
@@ -206,7 +225,12 @@
       alts.add(stem(n));
     });
 
-    return Array.from(alts).filter((t) => t && t.length >= 2);
+    return Array.from(alts).filter((t) => {
+      if (!t || t.length < 2) return false;
+      // Keep the typed word even if short (gif, mp3); drop tiny stems from synonyms
+      if (t.length < 4 && t !== base && t !== rooted) return false;
+      return true;
+    });
   }
 
   function termGroups(queryText) {
@@ -279,6 +303,45 @@
     return tool.t || "website";
   }
 
+  function isGithubTool(tool) {
+    if (toolKind(tool) === "github") return true;
+    const url = (tool.u || "").toLowerCase();
+    return url.includes("github.com/") || /(^|\.)github\.io(\/|$)/.test(url);
+  }
+
+  function categoryMeta(slug) {
+    return categories.find((c) => c.slug === slug) || null;
+  }
+
+  function virtualCategoryRank(tool, slug) {
+    const top = categoryMeta(slug)?.top3 || [];
+    const url = (tool.u || "").toLowerCase();
+    const id = (tool.id || "").toLowerCase();
+    for (let i = 0; i < top.length; i += 1) {
+      const tu = (top[i].u || "").toLowerCase();
+      if (tu && (url === tu || url.startsWith(tu) || tu.startsWith(url))) {
+        return i + 1;
+      }
+      if (tu && (id.includes(tu.replace(/^https?:\/\//, "")) || url.includes(tu.replace(/^https?:\/\//, "")))) {
+        return i + 1;
+      }
+    }
+    return 0;
+  }
+
+  function matchesCategory(tool) {
+    if (!categoryFilter) return true;
+    if (categoryFilter === "github-repos") return isGithubTool(tool);
+    return tool.s === categoryFilter;
+  }
+
+  function displayRank(tool) {
+    if (categoryFilter === "github-repos") {
+      return virtualCategoryRank(tool, "github-repos");
+    }
+    return tool.r === 1 || tool.r === 2 || tool.r === 3 ? tool.r : 0;
+  }
+
   function toolMatchesPricing(tool, filter) {
     if (filter === "all") return true;
     if (filter === "free") {
@@ -317,6 +380,88 @@
         btn.setAttribute("aria-label", `${label}, ${n.toLocaleString()} tools`);
       }
     });
+    fitFilterBars();
+  }
+
+  /** Shrink filter chip font/padding so the full bar (with counts) fits the screen. */
+  function fitFilterBar(bar) {
+    if (!bar) return;
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    let fs = isMobile ? 11 : 12;
+    let countFs = isMobile ? 10 : 11;
+    let pad = isMobile ? 10 : 14;
+    let gap = isMobile ? 4 : 6;
+    let h = isMobile ? 32 : 34;
+    let barPad = isMobile ? 4 : 5;
+
+    const clear = () => {
+      [
+        "--filter-fs",
+        "--filter-count-fs",
+        "--filter-pad-x",
+        "--filter-gap",
+        "--filter-h",
+        "--filter-bar-pad",
+      ].forEach((k) => bar.style.removeProperty(k));
+    };
+
+    const apply = () => {
+      bar.style.setProperty("--filter-fs", `${fs}px`);
+      bar.style.setProperty("--filter-count-fs", `${countFs}px`);
+      bar.style.setProperty("--filter-pad-x", `${pad}px`);
+      bar.style.setProperty("--filter-gap", `${gap}px`);
+      bar.style.setProperty("--filter-h", `${h}px`);
+      bar.style.setProperty("--filter-bar-pad", `${barPad}px`);
+    };
+
+    clear();
+    bar.style.width = "max-content";
+    bar.style.maxWidth = "100%";
+    apply();
+    void bar.offsetWidth;
+
+    const parent = bar.parentElement;
+    const avail = Math.max(
+      0,
+      (parent ? parent.clientWidth : bar.clientWidth) || bar.clientWidth
+    );
+    if (avail > 0 && bar.scrollWidth <= avail + 1) {
+      return;
+    }
+
+    bar.style.width = "100%";
+    void bar.offsetWidth;
+    let guard = 0;
+    while (bar.scrollWidth > bar.clientWidth + 1 && guard < 40) {
+      guard += 1;
+      if (fs > 8) fs -= 0.25;
+      if (countFs > 8) countFs -= 0.2;
+      if (pad > 3) pad -= 0.35;
+      if (gap > 2) gap -= 0.12;
+      if (h > 26) h -= 0.25;
+      if (barPad > 2) barPad -= 0.05;
+      apply();
+      void bar.offsetWidth;
+      if (fs <= 8 && pad <= 3 && countFs <= 8) break;
+    }
+  }
+
+  function fitFilterBars() {
+    fitFilterBar(els.chips);
+    fitFilterBar(els.kindChips);
+  }
+
+  let fitRaf = 0;
+  function scheduleFitFilterBars() {
+    if (fitRaf) cancelAnimationFrame(fitRaf);
+    fitRaf = requestAnimationFrame(() => {
+      fitRaf = 0;
+      fitFilterBars();
+      const active = els.chips?.querySelector(".home-filter.is-active");
+      if (active) moveFilterThumb(active, els.thumb, els.chips);
+      const kindActive = els.kindChips?.querySelector(".home-filter.is-active");
+      if (kindActive) moveFilterThumb(kindActive, els.kindThumb, els.kindChips);
+    });
   }
 
   function matchesKind(tool) {
@@ -350,11 +495,12 @@
     if (idx.blurb.includes(term) || idx.blurb.includes(rooted)) return 28;
 
     // Compound domains/names: freeconvert contains convert
-    if (rooted.length >= 4) {
+    // Short format codes (gif, mp3, pdf) still need substring matches
+    if (rooted.length >= 3) {
       for (const tok of idx.tokens) {
         if (tok.length >= rooted.length && tok.includes(rooted)) return 24;
       }
-      if (idx.blob.includes(rooted)) return 18;
+      if (idx.blob.includes(rooted) || idx.blob.includes(term)) return 18;
     } else if (idx.blob.includes(term)) {
       return 14;
     }
@@ -408,7 +554,7 @@
     for (const tool of tools) {
       if (!matchesPricing(tool)) continue;
       if (!matchesKind(tool)) continue;
-      if (categoryFilter && tool.s !== categoryFilter) continue;
+      if (!matchesCategory(tool)) continue;
       const score = scoreTool(tool, groups);
       if (!score) continue;
       list.push({ tool, score });
@@ -416,9 +562,20 @@
     list.sort((a, b) => {
       // Within a category view, hard-pin Top 3 order first
       if (categoryFilter && !groups.length) {
-        const ar = a.tool.r || 99;
-        const br = b.tool.r || 99;
+        const ar =
+          categoryFilter === "github-repos"
+            ? virtualCategoryRank(a.tool, "github-repos") || 99
+            : a.tool.r || 99;
+        const br =
+          categoryFilter === "github-repos"
+            ? virtualCategoryRank(b.tool, "github-repos") || 99
+            : b.tool.r || 99;
         if (ar !== br) return ar - br;
+        if (categoryFilter === "github-repos") {
+          const ap = a.tool.s === "github-powerhouses" ? 1 : 0;
+          const bp = b.tool.s === "github-powerhouses" ? 1 : 0;
+          if (ap !== bp) return bp - ap;
+        }
       }
       return b.score - a.score || a.tool.n.localeCompare(b.tool.n);
     });
@@ -427,16 +584,19 @@
 
   function liveCategories() {
     const counts = new Map();
+    let githubCount = 0;
     for (const tool of tools) {
       if (!matchesPricing(tool)) continue;
       if (!matchesKind(tool)) continue;
+      if (isGithubTool(tool)) githubCount += 1;
       if (!tool.s) continue;
       counts.set(tool.s, (counts.get(tool.s) || 0) + 1);
     }
     return categories
       .map((c) => ({
         ...c,
-        count: counts.get(c.slug) || 0,
+        count:
+          c.slug === "github-repos" ? githubCount : counts.get(c.slug) || 0,
       }))
       .filter((c) => c.count > 0);
   }
@@ -517,7 +677,9 @@
               : c.domain
                 ? `https://icon.horse/icon/${encodeURIComponent(c.domain)}`
                 : FALLBACK;
-          return `<a class="home-cat-card${categoryFilter === c.slug ? " is-active" : ""}" href="#results" data-cat="${escapeAttr(c.slug)}">
+          return `<a class="home-cat-card${categoryFilter === c.slug ? " is-active" : ""}${
+            c.slug === "must-try" || c.slug === "github-repos" ? " home-cat-card--featured" : ""
+          }" href="#results" data-cat="${escapeAttr(c.slug)}">
           <img class="home-cat-icon" src="${escapeAttr(icon)}" alt="" loading="lazy" onerror="this.src='${FALLBACK}'">
           <span class="home-cat-name">${escapeHtml(c.name)}</span>
           <span class="home-cat-count">${c.count.toLocaleString()}</span>
@@ -590,7 +752,7 @@
 
     const showTopIntro = Boolean(categoryFilter && !q);
     const topCount = showTopIntro
-      ? Math.min(3, slice.filter((t) => t.r === 1 || t.r === 2 || t.r === 3).length)
+      ? Math.min(3, slice.filter((t) => displayRank(t)).length)
       : 0;
 
     els.results.innerHTML =
@@ -599,10 +761,10 @@
         : "") +
       slice
         .map((t, idx) => {
-          const rank = t.r === 1 || t.r === 2 || t.r === 3 ? t.r : 0;
+          const rank = displayRank(t);
           const rankBadge = rank
             ? `<span class="home-badge home-badge--rank" data-r="${rank}" title="Top ${rank} in ${escapeAttr(
-                t.c || "this category"
+                catName || t.c || "this category"
               )}">#${rank}</span>`
             : "";
           const topClass = rank ? " is-top" : "";
@@ -825,10 +987,7 @@
     });
 
     window.addEventListener("resize", () => {
-      const active = els.chips?.querySelector(".home-filter.is-active");
-      if (active) moveFilterThumb(active, els.thumb, els.chips);
-      const kindActive = els.kindChips?.querySelector(".home-filter.is-active");
-      if (kindActive) moveFilterThumb(kindActive, els.kindThumb, els.kindChips);
+      scheduleFitFilterBars();
     });
 
     document.addEventListener("click", (e) => {
@@ -862,6 +1021,7 @@
       renderCategories();
       renderResults();
       requestAnimationFrame(() => {
+        fitFilterBars();
         const active = els.chips?.querySelector(".home-filter.is-active");
         if (active) moveFilterThumb(active, els.thumb, els.chips);
         const kindActive = els.kindChips?.querySelector(".home-filter.is-active");

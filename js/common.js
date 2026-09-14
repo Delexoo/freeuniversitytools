@@ -301,7 +301,7 @@ if (mobileMenuToggle && mainNav) {
     }
   });
 
-  mainNav.querySelectorAll(".nav-link, .btn-donate").forEach((link) => {
+  mainNav.querySelectorAll(".nav-link, .btn-donate, [data-hard-refresh]").forEach((link) => {
     link.addEventListener("click", closeMobileNav);
   });
 
@@ -332,7 +332,7 @@ if (desktopDropdownToggle && navDropdown) {
   });
 
   navDropdown
-    .querySelectorAll(".nav-dropdown-content .nav-link")
+    .querySelectorAll(".nav-dropdown-content .nav-link, .nav-dropdown-content [data-hard-refresh]")
     .forEach((link) => {
       link.addEventListener("click", function () {
         navDropdown.classList.remove("is-open");
@@ -350,6 +350,49 @@ if (desktopDropdownToggle && navDropdown) {
     }
   });
 }
+
+// Hard refresh: clear SW caches and reload fresh assets
+(function setupHardRefresh() {
+  function ensureButtons() {
+    document.querySelectorAll(".nav-dropdown-content").forEach((menu) => {
+      if (menu.querySelector("[data-hard-refresh]")) return;
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "nav-link nav-hard-refresh";
+      btn.setAttribute("data-hard-refresh", "");
+      btn.textContent = "Hard refresh";
+      menu.appendChild(btn);
+    });
+  }
+
+  async function hardRefresh() {
+    try {
+      if ("caches" in window) {
+        const keys = await caches.keys();
+        await Promise.all(keys.map((key) => caches.delete(key)));
+      }
+      if ("serviceWorker" in navigator) {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(regs.map((reg) => reg.unregister()));
+      }
+    } catch {
+      /* still reload */
+    }
+    const url = new URL(window.location.href);
+    url.searchParams.set("_r", String(Date.now()));
+    window.location.replace(url.toString());
+  }
+
+  ensureButtons();
+  document.addEventListener("click", function (e) {
+    const btn = e.target.closest("[data-hard-refresh]");
+    if (!btn) return;
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = "Refreshing…";
+    hardRefresh();
+  });
+})();
 
 // Header scroll effect (passive + rAF for lighter scroll work)
 (function () {
