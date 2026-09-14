@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-FILES = ["student.html", "about.html", "contact.html", "donate.html", "report.html"]
+FILES = ["data/student-directory.html", "about.html", "contact.html", "donate.html", "report.html"]
 
 CSS_LINKS = """ <link rel="stylesheet" href="css/site.css">
  <link rel="stylesheet" href="css/nav.css">"""
@@ -96,9 +96,9 @@ def ensure_css_links(text: str, is_student: bool) -> str:
 def process(path: Path) -> None:
  text = path.read_text(encoding="utf-8")
  text = STYLE_RE.sub("\n", text)
- text = ensure_css_links(text, path.name == "student.html")
+ text = ensure_css_links(text, path.name == "data/student-directory.html")
 
- if path.name == "student.html":
+ if path.name == "data/student-directory.html":
  text = MODAL_OLD.sub(MODAL_NEW, text)
  text = MODAL_SCRIPT_OLD.sub(MODAL_SCRIPT_NEW, text)
 

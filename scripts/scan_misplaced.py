@@ -4,7 +4,7 @@ from collections import defaultdict
 from pathlib import Path
 from urllib.parse import urlparse
 
-HTML = Path(__file__).resolve().parent.parent / "student.html"
+HTML = Path(__file__).resolve().parent.parent / "data" / "student-directory.html"
 SECTION_RE = re.compile(
  r'data-category="([^"]+)">.*?<div class="category-tools">(.*?)</div>\s*</section>',
  re.DOTALL,

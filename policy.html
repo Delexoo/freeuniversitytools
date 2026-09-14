@@ -1,82 +1,55 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="page-site">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Terms &amp; Disclaimer, Free University Tools</title>
-    <meta
-      name="description"
-      content="Terms of use, disclaimer, and limitation of liability for Free University Tools."
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      href="doc/FreeUniversityTools.png"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/site.css" />
-    <link rel="stylesheet" href="css/nav.css" />
-    <link rel="stylesheet" href="css/mobile-graphics.css" media="(max-width: 768px)" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="Terms of use, disclaimer, and limitation of liability for Free University Tools.">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="doc/FreeUniversityTools.png">
+    <title>Terms · Free University Tools</title>
+    <link rel="icon" type="image/png" href="doc/FreeUniversityTools.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/site-pages.css">
+    <link rel="stylesheet" href="css/mobile-graphics.css" media="(max-width: 768px)">
   </head>
-  <body>
-    <header class="header" id="header">
+  <body class="page-site-body">
+    <header class="header header--tools home-header" id="header">
       <div class="header-inner">
-        <a href="index.html" class="logo"
-          ><span class="logo-free">free</span
-          ><span class="logo-university">university</span
-          ><span class="logo-tools">tools</span></a
-        >
-        <button
-          class="mobile-menu-toggle"
-          id="mobileMenuToggle"
-          aria-label="Toggle menu"
-        >
-          ☰
-        </button>
+        <a href="index.html" class="logo" aria-label="Free University Tools home">
+          <span class="logo-free">free</span><span class="logo-university">university</span><span class="logo-tools">tools</span>
+        </a>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">☰</button>
         <nav class="nav" id="mainNav">
           <a href="index.html" class="nav-link">Search</a>
-          <a href="student.html" class="nav-link">Directory</a>
           <div class="nav-dropdown" id="navDropdown">
-            <button
-              type="button"
-              class="desktop-dropdown-toggle"
-              id="desktopDropdownToggle"
-              aria-label="More menu"
-              aria-expanded="false"
-            >
-              ☰
-            </button>
+            <button type="button" class="desktop-dropdown-toggle" id="desktopDropdownToggle" aria-label="More menu" aria-expanded="false">☰</button>
             <button class="nav-dropdown-btn">More ▼</button>
             <div class="nav-dropdown-content">
-              <a href="about.html" class="nav-link">About Us</a>
-              <a href="policy.html" class="nav-link active"
-                >Terms &amp; Disclaimer</a
-              >
+              <a href="about.html" class="nav-link">About</a>
+              <a href="policy.html" class="nav-link active">Terms</a>
             </div>
           </div>
-          <a
-            href="https://buy.stripe.com/9B63cu3RE2ouaKgcHLcjS00"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn-donate"
-            >Donate</a
-          >
+          <a href="https://buy.stripe.com/9B63cu3RE2ouaKgcHLcjS00" target="_blank" rel="noopener noreferrer" class="btn-donate">Donate</a>
         </nav>
       </div>
     </header>
 
-    <main class="main-content policy-page">
-      <p class="about-eyebrow">Legal</p>
-      <h1 class="about-hero-title">Terms of Use &amp; Disclaimer</h1>
-      <p class="policy-updated">Last updated: July 9, 2026</p>
+    <main class="site-main">
+      <header class="site-hero">
+        <p class="site-kicker">Legal</p>
+        <h1 class="site-title">Terms of Use &amp; Disclaimer</h1>
+        <p class="site-lede">Please read these terms before using Free University Tools.</p>
+        <p class="site-meta">Last updated: July 9, 2026</p>
+      </header>
 
-      <div class="policy-alert" role="note">
-        <p class="policy-alert-title">Important, read before using this site</p>
+      <div class="site-alert" role="note">
+        <p class="site-alert-title">Important, read before using this site</p>
         <p>
           Free University Tools is a <strong>link directory only</strong>. We do
           not host, operate, or control any listed tool or third-party website.
@@ -100,11 +73,11 @@
         </p>
       </div>
 
-      <section class="page-section" aria-labelledby="policy-accept">
-        <h2 id="policy-accept" class="page-section-title">
+      <section class="site-section" aria-labelledby="policy-accept">
+        <h2 id="policy-accept" class="site-section-title">
           1. Acceptance of terms
         </h2>
-        <div class="page-section-body">
+        <div class="site-section-body">
           <p>
             By accessing or using Free University Tools (“the Site,” “we,” “us,”
             or “our”), including browsing any page, clicking any link, or using
@@ -119,11 +92,11 @@
         </div>
       </section>
 
-      <section class="page-section" aria-labelledby="policy-nature">
-        <h2 id="policy-nature" class="page-section-title">
+      <section class="site-section" aria-labelledby="policy-nature">
+        <h2 id="policy-nature" class="site-section-title">
           2. Nature of the service
         </h2>
-        <div class="page-section-body">
+        <div class="site-section-body">
           <p>
             Free University Tools is an informational directory and link
             aggregator. We curate and organize links to third-party websites,
@@ -140,11 +113,11 @@
         </div>
       </section>
 
-      <section class="page-section" aria-labelledby="policy-advice">
-        <h2 id="policy-advice" class="page-section-title">
+      <section class="site-section" aria-labelledby="policy-advice">
+        <h2 id="policy-advice" class="site-section-title">
           3. No professional advice
         </h2>
-        <div class="page-section-body">
+        <div class="site-section-body">
           <p>
             Nothing on this Site constitutes legal, financial, medical,
             academic, career, or other professional advice. Content is provided
@@ -156,11 +129,11 @@
         </div>
       </section>
 
-      <section class="page-section" aria-labelledby="policy-analytics">
-        <h2 id="policy-analytics" class="page-section-title">
+      <section class="site-section" aria-labelledby="policy-analytics">
+        <h2 id="policy-analytics" class="site-section-title">
           4. Analytics
         </h2>
-        <div class="page-section-body">
+        <div class="site-section-body">
           <p>
             We use a lightweight, privacy-friendly hit counter
             (<a href="https://hits.sh/" target="_blank" rel="noopener noreferrer">hits.sh</a>)
@@ -172,18 +145,18 @@
         </div>
       </section>
 
-      <section class="page-section" aria-labelledby="policy-third-party">
-        <h2 id="policy-third-party" class="page-section-title">
+      <section class="site-section" aria-labelledby="policy-third-party">
+        <h2 id="policy-third-party" class="site-section-title">
           5. Third-party links and services
         </h2>
-        <div class="page-section-body">
+        <div class="site-section-body">
           <p>
             The Site contains links to external websites and services. When you
             leave our Site, you are subject to the terms, privacy policies, and
             practices of those Third-Party Services. We have no control over and
             assume no responsibility for:
           </p>
-          <ul class="policy-list">
+          <ul>
             <li>
               the content, accuracy, availability, or security of any
               Third-Party Service;
@@ -212,11 +185,11 @@
         </div>
       </section>
 
-      <section class="page-section" aria-labelledby="policy-warranty">
-        <h2 id="policy-warranty" class="page-section-title">
+      <section class="site-section" aria-labelledby="policy-warranty">
+        <h2 id="policy-warranty" class="site-section-title">
           6. Disclaimer of warranties
         </h2>
-        <div class="page-section-body">
+        <div class="site-section-body">
           <p>
             THE SITE AND ALL CONTENT, LINKS, AND INFORMATION ARE PROVIDED ON AN
             “AS IS” AND “AS AVAILABLE” BASIS WITHOUT WARRANTIES OF ANY KIND,
@@ -236,11 +209,11 @@
         </div>
       </section>
 
-      <section class="page-section" aria-labelledby="policy-liability">
-        <h2 id="policy-liability" class="page-section-title">
+      <section class="site-section" aria-labelledby="policy-liability">
+        <h2 id="policy-liability" class="site-section-title">
           7. Limitation of liability
         </h2>
-        <div class="page-section-body">
+        <div class="site-section-body">
           <p>
             TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL
             FREE UNIVERSITY TOOLS, ITS CREATOR, OPERATORS, CONTRIBUTORS, OR
@@ -249,7 +222,7 @@
             PROFITS, DATA, GOODWILL, OR OTHER INTANGIBLE LOSSES, ARISING OUT OF
             OR RELATED TO:
           </p>
-          <ul class="policy-list">
+          <ul>
             <li>your use of or inability to use the Site;</li>
             <li>your use of any Third-Party Service linked from the Site;</li>
             <li>
@@ -279,17 +252,17 @@
         </div>
       </section>
 
-      <section class="page-section" aria-labelledby="policy-risk">
-        <h2 id="policy-risk" class="page-section-title">
+      <section class="site-section" aria-labelledby="policy-risk">
+        <h2 id="policy-risk" class="site-section-title">
           8. Assumption of risk and user responsibility
         </h2>
-        <div class="page-section-body">
+        <div class="site-section-body">
           <p>
             You expressly acknowledge and agree that you use the Site and all
             linked Third-Party Services at your sole risk. You are solely
             responsible for:
           </p>
-          <ul class="policy-list">
+          <ul>
             <li>
               verifying the legality, safety, and appropriateness of any tool
               before use;
@@ -311,11 +284,11 @@
         </div>
       </section>
 
-      <section class="page-section" aria-labelledby="policy-ip">
-        <h2 id="policy-ip" class="page-section-title">
+      <section class="site-section" aria-labelledby="policy-ip">
+        <h2 id="policy-ip" class="site-section-title">
           9. Intellectual property
         </h2>
-        <div class="page-section-body">
+        <div class="site-section-body">
           <p>
             Trademarks, logos, and service names appearing on the Site belong to
             their respective owners. We do not claim ownership of third-party
@@ -327,11 +300,11 @@
         </div>
       </section>
 
-      <section class="page-section" aria-labelledby="policy-prohibited">
-        <h2 id="policy-prohibited" class="page-section-title">
+      <section class="site-section" aria-labelledby="policy-prohibited">
+        <h2 id="policy-prohibited" class="site-section-title">
           10. Prohibited uses
         </h2>
-        <div class="page-section-body">
+        <div class="site-section-body">
           <p>
             You agree not to use the Site to violate any law, infringe others’
             rights, distribute malware, attempt unauthorized access, harass
@@ -347,11 +320,11 @@
         </div>
       </section>
 
-      <section class="page-section" aria-labelledby="policy-educational">
-        <h2 id="policy-educational" class="page-section-title">
+      <section class="site-section" aria-labelledby="policy-educational">
+        <h2 id="policy-educational" class="site-section-title">
           11. Educational use only
         </h2>
-        <div class="page-section-body">
+        <div class="site-section-body">
           <p>
             The Site is intended to help students discover publicly available
             tools for learning, productivity, and research. It is not a
@@ -363,7 +336,7 @@
             If you believe a listing should be removed, contact us on
             <a
               href="https://t.me/delexoo"
-              class="about-inline-link"
+              class="site-link"
               target="_blank"
               rel="noopener noreferrer"
               >Telegram (@delexoo)</a
@@ -373,11 +346,11 @@
         </div>
       </section>
 
-      <section class="page-section" aria-labelledby="policy-indemnify">
-        <h2 id="policy-indemnify" class="page-section-title">
+      <section class="site-section" aria-labelledby="policy-indemnify">
+        <h2 id="policy-indemnify" class="site-section-title">
           12. Indemnification
         </h2>
-        <div class="page-section-body">
+        <div class="site-section-body">
           <p>
             You agree to defend, indemnify, and hold harmless Free University
             Tools, its creator, and contributors from and against any claims,
@@ -389,9 +362,9 @@
         </div>
       </section>
 
-      <section class="page-section" aria-labelledby="policy-donations">
-        <h2 id="policy-donations" class="page-section-title">13. Donations</h2>
-        <div class="page-section-body">
+      <section class="site-section" aria-labelledby="policy-donations">
+        <h2 id="policy-donations" class="site-section-title">13. Donations</h2>
+        <div class="site-section-body">
           <p>
             Voluntary donations support maintenance of the Site. Donations are
             not payments for goods or services, do not create any obligation to
@@ -402,11 +375,11 @@
         </div>
       </section>
 
-      <section class="page-section" aria-labelledby="policy-changes">
-        <h2 id="policy-changes" class="page-section-title">
+      <section class="site-section" aria-labelledby="policy-changes">
+        <h2 id="policy-changes" class="site-section-title">
           14. Changes to these terms
         </h2>
-        <div class="page-section-body">
+        <div class="site-section-body">
           <p>
             We may update these Terms at any time by posting a revised version
             on this page with an updated “Last updated” date. Material changes
@@ -416,11 +389,11 @@
         </div>
       </section>
 
-      <section class="page-section" aria-labelledby="policy-severability">
-        <h2 id="policy-severability" class="page-section-title">
+      <section class="site-section" aria-labelledby="policy-severability">
+        <h2 id="policy-severability" class="site-section-title">
           15. Severability and entire agreement
         </h2>
-        <div class="page-section-body">
+        <div class="site-section-body">
           <p>
             If any provision of these Terms is held invalid or unenforceable,
             the remaining provisions remain in full force. These Terms
@@ -431,47 +404,39 @@
       </section>
 
       <section
-        class="page-section policy-section--last"
+        class="site-section"
         aria-labelledby="policy-contact"
       >
-        <h2 id="policy-contact" class="page-section-title">16. Contact</h2>
-        <div class="page-section-body">
+        <h2 id="policy-contact" class="site-section-title">16. Contact</h2>
+        <div class="site-section-body">
           <p>
             Questions about these Terms may be directed on
             <a
               href="https://t.me/delexoo"
-              class="about-inline-link"
+              class="site-link"
               target="_blank"
               rel="noopener noreferrer"
               >Telegram (@delexoo)</a
             >.
           </p>
-          <p class="policy-note">
+          <p class="site-note">
             <strong>Note:</strong> This document is provided for general
             informational purposes. It is not legal advice. For specific legal
             questions, consult a qualified attorney in your jurisdiction.
           </p>
         </div>
       </section>
+    
     </main>
 
-    <footer class="footer">
-      <div class="footer-links">
-        <a href="index.html" class="footer-link">Home</a>
-        <a href="student.html" class="footer-link">Students</a>
-        <a href="about.html" class="footer-link">About</a>
-        <a href="policy.html" class="footer-link">Terms &amp; Disclaimer</a>
-        <a
-          href="https://buy.stripe.com/9B63cu3RE2ouaKgcHLcjS00"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="footer-link"
-          >Donate</a
-        >
-      </div>
-      <div class="footer-copyright">
-        © 2026 Free University Tools. Helping students succeed with free tools.
-      </div>
+    <footer class="site-foot">
+      <a href="index.html">Search</a>
+      <span aria-hidden="true">·</span>
+      <a href="about.html">About</a>
+      <span aria-hidden="true">·</span>
+      <a href="https://buy.stripe.com/9B63cu3RE2ouaKgcHLcjS00" target="_blank" rel="noopener noreferrer">Donate</a>
+      <span aria-hidden="true">·</span>
+      <span>© 2026 Free University Tools</span>
     </footer>
 
     <script defer src="js/common.js"></script>

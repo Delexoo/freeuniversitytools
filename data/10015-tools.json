@@ -1,0 +1,713 @@
+[
+  {
+    "name": "AI Color Palette GeneratorCraft perfect color palettes effortlessly with AI-driven creativity.Open",
+    "url": "https://10015.io/tools/ai-color-palette-generator",
+    "slug": "ai-color-palette-generator",
+    "category": "design",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Barcode GeneratorGenerate barcodes for different internatinal standardizations with desired sizesOpe",
+    "url": "https://10015.io/tools/barcode-generator",
+    "slug": "barcode-generator",
+    "category": "utilities",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Base64 Encoder/DecoderEncode your strings to Base64 or decode strings encoded with Base64Open",
+    "url": "https://10015.io/tools/base64-encoder-decoder",
+    "slug": "base64-encoder-decoder",
+    "category": "programming",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Bionic Reading ConverterConvert your texts into Bionic Reading mode to read them faster than beforeO",
+    "url": "https://10015.io/tools/bionic-reading-converter",
+    "slug": "bionic-reading-converter",
+    "category": "writing",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Case ConverterConvert your text or string to uppercase, lowercase, title case & sentence caseOpen",
+    "url": "https://10015.io/tools/case-converter",
+    "slug": "case-converter",
+    "category": "writing",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Code to Image ConverterConvert your codes to fancy images and share with your friends or colleaguesO",
+    "url": "https://10015.io/tools/code-to-image-converter",
+    "slug": "code-to-image-converter",
+    "category": "design",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Color MixerMix 2 colors and get color codes for intermediate colors from 2 to 10 stepsOpen",
+    "url": "https://10015.io/tools/color-mixer",
+    "slug": "color-mixer",
+    "category": "design",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Color Shades GeneratorGet all shades of a color by setting up steps for darken, lighten, saturation ",
+    "url": "https://10015.io/tools/color-shades-generator",
+    "slug": "color-shades-generator",
+    "category": "security",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "CSS Background Pattern GeneratorGenerate beautiful CSS-only background patterns and use it in your p",
+    "url": "https://10015.io/tools/css-background-pattern-generator",
+    "slug": "css-background-pattern-generator",
+    "category": "css-generators",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "CSS Border Radius GeneratorGenerate advanced CSS border radius to shape your HTML elements corners i",
+    "url": "https://10015.io/tools/css-border-radius-generator",
+    "slug": "css-border-radius-generator",
+    "category": "css-generators",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "CSS Box Shadow GeneratorGenerate CSS code for box shadows while previewing it for box, circle or hea",
+    "url": "https://10015.io/tools/css-box-shadow-generator",
+    "slug": "css-box-shadow-generator",
+    "category": "security",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "CSS Checkbox GeneratorGenerate CSS checkboxes with different styles by customizing color and sizeOpe",
+    "url": "https://10015.io/tools/css-checkbox-generator",
+    "slug": "css-checkbox-generator",
+    "category": "css-generators",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "CSS Clip Path GeneratorGenerate CSS clip path with different patterns and use clip-path property in ",
+    "url": "https://10015.io/tools/css-clip-path-generator",
+    "slug": "css-clip-path-generator",
+    "category": "css-generators",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "CSS Cubic Bezier GeneratorGenerate CSS cubic Bezier easing functions by previewing animation and tim",
+    "url": "https://10015.io/tools/css-cubic-bezier-generator",
+    "slug": "css-cubic-bezier-generator",
+    "category": "css-generators",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "CSS FormatterFormat your CSS code and copy the beautified code to your clipboard or download as styl",
+    "url": "https://10015.io/tools/css-formatter",
+    "slug": "css-formatter",
+    "category": "css-generators",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "CSS Glassmorphism GeneratorGenerate CSS for applying frosted-glass effect on your HTML elements by u",
+    "url": "https://10015.io/tools/css-glassmorphism-generator",
+    "slug": "css-glassmorphism-generator",
+    "category": "css-generators",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "CSS Gradient GeneratorGenerate beautiful CSS gradients either by using presets or customizing on you",
+    "url": "https://10015.io/tools/css-gradient-generator",
+    "slug": "css-gradient-generator",
+    "category": "css-generators",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "CSS Loader GeneratorGenerate fancy CSS loaders by specifying the type, color and size of the loading",
+    "url": "https://10015.io/tools/css-loader-generator",
+    "slug": "css-loader-generator",
+    "category": "css-generators",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "CSS MinifierMinify your CSS code and copy the minified code to your clipboard or download as style.m",
+    "url": "https://10015.io/tools/css-minifier",
+    "slug": "css-minifier",
+    "category": "css-generators",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "CSS Switch GeneratorGenerate beautiful CSS switches and toggles without JavascriptOpen",
+    "url": "https://10015.io/tools/css-switch-generator",
+    "slug": "css-switch-generator",
+    "category": "css-generators",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "CSS Text Glitch Effect GeneratorGenerate CSS text glitch effect and create fancy text animations by ",
+    "url": "https://10015.io/tools/css-text-glitch-effect-generator",
+    "slug": "css-text-glitch-effect-generator",
+    "category": "css-generators",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "CSS Triangle GeneratorGenerate CSS code for triangular shapes with desired width, height, angle and ",
+    "url": "https://10015.io/tools/css-triangle-generator",
+    "slug": "css-triangle-generator",
+    "category": "css-generators",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Fake IBAN GeneratorGenerate fake IBANs for different countriesOpen",
+    "url": "https://10015.io/tools/fake-iban-generator",
+    "slug": "fake-iban-generator",
+    "category": "security",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Google Fonts Pair FinderFind font pairs which looks cool together on your designs, pages or apps as ",
+    "url": "https://10015.io/tools/google-fonts-pair-finder",
+    "slug": "google-fonts-pair-finder",
+    "category": "writing",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "HEX to RGBA ConverterConvert HEX color codes to RGBA equivalents and see all details of a colorOpen",
+    "url": "https://10015.io/tools/hex-to-rgba-converter",
+    "slug": "hex-to-rgba-converter",
+    "category": "design",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "HTML Encoder/DecoderEncode or decode your HTML by replacing special characters into equivalent escap",
+    "url": "https://10015.io/tools/html-encoder-decoder",
+    "slug": "html-encoder-decoder",
+    "category": "programming",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "HTML FormatterFormat your HTML code with HTML beautifier and either copy the formatted HTML or downl",
+    "url": "https://10015.io/tools/html-formatter",
+    "slug": "html-formatter",
+    "category": "programming",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "HTML MinifierMinify your HTML code and copy the minified code to your clipboard or download as .html",
+    "url": "https://10015.io/tools/html-minifier",
+    "slug": "html-minifier",
+    "category": "programming",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Image Average Color FinderCalculate average and dominant color of an image by ignoring transparencyO",
+    "url": "https://10015.io/tools/image-average-color-finder",
+    "slug": "image-average-color-finder",
+    "category": "design",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Image Caption GeneratorGenerate instant image captions powered by AI (Artificial Intelligence) analy",
+    "url": "https://10015.io/tools/image-caption-generator",
+    "slug": "image-caption-generator",
+    "category": "design",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Image Color ExtractorExtract all colors from an image and get color codes and details of this colors",
+    "url": "https://10015.io/tools/image-color-extractor",
+    "slug": "image-color-extractor",
+    "category": "design",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Image Color PickerPick any color from an image with an eyedropper and get detailed info about the co",
+    "url": "https://10015.io/tools/image-color-picker",
+    "slug": "image-color-picker",
+    "category": "design",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Image CropperCrop unwanted parts of images and download desired part of the image as a new fileOpen",
+    "url": "https://10015.io/tools/image-cropper",
+    "slug": "image-cropper",
+    "category": "design",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Image FiltersApply different filters to images and change color balance and distribution of the itOp",
+    "url": "https://10015.io/tools/image-filters",
+    "slug": "image-filters",
+    "category": "design",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Image ResizerResize any image to desired width and height either by protecting aspect ratio or notOp",
+    "url": "https://10015.io/tools/image-resizer",
+    "slug": "image-resizer",
+    "category": "design",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Image to Base64 ConverterConvert images into Base64 string for different image formats like PNG, JPE",
+    "url": "https://10015.io/tools/image-to-base64-converter",
+    "slug": "image-to-base64-converter",
+    "category": "design",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "iMessage Chat GeneratorCreate fake iMessage conversations with blue or green bubbles, download them ",
+    "url": "https://10015.io/tools/imessage-chat-generator",
+    "slug": "imessage-chat-generator",
+    "category": "social-media",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Instagram DM GeneratorCreate fake Instagram DM conversations, download them as screenshots and make ",
+    "url": "https://10015.io/tools/instagram-dm-generator",
+    "slug": "instagram-dm-generator",
+    "category": "social-media",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Instagram FiltersApply Instagram filters to you photos either by uploading local file or uploading i",
+    "url": "https://10015.io/tools/instagram-filters",
+    "slug": "instagram-filters",
+    "category": "social-media",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Instagram Photo DownloaderDownload photos from public Instagram posts and save them to your local de",
+    "url": "https://10015.io/tools/instagram-photo-downloader",
+    "slug": "instagram-photo-downloader",
+    "category": "social-media",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Instagram Post GeneratorCreate Instagram posts as if they were real, download them as an image and m",
+    "url": "https://10015.io/tools/instagram-post-generator",
+    "slug": "instagram-post-generator",
+    "category": "social-media",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Instagram Story GeneratorCreate Instagram stories as if they were real, download them as an image an",
+    "url": "https://10015.io/tools/instagram-story-generator",
+    "slug": "instagram-story-generator",
+    "category": "social-media",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "JavaScript FormatterFormat/beautify your JavaScript code and copy the formatted code to your clipboa",
+    "url": "https://10015.io/tools/javascript-formatter",
+    "slug": "javascript-formatter",
+    "category": "programming",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "JavaScript MinifierMinify your JavaScript code and copy the minified code to your clipboard or downl",
+    "url": "https://10015.io/tools/javascript-minifier",
+    "slug": "javascript-minifier",
+    "category": "programming",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "JSON Tree ViewerView your JSON data in tree view, walk through all branches and update nodes if you ",
+    "url": "https://10015.io/tools/json-tree-viewer",
+    "slug": "json-tree-viewer",
+    "category": "programming",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "JWT Encoder/DecoderEncode, decode, verify or debug JWT (JSON Web Token) for HSxxx, RSxxx & ESxxx alg",
+    "url": "https://10015.io/tools/jwt-encoder-decoder",
+    "slug": "jwt-encoder-decoder",
+    "category": "security",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Letter CounterCount letters, words and sentences in a text and analyze this numbers with common limi",
+    "url": "https://10015.io/tools/letter-counter",
+    "slug": "letter-counter",
+    "category": "writing",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "List RandomizerRandomize your lists, make lotteries, draw campigns or select random people from a gr",
+    "url": "https://10015.io/tools/list-randomizer",
+    "slug": "list-randomizer",
+    "category": "writing",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Lorem Ipsum GeneratorCreate your placeholder texts with desired number of paragraphs and propertiesO",
+    "url": "https://10015.io/tools/lorem-ipsum-generator",
+    "slug": "lorem-ipsum-generator",
+    "category": "writing",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "MD5 Encrypt/DecryptEncrypt strings to MD5 hashes or decrypt MD5 hashes to strings by iterating combi",
+    "url": "https://10015.io/tools/md5-encrypt-decrypt",
+    "slug": "md5-encrypt-decrypt",
+    "category": "security",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Multiple Whitespace RemoverRemove multiple whitespaces and line breaks in a text and clear unwanted ",
+    "url": "https://10015.io/tools/multiple-whitespace-remover",
+    "slug": "multiple-whitespace-remover",
+    "category": "writing",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Open Graph Meta GeneratorGenerate open graph meta code for your web page and add it to your site's h",
+    "url": "https://10015.io/tools/open-graph-meta-generator",
+    "slug": "open-graph-meta-generator",
+    "category": "social-media",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "PDF CompressorReduce PDF file size with adjustable compression quality. 100% client-side, files neve",
+    "url": "https://10015.io/tools/pdf-compressor",
+    "slug": "pdf-compressor",
+    "category": "pdf",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "PDF MergerMerge multiple PDF files into a single document with drag-and-drop reordering and page sel",
+    "url": "https://10015.io/tools/pdf-merger",
+    "slug": "pdf-merger",
+    "category": "pdf",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "PDF SplitterExtract pages, split by range, or split into individual pages. Fully client-side PDF spl",
+    "url": "https://10015.io/tools/pdf-splitter",
+    "slug": "pdf-splitter",
+    "category": "pdf",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Photo CensorCensor photos and hide faces by pixellating/blurring them or by putting a black barOpen",
+    "url": "https://10015.io/tools/photo-censor",
+    "slug": "photo-censor",
+    "category": "design",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "QR Code GeneratorGenerate QR code for your links or texts easily and download them as an image fileO",
+    "url": "https://10015.io/tools/qr-code-generator",
+    "slug": "qr-code-generator",
+    "category": "utilities",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "React Native Shadow GeneratorGenerate fancy box shadows in React Native both for iOS and AndroidOpen",
+    "url": "https://10015.io/tools/react-native-shadow-generator",
+    "slug": "react-native-shadow-generator",
+    "category": "security",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "RGBA to HEX ConverterConvert RGBA color codes to alpha supported 6 or 8 digit HEX equivalentsOpen",
+    "url": "https://10015.io/tools/rgba-to-hex-converter",
+    "slug": "rgba-to-hex-converter",
+    "category": "design",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Scanned PDF ConverterConvert PDF files into scanned PDFs without using a real scannerOpen",
+    "url": "https://10015.io/tools/scanned-pdf-converter",
+    "slug": "scanned-pdf-converter",
+    "category": "pdf",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "SHA1 Encrypt/DecryptEncrypt strings to SHA1 hashes or decrypt SHA1 hashes to strings by iterating co",
+    "url": "https://10015.io/tools/sha1-encrypt-decrypt",
+    "slug": "sha1-encrypt-decrypt",
+    "category": "security",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "SHA224 Encrypt/DecryptEncrypt strings to SHA224 hashes or decrypt SHA224 hashes to strings by iterat",
+    "url": "https://10015.io/tools/sha224-encrypt-decrypt",
+    "slug": "sha224-encrypt-decrypt",
+    "category": "security",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "SHA256 Encrypt/DecryptEncrypt strings to SHA256 hashes or decrypt SHA256 hashes to strings by iterat",
+    "url": "https://10015.io/tools/sha256-encrypt-decrypt",
+    "slug": "sha256-encrypt-decrypt",
+    "category": "security",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "SHA384 Encrypt/DecryptEncrypt strings to SHA384 hashes or decrypt SHA384 hashes to strings by iterat",
+    "url": "https://10015.io/tools/sha384-encrypt-decrypt",
+    "slug": "sha384-encrypt-decrypt",
+    "category": "security",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "SHA512 Encrypt/DecryptEncrypt strings to SHA512 hashes or decrypt SHA512 hashes to strings by iterat",
+    "url": "https://10015.io/tools/sha512-encrypt-decrypt",
+    "slug": "sha512-encrypt-decrypt",
+    "category": "security",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Strong Random Password GeneratorGenerate strong random passwords and check its stregth with password",
+    "url": "https://10015.io/tools/strong-random-password-generator",
+    "slug": "strong-random-password-generator",
+    "category": "security",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "SVG Blob GeneratorGenerate random SVG blobs with desired complexity and get SVG as code or fileOpen",
+    "url": "https://10015.io/tools/svg-blob-generator",
+    "slug": "svg-blob-generator",
+    "category": "design",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "SVG Pattern GeneratorGenerate SVG patterns with different shapes and download it as SVG or an image ",
+    "url": "https://10015.io/tools/svg-pattern-generator",
+    "slug": "svg-pattern-generator",
+    "category": "design",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "SVG Stroke to Fill ConverterConvert SVG strokes to fills to ensure consistent rendering across diffe",
+    "url": "https://10015.io/tools/svg-stroke-to-fill-converter",
+    "slug": "svg-stroke-to-fill-converter",
+    "category": "design",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "SVG to PNG ConverterConvert any SVG file into PNG format image and scale it to desired size by prese",
+    "url": "https://10015.io/tools/svg-to-png-converter",
+    "slug": "svg-to-png-converter",
+    "category": "design",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Text to Handwriting ConverterConvert your text into handwriting with desired paper type and ink colo",
+    "url": "https://10015.io/tools/text-to-handwriting-converter",
+    "slug": "text-to-handwriting-converter",
+    "category": "writing",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Tweet GeneratorCreate tweets as if they were real, download them as an image and make jokes to your ",
+    "url": "https://10015.io/tools/tweet-generator",
+    "slug": "tweet-generator",
+    "category": "social-media",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Tweet to Image ConverterConvert tweets to images by adding fancy backgrounds, download and share the",
+    "url": "https://10015.io/tools/tweet-to-image-converter",
+    "slug": "tweet-to-image-converter",
+    "category": "social-media",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Twitter Ad Revenue GeneratorGenerate Twitter ad revenue screenshots and make jokes to your friendsOp",
+    "url": "https://10015.io/tools/twitter-ad-revenue-generator",
+    "slug": "twitter-ad-revenue-generator",
+    "category": "social-media",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "URL Encoder/DecoderEncode your URL by escaping characters that may break your navigation and decode ",
+    "url": "https://10015.io/tools/url-encoder-decoder",
+    "slug": "url-encoder-decoder",
+    "category": "programming",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "URL Slug GeneratorGenerate SEO-friendly slugs from titles or any other strings for your webpages or ",
+    "url": "https://10015.io/tools/url-slug-generator",
+    "slug": "url-slug-generator",
+    "category": "programming",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "Vimeo Thumbnail GrabberGet all available thumbnail images of a Vimeo videos just by entering the URL",
+    "url": "https://10015.io/tools/vimeo-thumbnail-grabber",
+    "slug": "vimeo-thumbnail-grabber",
+    "category": "social-media",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "WhatsApp Chat GeneratorCreate fake WhatsApp conversations, download them as screenshots and make jok",
+    "url": "https://10015.io/tools/whatsapp-chat-generator",
+    "slug": "whatsapp-chat-generator",
+    "category": "social-media",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  },
+  {
+    "name": "YouTube Thumbnail GrabberGet all available thumbnail images of a YouTube videos just by entering the",
+    "url": "https://10015.io/tools/youtube-thumbnail-grabber",
+    "slug": "youtube-thumbnail-grabber",
+    "category": "social-media",
+    "description": "",
+    "pricing": "free",
+    "source": "10015.io"
+  }
+]

@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 ARF_PATH = Path(r"c:\Users\Massi\Downloads\arf.json")
-HTML_PATH = ROOT / "student.html"
+HTML_PATH = ROOT / "data" / "student-directory.html"
 JS_PATH = ROOT / "js" / "student.js"
 
 PRICING_MAP = {

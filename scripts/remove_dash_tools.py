@@ -4,7 +4,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
-HTML_PATH = ROOT / "student.html"
+HTML_PATH = ROOT / "data" / "student-directory.html"
 
 LINK_RE = re.compile(
     r'\s*<a\s+href="[^"]+"[^>]*class="tool-link"[^>]*>.*?</a>',

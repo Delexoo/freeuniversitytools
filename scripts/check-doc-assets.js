@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const root = path.join(__dirname, '..');
-const html = fs.readFileSync(path.join(root, 'student.html'), 'utf8');
+const html = fs.readFileSync(path.join(root, 'data', 'student-directory.html'), 'utf8');
 const docFiles = new Set(
  fs.readdirSync(path.join(root, 'doc')).map((f) => f.toLowerCase())
 );

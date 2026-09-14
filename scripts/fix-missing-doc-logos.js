@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const root = path.join(__dirname, '..');
-let html = fs.readFileSync(path.join(root, 'student.html'), 'utf8');
+let html = fs.readFileSync(path.join(root, 'data', 'student-directory.html'), 'utf8');
 const docFiles = new Set(fs.readdirSync(path.join(root, 'doc')).map((f) => f.toLowerCase()));
 
 const FALLBACK =
@@ -42,5 +42,5 @@ html = html.replace(
  }
 );
 
-fs.writeFileSync(path.join(root, 'student.html'), html);
+fs.writeFileSync(path.join(root, 'data', 'student-directory.html'), html);
 console.log(`Replaced ${fixed} missing bundled logos with live favicons`);

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const studentPath = path.join(__dirname, '..', 'student.html');
+const studentPath = path.join(__dirname, '..', 'data', 'student-directory.html');
 let html = fs.readFileSync(studentPath, 'utf8');
 
 const FALLBACK =

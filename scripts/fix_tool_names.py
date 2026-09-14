@@ -6,7 +6,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
-HTML_PATH = ROOT / "student.html"
+HTML_PATH = ROOT / "data" / "student-directory.html"
 
 MS_STORE_NAMES = {
     "9mspc6mp8fm4": "Microsoft Whiteboard",

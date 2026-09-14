@@ -1,178 +1,122 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="page-site">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>About, Free University Tools</title>
-    <link
-      rel="icon"
-      type="image/png"
-      href="doc/FreeUniversityTools.png"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/site.css" />
-    <link rel="stylesheet" href="css/nav.css" />
-    <link rel="stylesheet" href="css/mobile-graphics.css" media="(max-width: 768px)" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="About Free University Tools and its creator.">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="doc/FreeUniversityTools.png">
+    <title>About · Free University Tools</title>
+    <link rel="icon" type="image/png" href="doc/FreeUniversityTools.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/site-pages.css">
+    <link rel="stylesheet" href="css/mobile-graphics.css" media="(max-width: 768px)">
   </head>
-  <body>
-    <!-- Header (same as index.html) -->
-    <header class="header" id="header">
+  <body class="page-site-body">
+    <header class="header header--tools home-header" id="header">
       <div class="header-inner">
-        <a href="index.html" class="logo"
-          ><span class="logo-free">free</span
-          ><span class="logo-university">university</span
-          ><span class="logo-tools">tools</span></a
-        >
-        <button
-          class="mobile-menu-toggle"
-          id="mobileMenuToggle"
-          aria-label="Toggle menu"
-        >
-          ☰
-        </button>
+        <a href="index.html" class="logo" aria-label="Free University Tools home">
+          <span class="logo-free">free</span><span class="logo-university">university</span><span class="logo-tools">tools</span>
+        </a>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">☰</button>
         <nav class="nav" id="mainNav">
           <a href="index.html" class="nav-link">Search</a>
-          <a href="student.html" class="nav-link">Directory</a>
           <div class="nav-dropdown" id="navDropdown">
-            <button
-              type="button"
-              class="desktop-dropdown-toggle"
-              id="desktopDropdownToggle"
-              aria-label="More menu"
-              aria-expanded="false"
-            >
-              ☰
-            </button>
+            <button type="button" class="desktop-dropdown-toggle" id="desktopDropdownToggle" aria-label="More menu" aria-expanded="false">☰</button>
             <button class="nav-dropdown-btn">More ▼</button>
             <div class="nav-dropdown-content">
-              <a href="about.html" class="nav-link active">About Us</a>
-              <a href="policy.html" class="nav-link">Terms &amp; Disclaimer</a>
+              <a href="about.html" class="nav-link active">About</a>
+              <a href="policy.html" class="nav-link">Terms</a>
             </div>
           </div>
-          <a
-            href="https://buy.stripe.com/9B63cu3RE2ouaKgcHLcjS00"
-            target="_blank"
-            class="btn-donate"
-            >Donate</a
-          >
+          <a href="https://buy.stripe.com/9B63cu3RE2ouaKgcHLcjS00" target="_blank" rel="noopener noreferrer" class="btn-donate">Donate</a>
         </nav>
       </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="main-content">
-      <p class="about-eyebrow">About</p>
-      <h1 class="about-hero-title">About the creator</h1>
+    <main class="site-main">
+      <header class="site-hero">
+        <p class="site-kicker">About</p>
+        <h1 class="site-title">Built by a student, for students</h1>
+        <p class="site-lede">One place for free study tools — no ads, no clutter, hand-picked listings.</p>
+      </header>
 
-      <section
-        class="about-section"
-        aria-label="What is freeuniversitytools.com"
-      >
-        <h2 class="about-section-title">What is freeuniversitytools.com?</h2>
-        <div class="about-section-body">
+      <section class="site-section" aria-labelledby="about-what">
+        <h2 id="about-what" class="site-section-title">What is this?</h2>
+        <div class="site-section-body">
           <p>
-            I'm a student. I got tired of jumping between bookmarks and random
-            blogs to find free study tools and AI stuff, so I built this: one
-            place, no ads, no clutter.
+            I’m a student. I got tired of jumping between bookmarks and random blogs to find free study tools and AI stuff, so I built this: one place, no ads, no clutter.
           </p>
           <p>
-            Everything here is hand-picked. If it’s on the list, it’s useful and
-            free (or has a solid free tier). The goal: help you study smarter
-            and spend less time searching.
+            Everything here is hand-picked. If it’s on the list, it’s useful and free (or has a solid free tier). The goal: help you study smarter and spend less time searching.
           </p>
           <p>
-            Maintained as a side project. New tools get added when I find
-            something worth sharing.
+            Maintained as a side project. New tools get added when I find something worth sharing.
           </p>
         </div>
       </section>
 
-      <section class="about-section" aria-label="Report issues">
-        <h2 class="about-section-title">Report a problem</h2>
-        <div class="about-section-body">
+      <section class="site-section" aria-labelledby="about-report">
+        <h2 id="about-report" class="site-section-title">Report a problem</h2>
+        <div class="site-section-body">
           <p>
-            Found misinformation, a broken link, or something that shouldn’t be
-            listed? Message me on Telegram,
-            <a
-              href="https://t.me/delexoo"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="about-inline-link"
-              >@delexoo</a
-            >, and I’ll fix it.
+            Found misinformation, a broken link, or something that shouldn’t be listed? Message me on Telegram,
+            <a href="https://t.me/delexoo" target="_blank" rel="noopener noreferrer">@delexoo</a>, and I’ll fix it.
           </p>
         </div>
       </section>
 
-      <section class="about-profile" aria-label="Profile">
-        <div class="about-profile-top">
-          <div class="about-profile-image-wrap">
+      <section class="site-section" aria-label="Creator profile">
+        <h2 class="site-section-title">Creator</h2>
+        <div class="site-profile">
+          <div class="site-profile-top">
             <img
+              class="site-profile-image"
               src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/D.png"
               alt="Delexo"
-              class="about-profile-image"
-            />
-          </div>
-          <div class="about-profile-head">
-            <div class="about-profile-name-wrap">
-              <h2 class="about-profile-name">Delexo</h2>
-              <img
-                src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/Verified.png"
-                alt=""
-                class="about-profile-verified"
-                aria-hidden="true"
-              />
+              width="56"
+              height="56"
+            >
+            <div>
+              <h3 class="site-profile-name">
+                Delexo
+                <img
+                  class="site-profile-verified"
+                  src="https://raw.githubusercontent.com/Delexoo/freeuniversitytools/refs/heads/main/doc/Verified.png"
+                  alt=""
+                  aria-hidden="true"
+                  width="16"
+                  height="16"
+                >
+              </h3>
+              <p class="site-profile-role">Creator</p>
             </div>
-            <p class="about-profile-role">Creator</p>
           </div>
-        </div>
-        <p class="about-profile-bio">
-          I'm a student. I made this so you don't have to hunt for free tools,
-          one place, no paywalls, no fluff.
-        </p>
-        <div class="profile-actions">
-          <div class="profile-buttons">
-            <a
-              href="https://delexo.store"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-primary"
-              >Visit my store</a
-            >
-            <a
-              href="https://t.me/delexoo"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-secondary"
-              >Telegram</a
-            >
+          <p class="site-profile-bio">
+            I’m a student. I made this so you don’t have to hunt for free tools — one place, no paywalls, no fluff.
+          </p>
+          <div class="site-actions">
+            <a class="site-btn site-btn--solid" href="https://delexo.store" target="_blank" rel="noopener noreferrer">Visit my store</a>
+            <a class="site-btn site-btn--ghost" href="https://t.me/delexoo" target="_blank" rel="noopener noreferrer">Telegram</a>
           </div>
         </div>
       </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-links">
-        <a href="index.html" class="footer-link">Home</a>
-        <a href="student.html" class="footer-link">Students</a>
-        <a href="about.html" class="footer-link">About</a>
-        <a href="policy.html" class="footer-link">Terms &amp; Disclaimer</a>
-        <a
-          href="https://buy.stripe.com/9B63cu3RE2ouaKgcHLcjS00"
-          target="_blank"
-          class="footer-link"
-          >Donate</a
-        >
-      </div>
-      <div class="footer-copyright">
-        © 2026 Free University Tools. Helping students succeed with free tools.
-      </div>
+    <footer class="site-foot">
+      <a href="index.html">Search</a>
+      <span aria-hidden="true">·</span>
+      <a href="policy.html">Terms</a>
+      <span aria-hidden="true">·</span>
+      <a href="https://buy.stripe.com/9B63cu3RE2ouaKgcHLcjS00" target="_blank" rel="noopener noreferrer">Donate</a>
+      <span aria-hidden="true">·</span>
+      <span>© 2026 Free University Tools</span>
     </footer>
 
     <script defer src="js/common.js"></script>

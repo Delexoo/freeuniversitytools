@@ -2212,7 +2212,45 @@ const KIND_LABELS = {
 };
 
 const AI_NAME_RE =
-  /(?<![a-z0-9])(ai|a\.i\.|gpt|llm|chatgpt|claude|gemini|ollama|midjourney|stable[\s-]?diffusion|copilot|langchain|huggingface|hugging\s?face|perplexity|deepseek|groq|anthropic|openai)(?![a-z0-9])/i;
+  /(?<![a-z0-9])(ai|a\.i\.|gpt|llm|chatgpt|claude|gemini|ollama|midjourney|stable[\s-]?diffusion|copilot|langchain|huggingface|hugging\s?face|perplexity|deepseek|groq|anthropic|openai|qwen|grok|mistral|notebooklm|suno|udio|elevenlabs|runway|cursor)(?![a-z0-9])/i;
+
+const PURE_AI_SLUGS = new Set([
+  "generative-ai",
+  "local-ai",
+  "ai-notetakers",
+  "ai-browser",
+  "ai-video",
+  "ai-voice",
+  "ai-audio",
+  "ai-study",
+  "ai-homework",
+  "ai-image-editing",
+  "ai-pdf-chat",
+  "ai-agents",
+  "ai-flows",
+  "programming-ai",
+  "osint-ai-tools",
+  "grammar-writing-ai",
+  "ai-writing-assistants",
+  "ai-research-tools",
+  "ai-study-tools",
+]);
+
+const NON_AI_DOMAINS = new Set(["beacons.ai", "linktree.ai", "carrd.ai"]);
+
+const LEARNING_DOMAINS = new Set([
+  "coursera.org",
+  "linkedin.com",
+  "skillsbuild.org",
+  "skills.google",
+  "udemy.com",
+  "edx.org",
+  "udacity.com",
+  "khanacademy.org",
+  "skillshare.com",
+  "pluralsight.com",
+  "freecodecamp.org",
+]);
 
 const KNOWN_AI_DOMAINS = new Set([
   "openai.com",
@@ -2226,7 +2264,11 @@ const KNOWN_AI_DOMAINS = new Set([
   "cohere.com",
   "groq.com",
   "x.ai",
+  "grok.com",
   "deepseek.com",
+  "chat.deepseek.com",
+  "chat.qwen.ai",
+  "qwen.ai",
   "huggingface.co",
   "character.ai",
   "poe.com",
@@ -2235,6 +2277,7 @@ const KNOWN_AI_DOMAINS = new Set([
   "chat.openai.com",
   "copilot.microsoft.com",
   "notebooklm.google.com",
+  "bard.google.com",
   "pi.ai",
   "meta.ai",
   "together.ai",
@@ -2247,6 +2290,10 @@ const KNOWN_AI_DOMAINS = new Set([
   "elevenlabs.io",
   "cursor.com",
   "cursor.sh",
+  "tabnine.com",
+  "codeium.com",
+  "continue.dev",
+  "lmstudio.ai",
   "ollama.com",
   "chatpdf.com",
   "elicit.com",
@@ -2255,7 +2302,66 @@ const KNOWN_AI_DOMAINS = new Set([
   "uncensored.ai",
   "eye2.ai",
   "cluely.com",
+  "magichour.ai",
+  "deepai.org",
+  "mathgptpro.com",
+  "math.bot",
+  "chatcsv.com",
+  "replika.com",
+  "hume.ai",
+  "venice.ai",
+  "lobechat.com",
+  "mem.ai",
+  "granola.ai",
+  "anara.ai",
+  "dyad.sh",
+  "designarena.ai",
+  "emergent.sh",
+  "app.emergent.sh",
 ]);
+
+function isLearningDomain(domain) {
+  if (!domain) return false;
+  if (LEARNING_DOMAINS.has(domain)) return true;
+  for (const host of LEARNING_DOMAINS) {
+    if (domain.endsWith("." + host)) return true;
+  }
+  return false;
+}
+
+const NON_AI_PURPOSE_RE =
+  /(temp\s*-?\s*mail|temporary\s*(e-?mail|mail)|disposable\s*(e-?mail|mail)?|guerrilla\s*mail|10\s*-?\s*min(ute)?s?\s*(e-?mail|mail)|minute\s*(e-?mail|mail)|fake\s*(e-?mail|mail)|trash\s*(e-?mail|mail)|burner\s*(e-?mail|mail)|yopmail|mailinator|tempmail|tempr\.?email|emailnator|mail\.tm|(?<![a-z])(vpn|proxy|torrent|password\s*manager|file\s*converter|pdf\s*(merge|split|compress|convert)|zip\s*extractor)(?![a-z])|webmail|outlook|boomerang\s*gmail)/i;
+
+function clearlyNonAi(name, domain) {
+  const blob = `${name || ""} ${domain || ""}`
+    .toLowerCase()
+    .replace(/[-_]/g, " ");
+  const compact = (domain || "").toLowerCase().replace(/[.-]/g, " ");
+  if (!NON_AI_PURPOSE_RE.test(blob) && !NON_AI_PURPOSE_RE.test(compact)) {
+    return false;
+  }
+  if (
+    AI_NAME_RE.test(name || "") &&
+    !/(temp|temporary|disposable|guerrilla|10\s*min|fakemail|trashmail)/i.test(
+      name || ""
+    )
+  ) {
+    return false;
+  }
+  return true;
+}
+
+function domainIsAi(domain) {
+  if (!domain || NON_AI_DOMAINS.has(domain)) return false;
+  if (KNOWN_AI_DOMAINS.has(domain)) return true;
+  for (const known of KNOWN_AI_DOMAINS) {
+    if (domain === known || domain.endsWith("." + known)) return true;
+  }
+  if (domain.endsWith(".ai") || domain.includes(".ai.")) return true;
+  const compact = domain.replace(/\./g, " ").replace(/-/g, " ");
+  if (AI_NAME_RE.test(compact)) return true;
+  return false;
+}
 
 function classifyToolKind(linkEl) {
   if (linkEl.dataset.kind) return linkEl.dataset.kind;
@@ -2265,9 +2371,6 @@ function classifyToolKind(linkEl) {
   ).trim();
   const section = linkEl.closest(".tool-category");
   const slug = (section?.dataset.category || "").toLowerCase();
-  const title = (
-    section?.querySelector(".category-title")?.textContent || ""
-  ).toLowerCase();
   let domain = "";
   try {
     domain = new URL(href).hostname.replace(/^www\./, "");
@@ -2294,22 +2397,6 @@ function classifyToolKind(linkEl) {
     return "app";
   }
 
-  const slugParts = slug.split("-");
-  const titleHasAi =
-    title.includes("(ai)") ||
-    title.startsWith("ai ") ||
-    ` ${title} `.includes(" ai ");
-  if (
-    slugParts.includes("ai") ||
-    KNOWN_AI_DOMAINS.has(domain) ||
-    domain.endsWith(".ai") ||
-    domain.includes(".ai.") ||
-    AI_NAME_RE.test(name) ||
-    titleHasAi
-  ) {
-    return "ai";
-  }
-
   if (
     domain === "github.com" ||
     domain.endsWith(".github.io") ||
@@ -2317,6 +2404,15 @@ function classifyToolKind(linkEl) {
   ) {
     return "github";
   }
+
+  const isAi =
+    !isLearningDomain(domain) &&
+    !NON_AI_DOMAINS.has(domain) &&
+    !clearlyNonAi(name, domain) &&
+    (domainIsAi(domain) || AI_NAME_RE.test(name) || PURE_AI_SLUGS.has(slug));
+
+  if (isAi) return "ai";
+
   return "website";
 }
 

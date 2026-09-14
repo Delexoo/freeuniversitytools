@@ -5,7 +5,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-HTML = ROOT / "student.html"
+HTML = ROOT / "data" / "student-directory.html"
 
 spec = importlib.util.spec_from_file_location(
     "fix_pricing", ROOT / "scripts" / "fix_pricing.py"

@@ -136,83 +136,135 @@
     return /iphone|ipad|ipod/i.test(navigator.userAgent);
   }
 
-  function closeInstallHelp() {
-    document.getElementById("installHelpModal")?.remove();
+  function closeInstallSheet(immediate) {
+    const el = document.getElementById("installHelpModal");
+    if (!el) return;
+    if (immediate) {
+      el.remove();
+      return;
+    }
+    el.classList.remove("is-open");
+    window.setTimeout(() => el.remove(), 180);
   }
 
-  function showInstallHelp() {
-    closeInstallHelp();
+  function showInstallSheet({ canPrompt }) {
+    closeInstallSheet(true);
     const overlay = document.createElement("div");
     overlay.id = "installHelpModal";
-    overlay.className = "install-help";
+    overlay.className = "install-sheet";
     overlay.setAttribute("role", "dialog");
     overlay.setAttribute("aria-modal", "true");
     overlay.setAttribute("aria-labelledby", "installHelpTitle");
 
-    let steps = "";
-    if (isIos()) {
-      steps = `
-        <ol>
-          <li>Tap the <strong>Share</strong> button in Safari</li>
-          <li>Scroll and tap <strong>Add to Home Screen</strong></li>
-          <li>Tap <strong>Add</strong> to install Free University Tools</li>
-        </ol>`;
-    } else if (/android/i.test(navigator.userAgent)) {
-      steps = `
-        <ol>
-          <li>Open the browser menu (⋮)</li>
-          <li>Tap <strong>Install app</strong> or <strong>Add to Home screen</strong></li>
-          <li>Confirm to add Free University Tools</li>
-        </ol>`;
+    let bodyHtml = "";
+    let actionsHtml = "";
+
+    if (canPrompt) {
+      bodyHtml = `
+        <p class="install-sheet-lede">
+          Open Free University Tools like a real app — faster launch, its own window, and a home-screen icon.
+        </p>
+        <ul class="install-sheet-perks">
+          <li>One-tap access from your desktop or phone</li>
+          <li>Opens in its own window, away from browser tabs</li>
+          <li>Works offline for pages you’ve already visited</li>
+        </ul>`;
+      actionsHtml = `
+        <div class="install-sheet-actions">
+          <button type="button" class="install-sheet-secondary" data-install-dismiss>Not now</button>
+          <button type="button" class="install-sheet-primary" data-install-confirm>Install</button>
+        </div>`;
     } else {
-      steps = `
-        <ol>
-          <li>Open your browser menu</li>
-          <li>Choose <strong>Install Free University Tools</strong> or <strong>Apps → Install this site as an app</strong></li>
-          <li>Confirm to pin it to your desktop or taskbar</li>
-        </ol>`;
+      let steps = "";
+      if (isIos()) {
+        steps = `
+          <ol class="install-sheet-steps">
+            <li>Tap <strong>Share</strong> in Safari</li>
+            <li>Choose <strong>Add to Home Screen</strong></li>
+            <li>Tap <strong>Add</strong> to finish</li>
+          </ol>`;
+      } else if (/android/i.test(navigator.userAgent)) {
+        steps = `
+          <ol class="install-sheet-steps">
+            <li>Open the browser menu (⋮)</li>
+            <li>Tap <strong>Install app</strong> or <strong>Add to Home screen</strong></li>
+            <li>Confirm to add Free University Tools</li>
+          </ol>`;
+      } else {
+        steps = `
+          <ol class="install-sheet-steps">
+            <li>Open your browser menu</li>
+            <li>Choose <strong>Install</strong> or <strong>Apps → Install this site as an app</strong></li>
+            <li>Confirm to pin it to your desktop or taskbar</li>
+          </ol>`;
+      }
+      bodyHtml = `
+        <p class="install-sheet-lede">
+          Add Free University Tools to your device for quick access on phones, tablets, and computers.
+        </p>
+        ${steps}`;
+      actionsHtml = `
+        <div class="install-sheet-actions">
+          <button type="button" class="install-sheet-primary" data-install-dismiss>Got it</button>
+        </div>`;
     }
 
     overlay.innerHTML = `
-      <div class="install-help-card">
-        <h2 id="installHelpTitle">Install app</h2>
-        <p>Add Free University Tools to your device for quick access — works on phones, tablets, and computers.</p>
-        ${steps}
-        <button type="button" class="install-help-close">Got it</button>
+      <div class="install-sheet-panel">
+        <button type="button" class="install-sheet-close" data-install-dismiss aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <div class="install-sheet-brand">
+          <img class="install-sheet-icon" src="${iconHref}" width="56" height="56" alt="" decoding="async">
+          <div class="install-sheet-brand-text">
+            <p class="install-sheet-kicker">Install app</p>
+            <h2 id="installHelpTitle">Free University Tools</h2>
+            <p class="install-sheet-host">${window.location.host || "freeuniversitytools.com"}</p>
+          </div>
+        </div>
+        ${bodyHtml}
+        ${actionsHtml}
       </div>`;
 
-    overlay.addEventListener("click", (e) => {
-      if (e.target === overlay || e.target.closest(".install-help-close")) {
-        closeInstallHelp();
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        closeInstallSheet();
+        document.removeEventListener("keydown", onKey);
       }
+    };
+
+    overlay.addEventListener("click", async (e) => {
+      if (e.target === overlay || e.target.closest("[data-install-dismiss]")) {
+        closeInstallSheet();
+        document.removeEventListener("keydown", onKey);
+        return;
+      }
+
+      const confirmBtn = e.target.closest("[data-install-confirm]");
+      if (!confirmBtn || !deferredPrompt) return;
+
+      confirmBtn.disabled = true;
+      closeInstallSheet();
+      document.removeEventListener("keydown", onKey);
+
+      try {
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+      } catch (_) {
+        /* user dismissed native prompt */
+      }
+      deferredPrompt = null;
     });
-    document.addEventListener(
-      "keydown",
-      function onEsc(e) {
-        if (e.key === "Escape") {
-          closeInstallHelp();
-          document.removeEventListener("keydown", onEsc);
-        }
-      },
-      { once: true }
-    );
+
+    document.addEventListener("keydown", onKey);
     document.body.appendChild(overlay);
+    requestAnimationFrame(() => overlay.classList.add("is-open"));
+    overlay.querySelector(".install-sheet-primary")?.focus();
   }
 
-  installBtn.addEventListener("click", async () => {
+  installBtn.addEventListener("click", () => {
     if (isStandalone) return;
-
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      try {
-        await deferredPrompt.userChoice;
-      } catch (_) {}
-      deferredPrompt = null;
-      return;
-    }
-
-    // iOS / Safari / Firefox / etc. — show add-to-home instructions
-    showInstallHelp();
+    showInstallSheet({ canPrompt: Boolean(deferredPrompt) });
   });
 })();
 

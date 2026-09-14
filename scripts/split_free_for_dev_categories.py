@@ -14,7 +14,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
-HTML_PATH = ROOT / "student.html"
+HTML_PATH = ROOT / "data" / "student-directory.html"
 JS_PATH = ROOT / "js" / "student.js"
 README_URL = "https://raw.githubusercontent.com/ripienaar/free-for-dev/master/README.md"
 

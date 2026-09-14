@@ -7,8 +7,8 @@
   --text: #09090b;
   --text-secondary: #52525b;
   --text-muted: #a1a1aa;
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
+  --accent: #0a6b5c;
+  --accent-hover: #085548;
   --border: #e4e4e7;
   --border-strong: #d4d4d8;
   --radius-sm: 8px;
@@ -21,7 +21,7 @@
   --narrow-max: 640px;
   --directory-max: 1200px;
   --font:
-    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    "Sora", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* Spacing scale */
   --space-1: 4px;
@@ -1180,8 +1180,8 @@ body[data-mode="paid"] .tool-pricing-label {
   color: var(--accent-hover);
 }
 
-/* Donate page */
-main:not(.main-content) {
+/* Legacy bare <main> pages (not home / not site-pages) */
+main:not(.main-content):not(.home-main):not(.site-main) {
   max-width: var(--narrow-max);
   margin: 0 auto;
   padding: var(--page-top) max(var(--gutter), env(safe-area-inset-left, 0px))
@@ -1459,71 +1459,260 @@ main:not(.main-content) {
   background: rgba(10, 107, 92, 0.1);
 }
 
-.install-help {
+.install-sheet {
   position: fixed;
   inset: 0;
   z-index: 2000;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  padding: 20px;
-  background: rgba(17, 17, 17, 0.35);
+  padding: 16px;
+  background: rgba(9, 9, 11, 0);
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0);
+  opacity: 0;
+  transition:
+    background 0.22s ease,
+    opacity 0.22s ease,
+    backdrop-filter 0.22s ease;
 }
 
-.install-help-card {
-  width: min(100%, 360px);
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px 18px 16px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
+.install-sheet.is-open {
+  background: rgba(9, 9, 11, 0.42);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 1;
 }
 
-.install-help-card h2 {
-  margin: 0 0 8px;
-  font-size: 16px;
-  font-weight: 600;
+.install-sheet-panel {
+  position: relative;
+  width: min(100%, 400px);
+  margin-bottom: max(8px, env(safe-area-inset-bottom, 0px));
+  padding: 22px 20px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 20px;
+  background:
+    linear-gradient(165deg, #ffffff 0%, #f7faf9 48%, #eef6f4 100%);
+  box-shadow:
+    0 24px 60px rgba(9, 9, 11, 0.22),
+    0 2px 0 rgba(255, 255, 255, 0.8) inset;
+  transform: translateY(18px) scale(0.98);
+  opacity: 0;
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.22s ease;
+}
+
+.install-sheet.is-open .install-sheet-panel {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.install-sheet-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(9, 9, 11, 0.05);
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.install-sheet-close:hover {
+  background: rgba(9, 9, 11, 0.1);
   color: var(--text);
 }
 
-.install-help-card p {
-  margin: 0 0 12px;
-  font-size: 13px;
-  line-height: 1.45;
+.install-sheet-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 4px 28px 16px 0;
+}
+
+.install-sheet-icon {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  object-fit: cover;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(10, 107, 92, 0.18);
+}
+
+.install-sheet-kicker {
+  margin: 0 0 2px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0a6b5c;
+}
+
+.install-sheet-brand-text h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.install-sheet-host {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.install-sheet-lede {
+  margin: 0 0 14px;
+  font-size: 14px;
+  line-height: 1.5;
   color: var(--text-secondary);
 }
 
-.install-help-card ol {
-  margin: 0 0 16px;
-  padding-left: 1.2rem;
+.install-sheet-perks {
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.install-sheet-perks li {
+  position: relative;
+  padding: 10px 12px 10px 34px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(10, 107, 92, 0.1);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.install-sheet-perks li::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin-top: -7px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 45%, #fff 0 28%, transparent 30%),
+    #0a6b5c;
+  box-shadow: 0 0 0 3px rgba(10, 107, 92, 0.12);
+}
+
+.install-sheet-steps {
+  margin: 0 0 18px;
+  padding: 12px 12px 12px 1.85rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(10, 107, 92, 0.1);
   font-size: 13px;
   line-height: 1.5;
   color: var(--text);
 }
 
-.install-help-card li + li {
-  margin-top: 6px;
+.install-sheet-steps li + li {
+  margin-top: 8px;
 }
 
-.install-help-close {
+.install-sheet-actions {
   display: flex;
-  width: 100%;
+  gap: 8px;
   align-items: center;
-  justify-content: center;
-  height: 36px;
-  border: 1px solid var(--text);
-  border-radius: 8px;
-  background: var(--text);
-  color: #fff;
-  font: inherit;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
 }
 
-.install-help-close:hover {
-  background: transparent;
+.install-sheet-secondary,
+.install-sheet-primary {
+  flex: 1;
+  height: 42px;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.install-sheet-secondary {
+  border: 1px solid var(--border-strong);
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text-secondary);
+}
+
+.install-sheet-secondary:hover {
   color: var(--text);
+  border-color: #a1a1aa;
+}
+
+.install-sheet-primary {
+  border: 1px solid transparent;
+  background: linear-gradient(180deg, #0d7d6b 0%, #0a6b5c 100%);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(10, 107, 92, 0.28);
+}
+
+.install-sheet-primary:hover {
+  background: linear-gradient(180deg, #0f8a76 0%, #085548 100%);
+}
+
+.install-sheet-primary:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.install-sheet-actions:has(.install-sheet-primary:only-child) .install-sheet-primary {
+  flex: 1;
+}
+
+@media (min-width: 640px) {
+  .install-sheet {
+    align-items: center;
+  }
+
+  .install-sheet-panel {
+    margin-bottom: 0;
+  }
+
+  .install-sheet.is-open .install-sheet-panel {
+    transform: translateY(0) scale(1);
+  }
+
+  .install-sheet:not(.is-open) .install-sheet-panel {
+    transform: translateY(10px) scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .install-sheet,
+  .install-sheet-panel,
+  .install-sheet-secondary,
+  .install-sheet-primary,
+  .install-sheet-close {
+    transition: none;
+  }
+
+  .install-sheet-panel {
+    transform: none;
+    opacity: 1;
+  }
 }
 
 @media (max-width: 768px) {

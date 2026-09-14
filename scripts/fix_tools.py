@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 from urllib.parse import urlparse
 
-path = Path(__file__).resolve().parent.parent / "student.html"
+path = Path(__file__).resolve().parent.parent / "data" / "student-directory.html"
 html = path.read_text(encoding="utf-8")
 
 SECTION_RE = re.compile(

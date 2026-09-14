@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 from urllib.parse import urlparse
 
-HTML = Path(__file__).resolve().parent.parent / "student.html"
+HTML = Path(__file__).resolve().parent.parent / "data" / "student-directory.html"
 LINK_RE = re.compile(
  r'href="([^"]+)"[^>]*data-pricing="free"[^>]*>.*?<span class="tool-link-name">([^<]+)</span>',
  re.DOTALL,

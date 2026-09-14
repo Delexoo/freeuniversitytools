@@ -5,7 +5,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
-html = (ROOT / "student.html").read_text(encoding="utf-8")
+html = (ROOT / "data" / "student-directory.html").read_text(encoding="utf-8")
 LINK_RE = re.compile(
     r'data-category="([^"]+)".*?<div class="category-tools">(.*?)</div>\s*</section>',
     re.DOTALL,

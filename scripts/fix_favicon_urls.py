@@ -2,7 +2,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TARGETS = [ROOT / "student.html"]
+TARGETS = [ROOT / "data" / "student-directory.html"]
 
 google_pattern = re.compile(
     r"https://www\.google\.com/s2/favicons\?domain=([^&\"']+)(?:&amp;|&)?sz=128"

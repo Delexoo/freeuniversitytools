@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="color-scheme" content="light">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="Search free student tools by keyword or category.">
+  <meta name="description" content="Search for thousands of free tools.">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="doc/FreeUniversityTools.png">
   <meta name="mobile-web-app-capable" content="yes">
@@ -30,7 +30,6 @@
       <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">☰</button>
         <nav class="nav" id="mainNav">
         <a href="index.html" class="nav-link active">Search</a>
-        <a href="student.html" class="nav-link">Directory</a>
           <div class="nav-dropdown" id="navDropdown">
           <button type="button" class="desktop-dropdown-toggle" id="desktopDropdownToggle" aria-label="More menu" aria-expanded="false">☰</button>
             <button class="nav-dropdown-btn">More ▼</button>
@@ -50,7 +49,7 @@
         <h1 class="home-brand">
           <span class="home-brand-free">free</span><span class="home-brand-rest">universitytools</span>
         </h1>
-        <p class="home-lede">Find student tools by keyword or category.</p>
+        <p class="home-lede">Search for thousands of free tools.</p>
 
         <form class="home-search" id="homeSearchForm" role="search" action="#results">
           <label class="visually-hidden" for="homeSearch">Search tools</label>
@@ -77,13 +76,12 @@
           <div class="home-filters-row">
             <div class="home-filters" id="homeChips" role="group" aria-label="Pricing filter">
               <span class="home-filters-thumb" id="homeFiltersThumb" aria-hidden="true"></span>
-              <button type="button" class="home-filter is-active" data-price="all">All</button>
-              <button type="button" class="home-filter" data-price="free">Free</button>
-              <button type="button" class="home-filter" data-price="free-tier">Free Tier</button>
-              <button type="button" class="home-filter" data-price="limited">Limited</button>
-              <button type="button" class="home-filter" data-price="paid">Paid</button>
+              <button type="button" class="home-filter is-active" data-price="all"><span class="home-filter-label">All</span><span class="home-filter-count" data-price-count="all">…</span></button>
+              <button type="button" class="home-filter" data-price="free"><span class="home-filter-label">Free</span><span class="home-filter-count" data-price-count="free">…</span></button>
+              <button type="button" class="home-filter" data-price="free-tier"><span class="home-filter-label">Free Tier</span><span class="home-filter-count" data-price-count="free-tier">…</span></button>
+              <button type="button" class="home-filter" data-price="limited"><span class="home-filter-label">Limited</span><span class="home-filter-count" data-price-count="limited">…</span></button>
+              <button type="button" class="home-filter" data-price="paid"><span class="home-filter-label">Paid</span><span class="home-filter-count" data-price-count="paid">…</span></button>
             </div>
-            <p class="home-meta" id="homeMeta">Loading…</p>
           </div>
 
           <div class="home-filters-row">
@@ -113,7 +111,6 @@
     <section class="home-section" id="results" aria-labelledby="homeResultsHead">
       <header class="home-section-head">
         <h2 id="homeResultsHead">Tools</h2>
-        <a class="home-text-link" href="student.html">Directory</a>
       </header>
       <div class="home-loading" id="homeLoading">Loading…</div>
       <div class="home-results" id="homeResults"></div>

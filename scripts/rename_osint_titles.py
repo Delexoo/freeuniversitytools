@@ -1,7 +1,7 @@
 """Rename OSINT category titles to beginner-friendly labels."""
 from pathlib import Path
 
-HTML_PATH = Path(__file__).resolve().parent.parent / "student.html"
+HTML_PATH = Path(__file__).resolve().parent.parent / "data" / "student-directory.html"
 
 TITLES = {
  "OSINT: Username": "Username Search",

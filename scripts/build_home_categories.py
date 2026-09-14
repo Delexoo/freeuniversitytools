@@ -13,31 +13,21 @@ PRIORITY = [
     "ai",
     "generative-ai",
     "local-ai",
-    "ai-study",
-    "ai-homework",
     "ai-voice",
-    "ai-audio",
     "ai-video",
     "ai-browser",
     "ai-agents",
     "ai-flows",
-    "ai-notetakers",
     "study",
     "courses",
     "open-courseware",
-    "exam-prep",
-    "test-prep",
     "language-learning",
     "english",
-    "math-tools",
-    "science-tools",
     "science",
     "mathematics",
     "research",
-    "essay-tools",
     "writing",
     "citations",
-    "grammar-writing-ai",
     "programming",
     "programming-ai",
     "code-editors",
@@ -57,12 +47,10 @@ PRIORITY = [
     "gradients",
     "css-generators",
     "pdf",
-    "ai-pdf-chat",
     "image",
     "video",
     "audio",
     "gif-converters",
-    "converters",
     "compressors",
     "security",
     "vpn",
@@ -72,7 +60,6 @@ PRIORITY = [
     "focus",
     "time-tracking",
     "todo-list",
-    "note-taking",
     "notepad",
     "bookmarks",
     "rss",
@@ -82,7 +69,6 @@ PRIORITY = [
     "spreadsheets",
     "data-tools",
     "data-science",
-    "notebooks",
     "diagrams",
     "flowcharts",
     "mind-mapping",
@@ -98,14 +84,12 @@ PRIORITY = [
     "email-marketing",
     "file-sharing",
     "cloud",
-    "cloud-sync",
     "backup",
     "music",
     "podcasts",
     "music-production",
     "screen-recording",
     "browser-extensions",
-    "chrome-extension",
     "api-clients",
     "api-platforms",
     "api-mocking",
@@ -113,7 +97,7 @@ PRIORITY = [
     "deployment",
     "devops",
     "containers",
-    "git-hosting",
+    "source-code-repos",
     "git-tools",
     "regex",
     "dev-tools",
@@ -179,13 +163,13 @@ PRIORITY = [
     "osint-document-search",
     "osint-maps-search",
     "osint-location-search",
-    "osint-privacy-tools",
     "osint-safety-tools",
 ]
 
 
 def main() -> None:
     cats = OrderedDict()
+    top_by_cat: dict[str, list[dict]] = {}
     for t in TOOLS:
         slug = t.get("s") or "utilities"
         if slug not in cats:
@@ -195,8 +179,12 @@ def main() -> None:
                 "count": 0,
                 "icon": t.get("i") or t.get("f") or "",
                 "domain": t.get("d") or "",
+                "top3": [],
             }
         cats[slug]["count"] += 1
+        rank = t.get("r")
+        if rank in (1, 2, 3):
+            top_by_cat.setdefault(slug, []).append(t)
         icon = t.get("i") or ""
         if icon and "FreeUniversityTools.png" not in icon:
             if (
@@ -204,6 +192,19 @@ def main() -> None:
                 or "FreeUniversityTools.png" in (cats[slug]["icon"] or "")
             ):
                 cats[slug]["icon"] = icon
+
+    for slug, ranked in top_by_cat.items():
+        ranked.sort(key=lambda t: t.get("r") or 99)
+        cats[slug]["top3"] = [
+            {
+                "n": t.get("n") or "",
+                "u": t.get("u") or "",
+                "i": t.get("i") or t.get("f") or "",
+                "r": t.get("r"),
+                "d": t.get("d") or "",
+            }
+            for t in ranked[:3]
+        ]
 
     ordered = []
     seen = set()
@@ -220,6 +221,8 @@ def main() -> None:
 
     OUT.write_text(json.dumps(ordered, separators=(",", ":")), encoding="utf-8")
     print(f"Wrote {len(ordered)} categories to {OUT}")
+    with_top = sum(1 for c in ordered if c.get("top3"))
+    print(f"Categories with Top 3: {with_top}")
 
 
 if __name__ == "__main__":

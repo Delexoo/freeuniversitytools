@@ -9,7 +9,7 @@ from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
-HTML_PATH = ROOT / "student.html"
+HTML_PATH = ROOT / "data" / "student-directory.html"
 JS_PATH = ROOT / "js" / "student.js"
 OSINT_HTML = Path(r"c:\Users\Massi\Downloads\OSINT4ALL - Start_me.html")
 OUT_JSON = ROOT / "scripts" / "batch_import_candidates.json"

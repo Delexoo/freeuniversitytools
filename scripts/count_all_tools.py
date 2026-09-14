@@ -5,7 +5,7 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).parent.parent
 
 PAGES = [
-    ("Student Tools", ROOT / "student.html"),
+    ("Student Tools", ROOT / "data" / "student-directory.html"),
     ("Powerful Tools", ROOT / "doc" / "powerful.html"),
     ("Homepage featured", ROOT / "index.html"),
     ("Doc homepage featured", ROOT / "doc" / "index.html"),
@@ -88,7 +88,7 @@ def main():
             f"{dup_listings} repeat listings in same page"
         )
 
-    student_hrefs = extract_hrefs((ROOT / "student.html").read_text(encoding="utf-8"), "tool-link")
+    student_hrefs = extract_hrefs((ROOT / "data" / "student-directory.html").read_text(encoding="utf-8"), "tool-link")
     powerful_hrefs = extract_hrefs((ROOT / "doc" / "powerful.html").read_text(encoding="utf-8"), "tool-link")
     student_keys = {normalize_href(h) for h in student_hrefs}
     powerful_keys = {normalize_href(h) for h in powerful_hrefs}

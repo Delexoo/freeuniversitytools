@@ -6,7 +6,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
-HTML_PATH = ROOT / "student.html"
+HTML_PATH = ROOT / "data" / "student-directory.html"
 JS_PATH = ROOT / "js" / "student.js"
 SCRAPE_OUT = ROOT / "scripts" / "learn_anything_os_tools.json"
 

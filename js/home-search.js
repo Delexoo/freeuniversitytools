@@ -103,7 +103,6 @@
     clear: document.getElementById("homeSearchClear"),
     go: document.getElementById("homeSearchGo"),
     suggestions: document.getElementById("homeSuggestions"),
-    meta: document.getElementById("homeMeta"),
     chips: document.getElementById("homeChips"),
     thumb: document.getElementById("homeFiltersThumb"),
     kindChips: document.getElementById("homeKindChips"),
@@ -280,15 +279,44 @@
     return tool.t || "website";
   }
 
-  function matchesPricing(tool) {
-    if (pricingFilter === "all") return true;
-    if (pricingFilter === "free") {
+  function toolMatchesPricing(tool, filter) {
+    if (filter === "all") return true;
+    if (filter === "free") {
       return tool.p === "free" || tool.p === "free-tier" || tool.p === "limited";
     }
-    if (pricingFilter === "paid") {
+    if (filter === "paid") {
       return tool.p === "paid" || tool.p === "limited" || tool.p === "free-tier";
     }
-    return tool.p === pricingFilter;
+    return tool.p === filter;
+  }
+
+  function matchesPricing(tool) {
+    return toolMatchesPricing(tool, pricingFilter);
+  }
+
+  function updatePricingChipCounts() {
+    if (!els.chips) return;
+    const keys = ["all", "free", "free-tier", "limited", "paid"];
+    const counts = Object.fromEntries(keys.map((k) => [k, 0]));
+    counts.all = tools.length;
+    for (const tool of tools) {
+      if (toolMatchesPricing(tool, "free")) counts.free += 1;
+      if (toolMatchesPricing(tool, "free-tier")) counts["free-tier"] += 1;
+      if (toolMatchesPricing(tool, "limited")) counts.limited += 1;
+      if (toolMatchesPricing(tool, "paid")) counts.paid += 1;
+    }
+
+    keys.forEach((key) => {
+      const el = els.chips.querySelector(`[data-price-count="${key}"]`);
+      if (!el) return;
+      const n = counts[key];
+      el.textContent = n.toLocaleString();
+      const btn = el.closest("[data-price]");
+      if (btn) {
+        const label = btn.querySelector(".home-filter-label")?.textContent || key;
+        btn.setAttribute("aria-label", `${label}, ${n.toLocaleString()} tools`);
+      }
+    });
   }
 
   function matchesKind(tool) {
@@ -343,6 +371,10 @@
       else if (tool.s === "security" || tool.s === "vpn") score += 25;
       else if (tool.s === "pdf" || tool.s === "writing" || tool.s === "design") score += 20;
       else if (tool.s === "utilities" || tool.s === "github-powerhouses") score -= 5;
+      // Category Top 3 float to the front when browsing a shelf
+      if (tool.r === 1) score += 300;
+      else if (tool.r === 2) score += 290;
+      else if (tool.r === 3) score += 280;
       return score;
     }
 
@@ -359,10 +391,14 @@
       score += best;
     }
     if (tool.s === "must-try") score += 8;
-    if (tool.s === "notepad" || tool.s === "ai-notetakers") score += 6;
+    if (tool.s === "notepad") score += 6;
     if (/(convert|compress|transcode)/i.test(tool.s || "") || /convert/i.test(tool.c || "")) {
       score += 4;
     }
+    // Mild boost so Top 3 still surface in keyword results
+    if (tool.r === 1) score += 12;
+    else if (tool.r === 2) score += 8;
+    else if (tool.r === 3) score += 5;
     return score;
   }
 
@@ -377,7 +413,15 @@
       if (!score) continue;
       list.push({ tool, score });
     }
-    list.sort((a, b) => b.score - a.score || a.tool.n.localeCompare(b.tool.n));
+    list.sort((a, b) => {
+      // Within a category view, hard-pin Top 3 order first
+      if (categoryFilter && !groups.length) {
+        const ar = a.tool.r || 99;
+        const br = b.tool.r || 99;
+        if (ar !== br) return ar - br;
+      }
+      return b.score - a.score || a.tool.n.localeCompare(b.tool.n);
+    });
     return list.map((x) => x.tool);
   }
 
@@ -534,10 +578,6 @@
           : "Tools";
     }
 
-    els.meta.textContent = `${list.length.toLocaleString()} tools${
-      q || catName ? " matched" : ""
-    }`;
-
     if (!slice.length) {
       els.results.innerHTML =
         '<div class="home-empty">No tools matched. Try a broader keyword like “pdf”, “vpn”, or “ai”.</div>';
@@ -548,21 +588,47 @@
       return;
     }
 
-    els.results.innerHTML = slice
-      .map(
-        (t) => `<a class="home-result" href="${escapeAttr(t.u)}" target="_blank" rel="noopener noreferrer">
+    const showTopIntro = Boolean(categoryFilter && !q);
+    const topCount = showTopIntro
+      ? Math.min(3, slice.filter((t) => t.r === 1 || t.r === 2 || t.r === 3).length)
+      : 0;
+
+    els.results.innerHTML =
+      (showTopIntro && topCount
+        ? `<div class="home-top3-label">Top ${topCount} in ${escapeHtml(catName)}</div>`
+        : "") +
+      slice
+        .map((t, idx) => {
+          const rank = t.r === 1 || t.r === 2 || t.r === 3 ? t.r : 0;
+          const rankBadge = rank
+            ? `<span class="home-badge home-badge--rank" data-r="${rank}" title="Top ${rank} in ${escapeAttr(
+                t.c || "this category"
+              )}">#${rank}</span>`
+            : "";
+          const topClass = rank ? " is-top" : "";
+          const divider =
+            showTopIntro && topCount && idx === topCount
+              ? `<div class="home-top3-divider">All in ${escapeHtml(catName)}</div>`
+              : "";
+          const kind = toolKind(t);
+          const price = t.p || "free";
+          return `${divider}<div class="home-result${topClass}">
+        <a class="home-result-cover" href="${escapeAttr(t.u)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeAttr(t.n)}"></a>
         <img src="${escapeAttr(iconFor(t))}" alt="" loading="lazy" onerror="this.src='${FALLBACK}'">
-        <span>
-          <span class="home-result-name">${escapeHtml(t.n)}</span>
+        <span class="home-result-body">
+          <span class="home-result-top">
+            <span class="home-result-name">${escapeHtml(t.n)}</span>
+            <span class="home-badges">
+              ${rankBadge}
+              <a class="home-badge home-badge--kind" href="#results" data-kind="${escapeAttr(kind)}" data-t="${escapeAttr(kind)}" title="Filter: ${escapeAttr(kindLabel(kind))}">${escapeHtml(kindLabel(kind))}</a>
+              <a class="home-badge home-badge--price" href="#results" data-price="${escapeAttr(price)}" data-p="${escapeAttr(price)}" title="Filter: ${escapeAttr(pricingLabel(price))}">${escapeHtml(pricingLabel(price))}</a>
+            </span>
+          </span>
           <span class="home-result-meta">${escapeHtml(t.x || t.c || "")}</span>
         </span>
-        <span class="home-badges">
-          <span class="home-badge home-badge--kind" data-t="${escapeAttr(toolKind(t))}">${escapeHtml(kindLabel(toolKind(t)))}</span>
-          <span class="home-badge" data-p="${escapeAttr(t.p || "free")}">${escapeHtml(pricingLabel(t.p))}</span>
-        </span>
-      </a>`
-      )
-      .join("");
+      </div>`;
+        })
+        .join("");
 
     els.more.hidden = slice.length >= list.length;
     if (suggestionsWanted()) renderSuggestions(list);
@@ -671,35 +737,63 @@
       closeSuggestions();
     });
 
-    els.chips.addEventListener("click", (e) => {
-      const chip = e.target.closest("[data-price]");
-      if (!chip) return;
-      pricingFilter = chip.dataset.price;
-      Array.from(els.chips.querySelectorAll(".home-filter")).forEach((c) => {
+    function setPricingFilter(next) {
+      pricingFilter = next || "all";
+      const chip =
+        els.chips?.querySelector(`[data-price="${pricingFilter}"]`) ||
+        els.chips?.querySelector('[data-price="all"]');
+      Array.from(els.chips?.querySelectorAll(".home-filter") || []).forEach((c) => {
         c.classList.toggle("is-active", c === chip);
       });
-      moveFilterThumb(chip, els.thumb, els.chips);
+      if (chip) moveFilterThumb(chip, els.thumb, els.chips);
       visible = PAGE_SIZE;
       visibleCats = catPageSize();
       renderCategories({ animate: true });
       renderResults({ animate: true });
+    }
+
+    function setKindFilter(next) {
+      kindFilter = next || "all";
+      const chip =
+        els.kindChips?.querySelector(`[data-kind="${kindFilter}"]`) ||
+        els.kindChips?.querySelector('[data-kind="all"]');
+      Array.from(els.kindChips?.querySelectorAll(".home-filter") || []).forEach((c) => {
+        c.classList.toggle("is-active", c === chip);
+      });
+      if (chip) moveFilterThumb(chip, els.kindThumb, els.kindChips);
+      visible = PAGE_SIZE;
+      visibleCats = catPageSize();
+      renderCategories({ animate: true });
+      renderResults({ animate: true });
+    }
+
+    els.chips.addEventListener("click", (e) => {
+      const chip = e.target.closest("[data-price]");
+      if (!chip) return;
+      setPricingFilter(chip.dataset.price);
     });
 
     if (els.kindChips) {
       els.kindChips.addEventListener("click", (e) => {
         const chip = e.target.closest("[data-kind]");
         if (!chip) return;
-        kindFilter = chip.dataset.kind;
-        Array.from(els.kindChips.querySelectorAll(".home-filter")).forEach((c) => {
-          c.classList.toggle("is-active", c === chip);
-        });
-        moveFilterThumb(chip, els.kindThumb, els.kindChips);
-        visible = PAGE_SIZE;
-        visibleCats = catPageSize();
-        renderCategories({ animate: true });
-        renderResults({ animate: true });
+        setKindFilter(chip.dataset.kind);
       });
     }
+
+    els.results.addEventListener("click", (e) => {
+      const priceBadge = e.target.closest("a.home-badge[data-price]");
+      if (priceBadge) {
+        e.preventDefault();
+        setPricingFilter(priceBadge.dataset.price);
+        return;
+      }
+      const kindBadge = e.target.closest("a.home-badge[data-kind]");
+      if (kindBadge) {
+        e.preventDefault();
+        setKindFilter(kindBadge.dataset.kind);
+      }
+    });
 
     els.cats.addEventListener("click", (e) => {
       const card = e.target.closest("[data-cat]");
@@ -764,6 +858,7 @@
       // Prebuild search indexes once for fast keyword matching
       for (let i = 0; i < tools.length; i += 1) ensureIndex(tools[i]);
       els.loading.hidden = true;
+      updatePricingChipCounts();
       renderCategories();
       renderResults();
       requestAnimationFrame(() => {

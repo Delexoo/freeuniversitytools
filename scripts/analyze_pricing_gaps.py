@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 from pricing_engine import resolve_pricing, load_base_rules, SECTION_RE, LINK_RE, NAME_RE
 
-html = (ROOT / "student.html").read_text(encoding="utf-8")
+html = (ROOT / "data" / "student-directory.html").read_text(encoding="utf-8")
 rules = load_base_rules()
 
 no_rule = []

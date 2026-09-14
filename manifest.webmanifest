@@ -1,7 +1,7 @@
 {
   "name": "Free University Tools",
   "short_name": "Free Uni Tools",
-  "description": "Search free student tools by keyword or category.",
+  "description": "Search for thousands of free tools.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

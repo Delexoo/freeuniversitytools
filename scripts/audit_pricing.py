@@ -4,7 +4,7 @@ from collections import Counter
 from pathlib import Path
 from urllib.parse import urlparse
 
-HTML = Path(__file__).resolve().parent.parent / "student.html"
+HTML = Path(__file__).resolve().parent.parent / "data" / "student-directory.html"
 LINK_RE = re.compile(
     r'<a\s+href="([^"]+)"[^>]*data-pricing="([^"]+)"[^>]*>.*?<span class="tool-link-name">([^<]+)</span></a>',
     re.DOTALL,

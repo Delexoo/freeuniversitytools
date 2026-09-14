@@ -8,7 +8,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
-HTML_PATH = ROOT / "student.html"
+HTML_PATH = ROOT / "data" / "student-directory.html"
 RULES_PATH = Path(__file__).resolve().parent / "pricing_rules.json"
 
 VALID = {"free", "free-tier", "limited", "paid"}
