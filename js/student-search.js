@@ -4,17 +4,69 @@
     ml: ["machine learning", "ai"],
     pdf: ["document", "acrobat"],
     vpn: ["virtual private network", "privacy"],
-    notes: ["notetaking", "note taking", "notebook"],
+    note: [
+      "notes",
+      "notetaking",
+      "note taking",
+      "notebook",
+      "notepad",
+      "notetaker",
+      "notetakers",
+      "notion",
+      "onenote",
+      "obsidian",
+      "simplenote",
+      "google keep",
+      "keep",
+    ],
+    notes: [
+      "note",
+      "notetaking",
+      "note taking",
+      "notebook",
+      "notepad",
+      "notetaker",
+      "notetakers",
+      "notion",
+      "onenote",
+      "obsidian",
+      "simplenote",
+      "google keep",
+      "keep",
+    ],
+    note: [
+      "notes",
+      "notetaking",
+      "note taking",
+      "notebook",
+      "notepad",
+      "notion",
+      "onenote",
+      "obsidian",
+    ],
+    convert: [
+      "converter",
+      "converters",
+      "conversion",
+      "converting",
+      "transcode",
+      "transcoder",
+    ],
+    converter: ["convert", "converters", "conversion", "converting", "transcode"],
+    converters: ["convert", "converter", "conversion"],
+    conversion: ["convert", "converter", "converting"],
     deploy: ["deployment", "hosting", "vercel", "netlify"],
     deployment: ["deploy", "hosting", "ci cd"],
     devops: ["docker", "kubernetes", "container"],
     osint: ["open source intelligence", "investigation"],
     study: ["learning", "homework", "exam", "flashcards"],
-    video: ["movie", "stream", "youtube"],
-    image: ["photo", "picture", "png", "jpg"],
+    video: ["movie", "stream", "youtube", "mp3", "mp4"],
+    image: ["photo", "picture", "png", "jpg", "gif"],
+    audio: ["music", "sound", "mp3", "wav"],
     code: ["programming", "developer", "ide"],
     math: ["mathematics", "calculator", "algebra"],
     write: ["writing", "essay", "grammar"],
+    writing: ["write", "essay", "grammar", "notes"],
     design: ["ui", "figma", "canva", "graphics"],
     email: ["mail", "inbox"],
     free: ["gratis", "no cost"],
@@ -56,18 +108,72 @@
     }
   }
 
-  function expandTerms(terms) {
-    const expanded = new Set();
-    terms.forEach((term) => {
-      const norm = normalizeSearchText(term);
-      if (!norm) return;
-      expanded.add(norm);
-      const syns = SYNONYMS[norm];
-      if (syns) {
-        syns.forEach((s) => expanded.add(normalizeSearchText(s)));
+  function stemTerm(term) {
+    let t = normalizeSearchText(term);
+    if (t.length < 3) return t;
+
+    if (t.length > 5 && t.endsWith("ies")) t = t.slice(0, -3) + "y";
+    else if (t.length > 5 && t.endsWith("ves")) t = t.slice(0, -3) + "f";
+    else if (t.length > 4 && t.endsWith("ses")) t = t.slice(0, -2);
+    else if (t.length > 5 && t.endsWith("ers")) t = t.slice(0, -1);
+    else if (t.length > 5 && t.endsWith("ors")) t = t.slice(0, -1);
+    else if (t.length > 4 && t.endsWith("s") && !t.endsWith("ss") && !t.endsWith("us")) {
+      t = t.slice(0, -1);
+    }
+
+    if (t.length > 6 && t.endsWith("ation")) t = t.slice(0, -5);
+    else if (t.length > 5 && t.endsWith("tion")) t = t.slice(0, -4);
+    else if (t.length > 5 && t.endsWith("sion")) t = t.slice(0, -4);
+
+    if (t.length > 5 && t.endsWith("ing")) {
+      t = t.slice(0, -3);
+      if (t.length > 3 && t.endsWith(t[t.length - 1])) t = t.slice(0, -1);
+    } else if (t.length > 4 && t.endsWith("er")) t = t.slice(0, -2);
+    else if (t.length > 4 && t.endsWith("or")) t = t.slice(0, -2);
+    else if (t.length > 4 && t.endsWith("ed")) {
+      t = t.slice(0, -2);
+      if (t.length > 3 && t.endsWith(t[t.length - 1])) t = t.slice(0, -1);
+    }
+
+    return t;
+  }
+
+  /** OR alternatives for one query word (morph forms + synonyms). */
+  function synonymGroup(term) {
+    const base = normalizeSearchText(term);
+    if (!base) return [];
+    const rooted = stemTerm(base);
+    const alts = new Set([base, rooted]);
+
+    [rooted, base].forEach((root) => {
+      if (root.length < 3) return;
+      alts.add(root + "s");
+      alts.add(root + "er");
+      alts.add(root + "ers");
+      alts.add(root + "or");
+      alts.add(root + "ing");
+      alts.add(root + "ed");
+      alts.add(root + "ion");
+      alts.add(root + "ions");
+      alts.add(root + "ation");
+      if (root.endsWith("e")) {
+        alts.add(root.slice(0, -1) + "ing");
+        alts.add(root + "r");
+        alts.add(root + "rs");
       }
     });
-    return Array.from(expanded);
+
+    const syns = [
+      ...(SYNONYMS[base] || []),
+      ...(SYNONYMS[rooted] || []),
+    ];
+    syns.forEach((s) => {
+      const n = normalizeSearchText(s);
+      if (!n) return;
+      alts.add(n);
+      alts.add(stemTerm(n));
+    });
+    return Array.from(alts).filter((t) => t && t.length >= 2);
   }
 
   function levenshtein(a, b) {
@@ -91,10 +197,13 @@
   function termMatchesInText(text, term) {
     if (!term) return true;
     if (text.includes(term)) return true;
+    const rooted = stemTerm(term);
+    if (rooted.length >= 4 && text.includes(rooted)) return true;
     if (term.length < 4) return false;
     return text.split(" ").some((word) => {
       if (word.length < 3) return false;
-      return levenshtein(word, term) <= 1;
+      if (rooted.length >= 4 && word.includes(rooted)) return true;
+      return levenshtein(word, term) <= 1 || levenshtein(stemTerm(word), rooted) <= 1;
     });
   }
 
@@ -127,6 +236,7 @@
     const result = {
       raw: (raw || "").trim(),
       must: [],
+      mustGroups: [],
       mustNot: [],
       phrases: [],
       category: null,
@@ -177,7 +287,12 @@
       if (norm) result.must.push(norm);
     });
 
-    result.must = expandTerms(result.must);
+    result.mustGroups = result.must.map((term) => synonymGroup(term));
+    // Keep flat must for highlight only (original words + light stems)
+    result.must = result.must.flatMap((term) => {
+      const base = normalizeSearchText(term);
+      return [base, stemTerm(base)].filter(Boolean);
+    });
     return result;
   }
 
@@ -258,34 +373,30 @@
 
     let score = 0;
 
-    for (const term of parsed.must) {
-      let matched = false;
-      if (entry.nameNorm === term) {
-        score += 200;
-        matched = true;
-      } else if (entry.nameNorm.startsWith(term)) {
-        score += 140;
-        matched = true;
-      } else if (entry.nameNorm.includes(term)) {
-        score += 100;
-        matched = true;
-      } else if (entry.domainNorm.includes(term) || entry.domain.includes(term)) {
-        score += 80;
-        matched = true;
-      } else if (entry.categoryNorm.includes(term)) {
-        score += 50;
-        matched = true;
-      } else if (entry.keywordNorm.includes(term)) {
-        score += 35;
-        matched = true;
-      } else if (termMatchesInText(entry.fullText, term)) {
-        score += 20;
-        matched = true;
+    const groups =
+      parsed.mustGroups && parsed.mustGroups.length
+        ? parsed.mustGroups
+        : (parsed.must || []).map((t) => [t]);
+
+    for (const group of groups) {
+      let best = 0;
+      for (const term of group) {
+        let termScore = 0;
+        if (entry.nameNorm === term) termScore = 200;
+        else if (entry.nameNorm.startsWith(term)) termScore = 140;
+        else if (entry.nameNorm.includes(term)) termScore = 100;
+        else if (entry.domainNorm.includes(term) || entry.domain.includes(term))
+          termScore = 80;
+        else if (entry.categoryNorm.includes(term)) termScore = 50;
+        else if (entry.keywordNorm.includes(term)) termScore = 35;
+        else if (termMatchesInText(entry.fullText, term)) termScore = 20;
+        if (termScore > best) best = termScore;
       }
-      if (!matched) return -1;
+      if (!best) return -1;
+      score += best;
     }
 
-    if (parsed.must.length === 0 && parsed.phrases.length === 0) {
+    if (groups.length === 0 && parsed.phrases.length === 0) {
       if (parsed.category || parsed.domain || parsed.pricing) {
         score = 10;
       }

@@ -34,7 +34,8 @@ html {
     background: rgba(9, 9, 11, 0.45) !important;
   }
 
-  .legal-badge {
+  .legal-badge,
+  .install-app-btn {
     background: #ffffff !important;
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
@@ -42,6 +43,10 @@ html {
     color: var(--text-muted, #a1a1aa) !important;
     box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
     transform: translateZ(0);
+  }
+
+  .install-app-btn {
+    color: #0a6b5c !important;
   }
 
   .floating-start-browsing,
@@ -134,6 +139,7 @@ html {
   .page-toc-toggle,
   .page-toc-panel,
   .legal-badge,
+  .install-app-btn,
   .floating-start-browsing,
   .search-suggestions,
   .tool-category,

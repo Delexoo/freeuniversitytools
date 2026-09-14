@@ -2124,6 +2124,7 @@ function onCategoryLoaded(event) {
 
   injectPricingLabelsIn(section);
   updatePricingLabelsIn(section);
+  injectKindLabelsIn(section);
   initLoadedCategory(section);
 
   section.querySelectorAll(".tool-link").forEach((link) => {
@@ -2202,6 +2203,123 @@ function getPaidLabelForLink(linkEl) {
   return "Paid";
 }
 
+const KIND_LABELS = {
+  ai: "AI",
+  website: "Website",
+  app: "App",
+  extension: "Extension",
+  github: "GitHub",
+};
+
+const AI_NAME_RE =
+  /(?<![a-z0-9])(ai|a\.i\.|gpt|llm|chatgpt|claude|gemini|ollama|midjourney|stable[\s-]?diffusion|copilot|langchain|huggingface|hugging\s?face|perplexity|deepseek|groq|anthropic|openai)(?![a-z0-9])/i;
+
+const KNOWN_AI_DOMAINS = new Set([
+  "openai.com",
+  "chatgpt.com",
+  "claude.ai",
+  "anthropic.com",
+  "gemini.google.com",
+  "aistudio.google.com",
+  "perplexity.ai",
+  "mistral.ai",
+  "cohere.com",
+  "groq.com",
+  "x.ai",
+  "deepseek.com",
+  "huggingface.co",
+  "character.ai",
+  "poe.com",
+  "you.com",
+  "phind.com",
+  "chat.openai.com",
+  "copilot.microsoft.com",
+  "notebooklm.google.com",
+  "pi.ai",
+  "meta.ai",
+  "together.ai",
+  "replicate.com",
+  "runwayml.com",
+  "midjourney.com",
+  "leonardo.ai",
+  "suno.com",
+  "udio.com",
+  "elevenlabs.io",
+  "cursor.com",
+  "cursor.sh",
+  "ollama.com",
+  "chatpdf.com",
+  "elicit.com",
+  "scite.ai",
+  "uncensored.chat",
+  "uncensored.ai",
+  "eye2.ai",
+  "cluely.com",
+]);
+
+function classifyToolKind(linkEl) {
+  if (linkEl.dataset.kind) return linkEl.dataset.kind;
+  const href = (linkEl.getAttribute("href") || "").toLowerCase();
+  const name = (
+    linkEl.querySelector(".tool-link-name")?.textContent || ""
+  ).trim();
+  const section = linkEl.closest(".tool-category");
+  const slug = (section?.dataset.category || "").toLowerCase();
+  const title = (
+    section?.querySelector(".category-title")?.textContent || ""
+  ).toLowerCase();
+  let domain = "";
+  try {
+    domain = new URL(href).hostname.replace(/^www\./, "");
+  } catch (_) {
+    domain = "";
+  }
+
+  if (
+    href.includes("chromewebstore.google.com") ||
+    href.includes("addons.mozilla.org") ||
+    href.includes("microsoftedge.microsoft.com/addons") ||
+    href.includes("addons.opera.com") ||
+    slug.includes("extension")
+  ) {
+    return "extension";
+  }
+  if (
+    href.includes("play.google.com") ||
+    href.includes("apps.apple.com") ||
+    href.includes("apps.microsoft.com") ||
+    href.includes("microsoft.com/store") ||
+    ["android-apps", "ios-apps", "mobile-apps", "desktop-apps"].includes(slug)
+  ) {
+    return "app";
+  }
+
+  const slugParts = slug.split("-");
+  const titleHasAi =
+    title.includes("(ai)") ||
+    title.startsWith("ai ") ||
+    ` ${title} `.includes(" ai ");
+  if (
+    slugParts.includes("ai") ||
+    KNOWN_AI_DOMAINS.has(domain) ||
+    domain.endsWith(".ai") ||
+    domain.includes(".ai.") ||
+    AI_NAME_RE.test(name) ||
+    titleHasAi
+  ) {
+    return "ai";
+  }
+
+  if (
+    domain === "github.com" ||
+    domain.endsWith(".github.io") ||
+    slug === "github-powerhouses"
+  ) {
+    return "github";
+  }
+  return "website";
+}
+
 function injectPricingLabelsIn(root) {
   root.querySelectorAll(".tool-link").forEach((link) => {
     if (link.querySelector(".tool-pricing-label")) return;
@@ -2259,6 +2377,27 @@ function updatePricingLabels() {
   updatePricingLabelsIn(document);
 }
 
+function injectKindLabelsIn(root) {
+  root.querySelectorAll(".tool-link").forEach((link) => {
+    const kind = classifyToolKind(link);
+    link.dataset.kind = kind;
+    let label = link.querySelector(".tool-kind-label");
+    if (!label) {
+      label = document.createElement("span");
+      label.className = "tool-kind-label";
+      const pricing = link.querySelector(".tool-pricing-label");
+      if (pricing) link.insertBefore(label, pricing);
+      else link.appendChild(label);
+    }
+    label.textContent = KIND_LABELS[kind] || "Website";
+    label.setAttribute("data-kind", kind);
+  });
+}
+
+function injectKindLabels() {
+  injectKindLabelsIn(document);
+}
+
 function setMode(nextMode) {
   if (nextMode !== "free" && nextMode !== "paid") return;
   currentMode = nextMode;
@@ -2281,6 +2420,7 @@ toggleOptions.forEach((option) => {
 
 injectPricingLabels();
 updatePricingLabels();
+injectKindLabels();
 initCategorySeeMore();
 
 if (toolsSearch && window.FUTStudentSearch) {

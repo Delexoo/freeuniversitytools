@@ -1,0 +1,26 @@
+{
+  "name": "Free University Tools",
+  "short_name": "Free Uni Tools",
+  "description": "Search free student tools by keyword or category.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "theme_color": "#0a6b5c",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "doc/FreeUniversityTools.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "doc/FreeUniversityTools.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
